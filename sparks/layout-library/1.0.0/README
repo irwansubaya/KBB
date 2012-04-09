@@ -1,0 +1,61 @@
+This is my take on a template library for CodeIgniter. I've been using it for a while now, and I think I'm happy enough with it to share it. You can do things like add title segments, javascript/css includes, and configure a lot of things.
+
+I've documented the files a bit, but if there are any questions feel free to ask. 
+
+This library assumes your assets layout is something like this:
+
+    _assets
+        css
+        js
+        img
+
+Should be easy enough to figure out how to change if that's not the case. Here is an extremely basic example of how you could use this library: 
+
+    class About extends CI_Controller
+    {
+        public function __construct()
+        {
+            parent::__construct();
+    
+            $this->template
+                ->add_title_segment('About Us')
+                ->add_javascript('jquery.js')
+                ->add_stylesheet('screen.js');
+        }
+
+        public function index()
+        {
+            $this->template
+                ->add_title_segment('Overview')
+                ->build('about/index');
+        }
+    }
+
+Ideally, you would have a base controller for including things like the jQuery library and your screen.css file, but I was trying to keep the example brief. Here is an example template file:
+
+    <!DOCTYPE html>
+    <html>
+	    <head>
+		    <meta charset="UTF-8" />
+                    <?php echo $meta_tags; ?>
+		
+		    <title><?php echo $title; ?></title>
+
+		    <?php echo $stylesheets; ?>
+	    </head>
+	
+	    <body>
+		    <div id="container">
+			    <?php echo $content; ?>
+		    </div>
+		
+		    <?php echo $javascripts; ?>
+	    </body>
+    </html>
+
+TODO:
+
+* Make config/template.php not required
+* Meta tag functionality
+
+Enjoy.

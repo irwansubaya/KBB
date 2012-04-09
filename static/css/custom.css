@@ -1,0 +1,14 @@
+.hero-unit {
+  margin-top: 20px;
+  padding: 10px 50px;
+}
+
+/* Autocomplete CSS
+ ============================================= */
+.ac_results { padding: 0px; border: 1px solid #7FADFF; background-color: white; overflow: hidden; z-index: 99999; }
+.ac_results ul { width: 100%; list-style-position: outside; list-style: none; padding: 0; margin: 0;}
+.ac_results li { margin: 0px; padding: 2px 5px; cursor: default; display: block; font-size: 12px; line-height: 16px;overflow: hidden;}
+.ac_loading {background: white right center no-repeat;}
+.ac_odd { background-color: #FFF;}
+.ac_over { background-color:#D5E3FF;}
+.search_content bold { color:#A5293E;}
