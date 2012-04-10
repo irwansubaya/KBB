@@ -61,18 +61,26 @@ class Customer extends MY_Controller {
 	{
 		if ($this->input->post('save'))
 		{
-			if ($this->customer_m->isValid())
+			if ($this->customer->get($this->input->post('cus_corporate_id')))
 			{
-				if ($this->customer_m->save())
+				if ($this->customer_m->isValid())
 				{
-					setSucces('Data is saved');
-					redirect ($this->module[0]);
-				}
-				else
-				{
-					setError('Unable to save');
+					if ($this->customer_m->save())
+					{
+						setSucces('Data is saved');
+						redirect ($this->module[0]);
+					}
+					else
+					{
+						setError('Unable to save');
+					}
 				}
 			}
+			else
+			{
+				setError('Customer ID is exist');
+			}
+			
 		}
 		$this->_view('main_1_3', 'customer_new');
 	}
