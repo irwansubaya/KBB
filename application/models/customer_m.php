@@ -37,7 +37,6 @@ class Customer_m extends MY_Model {
                         'cus_no_ktp' => array('No KTP', TRUE),
 			'cus_cp' => array('Contact Person', TRUE),
 			'cus_cabang' => array('Cabang', TRUE),
-			'cus_wilayah' => array('Wilayah', TRUE),
                         'cus_email' => array('Email', FALSE),
 			'cus_alamat' => array('Alamat', TRUE),
 			'cus_kota' => array('Kota', TRUE),
@@ -59,5 +58,18 @@ class Customer_m extends MY_Model {
 	public function save ($idx = FALSE)
 	{
 		return parent :: save ($idx);	
+	}
+	
+	public function get_paket_detail ($pkt_idx = FALSE)
+	{
+		$this->db->join('customer', 'customer.cus_idx = paket.cus_idx');
+		if ($pkt_idx) { $this->db->where('pkt_idx', $pkt_idx); }
+		$this->db->order_by('cus_corporate_id');
+		return parent :: get ();
+	}
+	public function get_by_corporate_id ($cus_corporate_id = false)
+	{
+		$this->db->where('cus_corporate_id', $cus_corporate_id);
+		return parent :: get ();
 	}
 }

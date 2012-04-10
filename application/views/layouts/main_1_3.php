@@ -24,7 +24,8 @@
             <ul class="nav">
               <li<?php echo ($this->uri->segment(1) == 'admin')?' class="active"':''?>><a href="<?php echo base_url()."admin/admin" ?>">Admin</a></li>
               <li<?php echo ($this->uri->segment(1) == 'customer')?' class="active"':''?>><a href="<?php echo base_url()."customer/customer" ?>">Customer</a></li>
-              <li<?php echo ($this->uri->segment(1) == 'packet')?' class="active"':''?>><a href="<?php echo base_url()."schedule/schedule" ?>">Confirm</a></li>
+              
+	      <li<?php echo ($this->uri->segment(1) == 'report')?' class="active"':''?>><a href="<?php echo base_url()."schedule/schedule" ?>">schedule</a></li>
 	      <li<?php echo ($this->uri->segment(1) == 'report')?' class="active"':''?>><a href="<?php echo base_url()."report/report" ?>">Report</a></li>
             </ul>
             <p class="navbar-text pull-right">Logged in as <a href="#">xxx</a></p>

@@ -14,7 +14,7 @@
 		dateFormat: 'yy-mm-dd',
 		showAnim: 'fold'
 	});
-        $('#pkt_corporate_id').autocomplete('<?php echo base_url()?>customer/paket/customer_ajax',{
+        $('#pkt_corporate_id').autocomplete('<?php echo base_url()?>schedule/schedule/customer_ajax',{
 		parse: function(data){
 		    var parsed = [];
 		    for (var i=0; i < data.length; i++) {

@@ -22,5 +22,11 @@ $nav = array (
                                     'Schedule'=>array(
 					'Add New::schedule/insert::',
 					'List::schedule/::schedule/update',
+                                    )),
+        'Paketz'	=> array (
+                                    'Paketz'=>array(
+					'Add New::Paketz/insert::',
+					'List::Paketz/::Paketz/update',
                                     ))
+        
 	);

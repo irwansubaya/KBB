@@ -61,24 +61,24 @@ class Customer extends MY_Controller {
 	{
 		if ($this->input->post('save'))
 		{
-			if ($this->customer->get($this->input->post('cus_corporate_id')))
+			if ($this->customer_m->get_by_corporate_id($this->input->post('cus_corporate_id')))	# Check cus_corporate_id
+			{
+				setError('Customer ID is exist');
+			}
+			else
 			{
 				if ($this->customer_m->isValid())
 				{
 					if ($this->customer_m->save())
 					{
 						setSucces('Data is saved');
-						redirect ($this->module[0]);
+						redirect ($this->module[0].'/update/'.$this->db->insert_id());
 					}
 					else
 					{
 						setError('Unable to save');
 					}
 				}
-			}
-			else
-			{
-				setError('Customer ID is exist');
 			}
 			
 		}
@@ -97,18 +97,33 @@ class Customer extends MY_Controller {
 		{
 			if ($this->input->post('save'))
 			{
-				if ($this->customer_m->isValid())
+				$query = $this->customer_m->get_by_corporate_id($this->input->post('cus_corporate_id'));
+echo "<pre>";
+var_dump(count($query) <= 1);
+var_dump($query[0]->cus_corporate_id != $this->input->post('cus_corporate_id'));
+echo "</pre>";
+exit;
+				if (count($query) <= 1 && $query[0]->cus_corporate_id != $this->input->post('cus_corporate_id'))
 				{
-					// save data
-					if ($this->customer_m->save($idx))
+					if ($this->customer_m->isValid())
 					{
-						setSucces('Data is edited');
-					}
-					else
-					{
-						setError('Unable to save');
+						if ($this->customer_m->save($idx))
+						{
+							setSucces('Data is saved');
+							redirect ($this->module[0].'/update/'.$idx);
+						}
+						else
+						{
+							setError('Unable to save');
+						}
 					}
 				}
+				else
+				{
+					setError('Customer ID is exist');
+				}
+
+
 			}
 			$this->params['data']		= $this->customer_m->get($idx);
 			$this->params['labels']		= $this->customer_m->getLabels();
