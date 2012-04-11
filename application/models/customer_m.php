@@ -30,21 +30,24 @@ class Customer_m extends MY_Model {
 		$this->tableName = 'customer';
 		$this->idx	 = 'cus_idx';
 		$this->fields	 = array(			
-			'cus_corporate_id' => array('Corporate ID', TRUE),
+			'cus_corporate_id' => array('Corporate ID', TRUE,  'required|exact_length[10]'),
 			'cus_nama_perusahaan' => array('Nama Perusahaan', TRUE),
-			'cus_bidang_usaha' => array('Bidang Usaha', TRUE),
+			'cus_no_ktp' => array('No KTP', FALSE),
 			'cus_no_rekening' => array('No Rekening', TRUE),
-                        'cus_no_ktp' => array('No KTP', TRUE),
+			'cus_bidang_usaha' => array('Bidang Usaha', FALSE),
+                        'cus_alamat' => array('Alamat', TRUE),
 			'cus_cp' => array('Contact Person', TRUE),
-			'cus_cabang' => array('Cabang', TRUE),
-                        'cus_email' => array('Email', FALSE),
-			'cus_alamat' => array('Alamat', TRUE),
 			'cus_kota' => array('Kota', TRUE),
                         'cus_kodepos' => array('Kode Pos', FALSE),
 			'cus_telepon_kantor' => array('Telp Kantor', FALSE),
 			'cus_telepon_rumah' => array('Telp Rumah', FALSE),
 			'cus_handphone' => array('Handphone', FALSE),
                         'cus_no_fax' => array('No Fax', FALSE),
+			'cus_cabang' => array('Cabang', TRUE),
+			'cus_kode_cabang' => array('Kode Cabang', FALSE),
+                        'cus_email' => array('Email', TRUE, 'valid_email'),
+			'cus_tanggal_input' => array('Tanggal Input Customer', TRUE),
+                        'cus_admin_input' => array('Nama Admin', TRUE)
 		);
 	}
 
@@ -57,6 +60,8 @@ class Customer_m extends MY_Model {
 	 */
 	public function save ($idx = FALSE)
 	{
+		$this->db->set('cus_tanggal_input',date('Y-m-d'));
+		$this->db->set('cus_admin_input','irwan');
 		return parent :: save ($idx);	
 	}
 	

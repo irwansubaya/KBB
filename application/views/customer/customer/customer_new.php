@@ -32,7 +32,10 @@
 <?php echo view_errors();?>
 <table>
     <tr>
-        <td><?php echo form_text('Corporate ID*','cus_corporate_id',(isset($data->cus_corporate_id))?$data->cus_corporate_id:'','class="span2" maxlength="10"');?></td>
+        <td>
+	    <input type="hidden" name="cus_corporate_id_old" value="<?php echo (isset($data->cus_corporate_id))?$data->cus_corporate_id:'' ?>">
+	    <?php echo form_text('Corporate ID*','cus_corporate_id',(isset($data->cus_corporate_id))?$data->cus_corporate_id:'','class="span2" maxlength="10"');?>
+	</td>
     </tr>
     <tr>
         <td><?php echo form_text('Nama Perusahaan / Nasabah*','cus_nama_perusahaan',(isset($data->cus_nama_perusahaan))?$data->cus_nama_perusahaan:'','class="span3" maxlength="64"');?></td>
@@ -59,7 +62,7 @@
         <td><?php echo form_text('Telp Fax','cus_no_fax',(isset($data->cus_no_fax))?$data->cus_no_fax:'','class="span2" maxlength="32"');?></td>
     </tr>
     <tr>
-        <td><?php echo form_text('Kode Cabang *','kode_cabang',(isset($data->kode_cabang))?$data->kode_cabang:'','class="span1" maxlength="32"');?></td>
+        <td><?php echo form_text('Kode Cabang *','cus_kode_cabang',(isset($data->cus_kode_cabang))?$data->cus_kode_cabang:'','class="span1" maxlength="32"');?></td>
         <td><?php echo form_text('Cabang *','cus_cabang',(isset($data->cus_cabang))?$data->cus_cabang:'','class="span3" maxlength="32"');?></td>
     </tr>
     <tr>

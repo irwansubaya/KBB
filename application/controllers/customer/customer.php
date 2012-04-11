@@ -63,7 +63,7 @@ class Customer extends MY_Controller {
 		{
 			if ($this->customer_m->get_by_corporate_id($this->input->post('cus_corporate_id')))	# Check cus_corporate_id
 			{
-				setError('Customer ID is exist');
+				setError('Customer Corporate ID <b>'.$this->input->post('cus_corporate_id').'</b> already exist. Please check your current input.');
 			}
 			else
 			{
@@ -98,15 +98,15 @@ class Customer extends MY_Controller {
 			if ($this->input->post('save'))
 			{
 				$query = $this->customer_m->get_by_corporate_id($this->input->post('cus_corporate_id'));
-echo "<pre>";
-var_dump(count($query) <= 1);
-var_dump($query[0]->cus_corporate_id != $this->input->post('cus_corporate_id'));
-echo "</pre>";
-exit;
-				if (count($query) <= 1 && $query[0]->cus_corporate_id != $this->input->post('cus_corporate_id'))
+
+				if ($query && count($query) >= 1 && $this->input->post('cus_corporate_id_old') != $this->input->post('cus_corporate_id'))
 				{
-					if ($this->customer_m->isValid())
-					{
+					setError('Customer Corporate ID <b>'.$this->input->post('cus_corporate_id').'</b> already exist. Please check your current input.');
+				}
+				else
+				{
+					#if ($this->customer_m->isValid())
+					#{
 						if ($this->customer_m->save($idx))
 						{
 							setSucces('Data is saved');
@@ -116,14 +116,8 @@ exit;
 						{
 							setError('Unable to save');
 						}
-					}
+					#}
 				}
-				else
-				{
-					setError('Customer ID is exist');
-				}
-
-
 			}
 			$this->params['data']		= $this->customer_m->get($idx);
 			$this->params['labels']		= $this->customer_m->getLabels();
