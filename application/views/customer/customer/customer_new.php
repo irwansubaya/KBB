@@ -74,7 +74,7 @@
 </table>
     <p><code>Note: </code> &nbsp; All field mark with <code>*</code> are required.</p>
     <div class="form-actions">
-        <?php echo form_submit('save','Save data', 'class="btn btn-primary"')?>
+        <?php echo form_submit('save','Save changes', 'class="btn btn-primary"')?>
         <?php echo anchor($module[0],'Cancel', 'class="btn"')?>
         <?php if(isset($data->cus_idx)): ?><div class="pull-right"><?php echo anchor($module[0].'/delete/'.$data->cus_idx,'Delete Customer', 'class="btn btn-danger"')?></div><?php endif; ?>
     </div>
