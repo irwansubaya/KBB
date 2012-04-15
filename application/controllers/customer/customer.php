@@ -109,8 +109,8 @@ class Customer extends MY_Controller {
 				}
 				else
 				{
-					#if ($this->customer_m->isValid())
-					#{
+					if ($this->customer_m->isValid())
+					{
 						if ($this->customer_m->save($idx))
 						{
 							setSucces('Data is saved');
@@ -120,7 +120,7 @@ class Customer extends MY_Controller {
 						{
 							setError('Unable to save');
 						}
-					#}
+					}
 				}
 			}
 			$this->params['data']		= $this->customer_m->get($idx);
