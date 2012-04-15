@@ -69,7 +69,7 @@ class Customer extends MY_Controller {
 			{
 				if ($this->customer_m->isValid())
 				{
-					if ($this->customer_m->save('cus_corporate_id'))
+					if ($this->customer_m->save())
 					{
 						setSucces('Data is saved');
 						redirect ($this->module[0].'/update/'.$this->db->insert_id());
