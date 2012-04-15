@@ -61,7 +61,7 @@
         <td>
             <?php echo form_drop('Kota *','cus_kota',$kota,(isset($data->cus_kota))?$data->cus_kota:'','class="span3"');?>
         <?php //echo form_text('Kota *','cus_kota',(isset($data->cus_kota))?$data->cus_kota:'','class="span2"');?></td>
-        <td><?php echo form_text('Kode Pos ','cus_kodepos',(isset($data->cus_kodepos))?$data->cus_kodepos:'','class="span1" maxlength="10"');?></td>
+        <td><?php echo form_text('Kode Pos ','cus_kodepos',(isset($data->cus_kodepos))?$data->cus_kodepos:'','class="span1" maxlength="5"');?></td>
     </tr>
     <tr>
         <td><?php echo form_text('Telp Kantor ','cus_telepon_kantor',(isset($data->cus_telepon_kantor))?$data->cus_telepon_kantor:'','class="span2" maxlength="32"');?></td>

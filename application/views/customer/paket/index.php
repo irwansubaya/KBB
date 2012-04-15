@@ -17,7 +17,7 @@
   <?php if ($data):?>
     <?php foreach ($data as $item):?>
     <tr>
-      <td><?php echo anchor($this->module[0] . '/update/' . $item->pkt_idx, $item->cus_corporate_id)?></td>
+      <td><?php echo anchor($this->module[0] . '/update/paket/' . $item->pkt_idx, $item->cus_corporate_id)?></td>
       <td><?php echo $item->cus_nama_perusahaan ?></td>
       <td><?php echo $item->pkt_jenis ?></td>
       <td><?php echo $item->pkt_jumlah_key ?></td>

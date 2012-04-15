@@ -66,7 +66,6 @@ class Paket_m extends MY_Model {
 				$this->db->insert('key');
 			}
 		}
-		$this->db->set('pkt_jumlah_key', $pkt_idx);
 		return TRUE;
 	}
 	
@@ -93,6 +92,7 @@ class Paket_m extends MY_Model {
 	 */
 	public function save ($idx = FALSE)
 	{
+		#$this->db->set('pkt_jumlah_key', $this->input->post('tot_key'));
 		parent :: save ($idx);
 		return $this->insert_sn($this->db->insert_id(), $this->input->post('cus_idx'));
 	}

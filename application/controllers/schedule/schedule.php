@@ -109,12 +109,12 @@ class schedule extends MY_Controller {
 	 */
 	public function customer_ajax ()
 	{
-		if ($this->input->is_ajax_request())
-		{
-			$this->load->model('customer_m');
-			$this->db->like('cus_corporate_id', $this->input->get('q'));
-			echo json_encode($this->customer_m->get());
-		}
+		//if ($this->input->is_ajax_request())
+		//{
+			//$this->load->model('customer_m');
+			//$this->db->like('cus_corporate_id', $this->input->get('q'));
+			echo json_encode($this->schedule_m->get_paket_detail());
+		//}
 	}
 
 	/**

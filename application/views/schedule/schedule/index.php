@@ -9,7 +9,7 @@
       <th>Jenis Paket</th>
       <th>Jumlah Paket</th>
       <th>Tanggal Koneksi</th>
-      <th>Tanggal Terima Paket</th>
+      <th>Tanggal Terima Key</th>
       <th>Tanggal Due Date</th>
     </tr>
   </thead>
@@ -21,9 +21,9 @@
       <td><?php echo $item->cus_nama_perusahaan ?></td>
       <td><?php echo $item->pkt_jenis ?></td>
       <td><?php echo $item->pkt_jumlah_key ?></td>
-      <td><?php echo $item->pkt_tanggal_koneksi ?></td>
-      <td><?php echo $item->pkt_tanggal_terima ?></td>
-      <td><?php echo $item->pkt_jatuh_tempo ?></td>
+      <td><?php echo date('d-m-y',strtotime($item->pkt_tanggal_koneksi)) ?></td>
+      <td><?php echo date('d-m-y',strtotime($item->pkt_tanggal_terima)) ?></td>
+      <td><?php echo date('d-m-y',strtotime($item->pkt_jatuh_tempo)) ?></td>
     </tr>
     <?php endforeach;?>
   <?php else:?>

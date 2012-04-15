@@ -68,7 +68,7 @@ class Paket extends MY_Controller {
 				if ($this->paket_m->save())
 				{
 					setSucces('Data is saved');
-					redirect ($this->module[0]);
+					#redirect ($this->module[0]);
 				}
 				else
 				{
@@ -85,19 +85,33 @@ class Paket extends MY_Controller {
 	 * @access	public
 	 * @return	parent class function
 	 */
-	public function update ($idx)
+	public function update ($action, $idx)
 	{
 		if ($idx AND $this->paket_m->get($idx))
 		{
+			if ($action == 'paket')
+			{
+			}
+			else if ($action == 'schedule')
+			{
+			}
+			else if ($action == 'call')
+			{
+			}
+			/*
 			if ($this->input->post('save'))
 			{
 				$this->paket_m->insert_sn($idx, $this->input->post('cus_idx'));
 				redirect ($this->module[0] . '/update/' . $idx);
 			}
+			
+			*/
 			$this->params['data']	 = $this->paket_m->get_paket_detail($idx);
 			$this->params['key']	 = $this->key_m->get_paket_key($idx);
 			$this->params['labels'] = $this->paket_m->getLabels();
-			$this->_view('main_1_3', 'paket_new');
+			$this->params['action'] = $action;
+			$this->_view('main_1_3', 'paket_detail');
+			
 		}
 		
 	}

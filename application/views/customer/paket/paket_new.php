@@ -104,13 +104,14 @@
     function update_amount()
     {
         var rows = $("#key_list >tbody tr").length;
-        $("#tot_key").val(rows);
+        $("#pkt_jumlah_key").val(rows);
     }
 </script>
 <div class="page-header">
     <h2>Detail Paket</h2>
 </div>
 <?php echo form_open(uri_string(),array('id'=>'formid', 'class'=>'form-horizontal'))?>
+    <?php echo validation_errors();?>
     <?php echo form_hidden('cus_idx',(isset($data[0]->cus_idx))?$data[0]->cus_idx:'', 'id=cus_idx');?>    
     <?php echo form_text('Corporate ID *','cus_corporate_id',(isset($data[0]->cus_corporate_id[0]))?$data[0]->cus_corporate_id:'','class="span2" maxlength="10" id="pkt_corporate_id"');?>
     <?php echo form_text('Name Perusahaan*','cus_nama_perusahaan',(isset($data[0]->cus_nama_perusahaan))?$data[0]->cus_nama_perusahaan:'','class="span3" maxlength="64" id ="cus_nama_perusahaan"');?>
@@ -165,7 +166,7 @@
       <tfoot>
 	<tr>
 		<th colspan="2" align="right">Total Key</th>
-                <th><input type="text" name="tot_key" id="tot_key" readonly="readonly" style="width:100%"></th>
+                <th><input type="text" name="pkt_jumlah_key" id="pkt_jumlah_key" readonly="readonly" style="width:100%"></th>
 	</tr>
       </tfoot>
     </table>

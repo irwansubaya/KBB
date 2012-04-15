@@ -23,7 +23,7 @@
       <td><?php echo $item->cus_telepon_kantor ?></td>
       <td><?php echo $item->cus_telepon_rumah ?></td>
       <td><?php echo $item->cus_handphone ?></td>
-      <td><?php echo $item->cus_tanggal_input ?></td>
+      <td><?php echo date('d-m-y',strtotime($item->cus_tanggal_input ))?></td>
     </tr>
     <?php endforeach;?>
   <?php else:?>

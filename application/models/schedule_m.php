@@ -78,8 +78,8 @@ class Schedule_m extends MY_Model {
 	*/
 	public function get_paket_detail ($cus_idx =FALSE)
 	{
-		$this->db->join('paket', 'paket.cus_idx = schedule.cus_idx');
-		$this->db->join('customer', 'customer.cus_idx = paket.cus_idx');
+		$this->db->join('paket', 'paket.cus_idx = schedule.cus_idx','LEFT');
+		$this->db->join('customer', 'customer.cus_idx = paket.cus_idx','LEFT');
 		if ($cus_idx) { $this->db->where('cus_idx', $cus_idx); }
 		$this->db->order_by('cus_corporate_id');
 		return parent :: get ();
