@@ -10,6 +10,7 @@
       <th width="10%">Telp Kantor</th>
       <th width="10%">Telp Rumah</th>
       <th width="10%">Handphone</th>
+      <th width="10%">Tanggal Input</th>
     </tr>
   </thead>
   <tbody>
@@ -22,6 +23,7 @@
       <td><?php echo $item->cus_telepon_kantor ?></td>
       <td><?php echo $item->cus_telepon_rumah ?></td>
       <td><?php echo $item->cus_handphone ?></td>
+      <td><?php echo $item->cus_tanggal_input ?></td>
     </tr>
     <?php endforeach;?>
   <?php else:?>

@@ -34,10 +34,10 @@ class Paket_m extends MY_Model {
 			'pkt_jenis' => array('Jenis Paket', TRUE),
 			'pkt_tipe' => array('Tipe Paket', TRUE),
 			'pkt_fitur' => array('Fitur Paket', TRUE),
-                        'pkt_jumlah_key' => array('Jumlah Key BCA', TRUE),
-			'pkt_tanggal_koneksi' => array('Tnaggal Koneksi', TRUE),
-			'pkt_tanggal_terima' => array('Tanggal Terima Paket', TRUE),
-			'pkt_jatuh_tempo' => array('Tanggal Jatuh Tempo', TRUE),
+                        'pkt_jumlah_key' => array('Jumlah Key BCA', false),
+			'pkt_tanggal_koneksi' => array('Tnaggal Koneksi', TRUE, 'callback_convert_date'),
+			'pkt_tanggal_terima' => array('Tanggal Terima Paket', TRUE, 'callback_convert_date'),
+			'pkt_jatuh_tempo' => array('Tanggal Jatuh Tempo', TRUE, 'callback_convert_date'),
 		);
 	}
 	
@@ -93,7 +93,12 @@ class Paket_m extends MY_Model {
 	 */
 	public function save ($idx = FALSE)
 	{
-		return parent :: save ($idx);	
+		parent :: save ($idx);
+		return $this->insert_sn($this->db->insert_id(), $this->input->post('cus_idx'));
 	}
 
+	public function convert_date ($str = FALSE)
+	{
+		return date('y-m-d', strtotime($str));
+	}
 }

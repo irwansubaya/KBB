@@ -63,8 +63,8 @@ class Paket extends MY_Controller {
 	{
 		if ($this->input->post('save'))
 		{
-#			if ($this->paket_m->isValid())
-#			{
+			if ($this->paket_m->isValid())
+			{
 				if ($this->paket_m->save())
 				{
 					setSucces('Data is saved');
@@ -74,7 +74,7 @@ class Paket extends MY_Controller {
 				{
 					setError('Unable to save');
 				}
-#			}
+			}
 		}
 		$this->_view('main_1_3', 'paket_new');
 	}

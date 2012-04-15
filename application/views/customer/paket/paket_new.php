@@ -2,16 +2,16 @@
 <script type="text/javascript">
     $(document).ready(function(){
         $("#formid").validate();
-         $("#pkt_tanggal_koneksi").datepicker({
+        $("#pkt_tanggal_koneksi").datepicker({
 		changeMonth: true,
 		changeYear: true,
-		dateFormat: 'yy-mm-dd',
+		dateFormat: 'dd-M-yy',
 		showAnim: 'fold'
 	});
         $("#pkt_tanggal_terima").datepicker({
 		changeMonth: true,
 		changeYear: true,
-		dateFormat: 'yy-mm-dd',
+		dateFormat: 'dd-M-yy',
 		showAnim: 'fold'
 	});
         $('#pkt_corporate_id').autocomplete('<?php echo base_url()?>customer/paket/customer_ajax',{
@@ -148,7 +148,7 @@
       </thead>
       <tbody id="item">
       <?php
-      if ($idx) { 
+      if (@$key) { 
       for($i=0; $i<count($key); $i++)
       {
 	echo '<tr id="key_'.$i.'">';

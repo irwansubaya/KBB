@@ -75,4 +75,9 @@ class Customer_m extends MY_Model {
 		$this->db->where('cus_corporate_id', $cus_corporate_id);
 		return parent :: get ();
 	}
+	public function get_by_date ($date=false)
+	{
+		$this->db->where('cus_tanggal_input',$date);
+		return parent::get();
+	}
 }
