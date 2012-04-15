@@ -61,8 +61,13 @@ class Admin extends MY_Controller {
 	{
 		if ($this->input->post('save'))
 		{
+			
 			if ($this->admin_m->isValid())
 			{
+				if ($this->admin_m->get_by_adm_username($this->input->post('adm_username')))	# Check adm_username
+				{
+					setError('Username <b>'.$this->input->post('adm_username').'</b> already exist. Please check your current input.');
+				}
 				if ($this->admin_m->save())
 				{
 					setSucces('Data is saved');
@@ -76,6 +81,8 @@ class Admin extends MY_Controller {
 		}
 		$this->_view('main_1_3', 'admin_new');
 	}
+	
+	
 
 	/**
 	 * Update supplier
@@ -83,23 +90,33 @@ class Admin extends MY_Controller {
 	 * @access	public
 	 * @return	parent class function
 	 */
+	
 	public function update ($idx)
 	{
 		if ($idx AND $this->admin_m->get($idx))
 		{
 			if ($this->input->post('save'))
 			{
-				if ($this->admin_m->isValid())
+				$query = $this->admin_m->get_by_adm_username($this->input->post('adm_username'));
+
+				if ($query && count($query) >= 1 && $this->input->post('adm_username_old') != $this->input->post('adm_username'))
 				{
-					// save data
-					if ($this->admin_m->save($idx))
-					{
-						setSucces('Data is edited');
-					}
-					else
-					{
-						setError('Unable to save');
-					}
+					setError('Username <b>'.$this->input->post('adm_username').'</b> already exist. Please check your current input.');
+				}
+				else
+				{
+					#if ($this->customer_m->isValid())
+					#{
+						if ($this->admin_m->save($idx))
+						{
+							setSucces('Data is saved');
+							redirect ($this->module[0].'/update/'.$idx);
+						}
+						else
+						{
+							setError('Unable to save');
+						}
+					#}
 				}
 			}
 			$this->params['data']		= $this->admin_m->get($idx);

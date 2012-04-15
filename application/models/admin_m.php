@@ -48,4 +48,9 @@ class Admin_m extends MY_Model {
 	{
 		return parent :: save ($idx);	
 	}
+	public function get_by_adm_username ($adm_username = false)
+	{
+		$this->db->where('adm_username', $adm_username);
+		return parent :: get ();
+	}
 }

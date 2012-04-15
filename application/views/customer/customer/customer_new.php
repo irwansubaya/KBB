@@ -24,6 +24,14 @@
 	    		$('#cus_idx').val(data.cus_idx);
     		}
 	);
+    $(document).ready(function()
+    {
+        $("#btnselectflower").click(function(){
+            $("selectflower1").append($("<option>" + $('#txtenterflower').val()+ "</option>"));
+                                        return false;
+        });
+    });
+    
 </script>
 <div class="page-header">
     <h2>Add New Customer</h2>
@@ -50,7 +58,9 @@
         <td><?php echo form_area('Contact Person *','cus_cp',(isset($data->cus_cp))?$data->cus_cp:'','class="span3" maxlength="64"');?></td>
     </tr>
     <tr>
-        <td><?php echo form_text('Kota *','cus_kota',(isset($data->cus_kota))?$data->cus_kota:'','class="span2"');?></td>
+        <td>
+            <?php echo form_drop('Kota *','cus_kota',$kota,(isset($data->cus_kota))?$data->cus_kota:'','class="span3"');?>
+        <?php //echo form_text('Kota *','cus_kota',(isset($data->cus_kota))?$data->cus_kota:'','class="span2"');?></td>
         <td><?php echo form_text('Kode Pos ','cus_kodepos',(isset($data->cus_kodepos))?$data->cus_kodepos:'','class="span1" maxlength="10"');?></td>
     </tr>
     <tr>
@@ -74,7 +84,7 @@
 </table>
     <p><code>Note: </code> &nbsp; All field mark with <code>*</code> are required.</p>
     <div class="form-actions">
-        <?php echo form_submit('save','Save data', 'class="btn btn-primary"')?>
+        <?php echo form_submit('save','Save changes', 'class="btn btn-primary"')?>
         <?php echo anchor($module[0],'Cancel', 'class="btn"')?>
         <?php if(isset($data->cus_idx)): ?><div class="pull-right"><?php echo anchor($module[0].'/delete/'.$data->cus_idx,'Delete Customer', 'class="btn btn-danger"')?></div><?php endif; ?>
     </div>

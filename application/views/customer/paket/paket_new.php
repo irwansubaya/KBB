@@ -30,6 +30,8 @@
 	    }).result( 
 		    function(event,data,formated){
 			$('#pkt_corporate_id').val(data.cus_corporate_id);
+                        $('#cus_nama_perusahaan').val(data.cus_nama_perusahaan);
+                        $('#cus_cp').val(data.cus_cp);
 	    		$('#cus_idx').val(data.cus_idx);
     	    });
 	
@@ -111,10 +113,10 @@
 <?php echo form_open(uri_string(),array('id'=>'formid', 'class'=>'form-horizontal'))?>
     <?php echo form_hidden('cus_idx',(isset($data[0]->cus_idx))?$data[0]->cus_idx:'', 'id=cus_idx');?>    
     <?php echo form_text('Corporate ID *','cus_corporate_id',(isset($data[0]->cus_corporate_id[0]))?$data[0]->cus_corporate_id:'','class="span2" maxlength="10" id="pkt_corporate_id"');?>
-    <?php echo form_text('Name Perusahaan*','cus_nama_perusahaan',(isset($data[0]->cus_nama_perusahaan))?$data[0]->cus_nama_perusahaan:'','class="span3" maxlength="64"');?>
+    <?php echo form_text('Name Perusahaan*','cus_nama_perusahaan',(isset($data[0]->cus_nama_perusahaan))?$data[0]->cus_nama_perusahaan:'','class="span3" maxlength="64" id ="cus_nama_perusahaan"');?>
     <?php echo form_area('Contact Person *','cus_cp',(isset($data[0]->cus_cp))?$data[0]->cus_cp:'','class="span3" maxlength="64"');?>
-    <?php echo form_drop('Jenis Paket *','pkt_jenis',array('single_otorisasi'=>'Single Otorisasi','multi_otorisasi'=>'Multi Otorisasi'),(isset($data[0]->pkt_jenis))?$data[0]->pkt_jenis:'','class="span2"');?>
-    <?php echo form_drop('Tipe Paket *','pkt_tipe',array('gold'=>'Gold','gold_payroll'=>'Gold Payroll','platinum'=>'Platinum'),(isset($data[0]->pkt_tipe))?$data[0]->pkt_tipe:'','class="span2"');?>
+    <?php echo form_drop('Tipe Paket *','pkt_jenis',array('single_otorisasi'=>'Single Otorisasi','multi_otorisasi'=>'Multi Otorisasi'),(isset($data[0]->pkt_jenis))?$data[0]->pkt_jenis:'','class="span2"');?>
+    <?php echo form_drop('Jenis Paket *','pkt_tipe',array('gold'=>'Gold','gold_payroll'=>'Gold Payroll','platinum'=>'Platinum'),(isset($data[0]->pkt_tipe))?$data[0]->pkt_tipe:'','class="span2"');?>
     <?php echo form_drop('Fitur Paket *','pkt_fitur',array(
                                                            'va'=>'Virtual Account',
                                                            'bca_va'=>'BCA Virtual Account',
@@ -146,7 +148,7 @@
       </thead>
       <tbody id="item">
       <?php
-      if ($key) { 
+      if ($idx) { 
       for($i=0; $i<count($key); $i++)
       {
 	echo '<tr id="key_'.$i.'">';

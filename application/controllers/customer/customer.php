@@ -69,7 +69,7 @@ class Customer extends MY_Controller {
 			{
 				if ($this->customer_m->isValid())
 				{
-					if ($this->customer_m->save())
+					if ($this->customer_m->save('cus_corporate_id'))
 					{
 						setSucces('Data is saved');
 						redirect ($this->module[0].'/update/'.$this->db->insert_id());
@@ -82,6 +82,10 @@ class Customer extends MY_Controller {
 			}
 			
 		}
+		// load kota model
+		$this->load->model('kota_m');
+		
+		$this->params['kota'] = $this->kota_m->dropdown();
 		$this->_view('main_1_3', 'customer_new');
 	}
 
@@ -121,6 +125,10 @@ class Customer extends MY_Controller {
 			}
 			$this->params['data']		= $this->customer_m->get($idx);
 			$this->params['labels']		= $this->customer_m->getLabels();
+				// load kota model
+			$this->load->model('kota_m');
+			
+			$this->params['kota'] = $this->kota_m->dropdown();
 			$this->_view('main_1_3', 'customer_new');
 		}
 		

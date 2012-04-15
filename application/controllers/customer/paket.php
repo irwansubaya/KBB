@@ -97,7 +97,7 @@ class Paket extends MY_Controller {
 			$this->params['data']	 = $this->paket_m->get_paket_detail($idx);
 			$this->params['key']	 = $this->key_m->get_paket_key($idx);
 			$this->params['labels'] = $this->paket_m->getLabels();
-			$this->_view('main_1_3', 'paket_detail');
+			$this->_view('main_1_3', 'paket_new');
 		}
 		
 	}
