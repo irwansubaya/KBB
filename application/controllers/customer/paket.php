@@ -91,9 +91,13 @@ class Paket extends MY_Controller {
 		{
 			if ($action == 'paket')
 			{
+				$this->params['data']	 = $this->paket_m->get_paket_detail($idx);
+				$this->params['key']	 = $this->key_m->get_paket_key($idx);
 			}
 			else if ($action == 'schedule')
 			{
+				$this->params['data']	 = $this->paket_m->get_paket_detail($idx);
+				$this->params['key']	 = $this->key_m->get_paket_key($idx);
 			}
 			else if ($action == 'call')
 			{
@@ -106,9 +110,7 @@ class Paket extends MY_Controller {
 			}
 			
 			*/
-			$this->params['data']	 = $this->paket_m->get_paket_detail($idx);
-			$this->params['key']	 = $this->key_m->get_paket_key($idx);
-			$this->params['labels'] = $this->paket_m->getLabels();
+			
 			$this->params['action'] = $action;
 			$this->_view('main_1_3', 'paket_detail');
 			
