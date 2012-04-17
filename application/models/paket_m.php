@@ -93,7 +93,7 @@ class Paket_m extends MY_Model {
 	public function save ($idx = FALSE)
 	{
 		parent :: save ($idx);
-		if(!$idx) $this->db->insert_id();
+		if(!$idx) $idx = $this->db->insert_id();
 		return $this->insert_sn($idx, $this->input->post('cus_idx'));
 	}
 
