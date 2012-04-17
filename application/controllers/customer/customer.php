@@ -98,11 +98,27 @@ class Customer extends MY_Controller {
 	 * @access	public
 	 * @return	parent class function
 	 */
-	public function update ($idx)
+	public function update ($action,$idx)
 	{
 		if ($idx AND $this->customer_m->get($idx))
 		{
-			if ($this->input->post('save'))
+			if ($action == 'customer')
+			{
+				$this->params['data']	 = $this->customer_m->get_customer_detail($idx);
+				//$this->params['key']	 = $this->key_m->get_paket_key($idx);
+			}
+			else if ($action == 'paket')
+			{
+				$this->params['data']	 = $this->paket_m->get_paket_detail($idx);
+				$this->params['key']	 = $this->key_m->get_paket_key($idx);
+			}
+			else if ($action == 'key')
+			{
+			}
+			
+			
+			
+			/*if ($this->input->post('save'))
 			{
 				$query = $this->customer_m->get_by_corporate_id($this->input->post('cus_corporate_id'));
 
@@ -125,16 +141,16 @@ class Customer extends MY_Controller {
 						}
 					}
 				}
-			}
+			}*/
 			$this->load->model('kota_m');
 			$this->load->model('bidus_m');
 			$this->load->model('cabang_m');
 			$this->params['kota'] = $this->kota_m->dropdown();
 			$this->params['bidus'] = $this->bidus_m->dropdown();
 			$this->params['cabang'] = $this->cabang_m->dropdown();
-			$this->params['data']		= $this->customer_m->get($idx);
-			$this->params['labels']		= $this->customer_m->getLabels();
-			$this->_view('main_1_3', 'customer_new');
+			$this->params['data']	= $this->customer_m->get($idx);
+			$this->params['labels']= $this->customer_m->getLabels();
+			$this->_view('main_1_3', 'customer_detail');
 		}
 		
 	}

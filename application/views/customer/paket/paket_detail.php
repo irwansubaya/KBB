@@ -112,7 +112,7 @@
 </div>
 <div class="tabbable" style="margin-bottom: 9px;">
     <ul class="nav nav-tabs">
-	<li<?php echo ($action == 'paket')?' class="active"':'' ?>><?php echo anchor($module[0].'/update/paket/'.$data[0]->pkt_idx,'Paket')?></li>
+	<li<?php echo ($action == 'paket')?' class="active"':'' ?>><?php echo anchor($module[0].'/update/'.$data[0]->pkt_idx,'Paket')?></li>
 	<li<?php echo ($action == 'schedule')?' class="active"':'' ?>><?php echo anchor($module[0].'/update/schedule/'.$data[0]->pkt_idx,'Schedule')?></li>
 	<li<?php echo ($action == 'call')?' class="active"':'' ?>><?php echo anchor($module[0].'/update/call/'.$data[0]->pkt_idx,'Call')?></li>
     </ul>
