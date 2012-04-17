@@ -68,7 +68,7 @@ class Paket extends MY_Controller {
 				if ($this->paket_m->save())
 				{
 					setSucces('Data is saved');
-					#redirect ($this->module[0]);
+					redirect ($this->module[0]);
 				}
 				else
 				{
