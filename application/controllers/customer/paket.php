@@ -91,6 +91,21 @@ class Paket extends MY_Controller {
 		{
 			if ($action == 'paket')
 			{
+				if ($this->input->post('save'))
+				{
+					if ($this->paket_m->isValid())
+					{
+						if ($this->paket_m->save($idx))
+						{
+							setSucces('Data is saved');
+							// redirect ($this->module[0].'/update/paket/'.$idx);
+						}
+						else
+						{
+							setError('Unable to save');
+						}
+					}
+				}
 				$this->params['data']	 = $this->paket_m->get_paket_detail($idx);
 				$this->params['key']	 = $this->key_m->get_paket_key($idx);
 			}
@@ -102,6 +117,7 @@ class Paket extends MY_Controller {
 			else if ($action == 'call')
 			{
 			}
+		
 			/*
 			if ($this->input->post('save'))
 			{

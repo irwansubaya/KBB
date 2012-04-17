@@ -92,9 +92,9 @@ class Paket_m extends MY_Model {
 	 */
 	public function save ($idx = FALSE)
 	{
-		#$this->db->set('pkt_jumlah_key', $this->input->post('tot_key'));
 		parent :: save ($idx);
-		return $this->insert_sn($this->db->insert_id(), $this->input->post('cus_idx'));
+		if(!$idx) $this->db->insert_id();
+		return $this->insert_sn($idx, $this->input->post('cus_idx'));
 	}
 
 	public function convert_date ($str = FALSE)
