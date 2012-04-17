@@ -4,8 +4,12 @@
 <table class="table">
   <thead>
     <tr>
+        <td><?php echo form_text('','cus_corporate_id',(isset($data->cus_corporate_id))?$data->cus_corporate_id:'','class="span2" maxlength="10"');?></td>
+        <td><?php echo form_submit('search','Search', 'class="btn btn-primary"')?></td>
+    </tr>
+    <tr>
       <th width="10%">Corporate ID</th>
-      <th width="10%">Contact Person</th>
+      <th width="15%">Contact Person</th>
       <th width="20%">Alamat</th>
       <th width="10%">Telp Kantor</th>
       <th width="10%">Telp Rumah</th>
@@ -17,7 +21,7 @@
   <?php if ($data):?>
     <?php foreach ($data as $item):?>
     <tr>
-      <td><?php echo anchor($this->module[0] . '/update/' . $item->cus_idx, $item->cus_corporate_id)?></td>
+      <td><?php echo anchor($this->module[0] . '/update/customer' . $item->cus_idx, $item->cus_corporate_id)?></td>
       <td><?php echo $item->cus_cp ?></td>
       <td><?php echo $item->cus_alamat ?></td>
       <td><?php echo $item->cus_telepon_kantor ?></td>
