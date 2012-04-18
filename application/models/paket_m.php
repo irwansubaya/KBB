@@ -35,7 +35,7 @@ class Paket_m extends MY_Model {
 			'pkt_tipe' => array('Tipe Paket', TRUE),
 			'pkt_fitur' => array('Fitur Paket', TRUE),
                         'pkt_jumlah_key' => array('Jumlah Key BCA', false),
-			'pkt_tanggal_koneksi' => array('Tnaggal Koneksi', TRUE, 'callback_convert_date'),
+			'pkt_tanggal_koneksi' => array('Tanggal Koneksi', TRUE, 'callback_convert_date'),
 			'pkt_tanggal_terima' => array('Tanggal Terima Paket', TRUE, 'callback_convert_date'),
 			'pkt_jatuh_tempo' => array('Tanggal Jatuh Tempo', TRUE, 'callback_convert_date'),
 		);
@@ -76,10 +76,12 @@ class Paket_m extends MY_Model {
 	 * @param	integer
 	 * @return	boolean
 	*/
-	public function get_paket_detail ($pkt_idx = FALSE)
+	public function get_paket_detail ($pkt_idx = FALSE, $cus_idx = FALSE)
 	{
+		
 		$this->db->join('customer', 'customer.cus_idx = paket.cus_idx');
 		if ($pkt_idx) { $this->db->where('pkt_idx', $pkt_idx); }
+		else if ($cus_idx) { $this->db->where('customer.cus_idx', $cus_idx); }
 		$this->db->order_by('cus_corporate_id');
 		return parent :: get ();
 	}

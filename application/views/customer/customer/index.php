@@ -21,7 +21,7 @@
   <?php if ($data):?>
     <?php foreach ($data as $item):?>
     <tr>
-      <td><?php echo anchor($this->module[0] . '/update/customer/' . $item->cus_idx, $item->cus_corporate_id)?></td>
+      <td><?php echo anchor($this->module[0] . '/update/detail/' . $item->cus_idx, $item->cus_corporate_id)?></td>
       <td><?php echo $item->cus_cp ?></td>
       <td><?php echo $item->cus_alamat ?></td>
       <td><?php echo $item->cus_telepon_kantor ?></td>

@@ -37,7 +37,10 @@ class Customer extends MY_Controller {
 		$this->load->model(array(
 			'customer_m',
 			'paket_m',
-			'key_m'
+			'key_m',
+			'kota_m',
+			'bidus_m',
+			'cabang_m'
 		));
 	}
 
@@ -84,10 +87,6 @@ class Customer extends MY_Controller {
 			}
 			
 		}
-		// load kota model
-		$this->load->model('kota_m');
-		$this->load->model('bidus_m');
-		$this->load->model('cabang_m');
 		$this->params['kota'] = $this->kota_m->dropdown();
 		$this->params['bidus'] = $this->bidus_m->dropdown();
 		$this->params['cabang'] = $this->cabang_m->dropdown();
@@ -100,11 +99,12 @@ class Customer extends MY_Controller {
 	 * @access	public
 	 * @return	parent class function
 	 */
-	public function update ($idx,$action)
+	public function update ($action, $idx)
 	{
 		if ($idx AND $this->customer_m->get($idx))
 		{
-			if ($action == 'customer')
+			$this->params['action'] = $action;
+			if ($action == 'detail')
 			{
 				if ($this->input->post('save'))
 				{
@@ -113,66 +113,44 @@ class Customer extends MY_Controller {
 						if ($this->customer_m->save($idx))
 						{
 							setSucces('Data is saved');
-							// redirect ($this->module[0].'/update/paket/'.$idx);
+							redirect ($this->module[0]. '/update/detail/' . $idx);
 						}
 						else
 						{
 							setError('Unable to save');
 						}
 					}
-				}
-				/*$this->load->model('kota_m');
-				$this->load->model('bidus_m');
-				$this->load->model('cabang_m');
+				}				
+				$this->params['data'] = $this->customer_m->get($idx);
 				$this->params['kota'] = $this->kota_m->dropdown();
 				$this->params['bidus'] = $this->bidus_m->dropdown();
 				$this->params['cabang'] = $this->cabang_m->dropdown();
-				*/
-				$this->params['data']	= $this->customer_m->get($idx);
 				$this->params['labels']= $this->customer_m->getLabels();
-				//$this->params['data']	 = $this->customer_m->get($idx);
-				//$this->params['key']	 = $this->key_m->get_paket_key($idx);
+				$this->_view('main_1_3', 'customer_detail');
 			}
 			else if ($action == 'paket')
 			{
-				$this->params['data']	 = $this->paket_m->get_paket_detail($idx);
-				$this->params['key']	 = $this->key_m->get_paket_key($idx);
-			}
-			else if ($action == 'key')
-			{
-			}
-			
-			
-			
-			/*if ($this->input->post('save'))
-			{
-				$query = $this->customer_m->get_by_corporate_id($this->input->post('cus_corporate_id'));
-
-				if ($query && count($query) >= 1 && $this->input->post('cus_corporate_id_old') != $this->input->post('cus_corporate_id'))
+				$this->params['cus'] = $this->customer_m->get($idx);
+				$this->params['data'] = $this->paket_m->get_paket_detail(false, $idx);
+				$this->params['key'] = $this->key_m->get_paket_key($this->params['data'][0]->pkt_idx);
+				if ($this->input->post('save'))
 				{
-					setError('Customer Corporate ID <b>'.$this->input->post('cus_corporate_id').'</b> already exist. Please check your current input.');
-				}
-				else
-				{
-					if ($this->customer_m->isValid())
+					if ($this->paket_m->isValid())
 					{
-						if ($this->customer_m->save($idx))
+						if ($this->paket_m->save(@$this->params['data'][0]->pkt_idx))
 						{
 							setSucces('Data is saved');
-							redirect ($this->module[0].'/update/'.$idx);
+							redirect ($this->module[0]. '/update/paket/' . $idx);
 						}
 						else
 						{
 							setError('Unable to save');
 						}
 					}
-				}
-			}*/
-			
-			$this->params['action'] = $action;
-			$this->_view('main_1_3', 'customer_detail');
+				}				
+				$this->_view('main_1_3', 'customer_detail_paket');
+			}
 		}
-		
 	}
 
 	/**
