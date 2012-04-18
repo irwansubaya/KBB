@@ -100,7 +100,7 @@ class Customer extends MY_Controller {
 	 * @access	public
 	 * @return	parent class function
 	 */
-	public function update ($action,$idx)
+	public function update ($idx,$action)
 	{
 		if ($idx AND $this->customer_m->get($idx))
 		{
