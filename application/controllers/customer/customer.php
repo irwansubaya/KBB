@@ -36,6 +36,8 @@ class Customer extends MY_Controller {
 
 		$this->load->model(array(
 			'customer_m',
+			'paket_m',
+			'key_m'
 		));
 	}
 
@@ -104,7 +106,31 @@ class Customer extends MY_Controller {
 		{
 			if ($action == 'customer')
 			{
-				$this->params['data']	 = $this->customer_m->get_customer_detail($idx);
+				if ($this->input->post('save'))
+				{
+					if ($this->customer_m->isValid())
+					{
+						if ($this->customer_m->save($idx))
+						{
+							setSucces('Data is saved');
+							// redirect ($this->module[0].'/update/paket/'.$idx);
+						}
+						else
+						{
+							setError('Unable to save');
+						}
+					}
+				}
+				/*$this->load->model('kota_m');
+				$this->load->model('bidus_m');
+				$this->load->model('cabang_m');
+				$this->params['kota'] = $this->kota_m->dropdown();
+				$this->params['bidus'] = $this->bidus_m->dropdown();
+				$this->params['cabang'] = $this->cabang_m->dropdown();
+				*/
+				$this->params['data']	= $this->customer_m->get($idx);
+				$this->params['labels']= $this->customer_m->getLabels();
+				//$this->params['data']	 = $this->customer_m->get($idx);
 				//$this->params['key']	 = $this->key_m->get_paket_key($idx);
 			}
 			else if ($action == 'paket')
@@ -142,14 +168,8 @@ class Customer extends MY_Controller {
 					}
 				}
 			}*/
-			$this->load->model('kota_m');
-			$this->load->model('bidus_m');
-			$this->load->model('cabang_m');
-			$this->params['kota'] = $this->kota_m->dropdown();
-			$this->params['bidus'] = $this->bidus_m->dropdown();
-			$this->params['cabang'] = $this->cabang_m->dropdown();
-			$this->params['data']	= $this->customer_m->get($idx);
-			$this->params['labels']= $this->customer_m->getLabels();
+			
+			$this->params['action'] = $action;
 			$this->_view('main_1_3', 'customer_detail');
 		}
 		
