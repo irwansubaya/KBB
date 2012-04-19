@@ -77,7 +77,7 @@ class Customer extends MY_Controller {
 					if ($this->customer_m->save())
 					{
 						setSucces('Data is saved');
-						redirect ($this->module[0].'/update/'.$this->db->insert_id());
+						redirect ($this->module[0].'/update/detail/'.$this->db->insert_id());
 					}
 					else
 					{

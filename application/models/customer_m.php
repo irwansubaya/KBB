@@ -45,7 +45,7 @@ class Customer_m extends MY_Model {
                         'cus_no_fax' => array('No Fax', FALSE,'integer'),
 			'cus_cabang' => array('Cabang', TRUE),
 			'cus_kode_cabang' => array('Kode Cabang', FALSE,'integer'),
-                        'cus_email' => array('Email', TRUE, 'valid_email')
+                        //'cus_email' => array('Email', TRUE, 'valid_email')
 		);
 	}
 

@@ -124,7 +124,19 @@
 	    <?php #echo form_area('Contact Person *','cus_cp',(isset($data[0]->cus_cp))?$data[0]->cus_cp:'','class="span3" maxlength="64"');?>
 	    <?php echo form_drop('Tipe Paket *','pkt_jenis',array('single_otorisasi'=>'Single Otorisasi','multi_otorisasi'=>'Multi Otorisasi'),(isset($data[0]->pkt_jenis))?$data[0]->pkt_jenis:'','class="span2"');?>
 	    <?php echo form_drop('Jenis Paket *','pkt_tipe',array('gold'=>'Gold','gold_payroll'=>'Gold Payroll','platinum'=>'Platinum'),(isset($data[0]->pkt_tipe))?$data[0]->pkt_tipe:'','class="span2"');?>
-	    <?php echo form_drop('Fitur Paket *','pkt_fitur',array(
+	    <div class="control-group">
+		<label class="control-label" for="it_has_ed">Fitur *</label>
+		<div class="controls">
+		    <input type="checkbox" name="fitur" value="Virtual Account"<?php (isset($data->pkt_fitur) && $data->pkt_fitur==1)?' checked':'' ?>>  Virtual Account<br>
+		    <input type="checkbox" name="fitur" value="Virtual Account"<?php (isset($data->pkt_fitur) && $data->pkt_fitur==1)?' checked':'' ?>>  BCA Virtual Account<br>
+		    <input type="checkbox" name="fitur" value="Virtual Account"<?php (isset($data->pkt_fitur) && $data->pkt_fitur==1)?' checked':'' ?>>  Payroll<br>
+		    <input type="checkbox" name="fitur" value="Virtual Account"<?php (isset($data->pkt_fitur) && $data->pkt_fitur==1)?' checked':'' ?>>  B2B Pertamina<br>
+		    <input type="checkbox" name="fitur" value="Virtual Account"<?php (isset($data->pkt_fitur) && $data->pkt_fitur==1)?' checked':'' ?>>  B2B E-Commerce<br>
+		    <input type="checkbox" name="fitur" value="Virtual Account"<?php (isset($data->pkt_fitur) && $data->pkt_fitur==1)?' checked':'' ?>>  MAR<br>
+		    <input type="checkbox" name="fitur" value="Virtual Account"<?php (isset($data->pkt_fitur) && $data->pkt_fitur==1)?' checked':'' ?>>  Sysadmin
+		</div>
+	    </div>
+	    <!--<?php echo form_drop('Fitur Paket *','pkt_fitur',array(
 								   'va'=>'Virtual Account',
 								   'bca_va'=>'BCA Virtual Account',
 								   'payroll'=>'Payroll',
@@ -132,16 +144,16 @@
 								   'b2b_ecommerce'=>'B2B E-Commerce',
 								   'mar'=>'MAR',
 								   'sysadmin'=>'Sysadmin',
-								   ),(isset($data[0]->pkt_fitur))?$data[0]->pkt_fitur:'','class="span2"');?>
+								   ),(isset($data[0]->pkt_fitur))?$data[0]->pkt_fitur:'','class="span2"');?>-->
 	    <?php echo form_text('Tgl Koneksi*','pkt_tanggal_koneksi',(isset($data[0]->pkt_tanggal_koneksi))?$data[0]->pkt_tanggal_koneksi:'','class="span2" maxlength="15" id="pkt_tanggal_koneksi"');?>    
 	    <?php echo form_text('Tgl Terima Paket*','pkt_tanggal_terima',(isset($data[0]->pkt_tanggal_terima))?$data[0]->pkt_tanggal_terima:'','class="span2" maxlength="15" id="pkt_tanggal_terima"');?>    
 	    <?php echo form_text('Tgl Due Date*','pkt_jatuh_tempo',(isset($data[0]->pkt_jatuh_tempo))?$data[0]->pkt_jatuh_tempo:'','class="span2" maxlength="15" id="pkt_jatuh_tempo"');?>    
 	
 	    <legend>List Key</legend>
 	    <div class="well form-inline">
-	    <input type="text" name="key_sn" placeholder="Key SN" id="key_sn" class="span3" maxlength="10">
-	    <input type="text" name="key_username" placeholder="Username" id="key_username" class="span2">
-	    <input type="hidden" value="insert" name="mode" id="mode">
+	    <input type="text" name="key_sn" placeholder="Key SN" id="key_sn" class="span2" maxlength="10">
+	    <input type="text" name="key_username" placeholder="Username" id="key_username" class="span3">
+	    <input type="hidden" value="insert" name="mode" id="mode" >
 	    <input type="hidden" value="" name="id_key" id="id_key">
 	    <?php echo form_button('insert-key','Insert','onclick="return insert_key()" class="btn"')?>
 	    </div>
