@@ -132,12 +132,13 @@ class Customer extends MY_Controller {
 			{
 				$this->params['cus'] = $this->customer_m->get($idx);
 				$this->params['data'] = $this->paket_m->get_paket_detail(false, $idx);
-				$this->params['key'] = $this->key_m->get_paket_key($this->params['data'][0]->pkt_idx);
+				$pkt_idx = (!$this->params['data']) ? null : $this->params['data'][0]->pkt_idx;
+				$this->params['key'] = $this->key_m->get_paket_key($pkt_idx);
 				if ($this->input->post('save'))
 				{
 					if ($this->paket_m->isValid())
 					{
-						if ($this->paket_m->save(@$this->params['data'][0]->pkt_idx))
+						if ($this->paket_m->save($pkt_idx))
 						{
 							setSucces('Data is saved');
 							redirect ($this->module[0]. '/update/paket/' . $idx);

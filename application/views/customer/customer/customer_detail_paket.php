@@ -127,13 +127,13 @@
 	    <div class="control-group">
 		<label class="control-label" for="it_has_ed">Fitur *</label>
 		<div class="controls">
-		    <input type="checkbox" name="fitur" value="Virtual Account"<?php (isset($data->pkt_fitur) && $data->pkt_fitur==1)?' checked':'' ?>>  Virtual Account<br>
-		    <input type="checkbox" name="fitur" value="Virtual Account"<?php (isset($data->pkt_fitur) && $data->pkt_fitur==1)?' checked':'' ?>>  BCA Virtual Account<br>
-		    <input type="checkbox" name="fitur" value="Virtual Account"<?php (isset($data->pkt_fitur) && $data->pkt_fitur==1)?' checked':'' ?>>  Payroll<br>
-		    <input type="checkbox" name="fitur" value="Virtual Account"<?php (isset($data->pkt_fitur) && $data->pkt_fitur==1)?' checked':'' ?>>  B2B Pertamina<br>
-		    <input type="checkbox" name="fitur" value="Virtual Account"<?php (isset($data->pkt_fitur) && $data->pkt_fitur==1)?' checked':'' ?>>  B2B E-Commerce<br>
-		    <input type="checkbox" name="fitur" value="Virtual Account"<?php (isset($data->pkt_fitur) && $data->pkt_fitur==1)?' checked':'' ?>>  MAR<br>
-		    <input type="checkbox" name="fitur" value="Virtual Account"<?php (isset($data->pkt_fitur) && $data->pkt_fitur==1)?' checked':'' ?>>  Sysadmin
+		    <input type="checkbox" name="fitur[]" value="Virtual Account"<?php echo (isset($data[0]->pkt_fitur) && in_array('Virtual Account', explode(',', $data[0]->pkt_fitur)))?' checked':'' ?>>  Virtual Account<br>
+		    <input type="checkbox" name="fitur[]" value="BCA Virtual Account"<?php echo (isset($data[0]->pkt_fitur) && in_array('BCA Virtual Account', explode(',', $data[0]->pkt_fitur)))?' checked':'' ?>>  BCA Virtual Account<br>
+		    <input type="checkbox" name="fitur[]" value="Payroll"<?php echo (isset($data[0]->pkt_fitur) && in_array('Payroll', explode(',', $data[0]->pkt_fitur)))?' checked':'' ?>>  Payroll<br>
+		    <input type="checkbox" name="fitur[]" value="B2B Pertamina"<?php echo (isset($data[0]->pkt_fitur) && in_array('B2B Pertamina', explode(',', $data[0]->pkt_fitur)))?' checked':'' ?>>  B2B Pertamina<br>
+		    <input type="checkbox" name="fitur[]" value="B2B E-Commerce"<?php echo (isset($data[0]->pkt_fitur) && in_array('B2B E-Commerce', explode(',', $data[0]->pkt_fitur)))?' checked':'' ?>>  B2B E-Commerce<br>
+		    <input type="checkbox" name="fitur[]" value="MAR"<?php echo (isset($data[0]->pkt_fitur) && in_array('MAR', explode(',', $data[0]->pkt_fitur)))?' checked':'' ?>>  MAR<br>
+		    <input type="checkbox" name="fitur[]" value="Sysadmin"<?php echo (isset($data[0]->pkt_fitur) && in_array('Sysadmin', explode(',', $data[0]->pkt_fitur)))?' checked':'' ?>>  Sysadmin
 		</div>
 	    </div>
 	    <!--<?php echo form_drop('Fitur Paket *','pkt_fitur',array(
