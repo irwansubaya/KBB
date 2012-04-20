@@ -35,18 +35,25 @@ class Customer_m extends MY_Model {
 			'cus_no_ktp' => array('No KTP', FALSE,'integer'),
 			'cus_no_rekening' => array('No Rekening', TRUE,'integer|exact_length[10]'),
 			'cus_bidang_usaha' => array('Bidang Usaha', FALSE),
-                        'cus_alamat' => array('Alamat', TRUE),
+            'cus_alamat' => array('Alamat', TRUE),
 			'cus_cp' => array('Contact Person', TRUE),
 			'cus_kota' => array('Kota', TRUE),
-                        'cus_kodepos' => array('Kode Pos', FALSE,'integer|exact_length[5]'),
+            'cus_kodepos' => array('Kode Pos', FALSE,'integer|exact_length[5]'),
 			'cus_telepon_kantor' => array('Telp Kantor', FALSE,'integer'),
 			'cus_telepon_rumah' => array('Telp Rumah', FALSE,'integer'),
 			'cus_handphone' => array('Handphone', FALSE,'integer'),
-                        'cus_no_fax' => array('No Fax', FALSE,'integer'),
+            'cus_no_fax' => array('No Fax', FALSE,'integer'),
 			'cus_cabang' => array('Cabang', TRUE),
 			'cus_kode_cabang' => array('Kode Cabang', FALSE,'integer|exact_length[4]'),
-                        'cus_email' => array('Email', false, 'valid_email')
+            'cus_email' => array('Email', false, 'valid_email')
 		);
+
+		$this->data = array(
+			'cus_corporate_id'	=> $this->input->get('cus_corporate_id'),
+			'cus_tanggal_input'	=> $this->input->get('cus_tanggal_input')
+		);
+
+		$this->page         = $this->input->get('page') != 0 ? ((int) ($this->input->get('page') - 1) * 25) : 0;
 	}
 
 	/**
@@ -75,9 +82,44 @@ class Customer_m extends MY_Model {
 		$this->db->where('cus_corporate_id', $cus_corporate_id);
 		return parent :: get ();
 	}
-	public function get_by_date ($date=false)
+
+	/**
+	 * [get_customer pagination]
+	 * @return [type] [description]
+	 */
+	public function get_customer ()
 	{
-		$this->db->where('cus_tanggal_input',$date);
+		foreach ($this->data as $key => $value) 
+		{
+			if ($value && $key == 'cus_corporate_id') $this->db->like($key, $value);
+			else if ($value && $key == 'cus_tanggal_input') $this->db->where($key, date('Y-m-d', strtotime($value)));
+		}
+		$this->db->limit('25',$this->page);
 		return parent::get();
 	}
+
+	/**
+	 * [count_customer description]
+	 * @return int [description]
+	 */
+	public function count_customer ()
+	{
+		foreach ($this->data as $key => $value) 
+		{
+			if ($value && $key == 'cus_corporate_id') $this->db->like($key, $value);
+			else if ($value && $key == 'cus_tanggal_input') $this->db->where($key, date('Y-m-d', strtotime($value)));
+		}
+		return parent :: count_record();
+	}
+
+	/**
+	 * Return data
+	 * 
+	 * @return array [description]
+	 */
+	public function data ()
+	{
+		return $this->data;
+	}
+
 }
