@@ -84,6 +84,7 @@ class MY_Controller extends CI_Controller {
 				->add_javascript('jquery-ui-1.8.18.custom.min.js')
 				->add_javascript('custom.js')
 				->add_javascript('bootstrap.js')
+				->add_javascript('date.js')
 				->add_javascript('jquery.autocomplete.js');
 		}
 
