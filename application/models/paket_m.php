@@ -33,6 +33,7 @@ class Paket_m extends MY_Model {
 			'cus_idx' => array('Cus Id', TRUE),
 			'pkt_jenis' => array('Jenis Paket', TRUE),
 			'pkt_tipe' => array('Tipe Paket', TRUE),
+			//'pkt_fitur'=>array('Tipe Paket',true),
                         'pkt_jumlah_key' => array('Jumlah Key BCA', false),
 			'pkt_tanggal_koneksi' => array('Tanggal Koneksi', TRUE, 'callback_convert_date'),
 			'pkt_tanggal_terima' => array('Tanggal Terima Paket', TRUE, 'callback_convert_date'),

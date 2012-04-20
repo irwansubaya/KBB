@@ -140,6 +140,29 @@ class Customer extends MY_Controller {
 				$this->params['key'] = $this->key_m->get_paket_key($idx);
 				if ($this->input->post('save'))
 				{
+				if ($this->paket_m->isValid())
+				{
+				if ($this->paket_m->save($pkt_idx))
+				{
+				setSucces('Data is saved');
+				redirect ($this->module[0]. '/update/paket/' . $idx);
+				}
+				else
+				{
+				setError('Unable to save');
+				}
+				}
+				}
+				$this->_view('main_1_3', 'customer_detail_paket');
+			}
+			/*else if ($action == 'paket')
+			{
+				$this->params['cus'] = $this->customer_m->get($idx);
+				$this->params['data'] = $this->paket_m->get_paket_detail(false, $idx);
+				$pkt_idx = (!$this->params['data']) ? null : $this->params['data'][0]->pkt_idx;
+				$this->params['key'] = $this->key_m->get_paket_key($idx);
+				if ($this->input->post('save'))
+				{
 					if ($this->paket_m->isValid())
 					{
 						if ($this->paket_m->save($pkt_idx))
@@ -154,7 +177,7 @@ class Customer extends MY_Controller {
 					}
 				}				
 				$this->_view('main_1_3', 'customer_detail_paket');
-			}
+			}*/
 			else if ($action == 'call')
 			{
 				$this->params['cus'] = $this->customer_m->get($idx);
