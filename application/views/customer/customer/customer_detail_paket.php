@@ -12,6 +12,16 @@
 		changeMonth: true,
 		changeYear: true,
 		dateFormat: 'dd-M-yy',
+		showAnim: 'fold',
+		onClose: function(dateText, inst) {
+		    var due_date = Date.parse(dateText).add(2).days();
+		    $('#pkt_jatuh_tempo').val(due_date.toString('dd-MMM-yyyy'));
+		}
+	});
+	$("#pkt_jatuh_tempo").datepicker({
+		changeMonth: true,
+		changeYear: true,
+		dateFormat: 'dd-M-yy',
 		showAnim: 'fold'
 	});
         $('#pkt_corporate_id').autocomplete('<?php echo base_url()?>customer/paket/customer_ajax',{
@@ -149,9 +159,9 @@
 								   'mar'=>'MAR',
 								   'sysadmin'=>'Sysadmin',
 								   ),(isset($data[0]->pkt_fitur))?$data[0]->pkt_fitur:'','class="span2"');?>-->
-	    <?php echo form_text('Tgl Koneksi*','pkt_tanggal_koneksi',(isset($data[0]->pkt_tanggal_koneksi))?$data[0]->pkt_tanggal_koneksi:'','class="span2" maxlength="15" id="pkt_tanggal_koneksi"');?>    
-	    <?php echo form_text('Tgl Terima Paket*','pkt_tanggal_terima',(isset($data[0]->pkt_tanggal_terima))?$data[0]->pkt_tanggal_terima:'','class="span2" maxlength="15" id="pkt_tanggal_terima"');?>    
-	    <?php echo form_text('Tgl Due Date*','pkt_jatuh_tempo',(isset($data[0]->pkt_jatuh_tempo))?$data[0]->pkt_jatuh_tempo:'','class="span2" maxlength="15" id="pkt_jatuh_tempo"');?>    
+	    <?php echo form_text('Tgl Koneksi*','pkt_tanggal_koneksi',(isset($data[0]->pkt_tanggal_koneksi))?date('d-M-Y',strtotime($data[0]->pkt_tanggal_koneksi)):'','class="span2" maxlength="15" id="pkt_tanggal_koneksi"');?>    
+	    <?php echo form_text('Tgl Terima Paket*','pkt_tanggal_terima',(isset($data[0]->pkt_tanggal_terima))?date('d-M-Y',strtotime($data[0]->pkt_tanggal_terima)):'','class="span2" maxlength="15" id="pkt_tanggal_terima"');?>    
+	    <?php echo form_text('Tgl Due Date*','pkt_jatuh_tempo',(isset($data[0]->pkt_jatuh_tempo))?date('d-M-Y',strtotime($data[0]->pkt_jatuh_tempo)):'','class="span2" maxlength="15" id="pkt_jatuh_tempo"');?>    
 	
 	    <legend>List Key</legend>
 	    <div class="well form-inline">
