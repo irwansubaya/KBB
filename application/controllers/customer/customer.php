@@ -40,7 +40,9 @@ class Customer extends MY_Controller {
 			'key_m',
 			'kota_m',
 			'bidus_m',
-			'cabang_m'
+			'cabang_m',
+			'schedule_m',
+			'status_m'
 		));
 	}
 
@@ -133,7 +135,7 @@ class Customer extends MY_Controller {
 				$this->params['cus'] = $this->customer_m->get($idx);
 				$this->params['data'] = $this->paket_m->get_paket_detail(false, $idx);
 				$pkt_idx = (!$this->params['data']) ? null : $this->params['data'][0]->pkt_idx;
-				$this->params['key'] = $this->key_m->get_paket_key($pkt_idx);
+				$this->params['key'] = $this->key_m->get_paket_key($idx);
 				if ($this->input->post('save'))
 				{
 					if ($this->paket_m->isValid())
@@ -150,6 +152,54 @@ class Customer extends MY_Controller {
 					}
 				}				
 				$this->_view('main_1_3', 'customer_detail_paket');
+			}
+			else if ($action == 'call')
+			{
+				$this->params['cus'] = $this->customer_m->get($idx);
+				$this->params['data'] = $this->call_m->get_call_detail(false, $idx);
+				$sched_idx = (!$this->params['data']) ? null : $this->params['data'][0]->sched_idx;
+				//$this->params['key'] = $this->key_m->get_paket_key($pkt_idx);
+				if ($this->input->post('save'))
+				{
+					if ($this->schedule_m->isValid())
+					{
+						if ($this->schedule_m->save($sched_idx))
+						{
+							setSucces('Data is saved');
+							redirect ($this->module[0]. '/update/schedule/' . $idx);
+						}
+						else
+						{
+							setError('Unable to save');
+						}
+					}
+				}
+				//$this->params['status'] = $this->status_m->dropdown();
+				$this->_view('main_1_3', 'customer_detail_schedule');
+			}
+			else if ($action == 'schedule')
+			{
+				$this->params['cus'] = $this->customer_m->get($idx);
+				$this->params['data'] = $this->schedule_m->get_schedule_detail(false, $idx);
+				$sched_idx = (!$this->params['data']) ? null : $this->params['data'][0]->sched_idx;
+				//$this->params['key'] = $this->key_m->get_paket_key($pkt_idx);
+				if ($this->input->post('save'))
+				{
+					if ($this->schedule_m->isValid())
+					{
+						if ($this->schedule_m->save($sched_idx))
+						{
+							setSucces('Data is saved');
+							redirect ($this->module[0]. '/update/schedule/' . $idx);
+						}
+						else
+						{
+							setError('Unable to save');
+						}
+					}
+				}
+				$this->params['status'] = $this->status_m->dropdown();
+				$this->_view('main_1_3', 'customer_detail_schedule');
 			}
 		}
 	}

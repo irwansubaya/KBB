@@ -22,22 +22,15 @@
  * @category	        Model
  */
 
-class Key_m extends MY_Model {
+class Status_m extends MY_Model {
 	
 	public function __construct ()
 	{
 		parent :: __construct ();
-		$this->tableName = 'key';
-		$this->idx	 = 'key_idx';
+		$this->tableName = 'status';
+		$this->idx	 = 'stat_idx';
 		$this->fields	 = array(
-			'cus_corporate_id' => array('Corporate ID', TRUE),
-			'pkt_jenis' => array('Jenis Paket', TRUE),
-			'pkt_tipe' => array('Tipe Paket', TRUE),
-			'pkt_fitur' => array('Fitur Paket', TRUE),
-                        'pkt_jumlah_key' => array('Jumlah Key BCA', TRUE),
-			'pkt_tanggal_koneksi' => array('Tnaggal Koneksi', TRUE),
-			'pkt_tanggal_terima' => array('Tanggal Terima Paket', TRUE),
-			'pkt_jatuh_tempo' => array('Tanggal Jatuh Tempo', TRUE),
+			'stat_nama' => array('Nama', TRUE),
 		);
 	}
 
@@ -52,19 +45,20 @@ class Key_m extends MY_Model {
 	{
 		return parent :: save ($idx);	
 	}
-	
-	
-	/**
-	 * Get record 
-	 *
-	 * @access	public
-	 * @param	integer
-	 * @return	boolean
-	*/
-	public function get_paket_key ($cus_idx = FALSE)
-	{
-		$this->db->where('cus_idx', $cus_idx);
-		$this->db->order_by('key_nama_user');
-		return parent :: get ();
-	}
+        
+        public function dropdown()
+        {
+            $arr = array();
+            
+            $data = parent ::get();
+            if ($data)
+            {
+                foreach($data as $d)
+                {
+                    $arr[$d->stat_idx] = $d->stat_nama;
+                }
+                
+                return $arr;
+            }
+        }
 }

@@ -33,6 +33,7 @@
     <ul class="nav nav-tabs">
 	<li<?php echo ($action == 'detail')?' class="active"':'' ?>><?php echo anchor($module[0].'/update/detail/'.$data->cus_idx,'Customer')?></li>
 	<li<?php echo ($action == 'paket')?' class="active"':'' ?>><?php echo anchor($module[0].'/update/paket/'.$data->cus_idx,'Paket & Key')?></li>
+	<li<?php echo ($action == 'schedule')?' class="active"':'' ?>><?php echo anchor($module[0].'/update/schedule/'.$data->cus_idx,'Schedule')?></li>
     </ul>
     <div class="tab-content">
 	<?php echo form_open(uri_string(),array('id'=>'formid', 'class'=>'form-horizontal'))?>

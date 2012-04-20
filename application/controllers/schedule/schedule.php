@@ -37,7 +37,8 @@ class schedule extends MY_Controller {
 		$this->load->model(array(
 			'customer_m',
 			'schedule_m',
-			'paket_m'
+			'paket_m',
+			'status_m'
 		));
 	}
 
@@ -63,8 +64,8 @@ class schedule extends MY_Controller {
 	{
 		if ($this->input->post('save'))
 		{
-#			if ($this->schedule_m->isValid())
-#			{
+			if ($this->schedule_m->isValid())
+			{
 				if ($this->schedule_m->save())
 				{
 					setSucces('Data is saved');
@@ -74,8 +75,9 @@ class schedule extends MY_Controller {
 				{
 					setError('Unable to save');
 				}
-#			}
+			}
 		}
+		$this->params['status'] = $this->status_m->dropdown();
 		$this->_view('main_1_3', 'schedule_new');
 	}
 
@@ -96,6 +98,7 @@ class schedule extends MY_Controller {
 			}
 			$this->params['data']	 = $this->schedule_m->get_paket_detail($idx);
 			$this->params['key']	 = $this->key_m->get_paket_key($idx);
+			$this->params['status'] = $this->status_m->dropdown();
 			$this->params['labels'] = $this->schedule_m->getLabels();
 			$this->_view('main_1_3', 'schedule_detail');
 		}

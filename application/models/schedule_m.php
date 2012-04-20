@@ -76,11 +76,11 @@ class Schedule_m extends MY_Model {
 	 * @param	integer
 	 * @return	boolean
 	*/
-	public function get_paket_detail ($cus_idx =FALSE)
+	public function get_schedule_detail ($sched_idx=false, $cus_idx =FALSE)
 	{
-		$this->db->join('paket', 'paket.cus_idx = schedule.cus_idx','LEFT');
-		$this->db->join('customer', 'customer.cus_idx = paket.cus_idx','LEFT');
-		if ($cus_idx) { $this->db->where('cus_idx', $cus_idx); }
+		$this->db->join('customer', 'customer.cus_idx = schedule.cus_idx');
+		if ($sched_idx) { $this->db->where('sched_idx', $sched_idx); }
+		if ($cus_idx) { $this->db->where('customer.cus_idx ', $cus_idx); }
 		$this->db->order_by('cus_corporate_id');
 		return parent :: get ();
 	}
