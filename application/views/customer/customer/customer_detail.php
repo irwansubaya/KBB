@@ -33,7 +33,9 @@
     <ul class="nav nav-tabs">
 	<li<?php echo ($action == 'detail')?' class="active"':'' ?>><?php echo anchor($module[0].'/update/detail/'.$data->cus_idx,'Customer')?></li>
 	<li<?php echo ($action == 'paket')?' class="active"':'' ?>><?php echo anchor($module[0].'/update/paket/'.$data->cus_idx,'Paket & Key')?></li>
+	<li<?php echo ($action == 'call')?' class="active"':'' ?>><?php echo anchor($module[0].'/update/call/'.$data->cus_idx,'call')?></li>
 	<li<?php echo ($action == 'schedule')?' class="active"':'' ?>><?php echo anchor($module[0].'/update/schedule/'.$data->cus_idx,'Schedule')?></li>
+	<li<?php echo ($action == 'hasjung')?' class="active"':'' ?>><?php echo anchor($module[0].'/update/hasjung/'.$data->cus_idx,'Hasil Kunjungan')?></li>
     </ul>
     <div class="tab-content">
 	<?php echo form_open(uri_string(),array('id'=>'formid', 'class'=>'form-horizontal'))?>
@@ -55,7 +57,7 @@
 	    </tr>
 	    <tr>
 		<td><?php echo form_area('ALamat *','cus_alamat',(isset($data->cus_alamat))?$data->cus_alamat:'','class="span3 maxlength="255"');?></td>
-		<td><?php echo form_area('Contact Person*','cus_cp',(isset($data->cus_cp))?$data->cus_cp:'','class="span3" maxlength="64"');?></td>
+		<td><?php echo form_area('Nama User / PIC*','cus_cp',(isset($data->cus_cp))?$data->cus_cp:'','class="span3" maxlength="64"');?></td>
 	    </tr>
 	    <tr>
 		<td>

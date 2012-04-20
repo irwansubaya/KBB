@@ -114,7 +114,9 @@
     <ul class="nav nav-tabs">
 	<li<?php echo ($action == 'detail')?' class="active"':'' ?>><?php echo anchor($module[0].'/update/detail/'.$cus->cus_idx,'Customer')?></li>
 	<li<?php echo ($action == 'paket')?' class="active"':'' ?>><?php echo anchor($module[0].'/update/paket/'.$cus->cus_idx,'Paket & Key')?></li>
+	<li<?php echo ($action == 'call')?' class="active"':'' ?>><?php echo anchor($module[0].'/update/call/'.$cus->cus_idx,'call')?></li>
 	<li<?php echo ($action == 'schedule')?' class="active"':'' ?>><?php echo anchor($module[0].'/update/schedule/'.$cus->cus_idx,'Schedule')?></li>
+	<li<?php echo ($action == 'hasjung')?' class="active"':'' ?>><?php echo anchor($module[0].'/update/hasjung/'.$cus->cus_idx,'Hasil Kunjungan')?></li>
     </ul>
     <div class="tab-content">
 	<?php echo form_open(uri_string(),array('id'=>'formid', 'class'=>'form-horizontal'))?>
@@ -123,14 +125,15 @@
 	    <?php #echo form_text('Corporate ID *','cus_corporate_id',(isset($data[0]->cus_corporate_id))?$data[0]->cus_corporate_id:'','class="span2" maxlength="10" id="pkt_corporate_id"');?>
 	    <?php #echo form_text('Name Perusahaan*','cus_nama_perusahaan',(isset($data[0]->cus_nama_perusahaan))?$data[0]->cus_nama_perusahaan:'','class="span3" maxlength="64" id ="cus_nama_perusahaan"');?>
 	    <?php #echo form_area('Contact Person *','cus_cp',(isset($data[0]->cus_cp))?$data[0]->cus_cp:'','class="span3" maxlength="64"');?>
-	    <?php echo form_drop('Tipe Paket *','pkt_jenis',array('single_otorisasi'=>'Single Otorisasi','multi_otorisasi'=>'Multi Otorisasi'),(isset($data[0]->pkt_jenis))?$data[0]->pkt_jenis:'','class="span2"');?>
 	    <?php echo form_drop('Jenis Paket *','pkt_tipe',array('gold'=>'Gold','gold_payroll'=>'Gold Payroll','platinum'=>'Platinum'),(isset($data[0]->pkt_tipe))?$data[0]->pkt_tipe:'','class="span2"');?>
+	    <?php echo form_drop('Tipe Paket *','pkt_jenis',array('single_otorisasi'=>'Single Otorisasi','multi_otorisasi'=>'Multi Otorisasi'),(isset($data[0]->pkt_jenis))?$data[0]->pkt_jenis:'','class="span2"');?>
 	    <div class="control-group">
 		<label class="control-label" for="it_has_ed">Fitur *</label>
 		<div class="controls">
 		    <input type="checkbox" name="fitur[]" value="Virtual Account"<?php echo (isset($data[0]->pkt_fitur) && in_array('Virtual Account', explode(',', $data[0]->pkt_fitur)))?' checked':'' ?>>  Virtual Account<br>
 		    <input type="checkbox" name="fitur[]" value="BCA Virtual Account"<?php echo (isset($data[0]->pkt_fitur) && in_array('BCA Virtual Account', explode(',', $data[0]->pkt_fitur)))?' checked':'' ?>>  BCA Virtual Account<br>
 		    <input type="checkbox" name="fitur[]" value="Payroll"<?php echo (isset($data[0]->pkt_fitur) && in_array('Payroll', explode(',', $data[0]->pkt_fitur)))?' checked':'' ?>>  Payroll<br>
+		    <input type="checkbox" name="fitur[]" value="Upgrade Payroll"<?php echo (isset($data[0]->pkt_fitur) && in_array('Upgrade Payroll', explode(',', $data[0]->pkt_fitur)))?' checked':'' ?>>  Upgrade Payroll<br>
 		    <input type="checkbox" name="fitur[]" value="B2B Pertamina"<?php echo (isset($data[0]->pkt_fitur) && in_array('B2B Pertamina', explode(',', $data[0]->pkt_fitur)))?' checked':'' ?>>  B2B Pertamina<br>
 		    <input type="checkbox" name="fitur[]" value="B2B E-Commerce"<?php echo (isset($data[0]->pkt_fitur) && in_array('B2B E-Commerce', explode(',', $data[0]->pkt_fitur)))?' checked':'' ?>>  B2B E-Commerce<br>
 		    <input type="checkbox" name="fitur[]" value="MAR"<?php echo (isset($data[0]->pkt_fitur) && in_array('MAR', explode(',', $data[0]->pkt_fitur)))?' checked':'' ?>>  MAR<br>
@@ -177,7 +180,7 @@
 		echo '<td><a href="" onclick="edit_key(\''.$i.
 					'\', \''.$key[$i]->key_id.
 					'\', \''.$key[$i]->key_nama_user.
-					'\'); return false">E</a> | <a href="" onclick="remove_key(\''.$i.'\'); return false;">D</a></td>';
+					'\'); return false">Edit</a> | <a href="" onclick="remove_key(\''.$i.'\'); return false;">Delete</a></td>';
 		echo "</tr>";
 	      } }
 	      ?>

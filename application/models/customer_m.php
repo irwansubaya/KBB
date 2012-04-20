@@ -44,7 +44,7 @@ class Customer_m extends MY_Model {
 			'cus_handphone' => array('Handphone', FALSE,'integer'),
                         'cus_no_fax' => array('No Fax', FALSE,'integer'),
 			'cus_cabang' => array('Cabang', TRUE),
-			'cus_kode_cabang' => array('Kode Cabang', FALSE,'integer'),
+			'cus_kode_cabang' => array('Kode Cabang', FALSE,'integer|exact_length[4]'),
                         'cus_email' => array('Email', false, 'valid_email')
 		);
 	}

@@ -49,7 +49,7 @@
     </tr>
     <tr>
         <td><?php echo form_area('ALamat *','cus_alamat',(isset($data->cus_alamat))?$data->cus_alamat:'','class="span3 maxlength="255"');?></td>
-        <td><?php echo form_area('Contact Person*','cus_cp',(isset($data->cus_cp))?$data->cus_cp:'','class="span3" maxlength="64"');?></td>
+        <td><?php echo form_area('Nama User / PIC*','cus_cp',(isset($data->cus_cp))?$data->cus_cp:'','class="span3" maxlength="64"');?></td>
     </tr>
     <tr>
         <td>
@@ -66,8 +66,8 @@
         <td><?php echo form_text('Telp Fax','cus_no_fax',(isset($data->cus_no_fax))?$data->cus_no_fax:'','class="span2" maxlength="32"');?></td>
     </tr>
     <tr>
-        <td><?php echo form_text('Kode Cabang','cus_kode_cabang',(isset($data->cus_kode_cabang))?$data->cus_kode_cabang:'','class="span1" maxlength="32"');?></td>
-        <td><?php echo form_drop('Cabang','cus_cabang',$cabang,(isset($data->cus_cabang))?$data->cus_cabang:'','class="span3"');?></td>
+        <td><?php echo form_text('Kode Cabang','cus_kode_cabang',(isset($data->cus_kode_cabang))?$data->cus_kode_cabang:'','class="span1" maxlength="4"');?></td>
+        <td><?php echo form_drop('Cabang','cus_cabang',$cabang,(isset($data->cus_cabang))?$data->cus_cabang:'','class="span3" maxlength="64"');?></td>
     </tr>
     <tr>
         <td><?php echo form_text('Email *','cus_email',(isset($data->cus_email))?$data->cus_email:'','class="span3" maxlength="64"');?></td>

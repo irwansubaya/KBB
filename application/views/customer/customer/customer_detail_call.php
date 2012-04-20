@@ -105,28 +105,36 @@
         $("#tot_key").val(rows);
     }
 </script>
+<div class="page-header">
+    <h2>Detail Customer : <?php echo '['.$cus->cus_corporate_id.'] '.$cus->cus_nama_perusahaan ?></h2>
+</div>
 <div class="tabbable" style="margin-bottom: 9px;">
     <ul class="nav nav-tabs">
 	<li<?php echo ($action == 'detail')?' class="active"':'' ?>><?php echo anchor($module[0].'/update/detail/'.$cus->cus_idx,'Customer')?></li>
 	<li<?php echo ($action == 'paket')?' class="active"':'' ?>><?php echo anchor($module[0].'/update/paket/'.$cus->cus_idx,'Paket & Key')?></li>
 	<li<?php echo ($action == 'call')?' class="active"':'' ?>><?php echo anchor($module[0].'/update/call/'.$cus->cus_idx,'call')?></li>
         <li<?php echo ($action == 'schedule')?' class="active"':'' ?>><?php echo anchor($module[0].'/update/schedule/'.$cus->cus_idx,'Schedule')?></li>
+	<li<?php echo ($action == 'hasjung')?' class="active"':'' ?>><?php echo anchor($module[0].'/update/hasjung/'.$cus->cus_idx,'Hasil Kunjungan')?></li>
     </ul>
     <div class="tab-content">
 	<?php echo form_open(uri_string(),array('id'=>'formid', 'class'=>'form-horizontal'))?>
 	<?php echo view_errors();?>
 	    <table>
 		<tr>
-		    <td><?php echo form_text('Admin Username','adm_username',(isset($data->sched_date))?$data->sched_date:'','class="span2" maxlength="25"');?></td>
+		    <td><?php echo form_text('Admin','adm_username',(isset($data->adm_username))?$data->adm_username:'','class="span2" maxlength="25"');?></td>
 		    <td><?php echo form_text('Call Date','call_date',(isset($data->call_date))?$data->call_date:'','class="span2" maxlength="10"');?></td>
 		</tr>
 		<tr>
-		    <td><?php echo form_text('Call Status','call_status',(isset($data->call_status))?$data->call_status:'','class="span2" maxlength="25"');?></td>
-		    <td><?php echo form_text('Kategori','call_kategori',(isset($data->call_kategori))?$data->call_kategori:'','class="span2" maxlength="10"');?></td>
+		    <td><?php echo form_drop('Status','call_status',$status,(isset($data->call_status))?$data->call_status:'','class="span2"');?></td>
+		    <td><?php echo form_drop('Kategori','call_kategori',$kategori,(isset($data->call_kategori))?$data->call_kategori:'','class="span2"');?>
+		    <?php //echo form_text('Kategori','call_kategori',(isset($data->call_kategori))?$data->call_kategori:'','class="span2" maxlength="10"');?></td>
 		</tr>
 		<tr>
-		    <td><?php echo form_area('Keterangan*','call_keterangan',(isset($data->call_keterangan))?$data->call_keterangan:'','class="span2" maxlength="10"');?></td>
-		    <td>&nbsp;</td>
+		    <td><?php echo form_text('Contact Person Lain','adm_username',(isset($data->adm_username))?$data->adm_username:'','class="span2" maxlength="25"');?></td>
+		    <td><?php echo form_text('Telp Lain','call_date',(isset($data->call_date))?$data->call_date:'','class="span2" maxlength="10"');?></td>
+		</tr>
+		<tr>
+		    <td><?php echo form_area('Keterangan*','call_keterangan',(isset($data->call_keterangan))?$data->call_keterangan:'','class="span3" maxlength="10"');?></td>
 		</tr>
 	    </table>
     <p><code>Note: </code> &nbsp; All field mark with <code>*</code> are required.</p>

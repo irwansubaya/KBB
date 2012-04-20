@@ -42,7 +42,9 @@ class Customer extends MY_Controller {
 			'bidus_m',
 			'cabang_m',
 			'schedule_m',
-			'status_m'
+			'status_m',
+			'call_m',
+			'kategori_m'
 		));
 	}
 
@@ -157,16 +159,16 @@ class Customer extends MY_Controller {
 			{
 				$this->params['cus'] = $this->customer_m->get($idx);
 				$this->params['data'] = $this->call_m->get_call_detail(false, $idx);
-				$sched_idx = (!$this->params['data']) ? null : $this->params['data'][0]->sched_idx;
+				$call_idx = (!$this->params['data']) ? null : $this->params['data'][0]->call_idx;
 				//$this->params['key'] = $this->key_m->get_paket_key($pkt_idx);
 				if ($this->input->post('save'))
 				{
-					if ($this->schedule_m->isValid())
+					if ($this->call_m->isValid())
 					{
-						if ($this->schedule_m->save($sched_idx))
+						if ($this->call_m->save($call_idx))
 						{
 							setSucces('Data is saved');
-							redirect ($this->module[0]. '/update/schedule/' . $idx);
+							redirect ($this->module[0]. '/update/call/' . $idx);
 						}
 						else
 						{
@@ -174,8 +176,9 @@ class Customer extends MY_Controller {
 						}
 					}
 				}
-				//$this->params['status'] = $this->status_m->dropdown();
-				$this->_view('main_1_3', 'customer_detail_schedule');
+				$this->params['status'] = $this->status_m->dropdown();
+				$this->params['kategori'] = $this->kategori_m->dropdown();
+				$this->_view('main_1_3', 'customer_detail_call');
 			}
 			else if ($action == 'schedule')
 			{
@@ -200,6 +203,30 @@ class Customer extends MY_Controller {
 				}
 				$this->params['status'] = $this->status_m->dropdown();
 				$this->_view('main_1_3', 'customer_detail_schedule');
+			}
+			else if ($action == 'Hasil Kunjungan')
+			{
+				$this->params['cus'] = $this->customer_m->get($idx);
+				$this->params['data'] = $this->schedule_m->get_schedule_detail(false, $idx);
+				$sched_idx = (!$this->params['data']) ? null : $this->params['data'][0]->sched_idx;
+				//$this->params['key'] = $this->key_m->get_paket_key($pkt_idx);
+				if ($this->input->post('save'))
+				{
+					if ($this->schedule_m->isValid())
+					{
+						if ($this->schedule_m->save($sched_idx))
+						{
+							setSucces('Data is saved');
+							redirect ($this->module[0]. '/update/schedule/' . $idx);
+						}
+						else
+						{
+							setError('Unable to save');
+						}
+					}
+				}
+				$this->params['status'] = $this->status_m->dropdown();
+				$this->_view('main_1_3', 'customer_detail_hasil_kunjungan');
 			}
 		}
 	}
