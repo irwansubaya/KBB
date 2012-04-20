@@ -1,12 +1,24 @@
+<script type="text/javascript">
+    $(document).ready(function(){
+        $("#cus_input_date").datepicker({
+		changeMonth: true,
+		changeYear: true,
+		dateFormat: 'dd-M-yy',
+		showAnim: 'fold'
+	});
+    });
+</script>
 <div class="page-header">
     <h2>List User</h2>
 </div>
+<form class="well form-search" style="text-align:right">
+    <input type="text" name="cus_input_date" id="cus_input_date" class="input-small search-query" value="<?php echo @$param['date'] ?>">
+    <input type="text" name="cus_corporate_id" id="cus_corporate_id" class="input-medium search-query" placeholder="Input Corporate ID ..." value="<?php echo @$param['corp_id'] ?>">
+    <button type="submit" class="btn"><i class="icon-search"></i> Search</button>
+</form>
+
 <table class="table">
   <thead>
-    <tr>
-        <td><?php echo form_text('','cus_corporate_id',(isset($data->cus_corporate_id))?$data->cus_corporate_id:'','class="span2" maxlength="10"');?></td>
-        <td><?php echo form_submit('search','Search', 'class="btn btn-primary"')?></td>
-    </tr>
     <tr>
       <th width="10%">Corporate ID</th>
       <th width="15%">Contact Person</th>

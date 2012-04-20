@@ -75,9 +75,10 @@ class Customer_m extends MY_Model {
 		$this->db->where('cus_corporate_id', $cus_corporate_id);
 		return parent :: get ();
 	}
-	public function get_by_date ($date=false)
+	public function get_customer ($date = false, $corp_id = false)
 	{
-		$this->db->where('cus_tanggal_input',$date);
+		if ($date) $this->db->where('cus_tanggal_input', $date);
+		if ($corp_id) $this->db->like('cus_corporate_id', $cus_corporate_id);
 		return parent::get();
 	}
 }

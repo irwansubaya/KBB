@@ -54,9 +54,10 @@ class Customer extends MY_Controller {
 	 * @access	public
 	 * @return	parent class function
 	 */
-	public function index ()
+	public function index ($date = FALSE, $corp_id = FALSE)
 	{
-		$this->params['data'] = $this->customer_m->get_by_date(date('y-m-d'));
+		$this->params['param'] = array('date'=>$date, 'corp_id'=>$corp_id);
+		$this->params['data'] = $this->customer_m->get_customer($date, $corp_id);
 		$this->_view('main_1_3', 'index');
 	}
 	
