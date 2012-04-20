@@ -91,12 +91,8 @@ class Customer_m extends MY_Model {
 	{
 		foreach ($this->data as $key => $value) 
 		{
-			if ($value)
-			{
-				// $this->db->like($key, $value);
-				// bisa di ganti dengan like juga kok
-				$this->db->where($key, $value);
-			}
+			if ($value && $key == 'cus_corporate_id') $this->db->like($key, $value);
+			else if ($value && $key == 'cus_tanggal_input') $this->db->where($key, date('Y-m-d', strtotime($value)));
 		}
 		$this->db->limit('25',$this->page);
 		return parent::get();
@@ -110,12 +106,8 @@ class Customer_m extends MY_Model {
 	{
 		foreach ($this->data as $key => $value) 
 		{
-			if ($value)
-			{
-				// $this->db->like($key, $value);
-				// bisa di ganti dengan like juga kok
-				$this->db->where($key, $value);
-			}
+			if ($value && $key == 'cus_corporate_id') $this->db->like($key, $value);
+			else if ($value && $key == 'cus_tanggal_input') $this->db->where($key, date('Y-m-d', strtotime($value)));
 		}
 		return parent :: count_record();
 	}
