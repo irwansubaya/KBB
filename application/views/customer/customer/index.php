@@ -12,8 +12,8 @@
     <h2>List User</h2>
 </div>
 <form class="well form-search" style="text-align:right">
-    <input type="text" name="cus_input_date" id="cus_input_date" class="input-small search-query" value="<?php echo @$param['date'] ?>">
-    <input type="text" name="cus_corporate_id" id="cus_corporate_id" class="input-medium search-query" placeholder="Input Corporate ID ..." value="<?php echo @$param['corp_id'] ?>">
+    <input type="text" name="cus_tanggal_input" id="cus_input_date" class="input-small search-query" value="<?php echo @$param['cus_tanggal_input'] ?>">
+    <input type="text" name="cus_corporate_id" id="cus_corporate_id" class="input-medium search-query" placeholder="Input Corporate ID ..." value="<?php echo @$param['cus_corporate_id'] ?>">
     <button type="submit" class="btn"><i class="icon-search"></i> Search</button>
 </form>
 
@@ -47,3 +47,4 @@
   <?php endif;?>
   </tbody>
 </table>
+<?php echo $page['links']?>

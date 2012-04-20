@@ -25,6 +25,7 @@
 class Customer extends MY_Controller {
 
 	public $module = array('customer/customer', 'customer', 'customer');
+	public $url;
 
 	/**
 	 * Constructor
@@ -56,8 +57,26 @@ class Customer extends MY_Controller {
 	 */
 	public function index ($date = FALSE, $corp_id = FALSE)
 	{
-		$this->params['param'] = array('date'=>$date, 'corp_id'=>$corp_id);
-		$this->params['data'] = $this->customer_m->get_customer($date, $corp_id);
+		$this->load->helper('pagination');
+
+		$this->params['param'] 	= $this->customer_m->data();
+		$this->params['data'] 	= $this->customer_m->get_customer();
+
+		// loop and implode to create an url exist
+		foreach ($this->params['param'] as $key => $value) 
+		{
+			$this->url .= $key.'='.$value.'&';
+		}
+
+		$this->params['page']	= create_pagination (
+			array(
+				'uri'			=> base_url().$this->module[0].'?'.$this->url,
+				'limit'			=> 25,
+				'query' 		=> TRUE,
+				'total_rows'	=> $this->customer_m->count_customer()
+			)
+		);
+
 		$this->_view('main_1_3', 'index');
 	}
 	

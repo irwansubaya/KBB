@@ -149,7 +149,7 @@ class MY_Model extends CI_Model {
 	 * @access  public
 	 * @return  object
 	 */
-	public function countRow()
+	public function count_record()
 	{
 		return $this->db->count_all_results($this->tableName); 
 	}                   
