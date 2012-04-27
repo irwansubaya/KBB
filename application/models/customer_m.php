@@ -51,7 +51,8 @@ class Customer_m extends MY_Model {
 		$this->data = array(
 			'cus_nama_perusahaan'=>$this->input->get('cus_nama_perusahaan'),
 			'cus_corporate_id'	=> $this->input->get('cus_corporate_id'),
-			'cus_tanggal_input'	=> $this->input->get('cus_tanggal_input')
+			'cus_tanggal_input'	=> $this->input->get('cus_tanggal_input'),
+			'asdes'	=> $this->input->get('asdes'),
 		);
 
 		$this->page         = $this->input->get('page') != 0 ? ((int) ($this->input->get('page') - 1) * 25) : 0;
@@ -95,6 +96,7 @@ class Customer_m extends MY_Model {
 			if ($value && $key == 'cus_nama_perusahaan') $this->db->like($key, $value);
 			else if ($value && $key == 'cus_corporate_id') $this->db->like($key, $value);
 			else if ($value && $key == 'cus_tanggal_input') $this->db->where($key, date('Y-m-d', strtotime($value)));
+			else if ($value && $key == 'cus_nama_perusahaan') $this->db->order_by('asdes','asc');
 		}
 		$this->db->limit('25',$this->page);
 		return parent::get();
@@ -108,7 +110,8 @@ class Customer_m extends MY_Model {
 	{
 		foreach ($this->data as $key => $value) 
 		{
-			if ($value && $key == 'cus_corporate_id') $this->db->like($key, $value);
+			if ($value && $key == 'cus_nama_perusahaan') $this->db->like($key, $value);
+			else if ($value && $key == 'cus_corporate_id') $this->db->like($key, $value);
 			else if ($value && $key == 'cus_tanggal_input') $this->db->where($key, date('Y-m-d', strtotime($value)));
 		}
 		return parent :: count_record();
