@@ -121,7 +121,7 @@
 	<?php echo view_errors();?>
 	    <table>
 		<tr>
-		    <td><?php echo form_text('Schedule Date *','sched_date',(isset($data->sched_date))?$data->sched_date:'','class="span2" maxlength="25" id="sched_tanggal"');?></td>
+		    <td><?php echo form_drop('Status','call_status',$status,(isset($data->call_status))?$data->call_status:'','class="span2"');?></td>
 		    <td><?php echo form_text('Schedule Time *','sched_time',(isset($data->sched_time))?$data->sched_time:'','class="span1" maxlength="10"');?></td>
 		</tr>
 		<tr>

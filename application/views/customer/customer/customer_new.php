@@ -41,7 +41,7 @@
     </tr>
     <tr>
         <td><?php echo form_text('Nama Perusahaan / Nasabah*','cus_nama_perusahaan',(isset($data->cus_nama_perusahaan))?$data->cus_nama_perusahaan:'','class="span3" maxlength="64"');?></td>
-        <td><?php echo form_text('No KTP','cus_no_ktp',(isset($data->cus_no_ktp))?$data->cus_no_ktp:'','class="span3" maxlength="64"');?></td>
+        <td><?php echo form_text('No KTP','cus_no_ktp',(isset($data->cus_no_ktp))?$data->cus_no_ktp:'','class="span2" maxlength="64"');?></td>
     </tr>
     <tr>
         <td><?php echo form_text('No Rekening *','cus_no_rekening',(isset($data->cus_no_rekening))?$data->cus_no_rekening:'','class="span2" maxlength="10"');?></td>

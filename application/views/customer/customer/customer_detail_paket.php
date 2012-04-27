@@ -14,7 +14,7 @@
 		dateFormat: 'dd-M-yy',
 		showAnim: 'fold',
 		onClose: function(dateText, inst) {
-		    var due_date = Date.parse(dateText).add(2).days();
+		    var due_date = Date.parse(dateText).add(3).days();
 		    $('#pkt_jatuh_tempo').val(due_date.toString('dd-MMM-yyyy'));
 		}
 	});
@@ -47,7 +47,7 @@
 	
         update_amount();
 	
-	$("#pkt_jatuh_tempo").focus(function(){
+	/*$("#pkt_jatuh_tempo").focus(function(){
             var due_date = new Date($("#pkt_tanggal_terima").val());
                 if(Date.parse(due_date)) {
                 var due_date = new Date().setDate(due_date.getDate()+2);
@@ -55,7 +55,7 @@
                 var due_date = due_date.toLocaleFormat('%Y-%m-%d');
                 $("#pkt_jatuh_tempo").val(due_date);
             }
-        });
+        });*/
     });
     
     var id = 0;
@@ -124,45 +124,33 @@
     <ul class="nav nav-tabs">
 	<li<?php echo ($action == 'detail')?' class="active"':'' ?>><?php echo anchor($module[0].'/update/detail/'.$cus->cus_idx,'Customer')?></li>
 	<li<?php echo ($action == 'paket')?' class="active"':'' ?>><?php echo anchor($module[0].'/update/paket/'.$cus->cus_idx,'Paket & Key')?></li>
-	<li<?php echo ($action == 'call')?' class="active"':'' ?>><?php echo anchor($module[0].'/update/call/'.$cus->cus_idx,'call')?></li>
+	<!--<li<?php echo ($action == 'call')?' class="active"':'' ?>><?php echo anchor($module[0].'/update/call/'.$cus->cus_idx,'call')?></li>
 	<li<?php echo ($action == 'schedule')?' class="active"':'' ?>><?php echo anchor($module[0].'/update/schedule/'.$cus->cus_idx,'Schedule')?></li>
 	<li<?php echo ($action == 'hasjung')?' class="active"':'' ?>><?php echo anchor($module[0].'/update/hasjung/'.$cus->cus_idx,'Hasil Kunjungan')?></li>
+	-->
     </ul>
     <div class="tab-content">
 	<?php echo form_open(uri_string(),array('id'=>'formid', 'class'=>'form-horizontal'))?>
 	<?php echo view_errors();?>
-	    <?php echo form_hidden('cus_idx',$cus->cus_idx, 'id=cus_idx');?>    
-	    <?php #echo form_text('Corporate ID *','cus_corporate_id',(isset($data[0]->cus_corporate_id))?$data[0]->cus_corporate_id:'','class="span2" maxlength="10" id="pkt_corporate_id"');?>
-	    <?php #echo form_text('Name Perusahaan*','cus_nama_perusahaan',(isset($data[0]->cus_nama_perusahaan))?$data[0]->cus_nama_perusahaan:'','class="span3" maxlength="64" id ="cus_nama_perusahaan"');?>
-	    <?php #echo form_area('Contact Person *','cus_cp',(isset($data[0]->cus_cp))?$data[0]->cus_cp:'','class="span3" maxlength="64"');?>
-	    <?php echo form_drop('Jenis Paket *','pkt_tipe',array('gold'=>'Gold','gold_payroll'=>'Gold Payroll','platinum'=>'Platinum'),(isset($data[0]->pkt_tipe))?$data[0]->pkt_tipe:'','class="span2"');?>
-	    <?php echo form_drop('Tipe Paket *','pkt_jenis',array('single_otorisasi'=>'Single Otorisasi','multi_otorisasi'=>'Multi Otorisasi'),(isset($data[0]->pkt_jenis))?$data[0]->pkt_jenis:'','class="span2"');?>
-	    <div class="control-group">
-		<label class="control-label" for="it_has_ed">Fitur *</label>
-		<div class="controls">
-		    <input type="checkbox" name="fitur[]" value="Virtual Account"<?php echo (isset($data[0]->pkt_fitur) && in_array('Virtual Account', explode(',', $data[0]->pkt_fitur)))?' checked':'' ?>>  Virtual Account<br>
-		    <input type="checkbox" name="fitur[]" value="BCA Virtual Account"<?php echo (isset($data[0]->pkt_fitur) && in_array('BCA Virtual Account', explode(',', $data[0]->pkt_fitur)))?' checked':'' ?>>  BCA Virtual Account<br>
-		    <input type="checkbox" name="fitur[]" value="Payroll"<?php echo (isset($data[0]->pkt_fitur) && in_array('Payroll', explode(',', $data[0]->pkt_fitur)))?' checked':'' ?>>  Payroll<br>
-		    <input type="checkbox" name="fitur[]" value="Upgrade Payroll"<?php echo (isset($data[0]->pkt_fitur) && in_array('Upgrade Payroll', explode(',', $data[0]->pkt_fitur)))?' checked':'' ?>>  Upgrade Payroll<br>
-		    <input type="checkbox" name="fitur[]" value="B2B Pertamina"<?php echo (isset($data[0]->pkt_fitur) && in_array('B2B Pertamina', explode(',', $data[0]->pkt_fitur)))?' checked':'' ?>>  B2B Pertamina<br>
-		    <input type="checkbox" name="fitur[]" value="B2B E-Commerce"<?php echo (isset($data[0]->pkt_fitur) && in_array('B2B E-Commerce', explode(',', $data[0]->pkt_fitur)))?' checked':'' ?>>  B2B E-Commerce<br>
-		    <input type="checkbox" name="fitur[]" value="MAR"<?php echo (isset($data[0]->pkt_fitur) && in_array('MAR', explode(',', $data[0]->pkt_fitur)))?' checked':'' ?>>  MAR<br>
-		    <input type="checkbox" name="fitur[]" value="Sysadmin"<?php echo (isset($data[0]->pkt_fitur) && in_array('Sysadmin', explode(',', $data[0]->pkt_fitur)))?' checked':'' ?>>  Sysadmin
-		</div>
-	    </div>
-	    <!--<?php echo form_drop('Fitur Paket *','pkt_fitur',array(
-								   'va'=>'Virtual Account',
-								   'bca_va'=>'BCA Virtual Account',
-								   'payroll'=>'Payroll',
-								   'b2b_pertamina'=>'B2B Pertamina',
-								   'b2b_ecommerce'=>'B2B E-Commerce',
-								   'mar'=>'MAR',
-								   'sysadmin'=>'Sysadmin',
-								   ),(isset($data[0]->pkt_fitur))?$data[0]->pkt_fitur:'','class="span2"');?>-->
-	    <?php echo form_text('Tgl Koneksi*','pkt_tanggal_koneksi',(isset($data[0]->pkt_tanggal_koneksi))?date('d-M-Y',strtotime($data[0]->pkt_tanggal_koneksi)):'','class="span2" maxlength="15" id="pkt_tanggal_koneksi"');?>    
-	    <?php echo form_text('Tgl Terima Paket*','pkt_tanggal_terima',(isset($data[0]->pkt_tanggal_terima))?date('d-M-Y',strtotime($data[0]->pkt_tanggal_terima)):'','class="span2" maxlength="15" id="pkt_tanggal_terima"');?>    
-	    <?php echo form_text('Tgl Due Date*','pkt_jatuh_tempo',(isset($data[0]->pkt_jatuh_tempo))?date('d-M-Y',strtotime($data[0]->pkt_jatuh_tempo)):'','class="span2" maxlength="15" id="pkt_jatuh_tempo"');?>    
-	
+	<table>
+	<tr>
+	    <td><?php echo form_hidden('cus_idx',$cus->cus_idx, 'id=cus_idx');?>    
+		<?php #echo form_text('Corporate ID *','cus_corporate_id',(isset($data[0]->cus_corporate_id))?$data[0]->cus_corporate_id:'','class="span2" maxlength="10" id="pkt_corporate_id"');?>
+		<?php #echo form_text('Name Perusahaan*','cus_nama_perusahaan',(isset($data[0]->cus_nama_perusahaan))?$data[0]->cus_nama_perusahaan:'','class="span3" maxlength="64" id ="cus_nama_perusahaan"');?>
+		<?php #echo form_area('Contact Person *','cus_cp',(isset($data[0]->cus_cp))?$data[0]->cus_cp:'','class="span3" maxlength="64"');?>
+		<?php echo form_drop('Jenis Paket *','pkt_tipe',array('gold'=>'Gold','gold_payroll'=>'Gold Payroll','platinum'=>'Platinum'),(isset($data[0]->pkt_tipe))?$data[0]->pkt_tipe:'','class="span2"');?>
+	    </td>
+	    <td><?php echo form_drop('Tipe Paket *','pkt_jenis',array('single_otorisasi'=>'Single Otorisasi','multi_otorisasi'=>'Multi Otorisasi'),(isset($data[0]->pkt_jenis))?$data[0]->pkt_jenis:'','class="span2"');?></td>
+	</tr>
+	<tr>
+	    <td><?php echo form_drop('Model Paket *','pkt_status',array('new'=>'New','upgrade'=>'Upgrade','amplop'=>'Amplop'),(isset($data[0]->pkt_status))?$data[0]->pkt_status:'','class="span2"');?></td>
+	    <td><?php echo form_text('Tgl Koneksi*','pkt_tanggal_koneksi',(isset($data[0]->pkt_tanggal_koneksi))?date('d-M-Y',strtotime($data[0]->pkt_tanggal_koneksi)):'','class="span2" maxlength="15" id="pkt_tanggal_koneksi"');?></td>
+	</tr>
+	<tr>
+	    <td><?php echo form_text('Tgl Terima Paket*','pkt_tanggal_terima',(isset($data[0]->pkt_tanggal_terima))?date('d-M-Y',strtotime($data[0]->pkt_tanggal_terima)):'','class="span2" maxlength="15" id="pkt_tanggal_terima"');?></td>
+	    <td><?php echo form_text('Tgl Due Date*','pkt_jatuh_tempo',(isset($data[0]->pkt_jatuh_tempo))?date('d-M-Y',strtotime($data[0]->pkt_jatuh_tempo)):'','class="span2" maxlength="15" id="pkt_jatuh_tempo"');?></td>
+	</tr>
+	</table>
 	    <legend>List Key</legend>
 	    <div class="well form-inline">
 	    <input type="text" name="key_sn" placeholder="Key SN" id="key_sn" class="span2" maxlength="10">
@@ -207,6 +195,8 @@
 	    <div class="form-actions">
 		<?php echo form_submit('save','Save data', 'class="btn btn-primary"')?>
 		<?php echo anchor($module[0],'Cancel', 'class="btn"')?>
+		<input type="text" name="password" placeholder="Password" id="password" class="span2" maxlength="10">
+		<?php echo form_submit('edit','Edit data', 'class="btn btn-primary"')?>
 	    </div>
 	<?php echo form_close();?>
     </div>

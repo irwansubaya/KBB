@@ -37,7 +37,7 @@ class Paket_m extends MY_Model {
 			'cus_idx' => array('Cus Id', TRUE),
 			'pkt_jenis' => array('Jenis Paket', TRUE),
 			'pkt_tipe' => array('Tipe Paket', TRUE),
-			//'pkt_fitur'=>array('Tipe Paket',true),
+			'pkt_status'=>array('Model Paket',true),
                         'pkt_jumlah_key' => array('Jumlah Key BCA', false),
 			'pkt_tanggal_koneksi' => array('Tanggal Koneksi', TRUE, 'convert_date'),
 			'pkt_tanggal_terima' => array('Tanggal Terima Paket', TRUE, 'convert_date'),
@@ -97,7 +97,9 @@ class Paket_m extends MY_Model {
 	 */
 	public function save ($idx = FALSE)
 	{
-		//$this->db->set('pkt_fitur', implode(',', $this->input->post('fitur')));
+		//$this->db->set('pkt_status', implode(',', $this->input->post('status')));
+		$this->db->set('pkt_tanggal_input',date('d-m-y'));
+		$this->db->set('pkt_admin_input','irwan');
 		parent :: save ($idx);
 		if(!$idx) $idx = $this->db->insert_id();
 		return $this->insert_sn($idx, $this->input->post('cus_idx'));

@@ -121,8 +121,8 @@
 	<?php echo view_errors();?>
 	    <table>
 		<tr>
-		    <td><?php echo form_text('Admin','adm_username','irwan',(isset($data->adm_username))?$data->adm_username:'','class="span2" maxlength="25"');?></td>
-		    <td><?php echo form_text('Call Date','call_date',"<?php date('d-M-Y') ?>",(isset($data->call_date))?$data->call_date:'','class="span2" maxlength="10"');?></td>
+		    <td><?php echo form_text('Admin','adm_username','irwan','class="span2"');?></td>
+		    <td><?php echo form_text('Call Date','call_date','','class="span2" ');?></td>
 		</tr>
 		<tr>
 		    <td><?php echo form_drop('Status','call_status',$status,(isset($data->call_status))?$data->call_status:'','class="span2"');?></td>

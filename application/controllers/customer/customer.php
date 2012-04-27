@@ -160,29 +160,6 @@ class Customer extends MY_Controller {
 				$this->params['key'] = $this->key_m->get_paket_key($idx);
 				if ($this->input->post('save'))
 				{
-				if ($this->paket_m->isValid())
-				{
-				if ($this->paket_m->save($pkt_idx))
-				{
-				setSucces('Data is saved');
-				redirect ($this->module[0]. '/update/paket/' . $idx);
-				}
-				else
-				{
-				setError('Unable to save');
-				}
-				}
-				}
-				$this->_view('main_1_3', 'customer_detail_paket');
-			}
-			/*else if ($action == 'paket')
-			{
-				$this->params['cus'] = $this->customer_m->get($idx);
-				$this->params['data'] = $this->paket_m->get_paket_detail(false, $idx);
-				$pkt_idx = (!$this->params['data']) ? null : $this->params['data'][0]->pkt_idx;
-				$this->params['key'] = $this->key_m->get_paket_key($idx);
-				if ($this->input->post('save'))
-				{
 					if ($this->paket_m->isValid())
 					{
 						if ($this->paket_m->save($pkt_idx))
@@ -197,8 +174,8 @@ class Customer extends MY_Controller {
 					}
 				}				
 				$this->_view('main_1_3', 'customer_detail_paket');
-			}*/
-			else if ($action == 'call')
+			}
+			/*else if ($action == 'call')
 			{
 				$this->params['cus'] = $this->customer_m->get($idx);
 				$this->params['data'] = $this->call_m->get_call_detail(false, $idx);
@@ -250,8 +227,8 @@ class Customer extends MY_Controller {
 			else if ($action == 'Hasil Kunjungan')
 			{
 				$this->params['cus'] = $this->customer_m->get($idx);
-				$this->params['data'] = $this->schedule_m->get_schedule_detail(false, $idx);
-				$sched_idx = (!$this->params['data']) ? null : $this->params['data'][0]->sched_idx;
+				$this->params['data'] = $this->hasjung_m->get_hasjung_detail(false, $idx);
+				$_idx = (!$this->params['data']) ? null : $this->params['data'][0]->sched_idx;
 				//$this->params['key'] = $this->key_m->get_paket_key($pkt_idx);
 				if ($this->input->post('save'))
 				{
@@ -260,7 +237,7 @@ class Customer extends MY_Controller {
 						if ($this->schedule_m->save($sched_idx))
 						{
 							setSucces('Data is saved');
-							redirect ($this->module[0]. '/update/schedule/' . $idx);
+							redirect ($this->module[0]. '/update/hasjung/' . $idx);
 						}
 						else
 						{
@@ -270,7 +247,7 @@ class Customer extends MY_Controller {
 				}
 				$this->params['status'] = $this->status_m->dropdown();
 				$this->_view('main_1_3', 'customer_detail_hasil_kunjungan');
-			}
+			}*/
 		}
 	}
 

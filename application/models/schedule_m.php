@@ -28,46 +28,19 @@ class Schedule_m extends MY_Model {
 	{
 		parent :: __construct ();
 		$this->tableName = 'schedule';
-		$this->idx	 = 'sched_idx';
+		$this->idx	 = 'sched_id';
 		$this->fields	 = array(
-			'cus_idx' => array('Cus Id', TRUE),
-			'pkt_idx' => array('Pkt Id', TRUE),
+			'cus_idx' => array('', TRUE),
+			'cus_corporate_id'=>array('Corporate ID',true),
+			'pkt_idx' => array('', TRUE),
 			'sched_status' => array('Status', TRUE),
-			'sched_date' => array('Date', TRUE),
-                        'sched_time' => array('Time', TRUE),
-			'sched_alamat_kirim' => array('Alamat Kirim', TRUE),
-			'sched_agenda_kunjungan' => array('Agenda Kunjungan', TRUE),
+			'sched_date' => array('Schedule Date', TRUE),
+			'sched_time' => array('Schedule Time', TRUE),
+			'sched_alamat_kirim' => array('Schedule Time', TRUE),
+			'sched_agenda_kunjungan' => array('Schedule Time', TRUE)
 		);
 	}
 	
-	/**
-	 * Insert SN Key
-	 *
-	 * @access	public
-	 * @param	integer
-	 * @return	boolean
-	 */
-	public function insert_sn ($pkt_idx = FALSE, $cus_idx = FALSE)
-	{
-		$sn = $this->input->post('item_key_sn');
-		$username = $this->input->post('item_key_username');
-		// delete old key, insert key baru
-		$this->db->delete('key', array('pkt_idx' => $pkt_idx));
-		
-		if ($this->input->post('item_key_sn'))
-		{
-			for($i=0; $i<count($this->input->post('item_key_sn')); $i++)
-			{
-				$this->db->set('pkt_idx', $pkt_idx);
-				$this->db->set('cus_idx', $cus_idx);
-				$this->db->set('key_id', $sn[$i]);
-				$this->db->set('key_nama_user', $username[$i]);
-				$this->db->insert('key');
-			}
-		}
-		$this->db->set('pkt_jumlah_key', $pkt_idx);
-		return TRUE;
-	}
 	
 	/**
 	 * Get record 
@@ -76,14 +49,16 @@ class Schedule_m extends MY_Model {
 	 * @param	integer
 	 * @return	boolean
 	*/
-	public function get_schedule_detail ($sched_idx=false, $cus_idx =FALSE)
+	
+	public function get_sched_detail ($pkt_idx = FALSE)
 	{
-		$this->db->join('customer', 'customer.cus_idx = schedule.cus_idx');
-		if ($sched_idx) { $this->db->where('sched_idx', $sched_idx); }
-		if ($cus_idx) { $this->db->where('customer.cus_idx ', $cus_idx); }
+		$this->db->join('paket', 'paket.pkt_idx = schedule.pkt_idx');
+		$this->db->join('customer', 'customer.cus_idx = paket.cus_idx');
+		if ($pkt_idx) { $this->db->where('pkt_idx', $pkt_idx); }
 		$this->db->order_by('cus_corporate_id');
 		return parent :: get ();
 	}
+
 	/**
 	 * Save method
 	 *
@@ -95,5 +70,4 @@ class Schedule_m extends MY_Model {
 	{
 		return parent :: save ($idx);	
 	}
-
 }

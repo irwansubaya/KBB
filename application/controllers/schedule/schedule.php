@@ -22,7 +22,7 @@
  * @category	        Model
  */
 
-class schedule extends MY_Controller {
+class Schedule extends MY_Controller {
 
 	public $module = array('schedule/schedule', 'schedule', 'schedule');
 
@@ -35,10 +35,9 @@ class schedule extends MY_Controller {
 		parent :: __construct ();
 
 		$this->load->model(array(
-			'customer_m',
 			'schedule_m',
 			'paket_m',
-			'status_m'
+			'customer_m'
 		));
 	}
 
@@ -50,7 +49,7 @@ class schedule extends MY_Controller {
 	 */
 	public function index ()
 	{
-		$this->params['data'] = $this->schedule_m->get_paket_detail();
+		$this->params['data'] = $this->schedule_m->get_sched_detail();
 		$this->_view('main_1_3', 'index');
 	}
 	
@@ -77,7 +76,6 @@ class schedule extends MY_Controller {
 				}
 			}
 		}
-		$this->params['status'] = $this->status_m->dropdown();
 		$this->_view('main_1_3', 'schedule_new');
 	}
 
@@ -93,35 +91,44 @@ class schedule extends MY_Controller {
 		{
 			if ($this->input->post('save'))
 			{
-				$this->schedule_m->insert_sn($idx, $this->input->post('cus_idx'));
-				redirect ($this->module[0] . '/update/' . $idx);
+				if ($this->schedule_m->isValid())
+				{
+					// save data
+					if ($this->schedule_m->save($idx))
+					{
+						setSucces('Data is edited');
+					}
+					else
+					{
+						setError('Unable to save');
+					}
+				}
 			}
-			$this->params['data']	 = $this->schedule_m->get_paket_detail($idx);
-			$this->params['key']	 = $this->key_m->get_paket_key($idx);
-			$this->params['status'] = $this->status_m->dropdown();
-			$this->params['labels'] = $this->schedule_m->getLabels();
-			$this->_view('main_1_3', 'schedule_detail');
+			$this->params['data']		= $this->schedule_m->get($idx);
+			$this->params['labels']		= $this->schedule_m->getLabels();
+			$this->_view('main_1_3', 'schedule_new');
 		}
 		
 	}
 	/**
-	 * Autocomplete using ajax calling data Supplier
+	 * Autocomplete using ajax calling data Customer
 	 *
 	 * @access	public
 	 * @return	parent class function
 	 */
 	public function customer_ajax ()
 	{
-		//if ($this->input->is_ajax_request())
-		//{
-			//$this->load->model('customer_m');
-			//$this->db->like('cus_corporate_id', $this->input->get('q'));
-			echo json_encode($this->schedule_m->get_paket_detail());
-		//}
+		if ($this->input->is_ajax_request())
+		{
+			$this->load->model('customer_m');
+			$this->db->like('cus_corporate_id', $this->input->get('q'));
+			echo json_encode($this->customer_m->get());
+		}
 	}
 
+
 	/**
-	 * Delete supplier
+	 * Delete customer
 	 *
 	 * @access	public
 	 * @return	parent class function
@@ -129,7 +136,6 @@ class schedule extends MY_Controller {
 	public function delete ($idx)
 	{
 		$this->schedule_m->delete($idx);
-		$this->customer_m->delete($idx);
 		redirect ($this->module[0]);
 	}
 }
