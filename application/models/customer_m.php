@@ -110,7 +110,8 @@ class Customer_m extends MY_Model {
 	{
 		foreach ($this->data as $key => $value) 
 		{
-			if ($value && $key == 'cus_corporate_id') $this->db->like($key, $value);
+			if ($value && $key == 'cus_nama_perusahaan') $this->db->like($key, $value);
+			else if ($value && $key == 'cus_corporate_id') $this->db->like($key, $value);
 			else if ($value && $key == 'cus_tanggal_input') $this->db->where($key, date('Y-m-d', strtotime($value)));
 		}
 		return parent :: count_record();

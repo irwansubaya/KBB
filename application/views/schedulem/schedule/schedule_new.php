@@ -2,14 +2,30 @@
 <script type="text/javascript">
     $(document).ready(function(){
         $("#formid").validate();
-    });
-    $("#sched_date").datepicker({
+        $("#sched_sched_date").datepicker({
 		changeMonth: true,
 		changeYear: true,
 		dateFormat: 'yy-mm-dd',
 		showAnim: 'fold'
 	});
-   $('#sched_corporate_id').autocomplete('<?php echo base_url()?>schedule/schedule/customer_ajax',{
+        
+        $("#pkt_jatuh_tempo").focus(function(){
+            var due_date = new Date($("#pkt_tanggal_terima").val());
+                if(Date.parse(due_date)) {
+                var due_date = new Date().setDate(due_date.getDate()+2);
+                var due_date = new Date(due_date);
+                var due_date = due_date.toLocaleFormat('%Y-%m-%d');
+                $("#pkt_jatuh_tempo").val(due_date);
+            }
+        });
+        
+        $("#pkt_tanggal_terima").datepicker({
+		changeMonth: true,
+		changeYear: true,
+		dateFormat: 'yy-mm-dd',
+		showAnim: 'fold'
+	});
+        /*$('#sched_corporate_id').autocomplete('<?php echo base_url()?>schedule/schedule/customer_ajax',{
 		parse: function(data){
 		    var parsed = [];
 		    for (var i=0; i < data.length; i++) {
@@ -28,12 +44,42 @@
                         $('#cus_nama_perusahaan').val(data.cus_nama_perusahaan);
                         $('#cus_cp').val(data.cus_cp);
 	    		$('#cus_idx').val(data.cus_idx);
-                        }
-                    );
-   
-   //update_amount();
+    		}
+	);
+        */
+        $('#sched_corporate_id').autocomplete('<?php echo base_url()?>schedule/schedule/customer_ajax',{
+		parse: function(data){
+		    var parsed = [];
+		    for (var i=0; i < data.length; i++) {
+			parsed[i] = { data: data[i], value: data[i].cus_corporate_id };
+		    }
+		    return parsed;
+		},
+		formatItem: function(data,i,max){
+		    return  '<div class="search_content"><bold> '+data.cus_corporate_id+' </bold> &nbsp;<small>'+data.cus_nama_perusahaan+'</small></div>';
+		    //return  '<div class="search_content"><bold> '+data.pkt_jenis+' </bold> &nbsp;<small>'+data.pkt_tipe+'</small></div>';
+		},
+		width: 450, 
+		dataType: 'json' 
+	    }).result( 
+		    function(event,data,formated){
+			$('#sched_corporate_id').val(data.cus_corporate_id);
+                        $('#cus_nama_perusahaan').val(data.cus_nama_perusahaan);
+                        $('#cus_cp').val(data.cus_cp);
+                        $('#cus_no_rekening').val(data.cus_no_rekening);
+                        $('#cus_wilayah').val(data.cus_wilayah);
+                        $('#cus_alamat').val(data.cus_alamat);
+                        $('#cus_telepon_kantor').val(data.cus_telepon_kantor);
+                        $('#cus_telepon_rumah').val(data.cus_telepon_rumah);
+                        $('#cus_handphone').val(data.cus_handphone);
+                        /*$('#pkt_jenis').val(data.pkt_jenis);
+                        $('#pkt_tipe').val(data.pkt_tipe);
+                        $('#pkt_fitur').val(data.pkt_fitur);
+                        $('#cus_idx').val(data.cus_idx);
+                        */$('#pkt_idx').val(data.pkt_idx);
+    		}
+	);       
     });
-
 </script>
 <div class="page-header">
     <h2>Add New Schedule</h2>
@@ -42,10 +88,11 @@
 <table>
     <tr>
         <td><?php echo form_hidden('cus_idx','', 'id=cus_idx');?></td>
-        <td><?php echo form_hidden('pkt_idx','', 'id=pkt_idx');?> </td>
+        <td><?php echo form_hidden('pkt_idx','', 'id=pkt_idx');?></td>
     </tr>
     <tr>
-        <td><?php echo form_text('Corporate ID*','cus_corporate_id',(isset($data->cus_corporate_id))?$data->cus_corporate_id:'','class="span2" maxlength="10" id="sched_corporate_id"');?></td>
+        <td><?php echo form_text('Corporate ID','cus_corporate_id',(isset($data->cus_corporate_id))?$data->cus_corporate_id:'','class="span2" maxlength="10" id="sched_corporate_id"');?></td>
+        <td><?php //echo anchor('Search','search', 'class="btn btn-primary"')?></td>
     </tr>
     <tr>
         <td><?php echo form_text('Nama Perusahaan / Nasabah*','cus_nama_perusahaan',(isset($data->cus_nama_perusahaan))?$data->cus_nama_perusahaan:'','class="span2" maxlength="64" id="cus_nama_perusahaan"');?></td>
@@ -114,8 +161,8 @@
 </table>
     <p><code>Note: </code> &nbsp; All field mark with <code>*</code> are required.</p>
     <div class="form-actions">
-        <?php echo form_submit('save','Save data', 'class="btn btn-primary"')?>
+        <?php echo form_submit('save','Save Data', 'class="btn btn-primary"')?>
         <?php echo anchor($module[0],'Cancel', 'class="btn"')?>
-        <?php if(isset($data->sched_id)): ?><div class="pull-right"><?php echo anchor($module[0].'/delete/'.$data->sched_id,'Delete User', 'class="btn btn-danger"')?></div><?php endif; ?>
+        <?php if(isset($data->pkt_idx)): ?><div class="pull-right"><?php echo anchor($module[0].'/delete/'.$data->pkt_idx,'Delete Paket', 'class="btn btn-danger"')?></div><?php endif; ?>
     </div>
 <?php echo form_close();?>
