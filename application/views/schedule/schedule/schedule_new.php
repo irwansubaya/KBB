@@ -2,42 +2,45 @@
 <script type="text/javascript">
     $(document).ready(function(){
         $("#formid").validate();
+	$("#sched_date").datepicker({
+		    changeMonth: true,
+		    changeYear: true,
+		    dateFormat: 'yy-mm-dd',
+		    showAnim: 'fold'
+	    });
+	$("#call_date").datepicker({
+		    changeMonth: true,
+		    changeYear: true,
+		    dateFormat: 'yy-mm-dd',
+		    showAnim: 'fold'
+	    });
+       $('#sched_corporate_id').autocomplete('<?php echo base_url()?>schedule/schedule/customer_ajax',{
+		    parse: function(data){
+			var parsed = [];
+			for (var i=0; i < data.length; i++) {
+			    parsed[i] = { data: data[i], value: data[i].cus_corporate_id };
+			}
+			return parsed;
+		    },
+		    formatItem: function(data,i,max){
+			return  '<div class="search_content"><bold> '+data.cus_corporate_id+' </bold> &nbsp;<small>'+data.cus_nama_perusahaan+'</small></div>';
+		    },
+		    width: 450, 
+		    dataType: 'json' 
+		}).result( 
+			function(event,data,formated){
+			    $('#pkt_corporate_id').val(data.cus_corporate_id);
+			    $('#cus_nama_perusahaan').val(data.cus_nama_perusahaan);
+			    $('#cus_cp').val(data.cus_cp);
+			    $('#cus_idx').val(data.cus_idx);
+			    }
+		);
     });
-    $("#sched_date").datepicker({
-		changeMonth: true,
-		changeYear: true,
-		dateFormat: 'yy-mm-dd',
-		showAnim: 'fold'
-	});
-   $('#sched_corporate_id').autocomplete('<?php echo base_url()?>schedule/schedule/customer_ajax',{
-		parse: function(data){
-		    var parsed = [];
-		    for (var i=0; i < data.length; i++) {
-			parsed[i] = { data: data[i], value: data[i].cus_corporate_id };
-		    }
-		    return parsed;
-		},
-		formatItem: function(data,i,max){
-		    return  '<div class="search_content"><bold> '+data.cus_corporate_id+' </bold> &nbsp;<small>'+data.cus_nama_perusahaan+'</small></div>';
-		},
-		width: 450, 
-		dataType: 'json' 
-	    }).result( 
-		    function(event,data,formated){
-			$('#pkt_corporate_id').val(data.cus_corporate_id);
-                        $('#cus_nama_perusahaan').val(data.cus_nama_perusahaan);
-                        $('#cus_cp').val(data.cus_cp);
-	    		$('#cus_idx').val(data.cus_idx);
-                        }
-                    );
-   
+
     var id = 0;
     function insert_call ()
     {
-	/*if ($("#adm_username").val() == '') {alert ('Please fill Admin'); $("#adm_username").focus()}
-	else if ($("#call_date").val() == '') {alert ('Please fill Date'); $("#call_date").focus()}
-        */
-        else if ($("#call_kategori").val() == '') {alert ('Please fill Kategori'); $("#call_kategori").focus()}
+        if ($("#call_kategori").val() == '') {alert ('Please fill Kategori'); $("#call_kategori").focus()}
         else if ($("#call_status").val() == '') {alert ('Please fill Status'); $("#call_status").focus()}
         else if ($("#call_cp_lain").val() == '') {alert ('Please fill CP Lain'); $("#call_cp_lain").focus()}
         else if ($("#call_telp_lain").val() == '') {alert ('Please fill Telp Lain'); $("#call_telp_lain").focus()}
@@ -47,15 +50,17 @@
 
     function insert_call_print ()
     {
-	$string = '<tr id="call'+id+'">'+
-		    //'<td>'+$("#call_date").val()+'<input type="hidden" name="item_call_date[]" value="'+$("#call_date").val()+'"></td>'+
+	$string = '<tr id="call_'+id+'">'+
+		    '<td>'+$("#call_nama_admin").val()+'<input type="hidden" name="item_call_admin[]" value="'+$("#call_nama_admin").val()+'"></td>'+
+		    '<td>'+$("#call_date").val()+'<input type="hidden" name="item_call_date[]" value="'+$("#call_date").val()+'"></td>'+
                     '<td>'+$("#call_kategori").val()+'<input type="hidden" name="item_call_kategori[]" value="'+$("#call_kategori").val()+'"></td>'+
                     '<td>'+$("#call_status").val()+'<input type="hidden" name="item_call_status[]" value="'+$("#call_status").val()+'"></td>'+
                     '<td>'+$("#call_cp_lain").val()+'<input type="hidden" name="item_call_cp_lain[]" value="'+$("#call_cp_lain").val()+'"></td>'+
                     '<td>'+$("#call_telp_lain").val()+'<input type="hidden" name="item_call_telp_lain[]" value="'+$("#call_telp_lain").val()+'"></td>'+
 		    '<td>'+$("#call_keterangan").val()+'<input type="hidden" name="item_call_keterangan[]" value="'+$("#call_keterangan").val()+'"></td>'+
                     '<td><a href="" onclick="edit_call(\''+id+
-						    //'\', \''+$("#call_date").val()+
+						    '\', \''+$("#call_nama_admin").val()+
+						    '\', \''+$("#call_date").val()+
                                                     '\', \''+$("#call_kategori").val()+
                                                     '\', \''+$("#call_status").val()+
                                                     '\', \''+$("#call_cp_lain").val()+
@@ -72,24 +77,24 @@
 	}
 	id++;
 	set_call ('');
-	update_amount();
     }
 
     function set_call( VAL )
     {
-	//$("#call_date").val( VAL );
+	$("#call_nama_admin").val( VAL );
+	$("#call_date").val( VAL );
         $("#call_kategori").val( VAL );
         $("#call_status").val( VAL );
         $("#call_cp_lain").val( VAL );
         $("#call_telp_lain").val( VAL );
-        $("#call_keterangan").val( VAL );
-        
+        $("#call_keterangan").val( VAL );	
 	$("#mode").val( 'insert' );
     }
 
-    function edit_call ( ID, DATE, KATEGORI, STATUS, CPLAIN, TELPLAIN, KETERANGAN)
+    function edit_call ( ID, ADM, DATE, KATEGORI, STATUS, CPLAIN, TELPLAIN, KETERANGAN)
     {
         $("#call_idx").val( ID );
+	$("#call_nama_admin").val( ADM );
 	$("#call_date").val( DATE );
 	$("#call_kategori").val( KATEGORI );
         $("#call_status").val( STATUS );
@@ -103,12 +108,8 @@
     function remove_call ( VAL )
     {
 	$('#call_'+VAL).remove();
-        update_amount();
 	return false;
     }
-   //update_amount();
-    });
-
 </script>
 <div class="page-header">
     <h2>Add New Schedule</h2>
@@ -184,14 +185,14 @@
     <table>
     <tr>
         <td>Nama Admin </td>
-        <td><input type="text" name="adm_name" placeholder="adm_name" id="adm_name" class="span2"></td>
+        <td><input type="text" name="call_nama_admin" placeholder="Nama Admin" id="call_nama_admin" class="span2"></td>
         <td>&nbsp;</td>
         <td>Call Date</td>
-        <td><input type="text" name="call_date" placeholder="call_date" id="call_date" class="span2" value=""></td>
+        <td><input type="text" name="call_date" placeholder="Date" id="call_date" class="span2" value=""></td>
         <td>&nbsp;</td>
         <td>Kategori</td>
         <td>
-            <select name="kategori" id="kategori" class="span2">
+            <select name="call_kategori" id="call_kategori" class="span2">
                 <option>Dijawalkan</option>
                 <option>Telp Tidak di angkat</option>
                 <option>Tel Tidak Aktif</option>
@@ -200,7 +201,7 @@
         <td>&nbsp;</td>
         <td>Status</td>
         <td>
-            <select name="status" id="status" class="span2">
+            <select name="call_status" id="call_status" class="span2">
                 <option>Folow Up</option>
                 <option>Aktif</option>
             </select>
@@ -211,17 +212,20 @@
     </tr>
     <tr>
         <td>CP Lain</td>
-        <td><input type="text" name="cp_lain" placeholder="cp_lain" id="cp_lain" class="span2"></td>
+        <td><input type="text" name="call_cp_lain" placeholder="CP Lainnya" id="call_cp_lain" class="span2"></td>
         <td>&nbsp;</td>
         <td>Telp Lain</td>
-        <td><input type="text" name="telp_lain" placeholder="telp_lain" id="telp_lain" class="span2"></td>
+        <td><input type="text" name="call_telp_lain" placeholder="Telepon Lainnya" id="call_telp_lain" class="span2"></td>
         <td>&nbsp;</td>
         <td>Keterangan</td>
-        <td><textarea name="keterangan"></textarea></td>
+        <td><textarea name="call_keterangan" id="call_keterangan"></textarea></td>
     </tr>
     <tr>
         <td>&nbsp;</td>
-        <td><?php echo form_button('insert-call','Insert','onclick="return insert_call()" class="btn"')?></td>
+        <td>
+	    <input type="hidden" value="" name="call_idx" id="call_idx">
+	    <?php echo form_button('insert-call','Insert','onclick="return insert_call()" class="btn"')?>
+	</td>
     </tr>
     <tr>
         <td><input type="hidden" value="insert" name="mode" id="mode"></td>
