@@ -5,15 +5,11 @@
 	$("#sched_date").datepicker({
 		    changeMonth: true,
 		    changeYear: true,
-		    dateFormat: 'yy-mm-dd',
+		    dateFormat: 'dd-M-yy',
 		    showAnim: 'fold'
 	    });
-	$("#call_date").datepicker({
-		    changeMonth: true,
-		    changeYear: true,
-		    dateFormat: 'yy-mm-dd',
-		    showAnim: 'fold'
-	    });
+        $('#date_time').datetimepicker();
+        $('#time').timepicker({});
        $('#sched_corporate_id').autocomplete('<?php echo base_url()?>schedule/schedule/customer_ajax',{
 		    parse: function(data){
 			var parsed = [];
@@ -29,10 +25,14 @@
 		    dataType: 'json' 
 		}).result( 
 			function(event,data,formated){
-			    $('#pkt_corporate_id').val(data.cus_corporate_id);
+			    $('#sched_corporate_id').val(data.cus_corporate_id);
 			    $('#cus_nama_perusahaan').val(data.cus_nama_perusahaan);
 			    $('#cus_cp').val(data.cus_cp);
-			    $('#cus_idx').val(data.cus_idx);
+			    $('#cus_kota').val(data.cus_kota);
+                            $('#cus_alamat').val(data.cus_alamat);
+                            $('#cus_telepon_kantor').val(data.cus_telepon_kantor);
+                            $('#cus_telepon_rumah').val(data.cus_telepon_rumah);
+                            $('#cus_handphone').val(data.cus_handphone);
 			    }
 		);
     });
@@ -120,39 +120,39 @@
         <td><?php echo form_text('Corporate ID*','cus_corporate_id',(isset($data->cus_corporate_id))?$data->cus_corporate_id:'','class="span2" maxlength="10" id="sched_corporate_id"');?></td>
     </tr>
     <tr>
-        <td><?php echo form_text('Nama Perusahaan / Nasabah','cus_nama_perusahaan',(isset($data->cus_nama_perusahaan))?$data->cus_nama_perusahaan:'','class="span2" maxlength="64" id="cus_nama_perusahaan"');?></td>
+        <td><?php echo form_text('Nama Perusahaan / Nasabah','cus_nama_perusahaan',(isset($data->cus_nama_perusahaan))?$data->cus_nama_perusahaan:'','class="span2" maxlength="64" id="cus_nama_perusahaan" readonly');?></td>
         <td>&nbsp;</td>
-        <td><?php echo form_area('Contact Person','cus_cp',(isset($data->cus_cp))?$data->cus_cp:'','class="span3" maxlength="64" id="cus_cp"');?></td>
+        <td><?php echo form_area('Contact Person','cus_cp',(isset($data->cus_cp))?$data->cus_cp:'','class="span3" maxlength="64" id="cus_cp" readonly');?></td>
     </tr>
     <tr>
-        <td><?php echo form_text('Kota','cus_wilayah',(isset($data->cus_wilayah))?$data->cus_wilayah:'','class="span2" maxlength="10" id="cus_wilayah"');?></td>
+        <td><?php echo form_text('Kota','cus_kota',(isset($data->cus_kota))?$data->cus_kota:'','class="span2" maxlength="10" id="cus_kota" readonly');?></td>
         <td>&nbsp;</td>
-        <td><?php echo form_area('ALamat','cus_alamat',(isset($data->cus_alamat))?$data->cus_alamat:'','class="span3" maxlength="255"');?></td>
+        <td><?php echo form_area('ALamat','cus_alamat',(isset($data->cus_alamat))?$data->cus_alamat:'','class="span3" maxlength="255" readonly');?></td>
     </tr>
     <tr>
-        <td><?php echo form_text('Telp Kantor ','cus_telepon_kantor',(isset($data->cus_telepon_kantor))?$data->cus_telepon_kantor:'','class="span2" maxlength="32" id="cus_telepon_kantor"');?></td>
+        <td><?php echo form_text('Telp Kantor ','cus_telepon_kantor',(isset($data->cus_telepon_kantor))?$data->cus_telepon_kantor:'','class="span2" maxlength="32" id="cus_telepon_kantor" readonly');?></td>
         <td>&nbsp;</td>
-        <td><?php echo form_text('Tipe Paket','pkt_tipe',(isset($data->pkt_tipe))?$data->pkt_tipe:'','class="span2" id="pkt_tipe"');?></td>
+        <td><?php echo form_text('Tipe Paket','pkt_tipe',(isset($data->pkt_tipe))?$data->pkt_tipe:'','class="span2" id="pkt_tipe" readonly');?></td>
     </tr>
     <tr>
-        <td><?php echo form_text('Telp Handphone ','cus_handphone',(isset($data->cus_handphone))?$data->cus_handphone:'','class="span2" maxlength="32" id="cus_handphone"');?></td>
+        <td><?php echo form_text('Telp Handphone ','cus_handphone',(isset($data->cus_handphone))?$data->cus_handphone:'','class="span2" maxlength="32" id="cus_handphone" readonly');?></td>
         <td>&nbsp;</td>
-        <td><?php echo form_text('Jenis Paket','pkt_jenis',(isset($data->pkt_jenis))?$data->pkt_jenis:'','class="span2" id="pkt_jenis"');?></td>
+        <td><?php echo form_text('Jenis Paket','pkt_jenis',(isset($data->pkt_jenis))?$data->pkt_jenis:'','class="span2" id="pkt_jenis" readonly');?></td>
     </tr>
     <tr>
-        <td><?php echo form_text('Telp Rumah ','cus_telepon_rumah',(isset($data->cus_telepon_rumah))?$data->cus_telepon_rumah:'','class="span2" maxlength="32" id="cus_telepon_rumah"');?></td>
+        <td><?php echo form_text('Telp Rumah ','cus_telepon_rumah',(isset($data->cus_telepon_rumah))?$data->cus_telepon_rumah:'','class="span2" maxlength="32" id="cus_telepon_rumah" readonly');?></td>
         <td>&nbsp;</td>
-        <td><?php echo form_text('Fitur Paket','pkt_fitur',(isset($data->pkt_fitur))?$data->pkt_fitur:'','class="span2" id="pkt_fitur"');?></td>
+        <td><?php echo form_text('Fitur Paket','pkt_fitur',(isset($data->pkt_fitur))?$data->pkt_fitur:'','class="span2" id="pkt_fitur" readonly');?></td>
     </tr>
     <tr>
-        <td><?php echo form_text('Tgl Koneksi','pkt_tanggal_koneksi',(isset($data->pkt_tanggal_koneksi))?$data->pkt_tanggal_koneksi:'','class="span2" maxlength="15" id="tgl"');?></td>
+        <td><?php echo form_text('Tgl Koneksi','pkt_tanggal_koneksi',(isset($data->pkt_tanggal_koneksi))?$data->pkt_tanggal_koneksi:'','class="span2" maxlength="15" id="tgl" readonly');?></td>
         <td>&nbsp;</td>
-        <td><?php echo form_text('Schedule Date *','sched_date',(isset($data->sched_date))?$data->sched_date:'','class="span2" maxlength="25" id="sched_sched_date"');?></td> 
+        <td><?php echo form_text('Schedule Date *','sched_date',(isset($data->sched_date))?$data->sched_date:'','class="span2" maxlength="25" id="sched_date"');?></td> 
     </tr>
     <tr>
-        <td><?php echo form_text('Tgl Terima Paket','pkt_tanggal_terima',(isset($data->pkt_tanggal_terima))?$data->pkt_tanggal_terima:'','class="span2" maxlength="15" id="tgl"');?></td>
+        <td><?php echo form_text('Tgl Terima Paket','pkt_tanggal_terima',(isset($data->pkt_tanggal_terima))?$data->pkt_tanggal_terima:'','class="span2" maxlength="15" id="tgl" readonly');?></td>
         <td>&nbsp;</td>
-        <td><?php echo form_text('Schedule Time *','sched_time',(isset($data->sched_time))?$data->sched_time:'','class="span2" maxlength="10"');?></td>
+        <td><?php echo form_text('Schedule Time *','sched_time',(isset($data->sched_time))?$data->sched_time:'','class="span2" maxlength="10" id="time"');?></td>
     </tr>
     <tr>
         <td><?php echo form_text('Tgl Due Date','pkt_jatuh_tempo',(isset($data->pkt_jatuh_tempo))?$data->pkt_jatuh_tempo:'','class="span2" maxlength="15" id="tgl"');?></td>
@@ -188,24 +188,21 @@
         <td><input type="text" name="call_nama_admin" placeholder="Nama Admin" id="call_nama_admin" class="span2"></td>
         <td>&nbsp;</td>
         <td>Call Date</td>
-        <td><input type="text" name="call_date" placeholder="Date" id="call_date" class="span2" value=""></td>
+        <td><input type="text" name="call_date" placeholder="Date" id="call_date" class="span2" value="<?php echo date('d-M-y H:i')?>"></td>
         <td>&nbsp;</td>
         <td>Kategori</td>
         <td>
             <select name="call_kategori" id="call_kategori" class="span2">
-                <option>Dijawalkan</option>
-                <option>Telp Tidak di angkat</option>
-                <option>Tel Tidak Aktif</option>
+                <?php
+                foreach ($kategori as $val) {
+                    echo '<option value="'.$val[0].'">'.$val[0].'</option>';
+                }
+                ?>
             </select>
         </td>
         <td>&nbsp;</td>
         <td>Status</td>
-        <td>
-            <select name="call_status" id="call_status" class="span2">
-                <option>Folow Up</option>
-                <option>Aktif</option>
-            </select>
-        </td>
+        <td><input type="text" name="call_status" value="Active" id="call_status" class="span2" readonly></td>
     </tr>
     <tr>
         <td>&nbsp;</td>

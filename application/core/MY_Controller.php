@@ -85,6 +85,7 @@ class MY_Controller extends CI_Controller {
 				->add_javascript('custom.js')
 				->add_javascript('bootstrap.js')
 				->add_javascript('date.js')
+				->add_javascript('jquery-ui-timepicker-addon.js')
 				->add_javascript('jquery.autocomplete.js');
 		}
 

@@ -55,7 +55,7 @@ class Cabang_m extends MY_Model {
             {
                 foreach($data as $d)
                 {
-                    $arr[$d->cab_idx] = $d->cab_name;
+                    $arr[$d->cab_name] = $d->cab_name;
                 }
                 
                 return $arr;

@@ -250,7 +250,22 @@ class Customer extends MY_Controller {
 			}*/
 		}
 	}
-
+	
+	/**
+	 * Autocomplete using ajax calling data Supplier
+	 *
+	 * @access	public
+	 * @return	parent class function
+	 */
+	public function cabang_ajax ()
+	{
+		if ($this->input->is_ajax_request())
+		{
+			$this->load->model('cabang_m');
+			$this->db->like('cab_code', $this->input->get('q'));
+			echo json_encode($this->cabang_m->get());
+		}
+	}
 	/**
 	 * Delete supplier
 	 *

@@ -55,7 +55,7 @@ class Status_m extends MY_Model {
             {
                 foreach($data as $d)
                 {
-                    $arr[$d->stat_idx] = $d->stat_nama;
+                    $arr[$d->stat_nama] = $d->stat_nama;
                 }
                 
                 return $arr;

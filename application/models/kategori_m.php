@@ -55,7 +55,8 @@ class kategori_m extends MY_Model {
             {
                 foreach($data as $d)
                 {
-                    $arr[$d->kat_idx] = $d->kat_nama;
+                    $arr[$d->kat_nama][0] = $d->kat_nama;
+		    $arr[$d->kat_nama][1] = $d->kat_status;
                 }
                 
                 return $arr;

@@ -357,6 +357,7 @@ function form_hidden($name, $value = '', $attributes ='', $recursing = FALSE)
 	return $form;
 }
 
+
 // ------------------------------------------------
 /* End of file MY_form_helper.php */
 /* Location: ./application/helper/MY_form_helper.php */

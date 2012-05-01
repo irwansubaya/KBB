@@ -55,7 +55,7 @@ class Bidus_m extends MY_Model {
             {
                 foreach($data as $d)
                 {
-                    $arr[$d->bid_idx] = $d->bid_name;
+                    $arr[$d->bid_name] = $d->bid_name;
                 }
                 
                 return $arr;

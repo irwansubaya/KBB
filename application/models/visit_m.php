@@ -55,7 +55,7 @@ class Visit_m extends MY_Model {
             {
                 foreach($data as $d)
                 {
-                    $arr[$d->visit_idx] = $d->visit_nama;
+                    $arr[$d->visit_nama] = $d->visit_nama;
                 }
                 
                 return $arr;

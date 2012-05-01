@@ -55,7 +55,7 @@ class Kota_m extends MY_Model {
             {
                 foreach($data as $d)
                 {
-                    $arr[$d->kota_id] = $d->nama_kota;
+                    $arr[$d->nama_kota] = $d->nama_kota;
                 }
                 
                 return $arr;

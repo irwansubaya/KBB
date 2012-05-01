@@ -14,15 +14,34 @@
 		dateFormat: 'dd-M-yy',
 		showAnim: 'fold',
 		onClose: function(dateText, inst) {
-		    var due_date = Date.parse(dateText).add(3).days();
+		    if ($("#pkt_tanggal_koneksi").val() == '') {
+			alert('Tanggal terima paket harus di isi');
+			$("#pkt_tanggal_terima").val('');
+			$("#pkt_tanggal_koneksi").focus();
+			return false;
+		    }
+		    else if (Date.parse(dateText) < Date.parse($("#pkt_tanggal_koneksi").val()))
+		    {
+			alert('Tanggal terima paket tidak boleh sebelum tanggal koneksi');
+			$("#pkt_tanggal_terima").val('');
+			$("#pkt_tanggal_terima").focus();
+			return false;
+		    }
+		    var dateText = Date.parse(dateText);
+		    
+		    // Jika sabtu / minggu maka
+		    if (dateText.is().monday() || dateText.is().tuesday()) {
+			var due_date =  dateText.add(3).days();
+		    } else if (dateText.is().wednesday()) {
+			var due_date =  dateText.next().monday();
+		    } else if (dateText.is().thursday()) {
+			var due_date =  dateText.next().tuesday();
+		    } else if (dateText.is().friday()) {
+			var due_date =  dateText.next().wednesday();
+		    } 
+		    
 		    $('#pkt_jatuh_tempo').val(due_date.toString('dd-MMM-yyyy'));
 		}
-	});
-	$("#pkt_jatuh_tempo").datepicker({
-		changeMonth: true,
-		changeYear: true,
-		dateFormat: 'dd-M-yy',
-		showAnim: 'fold'
 	});
         $('#pkt_corporate_id').autocomplete('<?php echo base_url()?>customer/paket/customer_ajax',{
 		parse: function(data){
@@ -148,7 +167,7 @@
 	</tr>
 	<tr>
 	    <td><?php echo form_text('Tgl Terima Paket*','pkt_tanggal_terima',(isset($data[0]->pkt_tanggal_terima))?date('d-M-Y',strtotime($data[0]->pkt_tanggal_terima)):'','class="span2" maxlength="15" id="pkt_tanggal_terima"');?></td>
-	    <td><?php echo form_text('Tgl Due Date*','pkt_jatuh_tempo',(isset($data[0]->pkt_jatuh_tempo))?date('d-M-Y',strtotime($data[0]->pkt_jatuh_tempo)):'','class="span2" maxlength="15" id="pkt_jatuh_tempo"');?></td>
+	    <td><?php echo form_text('Tgl Due Date*','pkt_jatuh_tempo','','class="span2" maxlength="15" readonly');?></td>
 	</tr>
 	</table>
 	    <legend>List Key</legend>
