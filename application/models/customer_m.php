@@ -114,7 +114,7 @@ class Customer_m extends MY_Model {
 			if ($value && $key == 'cus_nama_perusahaan') $this->db->like($key, $value);
 			else if ($value && $key == 'cus_corporate_id') $this->db->like($key, $value);
 			else if ($value && $key == 'cus_tanggal_input') $this->db->where($key, date('Y-m-d', strtotime($value)));
-			else if $this->db->order_by('asdes','asc');
+			
 		}
 		return parent :: count_record();
 	}

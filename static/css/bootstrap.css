@@ -107,7 +107,7 @@ textarea {
 body {
   margin: 0;
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-  font-size: 13px;
+  font-size: 12px;
   line-height: 18px;
   color: #333333;
   background-color: #ffffff;
@@ -974,6 +974,7 @@ input:focus:required:invalid:focus, textarea:focus:required:invalid:focus, selec
 .form-search .uneditable-input,
 .form-inline .uneditable-input,
 .form-horizontal .uneditable-input {
+  font-size:12px;
   display: inline-block;
   margin-bottom: 0;
 }
@@ -1020,6 +1021,7 @@ legend + .control-group {
   clear: both;
 }
 .form-horizontal .control-label {
+  font-size:12px;
   float: left;
   width: 140px;
   padding-top: 5px;
@@ -1029,7 +1031,7 @@ legend + .control-group {
   margin-left: 160px;
 }
 .form-horizontal .form-actions {
-  padding-left: 160px;
+  padding-left: 10px;
 }
 table {
   max-width: 100%;
@@ -1037,6 +1039,7 @@ table {
   border-spacing: 0;
 }
 .table {
+  text-align: left;
   width: 100%;
   margin-bottom: 18px;
 }

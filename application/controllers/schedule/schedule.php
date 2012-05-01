@@ -37,7 +37,9 @@ class Schedule extends MY_Controller {
 		$this->load->model(array(
 			'schedule_m',
 			'paket_m',
-			'customer_m'
+			'customer_m',
+			'visit_m',
+			'kategori_m'
 		));
 	}
 
@@ -76,6 +78,8 @@ class Schedule extends MY_Controller {
 				}
 			}
 		}
+		$this->params['kategori'] = $this->kategori_m->dropdown();
+		$this->params['visit'] = $this->visit_m->dropdown();
 		$this->_view('main_1_3', 'schedule_new');
 	}
 
@@ -104,6 +108,8 @@ class Schedule extends MY_Controller {
 					}
 				}
 			}
+			$this->params['kategori'] = $this->kategori_m->dropdown();
+			$this->params['visit'] = $this->visit_m->dropdown();
 			$this->params['data']		= $this->schedule_m->get($idx);
 			$this->params['labels']		= $this->schedule_m->getLabels();
 			$this->_view('main_1_3', 'schedule_new');
