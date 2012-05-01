@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50141
 File Encoding         : 65001
 
-Date: 2012-04-20 09:05:06
+Date: 2012-05-01 12:57:40
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -93,22 +93,23 @@ INSERT INTO `tb_cabang` VALUES ('6', '407', 'muara karang');
 DROP TABLE IF EXISTS `tb_call`;
 CREATE TABLE `tb_call` (
   `call_idx` int(11) NOT NULL AUTO_INCREMENT,
-  `cus_idx` int(11) DEFAULT NULL,
+  `cus_idx` int(11) NOT NULL,
+  `adm_id` int(11) NOT NULL,
   `adm_username` varchar(16) NOT NULL,
   `call_date` datetime NOT NULL,
   `call_status` varchar(32) NOT NULL,
   `call_kategori` varchar(32) NOT NULL,
+  `call_cp_lain` text NOT NULL,
+  `Call_telp_lain` int(11) NOT NULL,
   `call_keterangan` text NOT NULL,
   PRIMARY KEY (`call_idx`),
   KEY `tb_call_cus_idx` (`cus_idx`),
   CONSTRAINT `tb_call_cus_idx` FOREIGN KEY (`cus_idx`) REFERENCES `tb_customer` (`cus_idx`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- ----------------------------
 -- Records of tb_call
 -- ----------------------------
-INSERT INTO `tb_call` VALUES ('1', null, 'yugi', '2012-04-02 16:16:33', '', 'nasabah susah di hubungi', 'pending');
-INSERT INTO `tb_call` VALUES ('2', null, 'yugi', '2012-04-10 16:17:03', '', 'dsadasdasds', 'dsad');
 
 -- ----------------------------
 -- Table structure for `tb_customer`
@@ -135,50 +136,19 @@ CREATE TABLE `tb_customer` (
   `cus_tanggal_input` date NOT NULL,
   `cus_admin_input` varchar(255) NOT NULL,
   PRIMARY KEY (`cus_idx`)
-) ENGINE=InnoDB AUTO_INCREMENT=49 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=54015 DEFAULT CHARSET=latin1;
 
 -- ----------------------------
 -- Records of tb_customer
 -- ----------------------------
-INSERT INTO `tb_customer` VALUES ('2', 'IBSALIANOO', 'Alianto', 'fsdfs', '1231313121', 'fdsffsdfsfdsfds', 'Jl. Komplek TSS Indah No.815 Blok B Jakarta', 'Alianto', '1', '', '32131', '323131', '2313123', '', 'Reg.Tanah Abang', '', 'A@d.com', '2012-04-15', 'irwan');
-INSERT INTO `tb_customer` VALUES ('3', 'IBSPUNDIPT', 'Pundi Kalia Mandiri PT', '', '', 'Perdagangan Umum', 'Jl. Tarumanegara No.100A, Cirendeu Tangerang', 'Yoerly Hana G', 'Jakarta Timur', '15419', '', '021- 7470 2842', '', '', 'Cinere', null, 'pundikm@yahoo.com', '0000-00-00', '');
-INSERT INTO `tb_customer` VALUES ('4', 'IBSTJHINPK', 'Tjhin Pauw Kim Bangunan Jaya', '327.101.440.958.0002', '0953200845', 'toko keramik', 'Jl.Siliwangi No.28 Kel.Bondongan Rt01 Rw.13 Bogor Bogor', 'Luciawati', 'Jakarta Timur', '16131', '021-7364564', '0251- 832 6082; 832 4992', '0878 7080 8123', '0251-8324992', 'Bogor', null, 'U43DY@yahoo.com', '0000-00-00', '');
-INSERT INTO `tb_customer` VALUES ('8', 'IBSINGCUA1', 'Ing Cuan', '', '5450706789', 'handphone', 'Jl.Perdana Raya Indah Blok A/3 Rt10 Rw04 Wijaya Kusuma, Grogol Petamburan Jakarta Barat', 'Ing Cuan', 'Jakarta Timur', '11460', '', '021- 6385 8150', '0811 933 111', '', 'ITC Roxy Mas', null, 'as8888@indosat.net.id', '0000-00-00', '');
-INSERT INTO `tb_customer` VALUES ('13', 'IBSPTHAKAS', 'Hakasima Inti PT', '1', '1234567890', 'Peralatan Rumah Tangga', 'Jl. Kembangan Baru Raya Blok AA No.3 Kembangan Jakarta Barat', 'Nurjanti Widjaja,\r\nTjhin Anthony', 'Jakarta Barat', '11610', '021- 581 3345', '3123123', '-', '-', 'Puri Indah', null, 'a@a.com', '0000-00-00', '');
-INSERT INTO `tb_customer` VALUES ('14', 'ibskodelll', 'kkkkmlsklfksdfkskflsdfksdlkflskflksdlfklsdkflsd', '8989', '9898989898', 'kkjkjkj', 'kkjk', 'jkjk', '2', '09090', '9', '988998', '9898', '989', 'jhj', '989', 'h@d.com', '2012-04-16', 'irwan');
-INSERT INTO `tb_customer` VALUES ('16', 'wqeqeqwewq', 'eqweqweqw', '', '3213123131', '1', 'dfsfdsf', 'fdsfsfsf', '1', '', '', '', '', '', '1', '', 'w@w.com', '2012-04-17', 'irwan');
-INSERT INTO `tb_customer` VALUES ('17', 'jjjjjjjjjj', 'wrwerwercvxvcvxvc', '23123123', '2131231231', '1', 'mnmnmnm', 'mmnmn', '1', '78787', '86878', '7878', '7878787', '7878', '1', '87878', 'h@h.com', '2012-04-17', 'irwan');
-INSERT INTO `tb_customer` VALUES ('18', 'hkjhhjhjhj', 'mjjjhjhj', '31231', '9090909090', '1', 'kjkjkjkjk', 'jkjkjk', '1', '98989', '9989', '9898', '989', '898', '1', '98', 'j@j.com', '2012-04-16', 'irwan');
-INSERT INTO `tb_customer` VALUES ('19', 'jhjhjhjhjh', 'jhjhjhjh', '9889898989', '9898989898', '1', 'hjjhjhj', 'hjhjhj', '1', '98989', '8989898', '98989', '898', '9898', '1', '9898', 'h@h.com', '2012-04-17', 'irwan');
-INSERT INTO `tb_customer` VALUES ('20', 'wewqewqeew', 'jkjjkjk', '989898', '2131312312', '1', 'jkjkjkjkj', 'kjkjkjkjkj', '10', '89898', '89898', '98989', '898', '9898', '1', '989', 'h@h.com', '2012-04-18', 'irwan');
-INSERT INTO `tb_customer` VALUES ('21', 'fsfdsfdsff', 'jkjkjkj', '989898', '8989898989', '1', 'jkjkjkjk', 'jkjkjkj', '1', '78787', '787878', '78787', '878', '7878', '1', '7878', 'h@s.com', '2012-04-18', 'irwan');
-INSERT INTO `tb_customer` VALUES ('22', 'IBSALIANJJ', 'jdasjdbajbdsajbd', '7979797979', '8989898989', '4', 'fdsfsdsh', 'jkkjkjk', '8', '99898', '8989898', '9989', '9989', '898989', '1', '78787878989898989', 'h@h.com', '2012-04-18', 'irwan');
-INSERT INTO `tb_customer` VALUES ('23', 'fdsfsdfsdf', 'fdsfsfdfs', '43242342', '3424234242', '1', 'fdfdgfgd', 'fdgdfgfdgdfg', '1', '', '', '', '', '', '1', '', null, '2012-04-18', 'irwan');
-INSERT INTO `tb_customer` VALUES ('24', 'sadasdsadf', 'fdsfsfdfs', '43242342', '3424234242', '1', 'fdfdgfgd', 'fdgdfgfdgdfg', '1', '', '', '', '', '', '1', '', null, '2012-04-18', 'irwan');
-INSERT INTO `tb_customer` VALUES ('25', 'fsdfsdsdfs', 'fdsfsff', '2434234', '3242342423', '1', 'dfdfdfd', 'gfdgd', '1', '43534', '435345', '543543', '54543', '5435435', '1', '5453', null, '2012-04-18', 'irwan');
-INSERT INTO `tb_customer` VALUES ('26', 'dadasdadsd', 'fdsfsff', '2434234', '3242342423', '1', 'dfdfdfd', 'gfdgd', '1', '43534', '435345', '543543', '54543', '5435435', '1', '5453', null, '2012-04-18', 'irwan');
-INSERT INTO `tb_customer` VALUES ('27', 'Coorporate', 'Nama', 'Nomor KTP', 'Nomor rekening', 'Bidang Usaha', 'Address', 'Contact Person 2', 'City', 'ZIP/Postal Code', 'Business Phone', 'Home Phone', 'Mobile Phone', 'Fax Number', 'Cabang', 'Code Cabang', 'E-mail Address', '0000-00-00', 'Admin Input');
-INSERT INTO `tb_customer` VALUES ('28', 'IBSMAKJAEX', 'Makmur Jaya Express CV', '', '', '', 'Ruko Taman Palem Lestari Blok A-30 No.15 Cengkareng  Jakarta Barat', '', 'Jakarta Selatan', '', '', '', '0816 876 590 / 0878 8450 0595', '', 'Citra Garden II', '', 'makmurjaya_xpdc@yahoo.com', '2012-04-19', 'irwan');
-INSERT INTO `tb_customer` VALUES ('29', 'IBSSURYPER', 'Surya Perdana Abadi PT', '', '', '', 'Jl. Kapuk Utara II/8 Rt003/Rw001 Penjaringan Jakarta Barat', 'Suhai Wiraya', 'Jakarta Barat', '', ',', '', '0813 1877 8156 (Dewi)', '', 'Citra Garden II', '', '', '2012-04-19', 'irwan');
-INSERT INTO `tb_customer` VALUES ('30', 'IBSTRIANKU', 'Trianto Kuswita', '', '', '', 'Jl. Cempaka Putih Tengah 27 No.6A Cempaka Putih Jakarta Pusat', 'Imelda', 'Jakarta Pusat', '', '021- 8690 6112', '', '', '', 'Cempaka Putih Raya', '', 'triantokuswita@gmail.com', '2012-04-19', 'irwan');
-INSERT INTO `tb_customer` VALUES ('31', 'IBSGLOBSUC', 'Global Success International PT', '', '', '', 'Gedung Rifa Lt.2 Jl.Prof Dr.Satrio Blok C4 Kav.6-7 Kuningan Jakarta Pusat', 'Jefri Oktavian Indroe', 'Jakarta Pusat', '', '021- 526 0781', '', '', '', 'Setiabudi Atrium', '', '', '2012-04-19', 'irwan');
-INSERT INTO `tb_customer` VALUES ('32', 'IBSSAMSIMJ', 'Samsim Jaya', '', '', '', 'Jl. Kapuk Raya No.12 E & F Kel.Kapuk Muara Kec.Penjaringan Jakarta', '', 'Jakarta', '', '0812 9411 300; 7059 3159; 5439 4635', '', '', '', 'Kapuk Muara', '', 'samsinjaya@yahoo.com', '2012-04-19', 'irwan');
-INSERT INTO `tb_customer` VALUES ('33', 'IBSYYSDHAS', 'Yay Dharmasagara', '', '', '', 'Jln. Taman Sari Raya No.78 Jakarta Barat', 'Elizaris P', 'Jakarta Barat', '11150', '021- 649 2254; 662 0283', '', '0817 699 9511 (henny); 0812 8007685 (Elizaris)', '', 'Reg.Tanah Abang', '', '', '2012-04-19', 'irwan');
-INSERT INTO `tb_customer` VALUES ('34', 'IBSALIANOO', 'Alianto', '', '', '', 'Jl. Komplek TSS Indah No.815 Blok B Jakarta', '', 'Jakarta', '', '021- 6385 9181;', '', '0812 105 2052', '', 'Reg.Tanah Abang', '', '', '2012-04-19', 'irwan');
-INSERT INTO `tb_customer` VALUES ('35', 'IBSPUNDIPT', 'Pundi Kalia Mandiri PT', '', '', 'Perdagangan Umum', 'Jl. Tarumanegara No.100A, Cirendeu Tangerang', '', 'Tangerang', '15419', '021- 7470 2842', '', '', '', 'Cinere', '', 'pundikm@yahoo.com', '2012-04-19', 'irwan');
-INSERT INTO `tb_customer` VALUES ('36', 'IBSTJHINPK', 'Tjhin Pauw Kim Bangunan Jaya', '327.101.440.958.0002', '0953200845', 'toko keramik', 'Jl.Siliwangi No.28 Kel.Bondongan Rt01 Rw.13 Bogor Bogor', '', 'Bogor', '16131', '0251- 832 6082; 832 4992', '', '0878 7080 8123', '0251-8324992', 'Bogor', '', 'U43DY@yahoo.com', '2012-04-19', 'irwan');
-INSERT INTO `tb_customer` VALUES ('37', 'IBSHINTADW', 'Shinta Dewi', '', '', '', 'Jl. Sunter Kirana Raya Blok ND2 No.11 Sunter Jaya, Tanjung Priok Jakarta', '', 'Jakarta', '', '', '', '0811 999 889', '', 'Taman Sunter Indah', '', '', '2012-04-19', 'irwan');
-INSERT INTO `tb_customer` VALUES ('38', 'IBSWIGIYAN', 'Wigiyanto Soleman', '', '', '', 'Jl. Kayu Putih Raya B4 / 8  Sebelah kolam Renang Jakarta Timur', '', 'Jakarta Timur', '', '', '', '0812 8137 896', '', 'Grand Cempaka Mas', '', 'wigianto@gmail.com', '2012-04-19', 'irwan');
-INSERT INTO `tb_customer` VALUES ('39', 'IBSMARKAUW', 'Martin Kauw', '', '', '', 'Poglar Ex Pool PPD Blok B 27 Jakarta', '', 'Jakarta', '', '021- 5437 8002; 5437 8003', '', '', '', 'Setiabudi Atrium', '', '', '2012-04-19', 'irwan');
-INSERT INTO `tb_customer` VALUES ('40', 'IBSINGCUA1', 'Ing Cuan', '', '5450706789', 'handphone', 'Jl.Perdana Raya Indah Blok A/3 Rt10 Rw04 Wijaya Kusuma, Grogol Petamburan Jakarta Barat', '', 'Jakarta Barat', '11460', '021- 6385 8150', '', '0811 933 111', '', 'ITC Roxy Mas', '', 'as8888@indosat.net.id', '2012-04-19', 'irwan');
-INSERT INTO `tb_customer` VALUES ('41', 'IBSPTHAKAS', 'Hakasima Inti PT', '', '', 'Peralatan Rumah Tangga', 'Jl. Kembangan Baru Raya Blok AA No.3 Kembangan Jakarta Barat', 'Tjhin Anthony', 'Jakarta Barat', '11610', '021- 581 3345', '', '', '', 'Puri Indah', '', '', '2012-04-19', 'irwan');
-INSERT INTO `tb_customer` VALUES ('42', 'IBSPTPUSAK', 'Pusaka Banten Sakti PT', '', '', 'Jasa Angkutan', 'Jl. Raya Serang - Cilegon Km.122 Kramat watu Cilegon', '', 'Cilegon', '42161', '0254- 7000622; 7001168', '', '0812 1200091', '0254-233170', 'Serang', '', 'pbs_one@yahoo.com', '2012-04-19', 'irwan');
-INSERT INTO `tb_customer` VALUES ('43', 'IBSRUDIPAW', 'Rudianto Paw', '09.5003.111173.2013', '', '', 'Pademangan II  Gg II No.49  TK Borneo el Jl.Hayam Wuruk , Pademangan Jakarta', '', 'Jakarta', '', '629 5658', '', '0812 8132 897', '', 'Pademangan', '', 'rudianto@yahoo.com', '2012-04-19', 'irwan');
-INSERT INTO `tb_customer` VALUES ('44', 'IBSPTWATAN', 'Wahana Tani Organik Lestari PT', '', '', 'Produksi Pupuk', 'Jl.Gatot Subroto Rt04/Rw01 Sangiang Jaya Periuk Tangerang', '', 'Tangerang', '15132', '021- 4788 2599592 7148', '', '', '', 'Perum Cibodas', '', 'peterhartono@live.com', '2012-04-19', 'irwan');
-INSERT INTO `tb_customer` VALUES ('45', 'IBSPTINDOC', 'Indocore Perkasa PT', '', '', 'Alat Kesehatan', 'Graha Mas Pemuda Blok AB No.19 Kel.Jati Kec.Pulo Gadung Jakarta Timur', 'O Lee', 'Jakarta Timur', '', '021- 4788 2599', '', '', '', 'Wisma GKBI', '', 'sunflower58@homail.net', '2012-04-19', 'irwan');
-INSERT INTO `tb_customer` VALUES ('46', 'IBSGUNWIDJ', 'Gunadi Widjanarko', '09.5202.071168.0129', '', 'Bahan Bangunan', 'Jl.Gelang Baru Barat 1/38 Rt.01 Rw.003 Tomang, Grogol Petamburan (Alamat Lama) Jakarta Barat', '', 'Jakarta Barat', '', '021- 345 1288; 595 4224', '', '', '', 'Duta Merlin', '', 'batarex.indo@yahoo.com', '2012-04-19', 'irwan');
-INSERT INTO `tb_customer` VALUES ('47', 'ibsnekiari', 'maju bersama', '123455', '9809876589', '8', 'bonang', 'neki, purwandi', '1', '09909', '0393939', '0090', '9090', '9090', '1', '90909', 'dadasdsad@d.com', '2012-04-19', 'irwan');
-INSERT INTO `tb_customer` VALUES ('48', 'IBSIRWANSU', 'jkjkj', '989898', '8989898989', '1', 'jkkjkjk', 'kjkjkjkjk', '1', '89898', '988989', '8989898', '98989', '898989', '1', '989898', 'jkjkj@h.com', '2012-04-20', 'irwan');
+INSERT INTO `tb_customer` VALUES ('54007', 'IBSALIANOO', 'IBS', '6767', '6767676766', '1', 'GJGJGJHGGJH', 'GJJKJHJHJKH', '1', '21212', '4343433', '454454', '434434', '544545', '1', '6566', 'A@B.COM', '2012-04-22', 'irwan');
+INSERT INTO `tb_customer` VALUES ('54008', 'IBSKULDKDK', 'JKJKJKJKKJ', '989088989', '8989898989', '1', 'HJHJHJHJ', 'HJJHJHJH', '1', '99898', '99898', '98989', '89898', '98989', '1', '8989', 'G@H.COM', '2012-04-26', 'irwan');
+INSERT INTO `tb_customer` VALUES ('54009', 'dsmfnsfdjs', 'hjhjhjhjhj', '898989', '8989899898', '1', 'iuiuiuiuiuiu', 'iuiuiuiui', '1', '98989', '9898', '9898', '9898', '98989', '1', '8989', 'hjhjh@h.com', '2012-04-26', 'irwan');
+INSERT INTO `tb_customer` VALUES ('54010', 'ibsjdkdjdj', 'kjkjkjkj', '89898989', '8989898989', '1', 'jkkjkjkj', 'kjkjkjkj', '10', '89898', '898989', '89898', '98989', '8989', '1', '8989', '', '2012-04-26', 'irwan');
+INSERT INTO `tb_customer` VALUES ('54011', 'adsadasdas', 'dsadsadsad', '3423424', '4234324245', '1', 'fgdfggdff', 'dgfhfghgf', '1', '42342', '32423', '4324324', '432432', '432432', '1', '4324', '', '2012-04-27', 'irwan');
+INSERT INTO `tb_customer` VALUES ('54012', 'aaaaaaaaaa', 'aaaaaaaaaaaaaaaaaaaaaaa', '423424', '4324242343', '1', 'fgdgfdgdg', 'dfgdgfdg', '1', '35353', '543534', '543534', '534535', '54353453', '1', '5345', '', '2012-04-29', 'irwan');
+INSERT INTO `tb_customer` VALUES ('54013', 'bbbbbbbbbb', 'cccccccccccccccccc', '432423424242342', '4324242343', '1', 'fgdgdgdf', 'gdfgfdgdfg', '1', '35543', '543534543', '5435345', '5435345', '3543535', '1', '5435', '', '2012-04-29', 'irwan');
+INSERT INTO `tb_customer` VALUES ('54014', 'cccccccccc', 'dddddddddddddd', '432423424', '3242342342', '1', 'fdgdfgfdg', 'fdgfdgfdg', '1', '35353', '5435345', '3453534', '5345345', '534534534', '1', '5435', '', '2012-04-29', 'irwan');
 
 -- ----------------------------
 -- Table structure for `tb_engineer`
@@ -202,6 +172,25 @@ INSERT INTO `tb_engineer` VALUES ('10', 'Irwan Subaya', '1988-12-26', 'Jl. Rawa 
 INSERT INTO `tb_engineer` VALUES ('11', 'yugi', '1988-01-05', 'Jl. maju Mundur 3 X depan belakang kena', '12345', '021-73156354', '08567826536542');
 
 -- ----------------------------
+-- Table structure for `tb_kategori`
+-- ----------------------------
+DROP TABLE IF EXISTS `tb_kategori`;
+CREATE TABLE `tb_kategori` (
+  `kat_idx` int(11) NOT NULL AUTO_INCREMENT,
+  `kat_nama` text,
+  PRIMARY KEY (`kat_idx`)
+) ENGINE=MyISAM AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
+
+-- ----------------------------
+-- Records of tb_kategori
+-- ----------------------------
+INSERT INTO `tb_kategori` VALUES ('1', 'NN');
+INSERT INTO `tb_kategori` VALUES ('2', 'Telp Tidak Di angkat');
+INSERT INTO `tb_kategori` VALUES ('3', 'Telp Tidak Aktif');
+INSERT INTO `tb_kategori` VALUES ('4', 'Nasabaha Sulit Ditemui');
+INSERT INTO `tb_kategori` VALUES ('5', 'Pin Belum Diterima');
+
+-- ----------------------------
 -- Table structure for `tb_key`
 -- ----------------------------
 DROP TABLE IF EXISTS `tb_key`;
@@ -217,25 +206,17 @@ CREATE TABLE `tb_key` (
   KEY `tb_key_pkt_idx_fk` (`pkt_idx`),
   CONSTRAINT `tb_key_cus_idx_fk` FOREIGN KEY (`cus_idx`) REFERENCES `tb_customer` (`cus_idx`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `tb_key_pkt_idx_fk` FOREIGN KEY (`pkt_idx`) REFERENCES `tb_paket` (`pkt_idx`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=61 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=25 DEFAULT CHARSET=latin1;
 
 -- ----------------------------
 -- Records of tb_key
 -- ----------------------------
-INSERT INTO `tb_key` VALUES ('19', '26', '3', 'dsadasd', 'adssad', '0000-00-00');
-INSERT INTO `tb_key` VALUES ('20', '26', '3', 'sadsadas', 'dssa', '0000-00-00');
-INSERT INTO `tb_key` VALUES ('21', '27', '3', 'adsds', 'ds', '0000-00-00');
-INSERT INTO `tb_key` VALUES ('22', '31', '3', 'dfsf', 'fdsfdsf', '0000-00-00');
-INSERT INTO `tb_key` VALUES ('23', '31', '3', 'fdsfsd', 'fdsfds', '0000-00-00');
-INSERT INTO `tb_key` VALUES ('24', '28', '2', 'dfsdf', 'fdsfds', '0000-00-00');
-INSERT INTO `tb_key` VALUES ('27', '32', '20', 'a', 'b', '0000-00-00');
-INSERT INTO `tb_key` VALUES ('52', '33', '28', '9898989898', 'Neki', '0000-00-00');
-INSERT INTO `tb_key` VALUES ('53', '33', '28', '9909090909', 'Neki', '0000-00-00');
-INSERT INTO `tb_key` VALUES ('54', '33', '28', '7868678768', 'nkiiii', '0000-00-00');
-INSERT INTO `tb_key` VALUES ('57', '35', '47', '21321313', 'dfsdfsdffdsfsdffsfdsf', '0000-00-00');
-INSERT INTO `tb_key` VALUES ('58', '35', '47', '2131312', 'vfdvdfvfdsfsdfsfdsfsfdfdsf', '0000-00-00');
-INSERT INTO `tb_key` VALUES ('59', '36', '48', 'DASDASD', 'DSADASDASD', '0000-00-00');
-INSERT INTO `tb_key` VALUES ('60', '36', '48', 'DSADAD', 'DSADASD', '0000-00-00');
+INSERT INTO `tb_key` VALUES ('1', '1', '54007', '121121', 'RTRTRTRT', '0000-00-00');
+INSERT INTO `tb_key` VALUES ('18', '2', '54008', '23243', 'FDJFJSKJDKSJF', '0000-00-00');
+INSERT INTO `tb_key` VALUES ('21', '3', '54009', '3123123', 'nbsnbnbvbnxcbn', '0000-00-00');
+INSERT INTO `tb_key` VALUES ('22', '3', '54009', '3324234', 'smnmfnmds', '0000-00-00');
+INSERT INTO `tb_key` VALUES ('23', '4', '54010', '323123', 'fdsfdsfdsf', '0000-00-00');
+INSERT INTO `tb_key` VALUES ('24', '5', '54011', '3423423', 'fdgfdgdfg', '0000-00-00');
 
 -- ----------------------------
 -- Table structure for `tb_kota`
@@ -275,31 +256,26 @@ CREATE TABLE `tb_paket` (
   `cus_idx` int(11) NOT NULL,
   `pkt_jenis` varchar(16) NOT NULL,
   `pkt_tipe` varchar(16) NOT NULL,
-  `pkt_fitur` text NOT NULL,
+  `pkt_status` varchar(16) NOT NULL,
   `pkt_jumlah_key` smallint(6) NOT NULL DEFAULT '0',
   `pkt_tanggal_koneksi` date NOT NULL,
   `pkt_tanggal_terima` date NOT NULL,
   `pkt_jatuh_tempo` date NOT NULL,
   `pkt_tanggal_input` date NOT NULL,
+  `pkt_admin_input` varchar(255) NOT NULL,
   PRIMARY KEY (`pkt_idx`),
   KEY `tb_paket_cus_idx_fk` (`cus_idx`),
   CONSTRAINT `tb_paket_cus_idx_fk` FOREIGN KEY (`cus_idx`) REFERENCES `tb_customer` (`cus_idx`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=37 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
 
 -- ----------------------------
 -- Records of tb_paket
 -- ----------------------------
-INSERT INTO `tb_paket` VALUES ('26', '3', 'single_otorisasi', 'gold', 'va', '2', '0000-00-00', '0000-00-00', '0000-00-00', '0000-00-00');
-INSERT INTO `tb_paket` VALUES ('27', '3', 'single_otorisasi', 'gold', 'va', '1', '0000-00-00', '0000-00-00', '0000-00-00', '0000-00-00');
-INSERT INTO `tb_paket` VALUES ('28', '2', 'single_otorisasi', 'gold', 'va', '1', '0000-00-00', '0000-00-00', '0000-00-00', '0000-00-00');
-INSERT INTO `tb_paket` VALUES ('29', '14', 'single_otorisasi', 'gold', 'va', '0', '0000-00-00', '0000-00-00', '0000-00-00', '0000-00-00');
-INSERT INTO `tb_paket` VALUES ('30', '14', 'single_otorisasi', 'gold', 'va', '0', '0000-00-00', '0000-00-00', '0000-00-00', '0000-00-00');
-INSERT INTO `tb_paket` VALUES ('31', '3', 'single_otorisasi', 'gold', 'va', '2', '0000-00-00', '0000-00-00', '0000-00-00', '0000-00-00');
-INSERT INTO `tb_paket` VALUES ('32', '20', 'multi_otorisasi', 'gold_payroll', 'va', '1', '0000-00-00', '0000-00-00', '0000-00-00', '0000-00-00');
-INSERT INTO `tb_paket` VALUES ('33', '28', 'single_otorisasi', 'gold_payroll', 'Virtual Account,BCA Virtual Account,B2B E-Commerce,MAR', '3', '0000-00-00', '0000-00-00', '0000-00-00', '0000-00-00');
-INSERT INTO `tb_paket` VALUES ('34', '28', 'single_otorisasi', 'gold_payroll', 'Virtual Account,BCA Virtual Account,Payroll,B2B Pertamina,B2B E-Commerce,MAR,Sysadmin', '3', '0000-00-00', '0000-00-00', '0000-00-00', '0000-00-00');
-INSERT INTO `tb_paket` VALUES ('35', '47', 'multi_otorisasi', 'gold_payroll', 'Payroll,MAR,Sysadmin', '2', '0000-00-00', '0000-00-00', '0000-00-00', '0000-00-00');
-INSERT INTO `tb_paket` VALUES ('36', '48', 'multi_otorisasi', 'gold_payroll', 'Virtual Account,BCA Virtual Account,B2B Pertamina,Sysadmin', '2', '0000-00-00', '0000-00-00', '0000-00-00', '0000-00-00');
+INSERT INTO `tb_paket` VALUES ('1', '54007', 'multi_otorisasi', 'gold_payroll', 'Virtual Account,', '1', '2012-04-03', '2012-04-04', '2012-04-07', '0000-00-00', '');
+INSERT INTO `tb_paket` VALUES ('2', '54008', 'multi_otorisasi', 'platinum', 'amplop', '1', '2012-04-02', '2012-04-12', '2012-04-15', '2026-04-12', 'irwan');
+INSERT INTO `tb_paket` VALUES ('3', '54009', 'multi_otorisasi', 'platinum', 'new', '2', '2012-04-03', '2012-04-26', '2012-04-29', '0000-00-00', 'irwan');
+INSERT INTO `tb_paket` VALUES ('4', '54010', 'multi_otorisasi', 'gold_payroll', 'amplop', '1', '2012-04-11', '2012-04-13', '2012-04-16', '2026-04-12', 'irwan');
+INSERT INTO `tb_paket` VALUES ('5', '54011', 'single_otorisasi', 'gold', 'new', '1', '2012-04-02', '2012-04-03', '2012-04-06', '2027-04-12', 'irwan');
 
 -- ----------------------------
 -- Table structure for `tb_schedule`
@@ -309,13 +285,11 @@ CREATE TABLE `tb_schedule` (
   `sched_idx` int(11) NOT NULL AUTO_INCREMENT,
   `cus_idx` int(11) NOT NULL,
   `pkt_idx` int(11) NOT NULL,
-  `sched_status` text NOT NULL,
   `sched_date` date DEFAULT NULL,
   `sched_time` time DEFAULT NULL,
+  `sched__visit` text,
   `sched_alamat_kirim` text,
   `sched_agenda_kunjungan` text NOT NULL,
-  `sched__kunjungan_ke` text,
-  `sched_hasil_kunjungan` text,
   PRIMARY KEY (`sched_idx`),
   KEY `pkt_idx` (`pkt_idx`),
   KEY `cus_idx` (`cus_idx`),
@@ -343,10 +317,24 @@ CREATE TABLE `tb_status` (
 -- ----------------------------
 INSERT INTO `tb_status` VALUES ('1', 'Follow Up', '1');
 INSERT INTO `tb_status` VALUES ('2', 'Active', '1');
-INSERT INTO `tb_status` VALUES ('3', 'Done', '2');
-INSERT INTO `tb_status` VALUES ('4', 'Reschedule', '2');
-INSERT INTO `tb_status` VALUES ('5', 'Retur', '2');
-INSERT INTO `tb_status` VALUES ('6', 'Pending', '2');
+
+-- ----------------------------
+-- Table structure for `tb_status_akhir`
+-- ----------------------------
+DROP TABLE IF EXISTS `tb_status_akhir`;
+CREATE TABLE `tb_status_akhir` (
+  `status_idx` int(11) NOT NULL DEFAULT '0',
+  `status_nama` text,
+  PRIMARY KEY (`status_idx`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+-- ----------------------------
+-- Records of tb_status_akhir
+-- ----------------------------
+INSERT INTO `tb_status_akhir` VALUES ('1', 'Done');
+INSERT INTO `tb_status_akhir` VALUES ('2', 'Reschedule');
+INSERT INTO `tb_status_akhir` VALUES ('3', 'Retur');
+INSERT INTO `tb_status_akhir` VALUES ('4', 'Pending');
 
 -- ----------------------------
 -- Table structure for `tb_visit`
@@ -371,3 +359,20 @@ CREATE TABLE `tb_visit` (
 -- ----------------------------
 -- Records of tb_visit
 -- ----------------------------
+
+-- ----------------------------
+-- Table structure for `tb_visit_drop`
+-- ----------------------------
+DROP TABLE IF EXISTS `tb_visit_drop`;
+CREATE TABLE `tb_visit_drop` (
+  `visit_idx` int(11) NOT NULL AUTO_INCREMENT,
+  `visit_nama` varchar(255) NOT NULL,
+  PRIMARY KEY (`visit_idx`)
+) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+
+-- ----------------------------
+-- Records of tb_visit_drop
+-- ----------------------------
+INSERT INTO `tb_visit_drop` VALUES ('1', 'New');
+INSERT INTO `tb_visit_drop` VALUES ('2', 'Adhoc');
+INSERT INTO `tb_visit_drop` VALUES ('3', 'Upgrade');
