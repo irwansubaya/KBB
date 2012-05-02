@@ -82,7 +82,22 @@
     {
 	if ($("#key_sn").val() == '') {alert ('Please fill SN'); $("#key_sn").focus()}
 	else if ($("#key_username").val() == '') {alert ('Please fill username'); $("#key_username").focus()}
-	else insert_key_print ();
+
+	var is_double = false;
+	$("#item tr").each(function() {
+	    if ($(this).find('td:first input').val() == $("#key_sn").val()) {
+		is_double = true;
+	    }
+	});
+
+	if(is_double) {
+	    alert("Key SN may not duplicate");
+	    $("#key_sn").val('');
+	    $("#key_sn").focus();
+	} else {
+	    insert_key_print ();
+	}
+	
     }
 
     function insert_key_print ()
@@ -172,7 +187,7 @@
 	</table>
 	    <legend>List Key</legend>
 	    <div class="well form-inline">
-	    <input type="text" name="key_sn" placeholder="Key SN" id="key_sn" class="span2" maxlength="10">
+	    <input type="text" name="key_sn" placeholder="Key SN" id="key_sn" class="span2" maxlength="10" onkeyup="this.value=this.value.replace(/\D/g,'')">
 	    <input type="text" name="key_username" placeholder="Username" id="key_username" class="span3">
 	    <input type="hidden" value="insert" name="mode" id="mode" >
 	    <input type="hidden" value="" name="id_key" id="id_key">
