@@ -100,8 +100,9 @@ class Customer_m extends MY_Model {
 			elseif ($value && $key == 'cus_corporate_id') $this->db->like($key, $value);
 			elseif ($value && $key == 'cus_tanggal_input') $this->db->where($key, date('Y-m-d', strtotime($value)));
 			elseif ($value && $key == 'pkt_tanggal_koneksi') $this->db->where($key, date('Y-m-d', strtotime($value)));
-			elseif ($value && $key == 'asdes') $this->db->order_by('cus_corporate_id '.$value);
-			elseif ($value && $key == 'cek_nama_perusahaan') $this->db->order_by('cus_nama_perusahaan '.$value);
+			$this->db->order_by('cus_corporate_id');
+//			elseif ($value && $key == 'asdes') $this->db->order_by('cus_corporate_id '.$value);
+//			elseif ($value && $key == 'cek_nama_perusahaan') $this->db->order_by('cus_nama_perusahaan '.$value);
 		}
 		$this->db->limit('25',$this->page);
 		return parent::get();
