@@ -6,11 +6,11 @@
 		    changeMonth: true,
 		    changeYear: true,
 		    dateFormat: 'dd-M-yy',
-		    showAnim: 'fold'
-	    });
+		    showAnim: 'fold',
+	});
         $('#date_time').datetimepicker();
         $('#time').timepicker({});
-       $('#sched_corporate_id').autocomplete('<?php echo base_url()?>schedule/schedule/customer_ajax',{
+        $('#sched_corporate_id').autocomplete('<?php echo base_url()?>schedule/schedule/customer_ajax',{
 		    parse: function(data){
 			var parsed = [];
 			for (var i=0; i < data.length; i++) {
@@ -143,6 +143,7 @@
         <td><?php echo form_text('Telp Handphone ','cus_handphone',(isset($data->cus_handphone))?$data->cus_handphone:'','class="span2" maxlength="32" id="cus_handphone" readonly');?></td>
         <td>&nbsp;</td>
         <td><?php echo form_text('Jenis Paket','pkt_jenis',(isset($data->pkt_jenis))?$data->pkt_jenis:'','class="span2" id="pkt_jenis" readonly');?></td>
+    
     </tr>
     <tr>
         <td><?php echo form_text('Telp Rumah ','cus_telepon_rumah',(isset($data->cus_telepon_rumah))?$data->cus_telepon_rumah:'','class="span2" maxlength="32" id="cus_telepon_rumah" readonly');?></td>
@@ -281,6 +282,6 @@
     <div class="form-actions">
         <?php echo form_submit('save','Save data', 'class="btn btn-primary"')?>
         <?php echo anchor($module[0],'Cancel', 'class="btn"')?>
-        <?php if(isset($data->sched_id)): ?><div class="pull-right"><?php echo anchor($module[0].'/delete/'.$data->sched_id,'Delete User', 'class="btn btn-danger"')?></div><?php endif; ?>
+        <?php if(isset($data->sched_idx)): ?><div class="pull-right"><?php echo anchor($module[0].'/delete/'.$data->sched_idx,'Delete User', 'class="btn btn-danger"')?></div><?php endif; ?>
     </div>
 <?php echo form_close();?>

@@ -28,7 +28,7 @@ class Schedule_m extends MY_Model {
 	{
 		parent :: __construct ();
 		$this->tableName = 'schedule';
-		$this->idx	 = 'sched_id';
+		$this->idx	 = 'sched_idx';
 		$this->fields	 = array(
 			'cus_idx' => array('', TRUE),
 			'cus_corporate_id'=>array('Corporate ID',true),
@@ -56,7 +56,7 @@ class Schedule_m extends MY_Model {
 		$this->db->join('customer', 'customer.cus_idx = paket.cus_idx');
 		if ($pkt_idx) { $this->db->where('pkt_idx', $pkt_idx); }
 		$this->db->order_by('cus_corporate_id');
-		return parent :: get ();
+		return parent :: get();
 	}
 	
 	/**
