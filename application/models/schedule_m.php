@@ -36,7 +36,7 @@ class Schedule_m extends MY_Model {
 			'sched_status' => array('Status', TRUE),
 			'sched_date' => array('Schedule Date', TRUE),
 			'sched_time' => array('Schedule Time', TRUE),
-			'sched_alamat_kirim' => array('Schedule Time', TRUE),
+			//'sched_alamat_kirim' => array('Schedule Time', TRUE),
 			'sched_agenda_kunjungan' => array('Schedule Time', TRUE)
 		);
 	}
@@ -58,7 +58,43 @@ class Schedule_m extends MY_Model {
 		$this->db->order_by('cus_corporate_id');
 		return parent :: get ();
 	}
-
+	
+	/**
+	 * Insert SN Key
+	 *
+	 * @access	public
+	 * @param	integer
+	 * @return	boolean
+	 */
+	public function insert_call ($sched_idx = FALSE, $call_idx = FALSE)
+	{
+		$call = $this->input->post('item_call_date');
+		$call_kategori = $this->input->post('item_call_kategori');
+		$call_status = $this->input->post('item_call_status');
+		$call_cp_lain = $this->input->post('item_call_cp_lain');
+		$call_telp_lain = $this->input->post('item_call_telp_lain');
+		$call_keterangan = $this->input->post('item_call_keterangan');
+		// delete old key, insert key baru
+		$this->db->delete('call', array('sched_idx ' => $sched_idx));
+		
+		if ($this->input->post('item_call_date'))
+		{
+			for($i=0; $i<count($this->input->post('item_call_date')); $i++)
+			{
+				$this->db->set('sched_idx', $sched_idx);
+				$this->db->set('call_idx', $call_idx);
+				$this->db->set('call_date', $call[$i]);
+				$this->db->set('$call_kategori', $call_kategori[$i]);
+				$this->db->set('call_kategori', $call_status[$i]);
+				$this->db->set('call_cp_lain', $call_cp_lain[$i]);
+				$this->db->set('Call_telp_lain', $call_telp_lain[$i]);
+				$this->db->set('call_keterangan', $call_keterangan[$i]);
+				$this->db->insert('call');
+			}
+		}
+		return TRUE;
+	}
+	
 	/**
 	 * Save method
 	 *

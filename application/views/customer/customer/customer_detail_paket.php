@@ -182,12 +182,12 @@
 	</tr>
 	<tr>
 	    <td><?php echo form_text('Tgl Terima Paket*','pkt_tanggal_terima',(isset($data[0]->pkt_tanggal_terima))?date('d-M-Y',strtotime($data[0]->pkt_tanggal_terima)):'','class="span2" maxlength="15" id="pkt_tanggal_terima"');?></td>
-	    <td><?php echo form_text('Tgl Due Date*','pkt_jatuh_tempo','','class="span2" maxlength="15" readonly');?></td>
+	    <td><?php echo form_text('Tgl Due Date*','pkt_jatuh_tempo',(isset($data[0]->pkt_jatuh_tempo))?date('d-M-Y',strtotime($data[0]->pkt_jatuh_tempo)):'','class="span2" maxlength="15" readonly');?></td>
 	</tr>
 	</table>
 	    <legend>List Key</legend>
 	    <div class="well form-inline">
-	    <input type="text" name="key_sn" placeholder="Key SN" id="key_sn" class="span2" maxlength="10" onkeyup="this.value=this.value.replace(/\D/g,'')">
+	    <input type="text" name="key_sn" placeholder="Key SN" id="key_sn" class="span2" maxlength="10" onkeyup="this.value=this.value.replace(/\D/g,'') ">
 	    <input type="text" name="key_username" placeholder="Username" id="key_username" class="span3">
 	    <input type="hidden" value="insert" name="mode" id="mode" >
 	    <input type="hidden" value="" name="id_key" id="id_key">

@@ -132,18 +132,19 @@ class Customer extends MY_Controller {
 			{
 				if ($this->input->post('save'))
 				{
-					if ($this->customer_m->isValid())
-					{
-						if ($this->customer_m->save($idx))
+						if ($this->customer_m->isValid())
 						{
-							setSucces('Data is saved');
-							redirect ($this->module[0]. '/update/detail/' . $idx);
+							if ($this->customer_m->save($idx))
+							{
+								setSucces('Data is saved');
+								redirect ($this->module[0]. '/update/detail/' . $idx);
+							}
+							else
+							{
+								setError('Unable to save');
+							}
 						}
-						else
-						{
-							setError('Unable to save');
-						}
-					}
+					
 				}				
 				$this->params['data'] = $this->customer_m->get($idx);
 				$this->params['kota'] = $this->kota_m->dropdown();

@@ -20,7 +20,8 @@
 		    },
 		    formatItem: function(data,i,max){
 			return  '<div class="search_content"><bold> '+data.cus_corporate_id+' </bold> &nbsp;<small>'+data.cus_nama_perusahaan+'</small></div>';
-		    },
+		    
+                    },
 		    width: 450, 
 		    dataType: 'json' 
 		}).result( 
@@ -33,6 +34,10 @@
                             $('#cus_telepon_kantor').val(data.cus_telepon_kantor);
                             $('#cus_telepon_rumah').val(data.cus_telepon_rumah);
                             $('#cus_handphone').val(data.cus_handphone);
+                            $('#pkt_jenis').val(data.pkt_jenis);
+                            $('#pkt_tipe').val(data.pkt_tipe);
+                            $('#pkt_fitur').val(data.pkt_fitur);
+                            $('#cus_idx').val(data.cus_idx)
 			    }
 		);
     });
@@ -42,16 +47,16 @@
     {
         if ($("#call_kategori").val() == '') {alert ('Please fill Kategori'); $("#call_kategori").focus()}
         else if ($("#call_status").val() == '') {alert ('Please fill Status'); $("#call_status").focus()}
-        else if ($("#call_cp_lain").val() == '') {alert ('Please fill CP Lain'); $("#call_cp_lain").focus()}
-        else if ($("#call_telp_lain").val() == '') {alert ('Please fill Telp Lain'); $("#call_telp_lain").focus()}
-        else if ($("#call_keterangan").val() == '') {alert ('Please fill Telp Lain'); $("#call_keterangan").focus()}
+        //else if ($("#call_cp_lain").val() == '') {alert ('Please fill CP Lain'); $("#call_cp_lain").focus()}
+        //else if ($("#call_telp_lain").val() == '') {alert ('Please fill Telp Lain'); $("#call_telp_lain").focus()}
+        //else if ($("#call_keterangan").val() == '') {alert ('Please fill Telp Lain'); $("#call_keterangan").focus()}
 	else insert_call_print ();
     }
 
     function insert_call_print ()
     {
 	$string = '<tr id="call_'+id+'">'+
-		    '<td>'+$("#call_nama_admin").val()+'<input type="hidden" name="item_call_admin[]" value="'+$("#call_nama_admin").val()+'"></td>'+
+		    //'<td>'+$("#call_nama_admin").val()+'<input type="hidden" name="item_call_admin[]" value="'+$("#call_nama_admin").val()+'"></td>'+
 		    '<td>'+$("#call_date").val()+'<input type="hidden" name="item_call_date[]" value="'+$("#call_date").val()+'"></td>'+
                     '<td>'+$("#call_kategori").val()+'<input type="hidden" name="item_call_kategori[]" value="'+$("#call_kategori").val()+'"></td>'+
                     '<td>'+$("#call_status").val()+'<input type="hidden" name="item_call_status[]" value="'+$("#call_status").val()+'"></td>'+
@@ -125,7 +130,7 @@
         <td><?php echo form_area('Contact Person','cus_cp',(isset($data->cus_cp))?$data->cus_cp:'','class="span3" maxlength="64" id="cus_cp" readonly');?></td>
     </tr>
     <tr>
-        <td><?php echo form_text('Kota','cus_kota',(isset($data->cus_kota))?$data->cus_kota:'','class="span2" maxlength="10" id="cus_kota" readonly');?></td>
+        <td><?php echo form_text('Kota','cus_kota',(isset($data->cus_kota))?$data->cus_kota:'','class="span2" id="cus_kota" readonly');?></td>
         <td>&nbsp;</td>
         <td><?php echo form_area('ALamat','cus_alamat',(isset($data->cus_alamat))?$data->cus_alamat:'','class="span3" maxlength="255" readonly');?></td>
     </tr>
@@ -155,7 +160,7 @@
         <td><?php echo form_text('Schedule Time *','sched_time',(isset($data->sched_time))?$data->sched_time:'','class="span2" maxlength="10" id="time"');?></td>
     </tr>
     <tr>
-        <td><?php echo form_text('Tgl Due Date','pkt_jatuh_tempo',(isset($data->pkt_jatuh_tempo))?$data->pkt_jatuh_tempo:'','class="span2" maxlength="15" id="tgl"');?></td>
+        <td><?php echo form_text('Tgl Due Date','pkt_jatuh_tempo',(isset($data->pkt_jatuh_tempo))?$data->pkt_jatuh_tempo:'','class="span2" maxlength="15" id="tgl" readonly');?></td>
         <td>&nbsp;</td>
         <td><?php echo form_drop('Visit','sched_visit',$visit,(isset($data->sched_visit))?$data->sched_visit:'','class="span2"');?></td>
     </tr>
@@ -188,7 +193,7 @@
         <td><input type="text" name="call_nama_admin" placeholder="Nama Admin" id="call_nama_admin" class="span2"></td>
         <td>&nbsp;</td>
         <td>Call Date</td>
-        <td><input type="text" name="call_date" placeholder="Date" id="call_date" class="span2" value="<?php echo date('d-M-y H:i')?>"></td>
+        <td><input type="text" name="call_date" placeholder="Date" id="call_date" class="span2" readonly="readonly" value="<?php echo date('d-M-y H:i')?>"></td>
         <td>&nbsp;</td>
         <td>Kategori</td>
         <td>
@@ -202,7 +207,7 @@
         </td>
         <td>&nbsp;</td>
         <td>Status</td>
-        <td><input type="text" name="call_status" value="Active" id="call_status" class="span2" readonly></td>
+        <td><input type="text" name="call_status" value="--" id="call_kategori" class="span2" readonly></td>
     </tr>
     <tr>
         <td>&nbsp;</td>
@@ -245,7 +250,7 @@
       </thead>
       <tbody id="item">
       <?php
-      if (@$call) { 
+      /*if (@$call) { 
       for($i=0; $i<count($call); $i++)
       {
 	echo '<tr id="key_'.$i.'">';
@@ -260,7 +265,7 @@
 				'\', \''.$call[$i]->key_nama_user.
 				'\'); return false">E</a> | <a href="" onclick="remove_key(\''.$i.'\'); return false;">D</a></td>';
 	echo "</tr>";
-      } }
+      } }*/
       ?>
       </tbody>
       <!--<tfoot>

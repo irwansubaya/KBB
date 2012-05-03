@@ -76,7 +76,7 @@
 	    </tr>
 	    <tr>
 		<td><?php echo form_text('Kode Cabang','cus_kode_cabang',(isset($data->cus_kode_cabang))?$data->cus_kode_cabang:'','class="span1" maxlength="32"');?></td>
-		<td><?php echo form_drop('Cabang','cus_cabang',$cabang,(isset($data->cus_cabang))?$data->cus_cabang:'','class="span3"');?></td>
+		<td><?php echo form_text('Cabang','cus_cabang',(isset($data->cus_cabang))?$data->cus_cabang:'','class="span2" readonly');?></td>
 	    </tr>
 	    <tr>
 		<td><?php echo form_text('Email *','cus_email',(isset($data->cus_email))?$data->cus_email:'','class="span3" maxlength="64"');?></td>

@@ -2,7 +2,6 @@
 <script type="text/javascript">
     $(document).ready(function(){
         $("#formid").validate();
-
         $('#cus_kode_cabang').autocomplete('<?php echo base_url()?>customer/customer/cabang_ajax',{
                      parse: function(data){
                          var parsed = [];

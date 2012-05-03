@@ -50,9 +50,12 @@ class Customer_m extends MY_Model {
 
 		$this->data = array(
 			'cus_nama_perusahaan'=>$this->input->get('cus_nama_perusahaan'),
-			'asdes'				=> $this->input->get('asdes'),
+			//'cek_nama_perusahaan'=>$this->input->get('cek_nama_perusahaan'),
+			'asdes'		=> $this->input->get('asdes'),
+			'corpname'		=> $this->input->get('cus_nama_perusahaan'),
 			'cus_corporate_id'	=> $this->input->get('cus_corporate_id'),
-			'cus_tanggal_input'	=> $this->input->get('cus_tanggal_input')
+			'cus_tanggal_input'	=> $this->input->get('cus_tanggal_input'),
+			'pkt_tanggal_koneksi'=> $this->input->get('pkt_tanggal_koneksi')
 		);
 
 		$this->page         = $this->input->get('page') != 0 ? ((int) ($this->input->get('page') - 1) * 25) : 0;
@@ -76,7 +79,7 @@ class Customer_m extends MY_Model {
 	{
 		$this->db->join('customer', 'customer.cus_idx = paket.cus_idx');
 		if ($pkt_idx) { $this->db->where('pkt_idx', $pkt_idx); }
-		$this->db->order_by('cus_corporate_id desc');
+		$this->db->order_by('cus_corporate_id');
 		return parent :: get ();
 	}
 	public function get_by_corporate_id ($cus_corporate_id = false)
@@ -91,13 +94,15 @@ class Customer_m extends MY_Model {
 	 */
 	public function get_customer ()
 	{
+		$this->db->join('customer', 'customer.cus_idx = paket.cus_idx');
 		foreach ($this->data as $key => $value) 
 		{
 			if ($value && $key == 'cus_nama_perusahaan') $this->db->like($key, $value);
 			elseif ($value && $key == 'cus_corporate_id') $this->db->like($key, $value);
 			elseif ($value && $key == 'cus_tanggal_input') $this->db->where($key, date('Y-m-d', strtotime($value)));
-			elseif ($value && $key == 'asdes') $this->db->order_by('cus_nama_perusahaan '.$value);
-
+			elseif ($value && $key == 'pkt_tanggal_koneksi') $this->db->where($key, date('Y-m-d', strtotime($value)));
+			elseif ($value && $key == 'asdes') $this->db->order_by('cus_corporate_id '.$value);
+			elseif ($value && $key == 'cek_nama_perusahaan') $this->db->order_by('cus_nama_perusahaan '.$value);
 		}
 		$this->db->limit('25',$this->page);
 		return parent::get();
