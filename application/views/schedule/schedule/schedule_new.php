@@ -1,4 +1,5 @@
 <script src="<?php echo base_url()?>static/js/jquery.validate.js" type="text/javascript"></script>
+<script src="<?php echo base_url()?>static/js/jquery.autocomplete.js" type="text/javascript"></script>
 <script type="text/javascript">
     $(document).ready(function(){
         $("#formid").validate();
@@ -56,13 +57,13 @@
     function insert_call_print ()
     {
 	$string = '<tr id="call_'+id+'">'+
-		    //'<td>'+$("#call_nama_admin").val()+'<input type="hidden" name="item_call_admin[]" value="'+$("#call_nama_admin").val()+'"></td>'+
+		    '<td>'+$("#call_nama_admin").val()+'<input type="hidden" name="item_call_admin[]" value="'+$("#call_nama_admin").val()+'"></td>'+
 		    '<td>'+$("#call_date").val()+'<input type="hidden" name="item_call_date[]" value="'+$("#call_date").val()+'"></td>'+
                     '<td>'+$("#call_kategori").val()+'<input type="hidden" name="item_call_kategori[]" value="'+$("#call_kategori").val()+'"></td>'+
                     '<td>'+$("#call_status").val()+'<input type="hidden" name="item_call_status[]" value="'+$("#call_status").val()+'"></td>'+
                     '<td>'+$("#call_cp_lain").val()+'<input type="hidden" name="item_call_cp_lain[]" value="'+$("#call_cp_lain").val()+'"></td>'+
                     '<td>'+$("#call_telp_lain").val()+'<input type="hidden" name="item_call_telp_lain[]" value="'+$("#call_telp_lain").val()+'"></td>'+
-		    '<td>'+$("#call_keterangan").val()+'<input type="hidden" name="item_call_keterangan[]" value="'+$("#call_keterangan").val()+'"></td>'+
+		    '<td>'+$("#call_konfirm").val()+'<input type="hidden" name="item_call_konfirm[]" value="'+$("#call_konfirm").val()+'"></td>'+
                     '<td><a href="" onclick="edit_call(\''+id+
 						    '\', \''+$("#call_nama_admin").val()+
 						    '\', \''+$("#call_date").val()+
@@ -70,7 +71,7 @@
                                                     '\', \''+$("#call_status").val()+
                                                     '\', \''+$("#call_cp_lain").val()+
                                                     '\', \''+$("#call_telp_lain").val()+
-                                                    '\', \''+$("#call_keterangan").val()+
+                                                    '\', \''+$("#call_konfirm").val()+
 						    '\'); return false">E</a> | <a href="" onclick="remove_call(\''+id+'\'); return false;">D</a></td>'+
 		   '</tr>';
 	if ( $("#mode").val() == 'insert')
@@ -92,7 +93,7 @@
         $("#call_status").val( VAL );
         $("#call_cp_lain").val( VAL );
         $("#call_telp_lain").val( VAL );
-        $("#call_keterangan").val( VAL );	
+        $("#call_konfirm").val( VAL );	
 	$("#mode").val( 'insert' );
     }
 
@@ -105,7 +106,7 @@
         $("#call_status").val( STATUS );
         $("#call_cp_lain").val( CPLAIN );
         $("#call_telp_lain").val( TELPLAIN );
-        $("#call_keterangan").val( KETERANGAN );
+        $("#call_konfirm").val( KETERANGAN );
 	$("#mode").val('edit');
 	return false;
     }
@@ -143,12 +144,11 @@
         <td><?php echo form_text('Telp Handphone ','cus_handphone',(isset($data->cus_handphone))?$data->cus_handphone:'','class="span2" maxlength="32" id="cus_handphone" readonly');?></td>
         <td>&nbsp;</td>
         <td><?php echo form_text('Jenis Paket','pkt_jenis',(isset($data->pkt_jenis))?$data->pkt_jenis:'','class="span2" id="pkt_jenis" readonly');?></td>
-    
     </tr>
     <tr>
         <td><?php echo form_text('Telp Rumah ','cus_telepon_rumah',(isset($data->cus_telepon_rumah))?$data->cus_telepon_rumah:'','class="span2" maxlength="32" id="cus_telepon_rumah" readonly');?></td>
         <td>&nbsp;</td>
-        <td><?php echo form_text('Fitur Paket','pkt_fitur',(isset($data->pkt_fitur))?$data->pkt_fitur:'','class="span2" id="pkt_fitur" readonly');?></td>
+        <td><?php echo form_text('Fitur Paket','pkt_status',(isset($data->pkt_status))?$data->pkt_status:'','class="span2" id="pkt_fitur" readonly');?></td>
     </tr>
     <tr>
         <td><?php echo form_text('Tgl Koneksi','pkt_tanggal_koneksi',(isset($data->pkt_tanggal_koneksi))?$data->pkt_tanggal_koneksi:'','class="span2" maxlength="15" id="tgl" readonly');?></td>
@@ -221,7 +221,15 @@
         <td><input type="text" name="call_telp_lain" placeholder="Telepon Lainnya" id="call_telp_lain" class="span2"></td>
         <td>&nbsp;</td>
         <td>Keterangan</td>
-        <td><textarea name="call_keterangan" id="call_keterangan"></textarea></td>
+        <td>
+            <select name="call_konfirm" id="call_konfirm" class="span2">
+                <?php
+                foreach ($konfirm as $vil) {
+                    echo '<option value="'.$vil[0].'">'.$vil[0].'</option>';
+                }
+                ?>
+            </select>
+        </td>
     </tr>
     <tr>
         <td>&nbsp;</td>
@@ -245,7 +253,7 @@
 		<th width="10%">Status</th>
                 <th width="10%">CP Lain</th>
                 <th width="10%">Telp Lain</th>
-		<th width="20%">Keterangan</th>
+		<th width="20%">Konfirm</th>
                 <th width="10%">&nbsp;</th>
 	</tr>
       </thead>

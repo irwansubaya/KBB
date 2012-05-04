@@ -52,8 +52,8 @@ class Schedule_m extends MY_Model {
 	
 	public function get_sched_detail ($pkt_idx = FALSE)
 	{
-		$this->db->join('paket', 'paket.pkt_idx = schedule.pkt_idx');
-		$this->db->join('customer', 'customer.cus_idx = paket.cus_idx');
+		$this->db->join('customer', 'customer.cus_idx = schedule.cus_idx');
+		$this->db->join('paket', 'paket.pkt_idx = schedule.pkt_idx');		
 		if ($pkt_idx) { $this->db->where('pkt_idx', $pkt_idx); }
 		$this->db->order_by('cus_corporate_id');
 		return parent :: get();
@@ -73,7 +73,7 @@ class Schedule_m extends MY_Model {
 		$call_status = $this->input->post('item_call_status');
 		$call_cp_lain = $this->input->post('item_call_cp_lain');
 		$call_telp_lain = $this->input->post('item_call_telp_lain');
-		$call_keterangan = $this->input->post('item_call_keterangan');
+		$call_konfirm = $this->input->post('item_call_konfirm');
 		// delete old key, insert key baru
 		$this->db->delete('call', array('sched_idx ' => $sched_idx));
 		

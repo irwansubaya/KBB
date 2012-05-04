@@ -23,8 +23,7 @@
 			$('#cus_cp').val(data.cus_cp);
 			$('#cus_idx').val(data.cus_idx);
 		}
-	);
-    });    
+	)    
 </script>
 <div class="page-header">
     <h2>Detail Customer : <?php echo '['.$data->cus_corporate_id.'] '.$data->cus_nama_perusahaan ?></h2>

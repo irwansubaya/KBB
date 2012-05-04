@@ -39,7 +39,8 @@ class Schedule extends MY_Controller {
 			'paket_m',
 			'customer_m',
 			'visit_m',
-			'kategori_m'
+			'kategori_m',
+			'konfirm_m'
 		));
 	}
 
@@ -78,6 +79,7 @@ class Schedule extends MY_Controller {
 				}
 			}
 		}
+		$this->params['konfirm'] = $this->konfirm_m->dropdown();
 		$this->params['kategori'] = $this->kategori_m->dropdown();
 		$this->params['visit'] = $this->visit_m->dropdown();
 		$this->_view('main_1_3', 'schedule_new');
@@ -108,6 +110,7 @@ class Schedule extends MY_Controller {
 					}
 				}
 			}
+			$this->params['konfirm'] = $this->konfirm_m->dropdown();
 			$this->params['kategori'] = $this->kategori_m->dropdown();
 			$this->params['visit'] = $this->visit_m->dropdown();
 			$this->params['data']		= $this->schedule_m->get($idx);
@@ -126,9 +129,9 @@ class Schedule extends MY_Controller {
 	{
 		if ($this->input->is_ajax_request())
 		{
-			$this->load->model('customer_m');
-			$this->db->like('cus_corporate_id', $this->input->get('q'));
-			echo json_encode($this->customer_m->get());
+			$this->load->model('schedule_m');
+			$this->db->like('cus_corporate_id', $this->input->get_sched_detail('q'));
+			echo json_encode($this->customer_m->get_sched_detail());
 		}
 	}
 
