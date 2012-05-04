@@ -96,7 +96,7 @@
 	$("#mode").val( 'insert' );
     }
 
-    function edit_call ( ID, ADM, DATE, KATEGORI, STATUS, CPLAIN, TELPLAIN, KETERANGAN)
+    function edit_call ( ID, ADM, DATE, KATEGORI, STATUS, CPLAIN, TELPLAIN, KONFIRM)
     {
         $("#call_idx").val( ID );
 	$("#call_nama_admin").val( ADM );
@@ -105,7 +105,7 @@
         $("#call_status").val( STATUS );
         $("#call_cp_lain").val( CPLAIN );
         $("#call_telp_lain").val( TELPLAIN );
-        $("#call_konfirm").val( KETERANGAN );
+        $("#call_konfirm").val( KONFIRM );
 	$("#mode").val('edit');
 	return false;
     }
