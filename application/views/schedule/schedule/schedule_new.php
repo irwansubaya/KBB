@@ -41,6 +41,18 @@
                             $('#cus_idx').val(data.cus_idx)
 			    }
 		);
+    
+	var val = new Array();
+	<?php
+	foreach ($kategori as $val) 
+	    echo "val['{$val[0]}'] = '{$val[1]}';\n";
+	?>
+	$("#call_status").val(val[$("#call_kategori").val()]);
+ 
+	$("#call_kategori").change(function() {
+	    $("#call_status").val(val[$("#call_kategori").val()]);
+	});
+
     });
 
     var id = 0;
@@ -120,158 +132,151 @@
 <div class="page-header">
     <h2>Add New Schedule</h2>
 </div>
-<!--<div class="tabbable" style="margin-bottom: 9px;">
-    <ul class="nav nav-tabs">
-	<li<?php echo ($action == 'detail')?' class="active"':'' ?>><?php echo anchor($module[0].'/update/detail/'.$data->cus_idx,'Customer')?></li>
-	<li<?php echo ($action == 'kunjungan')?' class="active"':'' ?>><?php echo anchor($module[0].'/update/kunjungan/'.$data->cus_idx,'Hasil Kunjungan')?></li>
-    </ul>
-    <div class="tab-content">-->
-        <?php echo form_open(uri_string(),array('id'=>'formid', 'class'=>'form-horizontal'))?>
-        <table>
-            <tr>
-                <td><?php echo form_text('Corporate ID*','cus_corporate_id',(isset($data->cus_corporate_id))?$data->cus_corporate_id:'','class="span2" maxlength="10" id="sched_corporate_id"');?></td>
-            </tr>
-            <tr>
-                <td><?php echo form_text('Nama Perusahaan / Nasabah','cus_nama_perusahaan','','class="span2" maxlength="64" id="cus_nama_perusahaan" readonly');?></td>
-                <td>&nbsp;</td>
-                <td><?php echo form_area('Contact Person','cus_cp','','class="span3" maxlength="64" id="cus_cp" readonly');?></td>
-            </tr>
-            <tr>
-                <td><?php echo form_text('Kota','cus_kota','','class="span2" id="cus_kota" readonly');?></td>
-                <td>&nbsp;</td>
-                <td><?php echo form_area('ALamat','cus_alamat','','class="span3" maxlength="255" readonly');?></td>
-            </tr>
-            <tr>
-                <td><?php echo form_text('Telp Kantor ','cus_telepon_kantor','','class="span2" maxlength="32" id="cus_telepon_kantor" readonly');?></td>
-                <td>&nbsp;</td>
-                <td><?php echo form_text('Tipe Paket','pkt_tipe','','class="span2" id="pkt_tipe" readonly');?></td>
-            </tr>
-            <tr>
-                <td><?php echo form_text('Telp Handphone ','cus_handphone','','class="span2" maxlength="32" id="cus_handphone" readonly');?></td>
-                <td>&nbsp;</td>
-                <td><?php echo form_text('Jenis Paket','pkt_jenis','','class="span2" id="pkt_jenis" readonly');?></td>
-            </tr>
-            <tr>
-                <td><?php echo form_text('Telp Rumah ','cus_telepon_rumah','','class="span2" maxlength="32" id="cus_telepon_rumah" readonly');?></td>
-                <td>&nbsp;</td>
-                <td><?php echo form_text('Fitur Paket','pkt_status','','class="span2" id="pkt_fitur" readonly');?></td>
-            </tr>
-            <tr>
-                <td><?php echo form_text('Tgl Koneksi','pkt_tanggal_koneksi','','class="span2" maxlength="15" id="tgl" readonly');?></td>
-                <td>&nbsp;</td>
-                <td><?php echo form_text('Schedule Date *','sched_date',(isset($data->sched_date))?$data->sched_date:'','class="span2" maxlength="25" id="sched_date"');?></td> 
-            </tr>
-            <tr>
-                <td><?php echo form_text('Tgl Terima Paket','pkt_tanggal_terima','','class="span2" maxlength="15" id="tgl" readonly');?></td>
-                <td>&nbsp;</td>
-                <td><?php echo form_text('Schedule Time *','sched_time',(isset($data->sched_time))?$data->sched_time:'','class="span2" maxlength="10" id="time"');?></td>
-            </tr>
-            <tr>
-                <td><?php echo form_text('Tgl Due Date','pkt_jatuh_tempo','','class="span2" maxlength="15" id="tgl" readonly');?></td>
-                <td>&nbsp;</td>
-                <td><?php echo form_drop('Visit','sched_visit',$visit,(isset($data->sched_visit))?$data->sched_visit:'','class="span2"');?></td>
-            </tr>
-            <tr>
-                <td>
-                    <div class="control-group">
-                        <label class="control-label" for="it_has_ed">Agenda Kunjungan</label>
-                        <div class="controls">
-                            <input type="checkbox" name="agenda_kunj" <?php (isset($data->sched_agenda_kunjungan) && $data->sched_agenda_kunjungan==1)?' checked':'' ?>>  Key BCA Delivery<br>
-                            <input type="checkbox" name="agenda_kunj" <?php (isset($data->sched_agenda_kunjungan) && $data->sched_agenda_kunjungan==1)?' checked':'' ?>>  VPN Setting & Instalation<br>
-                            <input type="checkbox" name="agenda_kunj" <?php (isset($data->sched_agenda_kunjungan) && $data->sched_agenda_kunjungan==1)?' checked':'' ?>>  Tarining Pemakaian<br>
-                            <input type="checkbox" name="agenda_kunj" <?php (isset($data->sched_agenda_kunjungan) && $data->sched_agenda_kunjungan==1)?' checked':'' ?>>  Training Sysadmin<br>
-                            <input type="checkbox" name="agenda_kunj" <?php (isset($data->sched_agenda_kunjungan) && $data->sched_agenda_kunjungan==1)?' checked':'' ?>>  Training MAR<br>
-                            <input type="checkbox" name="agenda_kunj" <?php (isset($data->sched_agenda_kunjungan) && $data->sched_agenda_kunjungan==1)?' checked':'' ?>>  Training MFTS Converter<br>
-                            <input type="checkbox" name="agenda_kunj" <?php (isset($data->sched_agenda_kunjungan) && $data->sched_agenda_kunjungan==1)?' checked':'' ?>>  KBB Traouble Shooting
-                        </div>
-                    </div>
-                <?php //echo form_text('Agenda Kunjungan *','sched_agenda_kunjungan',(isset($data->sched_agenda_kunjungan))?$data->sched_agenda_kunjungan:'','class="span3" maxlength="10"');?>
-                </td>
-                <td>&nbsp;</td>
-                <td><?php echo form_area('Alamat Kirim *','sched_alamat_kirim',(isset($data->sched_alamat_kirim))?$data->sched_alamat_kirim:'','class="span3" maxlength="10"');?></td>
-            </tr>
-        </table>
-        
-        <legend>Call Admin</legend>
-           <div class="well form-inline">
-            <table>
-            <tr>
-                <td>Nama Admin </td>
-                <td><input type="text" name="call_nama_admin" placeholder="Nama Admin" id="call_nama_admin" class="span2"></td>
-                <td>&nbsp;</td>
-                <td>Call Date</td>
-                <td><input type="text" name="call_date" placeholder="Date" id="call_date" class="span2" readonly="readonly" value="<?php echo date('d-M-y H:i')?>"></td>
-                <td>&nbsp;</td>
-                <td>Kategori</td>
-                <td>
-                    <select name="call_kategori" id="call_kategori" class="span2">
-                        <?php
-                        foreach ($kategori as $val) {
-                            echo '<option value="'.$val[0].'">'.$val[0].'</option>';
-                        }
-                        ?>
-                    </select>
-                </td>
-                <td>&nbsp;</td>
-                <td>Status</td>
-                <td><input type="text" name="call_status" value="--" id="call_kategori" class="span2" readonly></td>
-            </tr>
-            <tr>
-                <td>&nbsp;</td>
-            </tr>
-            <tr>
-                <td>CP Lain</td>
-                <td><input type="text" name="call_cp_lain" placeholder="CP Lainnya" id="call_cp_lain" class="span2"></td>
-                <td>&nbsp;</td>
-                <td>Telp Lain</td>
-                <td><input type="text" name="call_telp_lain" placeholder="Telepon Lainnya" id="call_telp_lain" class="span2"></td>
-                <td>&nbsp;</td>
-                <td>Konfirm</td>
-                <td>
-                    <select name="call_konfirm" id="call_konfirm" class="span2">
-                        <?php
-                        foreach ($konfirm as $vil) {
-                            echo '<option value="'.$vil[0].'">'.$vil[0].'</option>';
-                        }
-                        ?>
-                    </select>
-                </td>
-            </tr>
-            <tr>
-                <td>&nbsp;</td>
-                <td>
-                    <input type="hidden" value="" name="call_idx" id="call_idx">
-                    <?php echo form_button('insert-call','Insert','onclick="return insert_call()" class="btn"')?>
-                </td>
-            </tr>
-            <tr>
-                <td><input type="hidden" value="insert" name="mode" id="mode"></td>
-                <td><input type="hidden" value="" name="id_call" id="id_call"></td>
-            </tr>
-            </table>
-           </div>
-            <table class="table table-bordered" id="call_list">
-              <thead>
-                <tr>
-                        <th width="10%">Admin</th>
-                        <th width="10%">Call Date</th>
-                        <th width="10%">Kategori</th>
-                        <th width="10%">Status</th>
-                        <th width="10%">CP Lain</th>
-                        <th width="10%">Telp Lain</th>
-                        <th width="20%">Konfirm</th>
-                        <th width="10%">&nbsp;</th>
-                </tr>
-              </thead>
-                    
-            </table>
-        
-            <p><code>Note: </code> &nbsp; All field mark with <code>*</code> are required.</p>
-            <div class="form-actions">
-                <?php echo form_submit('save','Save data', 'class="btn btn-primary"')?>
-                <?php echo anchor($module[0],'Cancel', 'class="btn"')?>
-                <?php if(isset($data->sched_idx)): ?><div class="pull-right"><?php echo anchor($module[0].'/delete/'.$data->sched_idx,'Delete User', 'class="btn btn-danger"')?></div><?php endif; ?>
-            </div>
-        <?php echo form_close();?>
-    <--</div>
-</div>-->
+<?php echo form_open(uri_string(),array('id'=>'formid', 'class'=>'form-horizontal'))?>
+<table>
+    <tr>
+        <td><?php echo form_text('Corporate ID*','cus_corporate_id',(isset($data->cus_corporate_id))?$data->cus_corporate_id:'','class="span2" maxlength="10" id="sched_corporate_id"');?></td>
+    </tr>
+    <tr>
+        <td><?php echo form_text('Nama Perusahaan / Nasabah','cus_nama_perusahaan',(isset($data->cus_nama_perusahaan))?$data->cus_nama_perusahaan:'','class="span2" maxlength="64" id="cus_nama_perusahaan" readonly');?></td>
+        <td>&nbsp;</td>
+        <td><?php echo form_area('Contact Person','cus_cp',(isset($data->cus_cp))?$data->cus_cp:'','class="span3" maxlength="64" id="cus_cp" readonly');?></td>
+    </tr>
+    <tr>
+        <td><?php echo form_text('Kota','cus_kota',(isset($data->cus_kota))?$data->cus_kota:'','class="span2" id="cus_kota" readonly');?></td>
+        <td>&nbsp;</td>
+        <td><?php echo form_area('ALamat','cus_alamat',(isset($data->cus_alamat))?$data->cus_alamat:'','class="span3" maxlength="255" readonly');?></td>
+    </tr>
+    <tr>
+        <td><?php echo form_text('Telp Kantor ','cus_telepon_kantor',(isset($data->cus_telepon_kantor))?$data->cus_telepon_kantor:'','class="span2" maxlength="32" id="cus_telepon_kantor" readonly');?></td>
+        <td>&nbsp;</td>
+        <td><?php echo form_text('Tipe Paket','pkt_tipe',(isset($data->pkt_tipe))?$data->pkt_tipe:'','class="span2" id="pkt_tipe" readonly');?></td>
+    </tr>
+    <tr>
+        <td><?php echo form_text('Telp Handphone ','cus_handphone',(isset($data->cus_handphone))?$data->cus_handphone:'','class="span2" maxlength="32" id="cus_handphone" readonly');?></td>
+        <td>&nbsp;</td>
+        <td><?php echo form_text('Jenis Paket','pkt_jenis',(isset($data->pkt_jenis))?$data->pkt_jenis:'','class="span2" id="pkt_jenis" readonly');?></td>
+    </tr>
+    <tr>
+        <td><?php echo form_text('Telp Rumah ','cus_telepon_rumah',(isset($data->cus_telepon_rumah))?$data->cus_telepon_rumah:'','class="span2" maxlength="32" id="cus_telepon_rumah" readonly');?></td>
+        <td>&nbsp;</td>
+        <td><?php echo form_text('Fitur Paket','pkt_status',(isset($data->pkt_status))?$data->pkt_status:'','class="span2" id="pkt_fitur" readonly');?></td>
+    </tr>
+    <tr>
+        <td><?php echo form_text('Tgl Koneksi','pkt_tanggal_koneksi',(isset($data->pkt_tanggal_koneksi))?$data->pkt_tanggal_koneksi:'','class="span2" maxlength="15" id="tgl" readonly');?></td>
+        <td>&nbsp;</td>
+        <td><?php echo form_text('Schedule Date *','sched_date',(isset($data->sched_date))?$data->sched_date:'','class="span2" maxlength="25" id="sched_date"');?></td> 
+    </tr>
+    <tr>
+        <td><?php echo form_text('Tgl Terima Paket','pkt_tanggal_terima',(isset($data->pkt_tanggal_terima))?$data->pkt_tanggal_terima:'','class="span2" maxlength="15" id="tgl" readonly');?></td>
+        <td>&nbsp;</td>
+        <td><?php echo form_text('Schedule Time *','sched_time',(isset($data->sched_time))?$data->sched_time:'','class="span2" maxlength="10" id="time"');?></td>
+    </tr>
+    <tr>
+        <td><?php echo form_text('Tgl Due Date','pkt_jatuh_tempo',(isset($data->pkt_jatuh_tempo))?$data->pkt_jatuh_tempo:'','class="span2" maxlength="15" id="tgl" readonly');?></td>
+        <td>&nbsp;</td>
+        <td><?php echo form_drop('Visit','sched_visit',$visit,(isset($data->sched_visit))?$data->sched_visit:'','class="span2"');?></td>
+    </tr>
+    <tr>
+        <td>
+            <div class="control-group">
+		<label class="control-label" for="it_has_ed">Agenda Kunjungan</label>
+		<div class="controls">
+		    <input type="checkbox" name="agenda_kunj" <?php (isset($data->sched_agenda_kunjungan) && $data->sched_agenda_kunjungan==1)?' checked':'' ?>>  Key BCA Delivery<br>
+		    <input type="checkbox" name="agenda_kunj" <?php (isset($data->sched_agenda_kunjungan) && $data->sched_agenda_kunjungan==1)?' checked':'' ?>>  VPN Setting & Instalation<br>
+		    <input type="checkbox" name="agenda_kunj" <?php (isset($data->sched_agenda_kunjungan) && $data->sched_agenda_kunjungan==1)?' checked':'' ?>>  Tarining Pemakaian<br>
+		    <input type="checkbox" name="agenda_kunj" <?php (isset($data->sched_agenda_kunjungan) && $data->sched_agenda_kunjungan==1)?' checked':'' ?>>  Training Sysadmin<br>
+		    <input type="checkbox" name="agenda_kunj" <?php (isset($data->sched_agenda_kunjungan) && $data->sched_agenda_kunjungan==1)?' checked':'' ?>>  Training MAR<br>
+		    <input type="checkbox" name="agenda_kunj" <?php (isset($data->sched_agenda_kunjungan) && $data->sched_agenda_kunjungan==1)?' checked':'' ?>>  Training MFTS Converter<br>
+		    <input type="checkbox" name="agenda_kunj" <?php (isset($data->sched_agenda_kunjungan) && $data->sched_agenda_kunjungan==1)?' checked':'' ?>>  KBB Traouble Shooting
+		</div>
+	    </div>
+        <?php //echo form_text('Agenda Kunjungan *','sched_agenda_kunjungan',(isset($data->sched_agenda_kunjungan))?$data->sched_agenda_kunjungan:'','class="span3" maxlength="10"');?>
+        </td>
+        <td>&nbsp;</td>
+        <td><?php echo form_area('Alamat Kirim *','sched_alamat_kirim',(isset($data->sched_alamat_kirim))?$data->sched_alamat_kirim:'','class="span3" maxlength="10"');?></td>
+    </tr>
+</table>
+
+<legend>Call Admin</legend>
+   <div class="well form-inline">
+    <table>
+    <tr>
+        <td>Nama Admin </td>
+        <td><input type="text" name="call_nama_admin" placeholder="Nama Admin" id="call_nama_admin" class="span2"></td>
+        <td>&nbsp;</td>
+        <td>Call Date</td>
+        <td><input type="text" name="call_date" placeholder="Date" id="call_date" class="span2" readonly="readonly" value="<?php echo date('d-M-y H:i')?>"></td>
+        <td>&nbsp;</td>
+        <td>Kategori</td>
+        <td>
+            <select name="call_kategori" id="call_kategori" class="span2">
+                <?php
+                foreach ($kategori as $val) {
+                    echo '<option value="'.$val[0].'">'.$val[0].'</option>';
+                }
+                ?>
+            </select>
+        </td>
+        <td>&nbsp;</td>
+        <td>Status</td>
+        <td><input type="text" name="call_status" id="call_status" class="span2" readonly="readonly"></td>
+    </tr>
+    <tr>
+        <td>&nbsp;</td>
+    </tr>
+    <tr>
+        <td>CP Lain</td>
+        <td><input type="text" name="call_cp_lain" placeholder="CP Lainnya" id="call_cp_lain" class="span2"></td>
+        <td>&nbsp;</td>
+        <td>Telp Lain</td>
+        <td><input type="text" name="call_telp_lain" placeholder="Telepon Lainnya" id="call_telp_lain" class="span2"></td>
+        <td>&nbsp;</td>
+        <td>Konfirm</td>
+        <td>
+            <select name="call_konfirm" id="call_konfirm" class="span2">
+                <?php
+                foreach ($konfirm as $vil) {
+                    echo '<option value="'.$vil[0].'">'.$vil[0].'</option>';
+                }
+                ?>
+            </select>
+        </td>
+    </tr>
+    <tr>
+        <td>&nbsp;</td>
+        <td>
+	    <input type="hidden" value="" name="call_idx" id="call_idx">
+	    <?php echo form_button('insert-call','Insert','onclick="return insert_call()" class="btn"')?>
+	</td>
+    </tr>
+    <tr>
+        <td><input type="hidden" value="insert" name="mode" id="mode"></td>
+        <td><input type="hidden" value="" name="id_call" id="id_call"></td>
+    </tr>
+    </table>
+   </div>
+    <table class="table table-bordered" id="call_list">
+      <thead>
+	<tr>
+		<th width="10%">Admin</th>
+		<th width="10%">Call Date</th>
+                <th width="10%">Kategori</th>
+		<th width="10%">Status</th>
+                <th width="10%">CP Lain</th>
+                <th width="10%">Telp Lain</th>
+		<th width="20%">Konfirm</th>
+                <th width="10%">&nbsp;</th>
+	</tr>
+      </thead>
+      <tbody id="item">
+      </tbody>
+    </table>
+
+    <p><code>Note: </code> &nbsp; All field mark with <code>*</code> are required.</p>
+    <div class="form-actions">
+        <?php echo form_submit('save','Save data', 'class="btn btn-primary"')?>
+        <?php echo anchor($module[0],'Cancel', 'class="btn"')?>
+        <?php if(isset($data->sched_idx)): ?><div class="pull-right"><?php echo anchor($module[0].'/delete/'.$data->sched_idx,'Delete User', 'class="btn btn-danger"')?></div><?php endif; ?>
+    </div>
+<?php echo form_close();?>
