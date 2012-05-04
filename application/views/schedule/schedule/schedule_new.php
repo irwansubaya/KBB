@@ -257,33 +257,7 @@
                 <th width="10%">&nbsp;</th>
 	</tr>
       </thead>
-      <tbody id="item">
-      <?php
-      /*if (@$call) { 
-      for($i=0; $i<count($call); $i++)
-      {
-	echo '<tr id="key_'.$i.'">';
-	echo '<td>'. $call[$i]->call_id .'<input type="hidden" name="item_key_sn[]" value="'. $key[$i]->call_id .'"></td>';
-	echo '<td>'. $call[$i]->key_nama_user .'<input type="hidden" name="item_key_username[]" value="'. $key[$i]->key_nama_user .'"></td>';
-	echo '<td>'. $call[$i]->call_id .'<input type="hidden" name="item_key_sn[]" value="'. $key[$i]->call_id .'"></td>';
-	echo '<td>'. $call[$i]->key_nama_user .'<input type="hidden" name="item_key_username[]" value="'. $key[$i]->key_nama_user .'"></td>';
-	echo '<td>'. $call[$i]->call_id .'<input type="hidden" name="item_key_sn[]" value="'. $key[$i]->call_id .'"></td>';
-	echo '<td>'. $call[$i]->key_nama_user .'<input type="hidden" name="item_key_username[]" value="'. $key[$i]->key_nama_user .'"></td>';
-        echo '<td><a href="" onclick="edit_key(\''.$i.
-				'\', \''.$call[$i]->key_id.
-				'\', \''.$call[$i]->key_nama_user.
-				'\'); return false">E</a> | <a href="" onclick="remove_key(\''.$i.'\'); return false;">D</a></td>';
-	echo "</tr>";
-      } }*/
-      ?>
-      </tbody>
-      <!--<tfoot>
-	<tr>
-		<th colspan="2" align="right">Total Key</th>
-                <th><input type="text" name="pkt_jumlah_key" id="pkt_jumlah_key" readonly="readonly" style="width:100%"></th>
-	</tr>
-      </tfoot>
-      -->
+            
     </table>
 
     <p><code>Note: </code> &nbsp; All field mark with <code>*</code> are required.</p>

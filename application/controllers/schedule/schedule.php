@@ -130,8 +130,8 @@ class Schedule extends MY_Controller {
 		if ($this->input->is_ajax_request())
 		{
 			$this->load->model('schedule_m');
-			$this->db->like('cus_corporate_id', $this->input->get_sched_detail('q'));
-			echo json_encode($this->customer_m->get_sched_detail());
+			$this->db->like('cus_corporate_id', $this->input->get('q'));
+			echo json_encode($this->customer_m->get());
 		}
 	}
 
