@@ -40,6 +40,18 @@
                             $('#cus_idx').val(data.cus_idx)
 			    }
 		);
+    
+	var val = new Array();
+	<?php
+	foreach ($kategori as $val) 
+	    echo "val['{$val[0]}'] = '{$val[1]}';\n";
+	?>
+	$("#call_status").val(val[$("#call_kategori").val()]);
+ 
+	$("#call_kategori").change(function() {
+	    $("#call_status").val(val[$("#call_kategori").val()]);
+	});
+
     });
 
     var id = 0;
@@ -207,7 +219,7 @@
         </td>
         <td>&nbsp;</td>
         <td>Status</td>
-        <td><input type="text" name="call_status" value="--" id="call_kategori" class="span2" readonly></td>
+        <td><input type="text" name="call_status" id="call_status" class="span2" readonly="readonly"></td>
     </tr>
     <tr>
         <td>&nbsp;</td>
@@ -256,7 +268,8 @@
                 <th width="10%">&nbsp;</th>
 	</tr>
       </thead>
-            
+      <tbody id="item">
+      </tbody>
     </table>
 
     <p><code>Note: </code> &nbsp; All field mark with <code>*</code> are required.</p>
