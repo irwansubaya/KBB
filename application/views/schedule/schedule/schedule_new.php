@@ -1,5 +1,4 @@
 <script src="<?php echo base_url()?>static/js/jquery.validate.js" type="text/javascript"></script>
-<script src="<?php echo base_url()?>static/js/jquery.autocomplete.js" type="text/javascript"></script>
 <script type="text/javascript">
     $(document).ready(function(){
         $("#formid").validate();
@@ -220,7 +219,7 @@
         <td>Telp Lain</td>
         <td><input type="text" name="call_telp_lain" placeholder="Telepon Lainnya" id="call_telp_lain" class="span2"></td>
         <td>&nbsp;</td>
-        <td>Keterangan</td>
+        <td>Konfirm</td>
         <td>
             <select name="call_konfirm" id="call_konfirm" class="span2">
                 <?php
