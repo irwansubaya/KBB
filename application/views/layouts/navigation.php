@@ -13,11 +13,12 @@ $nav = array (
                                     'Customer'=>array(
 					'Add New::customer/insert::',
 					'List Customer::customer/::customer/update',
-                                    ),
-                                    /*'Paket'=>array(
-                                        'Add New::paket/insert::',
-					'List Paket::paket/::paket/update',                                                                            
-                                    )*/),
+                                    //),
+                                    //'Paket'=>array(
+                                        //'Add New::paket/insert::',
+					//'List Paket::paket/::paket/update',
+                                        //'List Customer::customer/::customer/update',
+                                    )),
         'schedule'	=> array (
                                     'Schedule'=>array(
 					'Add New ::schedule/insert::',

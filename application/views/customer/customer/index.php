@@ -20,14 +20,16 @@
 <div class="page-header">
     <h2>List Customer</h2>
 </div>
-<form class="well form-search" style="text-align:right">
+<form class="well form-search" style="text-align:right" name="search">
     <table>
         <tr>
-            <td><input type="text" name="cus_nama_perusahaan" id="cus_nama_perusahaan" class="input-medium search-query" placeholder="Nama Perusahaan" value="<?php echo @$param['cus_nama_perusahaan'] ?>"></td>
-            <td><input type="text" name="cus_corporate_id" id="cus_corporate_id" class="input-medium search-query" placeholder="Input Corporate ID ..." value="<?php echo @$param['cus_corporate_id'] ?>"></td>
-            <td><input type="text" name="cus_tanggal_input" id="cus_input_date" class="input-small search-query" placeholder="Tgl Input"value="<?php echo @$param['cus_tanggal_input'] ?>"></td>
-            <td><input type="text" name="pkt_tanggal_koneksi" id="pkt_tgl_koneksi" class="input-small search-query" placeholder="Tgl Koneksi"value="<?php echo @$param['pkt_tanggal_koneksi'] ?>"></td>
-            <td><button type="submit" class="btn"><i class="icon-search"></i> Search</button></td>
+            <td><input autocomplete="off"  type="text" name="cus_nama_perusahaan" id="cus_nama_perusahaan" class="input-medium search-query" placeholder="Nama Perusahaan" value="<?php echo @$param['cus_nama_perusahaan'] ?>"></td>
+            <td><input autocomplete="off" type="text" name="cus_corporate_id" id="cus_corporate_id" class="input-medium search-query" placeholder="Input Corporate ID ..." value="<?php echo @$param['cus_corporate_id'] ?>"></td>
+            <td><input autocomplete="off" type="text" name="cus_tanggal_input" id="cus_input_date" class="input-small search-query" placeholder="Tgl Input"value="<?php echo @$param['cus_tanggal_input'] ?>"></td>
+            <td><input autocomplete="off" type="text" name="pkt_tanggal_koneksi" id="pkt_tgl_koneksi" class="input-small search-query" placeholder="Tgl Koneksi"value="<?php echo @$param['pkt_tanggal_koneksi'] ?>"></td>
+            <td><button type="submit" class="btn"><i class="icon-search"></i>Search</button></td>
+            <td><button type="reset" name="reset">Clear</button></td>
+
         </tr>
     </table>
 </form>

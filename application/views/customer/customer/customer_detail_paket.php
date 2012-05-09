@@ -158,8 +158,8 @@
     <ul class="nav nav-tabs">
 	<li<?php echo ($action == 'detail')?' class="active"':'' ?>><?php echo anchor($module[0].'/update/detail/'.$cus->cus_idx,'Customer')?></li>
 	<li<?php echo ($action == 'paket')?' class="active"':'' ?>><?php echo anchor($module[0].'/update/paket/'.$cus->cus_idx,'Paket & Key')?></li>
-	<!--<li<?php echo ($action == 'call')?' class="active"':'' ?>><?php echo anchor($module[0].'/update/call/'.$cus->cus_idx,'call')?></li>
-	<li<?php echo ($action == 'schedule')?' class="active"':'' ?>><?php echo anchor($module[0].'/update/schedule/'.$cus->cus_idx,'Schedule')?></li>
+	<li<?php echo ($action == 'list_paket')?' class="active"':'' ?>><?php echo anchor($module[0].'/update/list_paket/'.$cus->cus_idx,'List paket')?></li>
+	<!--<li<?php echo ($action == 'schedule')?' class="active"':'' ?>><?php echo anchor($module[0].'/update/schedule/'.$cus->cus_idx,'Schedule')?></li>
 	<li<?php echo ($action == 'hasjung')?' class="active"':'' ?>><?php echo anchor($module[0].'/update/hasjung/'.$cus->cus_idx,'Hasil Kunjungan')?></li>
 	-->
     </ul>
@@ -177,18 +177,18 @@
 	    <td><?php echo form_drop('Tipe Paket *','pkt_jenis',array('single_otorisasi'=>'Single Otorisasi','multi_otorisasi'=>'Multi Otorisasi'),(isset($data[0]->pkt_jenis))?$data[0]->pkt_jenis:'','class="span2"');?></td>
 	</tr>
 	<tr>
-	    <td><?php echo form_drop('Model Paket *','pkt_status',array('new'=>'New','upgrade'=>'Upgrade','amplop'=>'Amplop'),(isset($data[0]->pkt_status))?$data[0]->pkt_status:'','class="span2"');?></td>
+	    <td><?php echo form_drop('Model Paket *','pkt_status',array('new'=>'New','upgrade'=>'Upgrade','amplop'=>'Amplop','info_bca'=>'Info BCA'),(isset($data[0]->pkt_status))?$data[0]->pkt_status:'','class="span2"');?></td>
 	    <td><?php echo form_text('Tgl Koneksi*','pkt_tanggal_koneksi',(isset($data[0]->pkt_tanggal_koneksi))?date('d-M-Y',strtotime($data[0]->pkt_tanggal_koneksi)):'','class="span2" maxlength="15" id="pkt_tanggal_koneksi"');?></td>
 	</tr>
 	<tr>
-	    <td><?php echo form_text('Tgl Terima Paket*','pkt_tanggal_terima',(isset($data[0]->pkt_tanggal_terima))?date('d-M-Y',strtotime($data[0]->pkt_tanggal_terima)):'','class="span2" maxlength="15" id="pkt_tanggal_terima"');?></td>
-	    <td><?php echo form_text('Tgl Due Date*','pkt_jatuh_tempo',(isset($data[0]->pkt_jatuh_tempo))?date('d-M-Y',strtotime($data[0]->pkt_jatuh_tempo)):'','class="span2" maxlength="15" readonly');?></td>
+	    <td><?php echo form_text('Tgl Terima Paket*','pkt_tanggal_terima',(isset($data[0]->pkt_tanggal_terima))?date('d-M-Y',strtotime($data[0]->pkt_tanggal_terima)):'','class="span2" maxlength="15" id="pkt_tanggal_terima" autocomplete="off"');?></td>
+	    <td><?php echo form_text('Tgl Due Date*','pkt_jatuh_tempo',(isset($data[0]->pkt_jatuh_tempo))?date('d-M-Y',strtotime($data[0]->pkt_jatuh_tempo)):'','class="span2" maxlength="15" autocomplete="off" readonly');?></td>
 	</tr>
 	</table>
 	    <legend>List Key</legend>
 	    <div class="well form-inline">
-	    <input type="text" name="key_sn" placeholder="Key SN" id="key_sn" class="span2" maxlength="10" onkeyup="this.value=this.value.replace(/\D/g,'') ">
-	    <input type="text" name="key_username" placeholder="Username" id="key_username" class="span3">
+	    <input autocomplete="off" type="text" name="key_sn" placeholder="Key SN" id="key_sn" class="span2" maxlength="10" onkeyup="this.value=this.value.replace(/\D/g,'') ">
+	    <input autocomplete="off" type="text" name="key_username" placeholder="Username" id="key_username" class="span3">
 	    <input type="hidden" value="insert" name="mode" id="mode" >
 	    <input type="hidden" value="" name="id_key" id="id_key">
 	    <?php echo form_button('insert-key','Insert','onclick="return insert_key()" class="btn"')?>
@@ -227,11 +227,44 @@
 
 	    <p><code>Note: </code> &nbsp; All field mark with <code>*</code> are required.</p>
 	    <div class="form-actions">
+		
 		<?php echo form_submit('save','Save data', 'class="btn btn-primary"')?>
 		<?php echo anchor($module[0],'Cancel', 'class="btn"')?>
-		<input type="text" name="password" placeholder="Password" id="password" class="span2" maxlength="10">
-		<?php echo form_submit('edit','Edit data', 'class="btn btn-primary"')?>
+		<?php echo form_submit('addnewpaket',' Add New Paket', 'class="btn btn-primary"')?>
+		<!--<input type="text" name="password" placeholder="Password" id="password" class="span2" maxlength="10">
+		<?php echo form_submit('edit','Edit data', 'class="btn btn-primary"')?>-->
 	    </div>
+	    
+	    <table class="table table-bordered">
+	       <thead>
+		 <tr>
+		   <th width="10%">Jenis Paket</th>
+		   <th width="15%">Tipe Paket</th>
+		   <th width="15%">Model Paket</th>
+		   <th width="15%">Tgl Koneksi</th>
+		   <th width="10%">Tgl Terima Paket</th>
+		   <th width="10%">Tgl Due Date</th>
+		   <th width="10%">Aktif</th>
+		 </tr>
+	       </thead>
+	       <tbody>
+	       <?php if ($data):?>
+		 <?php foreach ($data as $item):?>
+		 <tr>
+		   <td><?php echo anchor($this->module[0] . '/update/paket/' . $item->cus_idx, $item->pkt_jenis)?></td>
+		   <td><?php echo $item->pkt_tipe?></td>
+		   <td><?php echo $item->pkt_status ?></td>
+		   <td><?php echo $item->pkt_tanggal_koneksi ?></td>
+		   <td><?php echo $item->pkt_tanggal_terima ?></td>
+		   <td><?php echo $item->pkt_jatuh_tempo ?></td>
+		   <td><input type="radio" name="aktif"></td>
+		 </tr>
+		 <?php endforeach;?>
+		 <?php else:?>
+		    There is no data. <?php echo anchor($module[0].'/insert','Please input one here')?>
+	       <?php endif;?>
+	       </tbody>
+	     </table>
 	<?php echo form_close();?>
     </div>
 </div>

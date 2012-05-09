@@ -176,13 +176,13 @@ class Customer extends MY_Controller {
 				}				
 				$this->_view('main_1_3', 'customer_detail_paket');
 			}
-			/*else if ($action == 'call')
+			else if ($action == 'list_paket')
 			{
 				$this->params['cus'] = $this->customer_m->get($idx);
-				$this->params['data'] = $this->call_m->get_call_detail(false, $idx);
-				$call_idx = (!$this->params['data']) ? null : $this->params['data'][0]->call_idx;
+				//$this->params['data'] = $this->call_m->get_call_detail(false, $idx);
+				//$call_idx = (!$this->params['data']) ? null : $this->params['data'][0]->call_idx;
 				//$this->params['key'] = $this->key_m->get_paket_key($pkt_idx);
-				if ($this->input->post('save'))
+				/*if ($this->input->post('save'))
 				{
 					if ($this->call_m->isValid())
 					{
@@ -196,12 +196,12 @@ class Customer extends MY_Controller {
 							setError('Unable to save');
 						}
 					}
-				}
-				$this->params['status'] = $this->status_m->dropdown();
-				$this->params['kategori'] = $this->kategori_m->dropdown();
-				$this->_view('main_1_3', 'customer_detail_call');
+				}*/
+				//$this->params['status'] = $this->status_m->dropdown();
+				//$this->params['kategori'] = $this->kategori_m->dropdown();
+				$this->_view('main_1_3', 'customer_detail_list_paket');
 			}
-			else if ($action == 'schedule')
+			/*else if ($action == 'schedule')
 			{
 				$this->params['cus'] = $this->customer_m->get($idx);
 				$this->params['data'] = $this->schedule_m->get_schedule_detail(false, $idx);

@@ -38,6 +38,9 @@
                             $('#pkt_jenis').val(data.pkt_jenis);
                             $('#pkt_tipe').val(data.pkt_tipe);
                             $('#pkt_status').val(data.pkt_status);
+                            $('#pkt_tanggal_koneksi').val(data.pkt_tanggal_koneksi);
+                            $('#pkt_tanggal_terima').val(data.pkt_tanggal_terima);
+                            $('#pkt_jatuh_tempo').val(data.pkt_jatuh_tempo);
                             $('#cus_idx').val(data.cus_idx)
 			    }
 		);
@@ -160,20 +163,20 @@
     <tr>
         <td><?php echo form_text('Telp Rumah ','cus_telepon_rumah',(isset($data->cus_telepon_rumah))?$data->cus_telepon_rumah:'','class="span2" maxlength="32" id="cus_telepon_rumah" readonly');?></td>
         <td>&nbsp;</td>
-        <td><?php echo form_text('Fitur Paket','pkt_status',(isset($data->pkt_status))?$data->pkt_status:'','class="span2" id="pkt_fitur" readonly');?></td>
+        <td><?php echo form_text('Model Paket','pkt_status',(isset($data->pkt_status))?$data->pkt_status:'','class="span2" id="pkt_status" readonly');?></td>
     </tr>
     <tr>
-        <td><?php echo form_text('Tgl Koneksi','pkt_tanggal_koneksi',(isset($data->pkt_tanggal_koneksi))?$data->pkt_tanggal_koneksi:'','class="span2" maxlength="15" id="tgl" readonly');?></td>
+        <td><?php echo form_text('Tgl Koneksi','pkt_tanggal_koneksi',(isset($data->pkt_tanggal_koneksi))?$data->pkt_tanggal_koneksi:'','class="span2" maxlength="15" id="pkt_tanggal_koneksi" readonly');?></td>
         <td>&nbsp;</td>
         <td><?php echo form_text('Schedule Date *','sched_date',(isset($data->sched_date))?$data->sched_date:'','class="span2" maxlength="25" id="sched_date"');?></td> 
     </tr>
     <tr>
-        <td><?php echo form_text('Tgl Terima Paket','pkt_tanggal_terima',(isset($data->pkt_tanggal_terima))?$data->pkt_tanggal_terima:'','class="span2" maxlength="15" id="tgl" readonly');?></td>
+        <td><?php echo form_text('Tgl Terima Paket','pkt_tanggal_terima',(isset($data->pkt_tanggal_terima))?$data->pkt_tanggal_terima:'','class="span2" maxlength="15" id="pkt_tanggal_terima" readonly');?></td>
         <td>&nbsp;</td>
         <td><?php echo form_text('Schedule Time *','sched_time',(isset($data->sched_time))?$data->sched_time:'','class="span2" maxlength="10" id="time"');?></td>
     </tr>
     <tr>
-        <td><?php echo form_text('Tgl Due Date','pkt_jatuh_tempo',(isset($data->pkt_jatuh_tempo))?$data->pkt_jatuh_tempo:'','class="span2" maxlength="15" id="tgl" readonly');?></td>
+        <td><?php echo form_text('Tgl Due Date','pkt_jatuh_tempo',(isset($data->pkt_jatuh_tempo))?$data->pkt_jatuh_tempo:'','class="span2" maxlength="15" id="pkt_jatuh_tempo" readonly');?></td>
         <td>&nbsp;</td>
         <td><?php echo form_drop('Visit','sched_visit',$visit,(isset($data->sched_visit))?$data->sched_visit:'','class="span2"');?></td>
     </tr>
@@ -203,7 +206,7 @@
     <table>
     <tr>
         <td>Nama Admin </td>
-        <td><input type="text" name="call_nama_admin" placeholder="Nama Admin" id="call_nama_admin" class="span2"></td>
+        <td><input type="text" name="call_nama_admin" placeholder="Nama Admin" id="call_nama_admin" class="span2" value="Irwan" readonly="readonly"></td>
         <td>&nbsp;</td>
         <td>Call Date</td>
         <td><input type="text" name="call_date" placeholder="Date" id="call_date" class="span2" readonly="readonly" value="<?php echo date('d-M-y H:i')?>"></td>
