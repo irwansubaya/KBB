@@ -123,7 +123,7 @@ class Customer extends MY_Controller {
 	 * @access	public
 	 * @return	parent class function
 	 */
-	public function update ($action, $idx)
+	public function update ($action, $idx, $pkt_idx = FALSE)
 	{
 		if ($idx AND $this->customer_m->get($idx))
 		{
@@ -155,100 +155,43 @@ class Customer extends MY_Controller {
 			}
 			else if ($action == 'paket')
 			{
-				$this->params['cus'] = $this->customer_m->get($idx);
-				$this->params['data'] = $this->paket_m->get_paket_detail(false, $idx);
-				$pkt_idx = (!$this->params['data']) ? null : $this->params['data'][0]->pkt_idx;
-				$this->params['key'] = $this->key_m->get_paket_key($idx);
-				if ($this->input->post('save'))
+				if($pkt_idx)
 				{
-					if ($this->paket_m->isValid())
+					if ($pkt_idx == 'new')
 					{
-						if ($this->paket_m->save($pkt_idx))
-						{
-							setSucces('Data is saved');
-							redirect ($this->module[0]. '/update/paket/' . $idx);
-						}
-						else
-						{
-							setError('Unable to save');
-						}
+
 					}
-				}				
-				$this->_view('main_1_3', 'customer_detail_paket');
-			}
-			else if ($action == 'list_paket')
-			{
-				$this->params['cus'] = $this->customer_m->get($idx);
-				//$this->params['data'] = $this->call_m->get_call_detail(false, $idx);
-				//$call_idx = (!$this->params['data']) ? null : $this->params['data'][0]->call_idx;
-				//$this->params['key'] = $this->key_m->get_paket_key($pkt_idx);
-				/*if ($this->input->post('save'))
-				{
-					if ($this->call_m->isValid())
+					else
 					{
-						if ($this->call_m->save($call_idx))
+						$this->params['cus'] = $this->customer_m->get($idx);
+						$this->params['data'] = $this->paket_m->get_paket_detail(false, $idx);
+						$pkt_idx = (!$this->params['data']) ? null : $this->params['data'][0]->pkt_idx;
+						$this->params['key'] = $this->key_m->get_paket_key($idx);
+						if ($this->input->post('save'))
 						{
-							setSucces('Data is saved');
-							redirect ($this->module[0]. '/update/call/' . $idx);
-						}
-						else
-						{
-							setError('Unable to save');
-						}
-					}
-				}*/
-				//$this->params['status'] = $this->status_m->dropdown();
-				//$this->params['kategori'] = $this->kategori_m->dropdown();
-				$this->_view('main_1_3', 'customer_detail_list_paket');
-			}
-			/*else if ($action == 'schedule')
-			{
-				$this->params['cus'] = $this->customer_m->get($idx);
-				$this->params['data'] = $this->schedule_m->get_schedule_detail(false, $idx);
-				$sched_idx = (!$this->params['data']) ? null : $this->params['data'][0]->sched_idx;
-				//$this->params['key'] = $this->key_m->get_paket_key($pkt_idx);
-				if ($this->input->post('save'))
-				{
-					if ($this->schedule_m->isValid())
-					{
-						if ($this->schedule_m->save($sched_idx))
-						{
-							setSucces('Data is saved');
-							redirect ($this->module[0]. '/update/schedule/' . $idx);
-						}
-						else
-						{
-							setError('Unable to save');
-						}
+							if ($this->paket_m->isValid())
+							{
+								if ($this->paket_m->save($pkt_idx))
+								{
+									setSucces('Data is saved');
+									redirect ($this->module[0]. '/update/paket/' . $idx . '/' . $pkt_idx);
+								}
+								else
+								{
+									setError('Unable to save');
+								}
+							}
+						}				
+						$this->_view('main_1_3', 'customer_detail_paket');
 					}
 				}
-				$this->params['status'] = $this->status_m->dropdown();
-				$this->_view('main_1_3', 'customer_detail_schedule');
-			}
-			else if ($action == 'Hasil Kunjungan')
-			{
-				$this->params['cus'] = $this->customer_m->get($idx);
-				$this->params['data'] = $this->hasjung_m->get_hasjung_detail(false, $idx);
-				$_idx = (!$this->params['data']) ? null : $this->params['data'][0]->sched_idx;
-				//$this->params['key'] = $this->key_m->get_paket_key($pkt_idx);
-				if ($this->input->post('save'))
+				else
 				{
-					if ($this->schedule_m->isValid())
-					{
-						if ($this->schedule_m->save($sched_idx))
-						{
-							setSucces('Data is saved');
-							redirect ($this->module[0]. '/update/hasjung/' . $idx);
-						}
-						else
-						{
-							setError('Unable to save');
-						}
-					}
+					$this->params['cus'] = $this->customer_m->get($idx);
+					$this->params['data'] = $this->paket_m->get_paket_detail(false, $idx);
+					$this->_view('main_1_3', 'customer_list_paket');
 				}
-				$this->params['status'] = $this->status_m->dropdown();
-				$this->_view('main_1_3', 'customer_detail_hasil_kunjungan');
-			}*/
+			}
 		}
 	}
 	

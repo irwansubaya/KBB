@@ -158,10 +158,6 @@
     <ul class="nav nav-tabs">
 	<li<?php echo ($action == 'detail')?' class="active"':'' ?>><?php echo anchor($module[0].'/update/detail/'.$cus->cus_idx,'Customer')?></li>
 	<li<?php echo ($action == 'paket')?' class="active"':'' ?>><?php echo anchor($module[0].'/update/paket/'.$cus->cus_idx,'Paket & Key')?></li>
-	<li<?php echo ($action == 'list_paket')?' class="active"':'' ?>><?php echo anchor($module[0].'/update/list_paket/'.$cus->cus_idx,'List paket')?></li>
-	<!--<li<?php echo ($action == 'schedule')?' class="active"':'' ?>><?php echo anchor($module[0].'/update/schedule/'.$cus->cus_idx,'Schedule')?></li>
-	<li<?php echo ($action == 'hasjung')?' class="active"':'' ?>><?php echo anchor($module[0].'/update/hasjung/'.$cus->cus_idx,'Hasil Kunjungan')?></li>
-	-->
     </ul>
     <div class="tab-content">
 	<?php echo form_open(uri_string(),array('id'=>'formid', 'class'=>'form-horizontal'))?>
@@ -229,10 +225,7 @@
 	    <div class="form-actions">
 		
 		<?php echo form_submit('save','Save data', 'class="btn btn-primary"')?>
-		<?php echo anchor($module[0],'Cancel', 'class="btn"')?>
-		<?php echo form_submit('addnewpaket',' Add New Paket', 'class="btn btn-primary"')?>
-		<!--<input type="text" name="password" placeholder="Password" id="password" class="span2" maxlength="10">
-		<?php echo form_submit('edit','Edit data', 'class="btn btn-primary"')?>-->
+		<?php echo anchor($this->module[0] . '/update/paket/' . $cus->cus_idx,'Back to List Paket', 'class="btn"')?>
 	    </div>
 	    
 	    <table class="table table-bordered">
