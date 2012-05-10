@@ -1,7 +1,15 @@
 <script src="<?php echo base_url() ?>static/js/standardista-table-sorting-common.js" type="text/javascript"></script>
 <script src="<?php echo base_url() ?>static/js/standardista-table-sorting-css.js" type="text/javascript"></script>
 <script src="<?php echo base_url() ?>static/js/standardista-table-sorting.js" type="text/javascript"></script>
-
+<script type="text/javascript">
+$(document).ready(function() { 
+    $('#demo1').click(function() { 
+        $.blockUI({ message: $('#customer_new') }); 
+ 
+        setTimeout($.unblockUI, 2000); 
+    }); 
+});
+</script>
 <div class="page-header">
     <h2>List Paket for Customer : <?php echo '['.$cus->cus_corporate_id.'] '.$cus->cus_nama_perusahaan ?></h2>
 </div>
@@ -42,6 +50,6 @@
 	  <?php endif;?>
 	  </tbody>
 	</table>
-	<?php echo anchor($this->module[0] . '/update/paket/' . $item->cus_idx . '/new','Add new paket')?>
+	<?php echo anchor($this->module[0] . '/update/paket/' . $cus->cus_idx . '/customer_new_paket','Add new paket');?>
     </div>
 </div>

@@ -8,12 +8,14 @@
 		dateFormat: 'dd-M-yy',
 		showAnim: 'fold'
 	});
-        $("#pkt_tanggal_terima").datepicker({
+        $("#pkt_tanggal_terima").datepicker
+	({
 		changeMonth: true,
 		changeYear: true,
 		dateFormat: 'dd-M-yy',
 		showAnim: 'fold',
-		onClose: function(dateText, inst) {
+		onClose: function(dateText, inst)
+		{
 		    if ($("#pkt_tanggal_koneksi").val() == '') {
 			alert('Tanggal terima paket harus di isi');
 			$("#pkt_tanggal_terima").val('');
@@ -39,7 +41,6 @@
 		    } else if (dateText.is().friday()) {
 			var due_date =  dateText.next().wednesday();
 		    } 
-		    
 		    $('#pkt_jatuh_tempo').val(due_date.toString('dd-MMM-yyyy'));
 		}
 	});
@@ -227,37 +228,6 @@
 		<?php echo form_submit('save','Save data', 'class="btn btn-primary"')?>
 		<?php echo anchor($this->module[0] . '/update/paket/' . $cus->cus_idx,'Back to List Paket', 'class="btn"')?>
 	    </div>
-	    
-	    <table class="table table-bordered">
-	       <thead>
-		 <tr>
-		   <th width="10%">Jenis Paket</th>
-		   <th width="15%">Tipe Paket</th>
-		   <th width="15%">Model Paket</th>
-		   <th width="15%">Tgl Koneksi</th>
-		   <th width="10%">Tgl Terima Paket</th>
-		   <th width="10%">Tgl Due Date</th>
-		   <th width="10%">Aktif</th>
-		 </tr>
-	       </thead>
-	       <tbody>
-	       <?php if ($data):?>
-		 <?php foreach ($data as $item):?>
-		 <tr>
-		   <td><?php echo anchor($this->module[0] . '/update/paket/' . $item->cus_idx, $item->pkt_jenis)?></td>
-		   <td><?php echo $item->pkt_tipe?></td>
-		   <td><?php echo $item->pkt_status ?></td>
-		   <td><?php echo $item->pkt_tanggal_koneksi ?></td>
-		   <td><?php echo $item->pkt_tanggal_terima ?></td>
-		   <td><?php echo $item->pkt_jatuh_tempo ?></td>
-		   <td><input type="radio" name="aktif"></td>
-		 </tr>
-		 <?php endforeach;?>
-		 <?php else:?>
-		    There is no data. <?php echo anchor($module[0].'/insert','Please input one here')?>
-	       <?php endif;?>
-	       </tbody>
-	     </table>
 	<?php echo form_close();?>
     </div>
 </div>
