@@ -157,11 +157,11 @@ class Customer extends MY_Controller {
 			{
 				if($pkt_idx)
 				{
-					if ($pkt_idx == 'new')
+					if ($pkt_idx == 'customer_new_paket')
 					{
 						$this->params['cus'] = $this->customer_m->get($idx);
-						$this->params['data'] = $this->paket_m->get_paket_detail(false,$idx);
-						$pkt_idx = $this->pkt_idx(true);
+						$this->params['data'] = $this->paket_m->get_paket_detail(false, $idx);
+						//$pkt_idx = (!$this->params['data']) ? null : $this->params['data'][0]->pkt_idx;
 						$this->params['key'] = $this->key_m->get_paket_key($idx);
 						if ($this->input->post('save'))
 						{
@@ -170,7 +170,7 @@ class Customer extends MY_Controller {
 								if ($this->paket_m->save($pkt_idx))
 								{
 									setSucces('Data is saved');
-									redirect ($this->module[0]. '/update/new/' . $idx );
+									redirect ($this->module[0]. '/update/customer_new_paket/' . $idx );
 								}
 								else
 								{
