@@ -42,7 +42,7 @@ $(document).ready(function() {
 	      <td><?php echo $item->pkt_tanggal_koneksi ?></td>
 	      <td><?php echo $item->pkt_tanggal_terima ?></td>
 	      <td><?php echo $item->pkt_jatuh_tempo ?></td>
-	      <td><input type="radio" name="aktif"></td>
+	      <td><input type="checkbox" name="aktif"></td>
 	    </tr>
 	    <?php endforeach;?>
 	  <?php else:?>

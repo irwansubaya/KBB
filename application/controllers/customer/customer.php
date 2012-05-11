@@ -61,6 +61,7 @@ class Customer extends MY_Controller {
 
 		$this->params['param'] 	= $this->customer_m->data();
 		$this->params['data'] 	= $this->customer_m->get_customer();
+		
 
 		// loop and implode to create an url exist
 		foreach ($this->params['param'] as $key => $value) 
@@ -160,9 +161,9 @@ class Customer extends MY_Controller {
 					if ($pkt_idx == 'customer_new_paket')
 					{
 						$this->params['cus'] = $this->customer_m->get($idx);
-						$this->params['data'] = $this->paket_m->get_paket_detail(false, $idx);
-						//$pkt_idx = (!$this->params['data']) ? null : $this->params['data'][0]->pkt_idx;
-						$this->params['key'] = $this->key_m->get_paket_key($idx);
+						$this->params['data'] = $this->paket_m->get_paket_detail($pkt_idx);
+						$pkt_idx = (!$this->params['data']) ? null : $this->params['data'][0]->pkt_idx;
+						$this->params['key'] = $this->key_m->get_paket_key(false,$idx);
 						if ($this->input->post('save'))
 						{
 							if ($this->paket_m->isValid())
@@ -170,7 +171,7 @@ class Customer extends MY_Controller {
 								if ($this->paket_m->save($pkt_idx))
 								{
 									setSucces('Data is saved');
-									redirect ($this->module[0]. '/update/customer_new_paket/' . $idx );
+									redirect ($this->module[0]. '/update/paket/' . $idx . '/' . $pkt_idx);
 								}
 								else
 								{

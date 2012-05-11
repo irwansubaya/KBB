@@ -94,7 +94,7 @@ class Customer_m extends MY_Model {
 	 */
 	public function get_customer ()
 	{
-		$this->db->join('paket', 'customer.cus_idx = paket.cus_idx');
+		//$this->db->join('paket', 'customer.cus_idx = paket.cus_idx');
 		foreach ($this->data as $key => $value) 
 		{
 			if ($value && $key == 'cus_nama_perusahaan') $this->db->like($key, $value);
