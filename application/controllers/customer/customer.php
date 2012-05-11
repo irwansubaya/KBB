@@ -183,7 +183,7 @@ class Customer extends MY_Controller {
 					else
 					{
 						$this->params['cus'] = $this->customer_m->get($idx);
-						$this->params['data'] = $this->paket_m->get_paket_detail(false, $idx);
+						$this->params['data'] = $this->paket_m->get_paket_detail($pkt_idx);
 						$pkt_idx = (!$this->params['data']) ? null : $this->params['data'][0]->pkt_idx;
 						$this->params['key'] = $this->key_m->get_paket_key($idx);
 						if ($this->input->post('save'))
