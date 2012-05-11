@@ -61,9 +61,9 @@ class Key_m extends MY_Model {
 	 * @param	integer
 	 * @return	boolean
 	*/
-	public function get_paket_key ($cus_idx = FALSE)
+	public function get_paket_key ($pkt_idx = FALSE)
 	{
-		$this->db->where('cus_idx', $cus_idx);
+		$this->db->where('pkt_idx', $pkt_idx);
 		$this->db->order_by('key_nama_user');
 		return parent :: get ();
 	}
