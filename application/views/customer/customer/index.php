@@ -68,14 +68,6 @@
   <tbody>
   <?php if ($data):?>
     <?php foreach ($data as $item):?>
-<?php
-/*
-echo "<pre>";
-var_dump($item);
-echo "</pre>";
-exit;
-*/
-?>
     <tr>
       <td><?php echo anchor($this->module[0] . '/update/detail/' . $item->cus_idx, $item->cus_corporate_id)?></td>
       <td><?php echo $item->cus_nama_perusahaan?></td>
@@ -83,10 +75,8 @@ exit;
       <td><?php echo $item->cus_alamat ?></td>
       <td><?php echo $item->cus_handphone ?></td>
       <td><?php echo $item->pkt_jenis ?></td>
-      <!--<td><?php //echo date('d-m-y',strtotime($item->cus_tanggal_input ))?></td>-->
       <td><?php echo ($item->pkt_tanggal_koneksi == '') ? '' : date('d-m-y',strtotime($item->pkt_tanggal_koneksi ))?></td>
-      <td><?php echo anchor($module[0].'/update/schedule/'.$item->cus_idx.'/'.$item->pkt_idx,$item->cus_status)?></td>
-      <!--<td><?php //echo anchor($module[0].'/update/schedule/'.$item->cus_idx.'/'.$item->pkt_idx,$item->cus_status)?></td>-->
+      <td><?php echo anchor(base_url().'schedule/schedule/index/'.$item->cus_idx.'/'.$item->pkt_idx,$item->cus_status)?></td>
     </tr>
     <?php endforeach;?>
   <?php else:?>

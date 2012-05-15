@@ -35,12 +35,9 @@ class Schedule extends MY_Controller {
 		parent :: __construct ();
 
 		$this->load->model(array(
-			'schedule_m',
-			'paket_m',
 			'customer_m',
-			'visit_m',
-			'kategori_m',
-			'konfirm_m'
+			'paket_m',
+			'schedule_m'
 		));
 	}
 
@@ -50,103 +47,18 @@ class Schedule extends MY_Controller {
 	 * @access	public
 	 * @return	parent class function
 	 */
-	public function index ()
+	public function index ($cus_idx, $pkt_idx)
 	{
-		$this->params['data'] = $this->schedule_m->get_sched_detail();
+		$this->params['cus_idx'] = $cus_idx;
+		$this->params['pkt_idx'] = $pkt_idx;
+		$this->params['cus'] = $this->customer_m->get($cus_idx);
+		$this->params['data'] = $this->customer_m->get_list_schedule($cus_idx, $pkt_idx);
 		$this->_view('main_1_3', 'index');
 	}
-	
-	/**
-	 * Add new supplier
-	 *
-	 * @access	public
-	 * @return	parent class function
-	 */
-	public function insert ()
-	{
-		if ($this->input->post('save'))
-		{
-			if ($this->schedule_m->isValid())
-			{
-				if ($this->schedule_m->save())
-				{
-					setSucces('Data is saved');
-					redirect ($this->module[0]);
-				}
-				else
-				{
-					setError('Unable to save');
-				}
-			}
-		}
-		$this->params['konfirm'] = $this->konfirm_m->dropdown();
-		$this->params['kategori'] = $this->kategori_m->dropdown();
-		$this->params['visit'] = $this->visit_m->dropdown();
-		$this->_view('main_1_3', 'schedule_new');
-	}
 
-	/**
-	 * Update supplier
-	 *
-	 * @access	public
-	 * @return	parent class function
-	 */
-	public function update ($idx)
+	public function update ($cus_idx, $pkt_idx, $sched_idx)
 	{
-		if ($idx AND $this->schedule_m->get($idx))
-		{
-			if ($this->input->post('save'))
-			{
-				if ($this->schedule_m->isValid())
-				{
-					// save data
-					if ($this->schedule_m->save($idx))
-					{
-						setSucces('Data is edited');
-					}
-					else
-					{
-						setError('Unable to save');
-					}
-				}
-			}
-			$this->params['konfirm'] = $this->konfirm_m->dropdown();
-			$this->params['kategori'] = $this->kategori_m->dropdown();
-			$this->params['visit'] = $this->visit_m->dropdown();
-			$this->params['data']		= $this->schedule_m->get($idx);
-			$this->params['labels']		= $this->schedule_m->getLabels();
-			$this->_view('main_1_3', 'schedule_new');
-		}
 		
-	}
-	/**
-	 * Autocomplete using ajax calling data Customer
-	 *
-	 * @access	public
-	 * @return	parent class function
-	 */
-	public function customer_ajax ()
-	{
-		if ($this->input->is_ajax_request())
-		{
-			$this->load->model('customer_m');
-			$this->db->join('paket', 'customer.cus_idx = paket.cus_idx');
-			$this->db->like('cus_corporate_id', $this->input->get('q'));
-			echo json_encode($this->customer_m->get());
-		}
-	}
-
-
-	/**
-	 * Delete customer
-	 *
-	 * @access	public
-	 * @return	parent class function
-	 */
-	public function delete ($idx)
-	{
-		$this->schedule_m->delete($idx);
-		redirect ($this->module[0]);
 	}
 }
 /* End class Admin */

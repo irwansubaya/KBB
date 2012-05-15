@@ -241,6 +241,7 @@ class Customer extends MY_Controller {
 				$this->params['labels']= $this->customer_m->getLabels();
 				$this->_view('main_1_3', 'customer_detail_schedule');
 			}*/
+			/*
 			else if ($action == 'schedule')
 			{
 				if($sched_idx)
@@ -299,7 +300,8 @@ class Customer extends MY_Controller {
 					$this->_view('main_1_3', 'customer_list_schedule');
 				}
 			}
-			
+			*/
+			/*
 			else if ($action == 'hasjung')
 			{
 				if ($this->input->post('save'))
@@ -327,6 +329,7 @@ class Customer extends MY_Controller {
 				$this->params['labels']= $this->customer_m->getLabels();
 				$this->_view('main_1_3', 'customer_hasil_schedule');
 			}
+			*/
 
 		}
 	}
