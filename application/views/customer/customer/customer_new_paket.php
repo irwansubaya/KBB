@@ -14,6 +14,8 @@
 		changeYear: true,
 		dateFormat: 'dd-M-yy',
 		showAnim: 'fold',
+                minDate: '-2m',
+                maxDate:'+2m',
 		onClose: function(dateText, inst)
 		{
 		    if ($("#pkt_tanggal_koneksi").val() == '') {
@@ -71,8 +73,8 @@
     var id = 0;
     function insert_key ()
     {
-	if ($("#key_sn").val() == '') {alert ('Please fill SN'); $("#key_sn").focus()}
-	else if ($("#key_username").val() == '') {alert ('Please fill username'); $("#key_username").focus()}
+	if ($("#key_sn").val() == '') {alert ('Please fill SN'); $("#key_sn").focus();return false;}
+	else if ($("#key_username").val() == '') {alert ('Please fill username'); $("#key_username").focus();return false;}
 
 	var is_double = false;
 	$("#item tr").each(function() {
@@ -158,9 +160,6 @@
 	<table>
 	<tr>
 	    <td><?php echo form_hidden('cus_idx',$cus->cus_idx, 'id=cus_idx');?>    
-		<?php #echo form_text('Corporate ID *','cus_corporate_id',(isset($data[0]->cus_corporate_id))?$data[0]->cus_corporate_id:'','class="span2" maxlength="10" id="pkt_corporate_id"');?>
-		<?php #echo form_text('Name Perusahaan*','cus_nama_perusahaan',(isset($data[0]->cus_nama_perusahaan))?$data[0]->cus_nama_perusahaan:'','class="span3" maxlength="64" id ="cus_nama_perusahaan"');?>
-		<?php #echo form_area('Contact Person *','cus_cp',(isset($data[0]->cus_cp))?$data[0]->cus_cp:'','class="span3" maxlength="64"');?>
 		<?php echo form_drop('Jenis Paket *','pkt_tipe',array('gold'=>'Gold','gold_payroll'=>'Gold Payroll','platinum'=>'Platinum'),(isset($data[0]->pkt_tipe))?$data[0]->pkt_tipe:'','class="span2"');?>
 	    </td>
 	    <td><?php echo form_drop('Tipe Paket *','pkt_jenis',array('single_otorisasi'=>'Single Otorisasi','multi_otorisasi'=>'Multi Otorisasi'),(isset($data[0]->pkt_jenis))?$data[0]->pkt_jenis:'','class="span2"');?></td>

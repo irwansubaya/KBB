@@ -50,15 +50,19 @@ class Schedule_m extends MY_Model {
 	 * @return	boolean
 	*/
 	
-	public function get_sched_detail ($pkt_idx = FALSE)
+	
+	/*
+	public function get_sched_detail ($sched_idx)
 	{
-		$this->db->join('customer', 'customer.cus_idx = schedule.cus_idx');
-		$this->db->join('paket', 'paket.pkt_idx = schedule.pkt_idx');		
-		if ($pkt_idx) { $this->db->where('pkt_idx', $pkt_idx); }
+		//$this->db->join('paket', 'customer.cus_idx = paket.cus_idx');
+		$this->db->join('customer AS cus', 'cus.cus_idx = schedule.cus_idx');
+		$this->db->join('paket AS pkt', 'pkt.pkt_idx = cus.pkt_idx');		
+		if ($sched_idx) { $this->db->where('pkt_idx', $sched_idx); }
 		$this->db->order_by('cus_corporate_id');
 		return parent :: get();
 	}
-	
+
+	*/	
 	/**
 	 * Insert SN Key
 	 *

@@ -6,7 +6,8 @@
 		changeMonth: true,
 		changeYear: true,
 		dateFormat: 'dd-M-yy',
-		showAnim: 'fold'
+		showAnim: 'fold',
+		
 	});
         $("#pkt_tanggal_terima").datepicker
 	({
@@ -14,6 +15,7 @@
 		changeYear: true,
 		dateFormat: 'dd-M-yy',
 		showAnim: 'fold',
+		minDate: new date(),
 		onClose: function(dateText, inst)
 		{
 		    if ($("#pkt_tanggal_koneksi").val() == '') {
@@ -77,12 +79,12 @@
             }
         });*/
     });
-    
+
     var id = 0;
     function insert_key ()
     {
-	if ($("#key_sn").val() == '') {alert ('Please fill SN'); $("#key_sn").focus()}
-	else if ($("#key_username").val() == '') {alert ('Please fill username'); $("#key_username").focus()}
+	if ($("#key_sn").val() == '') {alert ('Please fill SN'); $("#key_sn").focus(); return false;}
+	else if ($("#key_username").val() == '') {alert ('Please fill username'); $("#key_username").focus(); return false;}
 
 	var is_double = false;
 	$("#item tr").each(function() {
@@ -109,7 +111,7 @@
 		    '<td><a href="" onclick="edit_key(\''+id+
 						    '\', \''+$("#key_sn").val()+
 						    '\', \''+$("#key_username").val()+
-						    '\'); return false">E</a> | <a href="" onclick="remove_key(\''+id+'\'); return false;">D</a></td>'+
+						    '\'); return false">Edit</a> | <a href="" onclick="remove_key(\''+id+'\'); return false;">Delete</a></td>'+
 		   '</tr>';
 	if ( $("#mode").val() == 'insert')
 	{
@@ -151,6 +153,13 @@
         var rows = $("#key_list >tbody tr").length;
         $("#pkt_jumlah_key").val(rows);
     }
+    
+    function dontEnter(evt) { 
+    var evt = (evt) ? evt : ((event) ? event : null); 
+      var node = (evt.target) ? evt.target : ((evt.srcElement) ? evt.srcElement : null); 
+      if ((evt.keyCode == 13) && (node.type=="text"))  {return false;} 
+    } 
+    document.onkeypress = dontEnter;
 </script>
 <div class="page-header">
     <h2>Detail Customer : <?php echo '['.$cus->cus_corporate_id.'] '.$cus->cus_nama_perusahaan ?></h2>
@@ -175,16 +184,16 @@
 	</tr>
 	<tr>
 	    <td><?php echo form_drop('Model Paket *','pkt_status',array('new'=>'New','upgrade'=>'Upgrade','amplop'=>'Amplop','info_bca'=>'Info BCA'),(isset($data[0]->pkt_status))?$data[0]->pkt_status:'','class="span2"');?></td>
-	    <td><?php echo form_text('Tgl Koneksi*','pkt_tanggal_koneksi',(isset($data[0]->pkt_tanggal_koneksi))?date('d-M-Y',strtotime($data[0]->pkt_tanggal_koneksi)):'','class="span2" maxlength="15" id="pkt_tanggal_koneksi"');?></td>
+	    <td><?php echo form_text('Tgl Koneksi*','pkt_tanggal_koneksi',(isset($data[0]->pkt_tanggal_koneksi))?date('d-M-Y ;l',strtotime($data[0]->pkt_tanggal_koneksi)):'','class="span2" maxlength="25" id="pkt_tanggal_koneksi"');?></td>
 	</tr>
 	<tr>
-	    <td><?php echo form_text('Tgl Terima Paket*','pkt_tanggal_terima',(isset($data[0]->pkt_tanggal_terima))?date('d-M-Y',strtotime($data[0]->pkt_tanggal_terima)):'','class="span2" maxlength="15" id="pkt_tanggal_terima" autocomplete="off"');?></td>
-	    <td><?php echo form_text('Tgl Due Date*','pkt_jatuh_tempo',(isset($data[0]->pkt_jatuh_tempo))?date('d-M-Y',strtotime($data[0]->pkt_jatuh_tempo)):'','class="span2" maxlength="15" autocomplete="off" readonly');?></td>
+	    <td><?php echo form_text('Tgl Terima Paket*','pkt_tanggal_terima',(isset($data[0]->pkt_tanggal_terima))?date('d-M-Y ; l',strtotime($data[0]->pkt_tanggal_terima)):'','class="span2" maxlength="25" id="pkt_tanggal_terima" autocomplete="off"');?></td>
+	    <td><?php echo form_text('Tgl Due Date*','pkt_jatuh_tempo',(isset($data[0]->pkt_jatuh_tempo))?date('d-M-Y ;l',strtotime($data[0]->pkt_jatuh_tempo)):'','class="span2" maxlength="25" autocomplete="off" readonly');?></td>
 	</tr>
 	</table>
 	    <legend>List Key</legend>
 	    <div class="well form-inline">
-	    <input autocomplete="off" type="text" name="key_sn" placeholder="Key SN" id="key_sn" class="span2" maxlength="10" onkeyup="this.value=this.value.replace(/\D/g,'') ">
+	    <input autocomplete="off" onkeypress="" type="text" name="key_sn" placeholder="SN Key" id="key_sn" class="span2" maxlength="10" onkeyup="this.value=this.value.replace(/\D/g,'') ">
 	    <input autocomplete="off" type="text" name="key_username" placeholder="Username" id="key_username" class="span3">
 	    <input type="hidden" value="insert" name="mode" id="mode" >
 	    <input type="hidden" value="" name="id_key" id="id_key">

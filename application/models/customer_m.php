@@ -72,16 +72,33 @@ class Customer_m extends MY_Model {
 	{
 		$this->db->set('cus_tanggal_input',date('Y-m-d'));
 		$this->db->set('cus_admin_input','irwan');
+		$this->db->set('cus_status','Folow UP');
 		return parent :: save ($idx);	
 	}
-	
-	public function get_paket_detail ($pkt_idx = FALSE)
+
+	public function get_schedule_detail ($pkt_idx = FALSE)
 	{
-		$this->db->join('customer', 'customer.cus_idx = paket.cus_idx');
-		if ($pkt_idx) { $this->db->where('pkt_idx', $pkt_idx); }
+		$this->db->join('paket', 'paket.cus_idx = customer.cus_idx');
+		//$this->db->join('customer', 'customer.cus_idx = paket.cus_idx');
+		//$this->db->join('customer AS cus', 'cus.cus_idx = schedule.cus_idx');
+		//$this->db->join('paket', 'customer.cus_idx = paket.cus_idx');
+		//$this->db->join('paket', 'paket.pkt_idx = schedule.pkt_idx');
+		//if ($pkt_idx) { $this->db->where('pkt_idx', $pkt_idx); }
 		$this->db->order_by('cus_corporate_id');
 		return parent :: get ();
 	}
+
+	public function get_paket_schedule ($cus_idx, $pkt_idx, $sched_idx = FALSE)
+	{
+		$this->db->join('paket', 'paket.cus_idx = customer.cus_idx');
+		if ($sched_idx) { $this->db->join('schedule', 'paket.pkt_idx = schedule.pkt_idx'); }
+		$this->db->where('customer.cus_idx', $cus_idx);
+		$this->db->where('paket.pkt_idx', $pkt_idx);
+		if ($sched_idx) { $this->db->where('sched_idx', $sched_idx); }
+		$this->db->order_by('cus_corporate_id');
+		return parent :: get();
+	}
+
 	public function get_by_corporate_id ($cus_corporate_id = false)
 	{
 		$this->db->where('cus_corporate_id', $cus_corporate_id);
@@ -94,7 +111,8 @@ class Customer_m extends MY_Model {
 	 */
 	public function get_customer ()
 	{
-		//$this->db->join('paket', 'customer.cus_idx = paket.cus_idx');
+		$this->db->join('paket', 'customer.cus_idx = paket.cus_idx', 'left');
+		//$this->db->where('cus_corporate_id');
 		foreach ($this->data as $key => $value) 
 		{
 			if ($value && $key == 'cus_nama_perusahaan') $this->db->like($key, $value);

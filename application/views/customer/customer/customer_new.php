@@ -22,6 +22,12 @@
                      }
              );
     });
+    function dontEnter(evt) { 
+    var evt = (evt) ? evt : ((event) ? event : null); 
+        var node = (evt.target) ? evt.target : ((evt.srcElement) ? evt.srcElement : null); 
+        if ((evt.keyCode == 13) && (node.type=="text"))  {return false;} 
+      } 
+      document.onkeypress = dontEnter;
 </script>
 <div class="page-header">
     <h2>Add New Customer</h2>
@@ -36,7 +42,7 @@
 	</td>
     </tr>
     <tr>
-        <td><?php echo form_text('Nama Perusahaan / Nasabah*','cus_nama_perusahaan',(isset($data->cus_nama_perusahaan))?$data->cus_nama_perusahaan:'','class="span3" maxlength="64" autocomplete="off"');?></td>
+        <td><?php echo form_text('Nama Perusahaan / Nasabah*','cus_nama_perusahaan',(isset($data->cus_nama_perusahaan))?$data->cus_nama_perusahaan:'','class="span2" maxlength="64" autocomplete="off"');?></td>
         <td><?php echo form_text('No KTP','cus_no_ktp',(isset($data->cus_no_ktp))?$data->cus_no_ktp:'','class="span2" maxlength="64" autocomplete="off"');?></td>
     </tr>
     <tr>

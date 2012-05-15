@@ -20,7 +20,7 @@
 			return parsed;
 		    },
 		    formatItem: function(data,i,max){
-			return  '<div class="search_content"><bold> '+data.cus_corporate_id+' </bold> &nbsp;<small>'+data.cus_nama_perusahaan+'</small></div>';
+			return  '<div class="search_content"><bold> '+data.cus_corporate_id+' </bold> &nbsp;<small>'+data.cus_nama_perusahaan+'</small>&nbsp;<small>'+data.pkt_jenis+'</small></div>';
 		    
                     },
 		    width: 450, 
@@ -209,7 +209,7 @@
         <td><input type="text" name="call_nama_admin" placeholder="Nama Admin" id="call_nama_admin" class="span2" value="Irwan" readonly="readonly"></td>
         <td>&nbsp;</td>
         <td>Call Date</td>
-        <td><input type="text" name="call_date" placeholder="Date" id="call_date" class="span2" readonly="readonly" value="<?php echo date('d-M-y H:i')?>"></td>
+        <td><input type="text" name="call_date" placeholder="Date" id="call_date" class="span2" readonly="readonly" value="<?php echo date('d-M-y H:i ;l')?>"></td>
         <td>&nbsp;</td>
         <td>Kategori</td>
         <td>
