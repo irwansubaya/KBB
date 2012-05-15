@@ -2,66 +2,40 @@
 <script src="<?php echo base_url() ?>static/js/standardista-table-sorting-css.js" type="text/javascript"></script>
 <script src="<?php echo base_url() ?>static/js/standardista-table-sorting.js" type="text/javascript"></script>
 <script type="text/javascript">
-    $(document).ready(function(){
-        $("#cus_input_date").datepicker({
-		changeMonth: true,
-		changeYear: true,
-		dateFormat: 'dd-M-yy',
-		showAnim: 'fold'
-	});
-        $("#sched_date").datepicker({
-		changeMonth: true,
-		changeYear: true,
-		dateFormat: 'dd-M-yy',
-		showAnim: 'fold'
-	});
-    });
 </script>
 <div class="page-header">
-    <h2>List Schedule</h2>
+    <h2>List Schedule for Customer :<?php echo '['.$cus->cus_corporate_id.'] '.$cus->cus_nama_perusahaan ?></h2>
 </div>
-<form class="well form-search" style="text-align:right">
-    <table>
-        <tr>
-            <td><?php echo form_drop('','asdes',array('ASC'=>'Ascending','DESC'=>'Descending'),@$param['asdes'],'class="span2"');?></td>
-            <td><input type="text" name="cus_nama_perusahaan" id="cus_nama_perusahaan" class="input-medium search-query" placeholder="Nama Perusahaan" value="<?php echo @$param['cus_nama_perusahaan'] ?>"></td>
-            <td><input type="text" name="cus_corporate_id" id="cus_corporate_id" class="input-medium search-query" placeholder="Input Corporate ID ..." value="<?php echo @$param['cus_corporate_id'] ?>"></td>
-            <td><input type="text" name="sched_date" id="sched_date" class="input-small search-query" placeholder="Tgl Schedule"value="<?php echo @$param['sched_date'] ?>"></td>
-            <td><button type="submit" class="btn"><i class="icon-search"></i> Search</button></td>
-        </tr>
-    </table>
-</form>
-<table class="table">
+<table class="table sortable">
   <thead>
     <tr>
       <th width="10%">Corporate ID</th>
-      <th width="15%">Contact Person</th>
-      <th width="10%">Alamat</th>
-      <th width="10%">Telp Kantor</th>
-      <th width="10%">Model Paket</th>
-      <th>Jenis Paket</th>
-      <th>Tipe Paket</th>
-      <th>Schedule Date</th>
-      <th>Schedule Time</th>
+      <th width="15%">Nama Perusahaan</th>
+      <th width="10%">Jenis Paket</th>
+      <th width="15%">Tipe Paket</th>
+      <th width="15%">Model Paket</th>
+      <th width="15%">Tgl Schedule</th>
+      <th width="15%">Alamat Kirim</th>
     </tr>
   </thead>
   <tbody>
   <?php if ($data):?>
     <?php foreach ($data as $item):?>
-    <tr>
-      <td><?php echo anchor($this->module[0] . '/update/detail/' . $item->sched_idx, $item->cus_corporate_id)?></td>
-      <td><?php echo $item->cus_cp ?></td>
-      <td><?php echo $item->cus_alamat ?></td>
-      <td><?php echo $item->cus_telepon_kantor ?></td>
-      <td><?php echo $item->pkt_status ?></td>
-      <td><?php echo $item->pkt_jenis ?></td>
-      <td><?php echo $item->pkt_tipe?></td>
-      <td><?php echo $item->sched_date?></td>
-      <td><?php echo $item->sched_time?></td>
-    </tr>
+      <tr>
+	<td><?php echo anchor($module[0].'/update/'.$cus_idx.'/'.$pkt_idx.'/'.$item->sched_idx, $item->cus_corporate_id)?></td>
+	<td><?php echo $item->cus_nama_perusahaan?></td>
+	<td><?php echo $item->pkt_jenis ?></td>
+	<td><?php echo $item->pkt_tipe ?></td>
+	<td><?php echo $item->pkt_status ?></td>
+	<td><?php echo $item->sched_date_time?></td>
+	<td><?php echo $item->sched_alamat_kirim?></td>
+      </tr>
     <?php endforeach;?>
   <?php else:?>
-    There is no data. <?php echo anchor($module[0].'/insert','Please input one here')?>
+      <tr>
+	<td colspan="7">There is no data.</td>
+      </tr>
   <?php endif;?>
   </tbody>
 </table>
+<?php echo anchor($module[0].'/update/'.$cus_idx.'/'.$pkt_idx,'Add New Schedule')?>

@@ -99,6 +99,18 @@ class Customer_m extends MY_Model {
 		return parent :: get();
 	}
 
+	
+	public function get_list_schedule ($cus_idx, $pkt_idx)
+	{
+		$this->db->join('paket', 'paket.cus_idx = customer.cus_idx');
+		$this->db->join('schedule', 'paket.pkt_idx = schedule.pkt_idx');
+		$this->db->where('customer.cus_idx', $cus_idx);
+		$this->db->where('paket.pkt_idx', $pkt_idx);
+		$this->db->order_by('sched_date_time');
+		return parent :: get();
+	}
+	
+
 	public function get_by_corporate_id ($cus_corporate_id = false)
 	{
 		$this->db->where('cus_corporate_id', $cus_corporate_id);
