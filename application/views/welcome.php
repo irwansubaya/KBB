@@ -69,6 +69,7 @@
 		      <h3>Report</h3>
 		      <p>
 			    <ul class="nav nav-tabs nav-stacked">
+				<li><a href="<?php echo base_url().'report/report/'?>">report</a></li>
 			    </ul>
 		      </p>
 		    </div>

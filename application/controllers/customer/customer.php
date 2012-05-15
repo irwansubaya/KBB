@@ -294,7 +294,7 @@ class Customer extends MY_Controller {
 				}
 				else
 				{
-					$this->params['cus'] = $this->customer_m->get($idx);
+					$this->params['cus'] = $this->customer_m->get_schedule_detail($idx);
 					$this->params['data'] = $this->customer_m->get_paket_schedule(false, $idx);
 					$this->_view('main_1_3', 'customer_list_schedule');
 				}

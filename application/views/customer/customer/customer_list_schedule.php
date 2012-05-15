@@ -63,7 +63,7 @@ exit;
 //echo "</pre>";
 //exit;
 ?>
-        <?php echo anchor($module[0].'/update/schedule/'.$cus->cus_idx.'/'.$cus->sched_idx,'Add New Schedule')?>
+        <?php echo anchor($module[0].'/update/schedule/'.$cus->cus_idx.'/customer_new_schedule','Add New Schedule')?>
         <?php //echo anchor($this->module[0].'/update/schedule/'.$cus->cus_idx.'/customer_new_schedule','Add New Schedule')?>
     </div>
 </div>

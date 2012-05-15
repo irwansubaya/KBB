@@ -85,7 +85,7 @@ exit;
       <td><?php echo $item->pkt_jenis ?></td>
       <!--<td><?php //echo date('d-m-y',strtotime($item->cus_tanggal_input ))?></td>-->
       <td><?php echo ($item->pkt_tanggal_koneksi == '') ? '' : date('d-m-y',strtotime($item->pkt_tanggal_koneksi ))?></td>
-      <td><?php echo anchor($module[0].'/update/schedule/'.$item->cus_idx,$item->cus_status)?></td>
+      <td><?php echo anchor($module[0].'/update/schedule/'.$item->cus_idx.'/'.$item->pkt_idx,$item->cus_status)?></td>
       <!--<td><?php //echo anchor($module[0].'/update/schedule/'.$item->cus_idx.'/'.$item->pkt_idx,$item->cus_status)?></td>-->
     </tr>
     <?php endforeach;?>
