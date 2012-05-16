@@ -31,79 +31,49 @@ class Schedule_m extends MY_Model {
 		$this->idx	 = 'sched_idx';
 		$this->fields	 = array(
 			'cus_idx' => array('', TRUE),
-			'cus_corporate_id'=>array('Corporate ID',true),
 			'pkt_idx' => array('', TRUE),
-			'sched_status' => array('Status', TRUE),
-			'sched_date' => array('Schedule Date', TRUE),
-			'sched_time' => array('Schedule Time', TRUE),
-			//'sched_alamat_kirim' => array('Schedule Time', TRUE),
-			'sched_agenda_kunjungan' => array('Schedule Time', TRUE)
+			'sched_date_time' => array('Date/Time', TRUE, 'convert_datetime'),
+			'sched_visit' => array('Schedule Visit', FALSE),
+			'sched_alamat_kirim' => array('Alamat Kirim', FALSE)
 		);
 	}
-	
-	
-	/**
-	 * Get record 
-	 *
-	 * @access	public
-	 * @param	integer
-	 * @return	boolean
-	*/
-	
-	
-	/*
-	public function get_sched_detail ($sched_idx)
-	{
-		//$this->db->join('paket', 'customer.cus_idx = paket.cus_idx');
-		$this->db->join('customer AS cus', 'cus.cus_idx = schedule.cus_idx');
-		$this->db->join('paket AS pkt', 'pkt.pkt_idx = cus.pkt_idx');		
-		if ($sched_idx) { $this->db->where('pkt_idx', $sched_idx); }
-		$this->db->order_by('cus_corporate_id');
-		return parent :: get();
-	}
 
-	*/	
 	/**
-	 * Insert SN Key
+	 * Insert Call
 	 *
 	 * @access	public
 	 * @param	integer
 	 * @return	boolean
 	 */
-	public function insert_call ($sched_idx = FALSE, $call_idx = FALSE)
+	public function insert_call ($sched_idx = FALSE)
 	{
-		$call = $this->input->post('item_call_admin');
-		$call = $this->input->post('item_call_date');
-		$call = $this->input->post('item_call_konfirm');
-		//$call_kategori = $this->input->post('item_call_kategori');
-		//$call_status = $this->input->post('item_call_status');
-		$call_cp_lain = $this->input->post('item_call_cp_lain');
-		$call_telp_lain = $this->input->post('item_call_telp_lain');
-		$call_konfirm = $this->input->post('item_call_keterangan');
-		// delete old key, insert key baru
-		$this->db->delete('call', array('sched_idx ' => $sched_idx));
+		$call[0] = $this->input->post('item_call_nama_admin');
+		$call[1] = $this->input->post('item_call_date');
+		$call[2] = $this->input->post('item_call_konfirm');
+		$call[3] = $this->input->post('item_call_cp_lain');
+		$call[4] = $this->input->post('item_call_telp_lain');
+		$call[5] = $this->input->post('item_call_keterangan');
+
+		// delete old call, insert new call
+		$this->db->delete('call', array('sched_idx' => $sched_idx));
 		
 		if ($this->input->post('item_call_date'))
 		{
 			for($i=0; $i<count($this->input->post('item_call_date')); $i++)
 			{
 				$this->db->set('sched_idx', $sched_idx);
-				$this->db->set('call_idx', $call_idx);
-				$this->db->set('adm_id', $adm_id);
-				$this->db->set('adm_username', $call[$i]);
-				$this->db->set('call_date', $call[$i]);
-				$this->db->set('call_konfirm', $call[$i]);
-				//$this->db->set('$call_kategori', $call_kategori[$i]);
-				//$this->db->set('call_kategori', $call_status[$i]);
-				$this->db->set('call_cp_lain', $call_cp_lain[$i]);
-				$this->db->set('Call_telp_lain', $call_telp_lain[$i]);
-				$this->db->set('call_keterangan', $call_keterangan[$i]);
+				$this->db->set('call_nama_admin', $call[0][$i]);
+				$this->db->set('call_date', convert_datetime($call[1][$i]));
+				$this->db->set('call_konfirm',$call[2][$i]);
+				$this->db->set('call_cp_lain', $call[3][$i]);
+				$this->db->set('call_telp_lain', $call[4][$i]);
+				$this->db->set('call_keterangan', $call[5][$i]);
 				$this->db->insert('call');
 			}
 		}
 		return TRUE;
 	}
-	
+
 	/**
 	 * Save method
 	 *
@@ -111,14 +81,12 @@ class Schedule_m extends MY_Model {
 	 * @param	integer
 	 * @return	boolean
 	 */
-	
 	public function save ($idx = FALSE)
 	{
-		//$this->db->set('pkt_tanggal_input',date('d-m-y'));
-		//$this->db->set('pkt_admin_input','irwan');
+		$agenda = (($this->input->post('agenda_kunjungan')) > 0) ? implode(',',$this->input->post('agenda_kunjungan')) : '';
+		$this->db->set('sched_agenda_kunjungan', $agenda);
 		parent :: save ($idx);
 		if(!$idx) $idx = $this->db->insert_id();
-		return $this->insert_call($idx, $this->input->post('cus_idx'));
-		//return parent :: save ($idx);	
+		return $this->insert_call($idx);
 	}
 }
