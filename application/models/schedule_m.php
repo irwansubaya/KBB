@@ -31,12 +31,13 @@ class Schedule_m extends MY_Model {
 		$this->idx	 = 'sched_idx';
 		$this->fields	 = array(
 			'cus_idx' => array('', TRUE),
-			'cus_corporate_id'=>array('Corporate ID',true),
+			//'cus_corporate_id'=>array('Corporate ID',true),
 			'pkt_idx' => array('', TRUE),
-			'sched_status' => array('Status', TRUE),
-			'sched_date' => array('Schedule Date', TRUE),
-			'sched_time' => array('Schedule Time', TRUE),
-			//'sched_alamat_kirim' => array('Schedule Time', TRUE),
+			//'sched_status' => array('Status', TRUE),
+			'sched_date_time' => array('Schedule Date', false),
+			'sched_visit' => array('Schedule Visit', TRUE),
+			//'sched_time' => array('Schedule Time', TRUE),
+			'sched_alamat_kirim' => array('Schedule Time', false),
 			'sched_agenda_kunjungan' => array('Schedule Time', TRUE)
 		);
 	}
@@ -64,7 +65,7 @@ class Schedule_m extends MY_Model {
 
 	*/	
 	/**
-	 * Insert SN Key
+	 * Insert call Key
 	 *
 	 * @access	public
 	 * @param	integer

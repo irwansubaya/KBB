@@ -8,9 +8,10 @@
 		    dateFormat: 'dd-M-yy',
 		    showAnim: 'fold'
 	});
-        //$('#date').datepicker();
-        $('#date_time').datetimepicker();
-        //$('#time').timepicker();
+        $('#date').datepicker();
+        //$('#date_time').datetimepicker({       }        );
+        $("#time1").timePicker();
+        $('#time').timepicker();
     });
     
     	//var val = new Array();
@@ -134,19 +135,22 @@
         <td><?php echo form_text('Model Paket','pkt_status',(isset($data[0]->pkt_status))?$data[0]->pkt_status:'','class="span2"  readonly');?></td>
     </tr>
     <tr>
-        <td><?php echo form_text('Tgl Koneksi','pkt_tanggal_koneksi',(isset($data[0]->pkt_tanggal_koneksi))?$data[0]->pkt_tanggal_koneksi:'','class="span2" maxlength="15"  readonly');?></td>
+        <td><?php echo form_text('Tgl Koneksi','pkt_tanggal_koneksi',(isset($data[0]->pkt_tanggal_koneksi))?date('d-M-Y ;l',strtotime($data[0]->pkt_tanggal_koneksi)):'','class="span2" maxlength="15"  readonly');?></td>
         <td>&nbsp;</td>
-        <td><?php echo form_text('Tgl Due Date','pkt_jatuh_tempo',(isset($data[0]->pkt_jatuh_tempo))?$data[0]->pkt_jatuh_tempo:'','class="span2" maxlength="15"  readonly');?></td> 
+        <td><?php echo form_text('Tgl Due Date','pkt_jatuh_tempo',(isset($data[0]->pkt_jatuh_tempo))?date('d-M-Y ;l',strtotime($data[0]->pkt_jatuh_tempo)):'','class="span2" maxlength="15"  readonly');?></td> 
     </tr>
     <tr>
-        <td><?php echo form_text('Tgl Terima Paket','pkt_tanggal_terima',(isset($data[0]->pkt_tanggal_terima))?$data[0]->pkt_tanggal_terima:'','class="span2" maxlength="15" id="pkt_tanggal_terima" readonly');?></td>
+        <td><?php echo form_text('Tgl Terima Paket','pkt_tanggal_terima',(isset($data[0]->pkt_tanggal_terima))?date('d-M-Y ; l',strtotime($data[0]->pkt_tanggal_terima)):'','class="span2" maxlength="15" id="pkt_tanggal_terima" readonly');?></td>
         <td>&nbsp;</td>
         <td><?php echo form_drop('Status *','cus_status',$status,(isset($data[0]->cus_status))?$data[0]->cus_status:'','class="span2"');?></td>
     </tr>
     <tr>
-        <td><?php echo form_text('Schedule Date & Time *','sched_date_time',(isset($data[0]->sched_date_time))?$data[0]->sched_date_time:'','class="span2" id="date_time"');?></td>
+        <td><?php echo form_text('Schedule Date','sched_date',(isset($data[0]->sched_date))?date('d-M-Y ;l',strtotime($data[0]->sched_date)):'','class="span2" id="sched_date"autocomplete="off"');?></td>
         <td>&nbsp;</td>
         <td><?php echo form_drop('Visit','sched_visit',$visit,(isset($data[0]->sched_visit))?$data[0]->sched_visit:'','class="span2"');?></td>
+    </tr>
+    <tr>
+        <td><?php echo form_text('Schedule Time *','sched_time',(isset($data[0]->sched_time))?date('d-M-Y ;l',strtotime($data[0]->sched_time)):'','class="span2" id="time"autocomplete="off"');?></td>
     </tr>
     <tr>
         <td>
@@ -165,7 +169,7 @@
         <?php //echo form_text('Agenda Kunjungan *','sched_agenda_kunjungan',(isset($data[0]->sched_agenda_kunjungan))?$data[0]->sched_agenda_kunjungan:'','class="span3" maxlength="10"');?>
         </td>
         <td>&nbsp;</td>
-        <td><?php echo form_area('Alamat Kirim *','sched_alamat_kirim',(isset($data[0]->sched_alamat_kirim))?$data[0]->sched_alamat_kirim:'','class="span3" maxlength="10"');?></td>
+        <td><?php echo form_area('Alamat Kirim *','sched_alamat_kirim',(isset($data[0]->sched_alamat_kirim))?$data[0]->sched_alamat_kirim:'','class="span3" maxlength="10" autocomplete="off"');?></td>
     </tr>
 </table>
 
