@@ -69,8 +69,9 @@ class Schedule extends MY_Controller {
 				if ($this->schedule_m->save())
 				{
 					setSucces('Data is saved');
-					redirect ($this->module[0]);
-					redirect ($this->module[0].'/update/schedule/'.$this->db->insert_id().'/schedule_new/');
+					$cus_idx = $this->input->post('cus_idx');
+					$pkt_idx = $this->input->post('pkt_idx');
+					redirect ($this->module[0].'/update/'.$cus_idx.'/'.$pkt_idx.'/'.$this->db->insert_id());
 				}
 				else
 				{
@@ -88,7 +89,7 @@ class Schedule extends MY_Controller {
 	
 	public function update ($cus_idx, $cus_idx, $sched_idx)
 	{
-		if ($idx AND $this->schedule_m->get($sched_idx))
+		if ($sched_idx AND $this->schedule_m->get($sched_idx))
 		{
 			if ($this->input->post('save'))
 			{

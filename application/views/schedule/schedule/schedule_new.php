@@ -8,17 +8,9 @@
 		    dateFormat: 'dd-M-yy',
 		    showAnim: 'fold'
 	});
-        $('#date').datepicker();
-        //$('#date_time').datetimepicker({       }        );
-        $("#time1").timePicker();
-        $('#time').timepicker();
+        $('#date_time').datetimepicker();
     });
-    
-    	//var val = new Array();
-	<?php
-	//foreach ($kategori as $val) 
-	  //  echo "val['{$val[0]}'] = '{$val[1]}';\n";
-	?>
+
 	$("#call_status").val(val[$("#call_keterangan").val()]);
  
 	$("#call_keterangan").change(function() {
@@ -30,9 +22,6 @@
     {
         if ($("#call_konfirm").val() == '') {alert ('Please fill respon'); $("#call_konfirm").focus()}
         else if ($("#call_status").val() == '') {alert ('Please fill Status'); $("#call_status").focus()}
-        //else if ($("#call_cp_lain").val() == '') {alert ('Please fill CP Lain'); $("#call_cp_lain").focus()}
-        //else if ($("#call_telp_lain").val() == '') {alert ('Please fill Telp Lain'); $("#call_telp_lain").focus()}
-        //else if ($("#call_keterangan").val() == '') {alert ('Please fill Telp Lain'); $("#call_keterangan").focus()}
 	else insert_call_print ();
     }
 
@@ -102,8 +91,8 @@
 <?php echo view_errors();?>
 <table>
     <tr>
-	<td><?php echo form_hidden('cus_idx','', 'id=cus_idx');?></td>
-        <td><?php echo form_hidden('pkt_idx','', 'id=pkt_idx');?></td>
+	<td><?php echo form_hidden('cus_idx',$cus->cus_idx, 'id=cus_idx');?></td>
+        <td><?php echo form_hidden('pkt_idx',$data[0]->pkt_idx, 'id=pkt_idx');?></td>
     </tr>
     <tr>
         <td><?php echo form_text('Corporate ID*','cus_corporate_id',(isset($data[0]->cus_corporate_id))?$data[0]->cus_corporate_id:'','class="span2" maxlength="10" id="sched_corporate_id" readonly');?></td>
@@ -157,16 +146,15 @@
             <div class="control-group">
 		<label class="control-label" for="it_has_ed">Agenda Kunjungan</label>
 		<div class="controls">
-		    <input type="checkbox" name="agenda_kunj" <?php (isset($data[0]->sched_agenda_kunjungan) && $data[0]->sched_agenda_kunjungan==1)?' checked':'' ?>>  Key BCA Delivery<br>
-		    <input type="checkbox" name="agenda_kunj" <?php (isset($data[0]->sched_agenda_kunjungan) && $data[0]->sched_agenda_kunjungan==1)?' checked':'' ?>>  VPN Setting & Instalation<br>
-		    <input type="checkbox" name="agenda_kunj" <?php (isset($data[0]->sched_agenda_kunjungan) && $data[0]->sched_agenda_kunjungan==1)?' checked':'' ?>>  Tarining Pemakaian<br>
-		    <input type="checkbox" name="agenda_kunj" <?php (isset($data[0]->sched_agenda_kunjungan) && $data[0]->sched_agenda_kunjungan==1)?' checked':'' ?>>  Training Sysadmin<br>
-		    <input type="checkbox" name="agenda_kunj" <?php (isset($data[0]->sched_agenda_kunjungan) && $data[0]->sched_agenda_kunjungan==1)?' checked':'' ?>>  Training MAR<br>
-		    <input type="checkbox" name="agenda_kunj" <?php (isset($data[0]->sched_agenda_kunjungan) && $data[0]->sched_agenda_kunjungan==1)?' checked':'' ?>>  Training MFTS Converter<br>
-		    <input type="checkbox" name="agenda_kunj" <?php (isset($data[0]->sched_agenda_kunjungan) && $data[0]->sched_agenda_kunjungan==1)?' checked':'' ?>>  KBB Traouble Shooting
+		    <input type="checkbox" name="agenda_kunjungan[]" value="Key BCA Delivery"<?php echo (isset($data[0]->sched_agenda_kunjungan) && in_array('Key BCA Delivery', explode(',', $data[0]->sched_agenda_kunjungan)))?' checked':'' ?>>  Key BCA Delivery<br>
+		    <input type="checkbox" name="agenda_kunjungan[]" value="VPN Setting & Instalation"<?php echo (isset($data[0]->sched_agenda_kunjungan) && in_array('VPN Setting & Instalation', explode(',', $data[0]->sched_agenda_kunjungan)))?' checked':'' ?>>  VPN Setting & Instalation<br>
+		    <input type="checkbox" name="agenda_kunjungan[]" value="Training Pemakaian"<?php echo (isset($data[0]->sched_agenda_kunjungan) && in_array('Training Pemakaian', explode(',', $data[0]->sched_agenda_kunjungan)))?' checked':'' ?>>  Training Pemakaian<br>
+		    <input type="checkbox" name="agenda_kunjungan[]" value="Training Sysadmin"<?php echo (isset($data[0]->sched_agenda_kunjungan) && in_array('Training Sysadmin', explode(',', $data[0]->sched_agenda_kunjungan)))?' checked':'' ?>>  Training Sysadmin<br>
+		    <input type="checkbox" name="agenda_kunjungan[]" value="Training MAR"<?php echo (isset($data[0]->sched_agenda_kunjungan) && in_array('Training MAR', explode(',', $data[0]->sched_agenda_kunjungan)))?' checked':'' ?>>  Training MAR<br>
+		    <input type="checkbox" name="agenda_kunjungan[]" value="Training MFTS Converter"<?php echo (isset($data[0]->sched_agenda_kunjungan) && in_array('Training MFTS Converter', explode(',', $data[0]->sched_agenda_kunjungan)))?' checked':'' ?>>  Training MFTS Converter<br>
+		    <input type="checkbox" name="agenda_kunjungan[]" value="KBB Trouble Shooting"<?php echo (isset($data[0]->sched_agenda_kunjungan) && in_array('KBB Trouble Shooting', explode(',', $data[0]->sched_agenda_kunjungan)))?' checked':'' ?>>  KBB Trouble Shooting
 		</div>
 	    </div>
-        <?php //echo form_text('Agenda Kunjungan *','sched_agenda_kunjungan',(isset($data[0]->sched_agenda_kunjungan))?$data[0]->sched_agenda_kunjungan:'','class="span3" maxlength="10"');?>
         </td>
         <td>&nbsp;</td>
         <td><?php echo form_area('Alamat Kirim *','sched_alamat_kirim',(isset($data[0]->sched_alamat_kirim))?$data[0]->sched_alamat_kirim:'','class="span3" maxlength="10" autocomplete="off"');?></td>
@@ -181,7 +169,7 @@
         <td><input type="text" name="call_nama_admin" placeholder="Nama Admin" id="call_nama_admin" class="span2" value="Irwan" readonly="readonly"></td>
         <td>&nbsp;</td>
         <td>Call Date</td>
-        <td><input type="text" name="call_date" placeholder="Date" id="call_date" class="span2" readonly="readonly" value="<?php echo date('d-M-y H:i ;l')?>"></td>
+        <td><input type="text" name="call_date" placeholder="Date" id="call_date" class="span2" readonly="readonly" value="<?php echo date('d-M-y H:i')?>"></td>
         <td>&nbsp;</td>
 	 <td>Respon</td>
         <td>
