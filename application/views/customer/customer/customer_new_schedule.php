@@ -95,7 +95,7 @@
     
 </script>
 <div class="page-header">
-    <h2>Detail Customer : <?php echo '['.$cus[0]->cus_corporate_id.'] '.$cus[0]->cus_nama_perusahaan ?></h2>
+    <h2>Detail Customer : <?php echo '['.$data[0]->cus_corporate_id.'] '.$data[0]->cus_nama_perusahaan ?></h2>
 </div>
 <div class="tabbable" style="margin-bottom: 9px;">
 <ul class="nav nav-tabs">

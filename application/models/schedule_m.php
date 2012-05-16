@@ -72,12 +72,14 @@ class Schedule_m extends MY_Model {
 	 */
 	public function insert_call ($sched_idx = FALSE, $call_idx = FALSE)
 	{
+		$call = $this->input->post('item_call_admin');
 		$call = $this->input->post('item_call_date');
-		$call_kategori = $this->input->post('item_call_kategori');
-		$call_status = $this->input->post('item_call_status');
+		$call = $this->input->post('item_call_konfirm');
+		//$call_kategori = $this->input->post('item_call_kategori');
+		//$call_status = $this->input->post('item_call_status');
 		$call_cp_lain = $this->input->post('item_call_cp_lain');
 		$call_telp_lain = $this->input->post('item_call_telp_lain');
-		$call_konfirm = $this->input->post('item_call_konfirm');
+		$call_konfirm = $this->input->post('item_call_keterangan');
 		// delete old key, insert key baru
 		$this->db->delete('call', array('sched_idx ' => $sched_idx));
 		
@@ -87,9 +89,12 @@ class Schedule_m extends MY_Model {
 			{
 				$this->db->set('sched_idx', $sched_idx);
 				$this->db->set('call_idx', $call_idx);
+				$this->db->set('adm_id', $adm_id);
+				$this->db->set('adm_username', $call[$i]);
 				$this->db->set('call_date', $call[$i]);
-				$this->db->set('$call_kategori', $call_kategori[$i]);
-				$this->db->set('call_kategori', $call_status[$i]);
+				$this->db->set('call_konfirm', $call[$i]);
+				//$this->db->set('$call_kategori', $call_kategori[$i]);
+				//$this->db->set('call_kategori', $call_status[$i]);
 				$this->db->set('call_cp_lain', $call_cp_lain[$i]);
 				$this->db->set('Call_telp_lain', $call_telp_lain[$i]);
 				$this->db->set('call_keterangan', $call_keterangan[$i]);
@@ -106,8 +111,14 @@ class Schedule_m extends MY_Model {
 	 * @param	integer
 	 * @return	boolean
 	 */
+	
 	public function save ($idx = FALSE)
 	{
-		return parent :: save ($idx);	
+		//$this->db->set('pkt_tanggal_input',date('d-m-y'));
+		//$this->db->set('pkt_admin_input','irwan');
+		parent :: save ($idx);
+		if(!$idx) $idx = $this->db->insert_id();
+		return $this->insert_call($idx, $this->input->post('cus_idx'));
+		//return parent :: save ($idx);	
 	}
 }

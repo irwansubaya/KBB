@@ -38,4 +38,4 @@
   <?php endif;?>
   </tbody>
 </table>
-<?php echo anchor($module[0].'/update/'.$cus_idx.'/'.$pkt_idx,'Add New Schedule')?>
+<?php echo anchor($module[0].'/insert/'.$cus_idx.'/'.$pkt_idx,'Add New Schedule')?>
