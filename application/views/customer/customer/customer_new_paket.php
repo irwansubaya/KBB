@@ -3,16 +3,21 @@
     $(document).ready(function(){
         $("#formid").validate();
         $("#pkt_tanggal_koneksi").datepicker({
-		changeMonth: true,
-		changeYear: true,
-		dateFormat: 'dd-M-yy',
+                showOn: "button",
+		buttonImage: "images/calendar.gif",
+		buttonImageOnly: true,
+                minDate: '-2m',
+                maxDate:'+2m',
+		dateFormat: 'dd-M-yy DD',
 		showAnim: 'fold'
 	});
-        $("#pkt_tanggal_terima").datepicker
-	({
+        $("#pkt_tanggal_terima").datepicker({
+                showOn: "button",
+		buttonImage: "images/calendar.gif",
+		buttonImageOnly: true,
 		changeMonth: true,
 		changeYear: true,
-		dateFormat: 'dd-M-yy',
+		dateFormat: 'dd-M-yy DD',
 		showAnim: 'fold',
                 minDate: '-2m',
                 maxDate:'+2m',
@@ -43,7 +48,7 @@
 		    } else if (dateText.is().friday()) {
 			var due_date =  dateText.next().wednesday();
 		    } 
-		    $('#pkt_jatuh_tempo').val(due_date.toString('dd-MMM-yyyy'));
+		    $('#pkt_jatuh_tempo').val(due_date.toString('dd-MMM-yyyy dddd'));
 		}
 	});
         $('#pkt_corporate_id').autocomplete('<?php echo base_url()?>customer/paket/customer_ajax',{
@@ -166,11 +171,11 @@
 	</tr>
 	<tr>
 	    <td><?php echo form_drop('Model Paket *','pkt_status',array('new'=>'New','upgrade'=>'Upgrade','amplop'=>'Amplop','info_bca'=>'Info BCA'),(isset($data[0]->pkt_status))?$data[0]->pkt_status:'','class="span2"');?></td>
-	    <td><?php echo form_text('Tgl Koneksi*','pkt_tanggal_koneksi',(isset($data[0]->pkt_tanggal_koneksi))?date('d-M-Y',strtotime($data[0]->pkt_tanggal_koneksi)):'','class="span2" maxlength="15" id="pkt_tanggal_koneksi"');?></td>
+	    <td><?php echo form_text('Tgl Koneksi*','pkt_tanggal_koneksi',(isset($data[0]->pkt_tanggal_koneksi))?date('d-M-Y ',strtotime($data[0]->pkt_tanggal_koneksi)):'','class="span2" id="pkt_tanggal_koneksi" readonly');?></td>
 	</tr>
 	<tr>
-	    <td><?php echo form_text('Tgl Terima Paket*','pkt_tanggal_terima',(isset($data[0]->pkt_tanggal_terima))?date('d-M-Y',strtotime($data[0]->pkt_tanggal_terima)):'','class="span2" maxlength="15" id="pkt_tanggal_terima" autocomplete="off"');?></td>
-	    <td><?php echo form_text('Tgl Due Date*','pkt_jatuh_tempo',(isset($data[0]->pkt_jatuh_tempo))?date('d-M-Y',strtotime($data[0]->pkt_jatuh_tempo)):'','class="span2" maxlength="15" autocomplete="off" readonly');?></td>
+	    <td><?php echo form_text('Tgl Terima Paket*','pkt_tanggal_terima',(isset($data[0]->pkt_tanggal_terima))?date('d-M-Y',strtotime($data[0]->pkt_tanggal_terima)):'','class="span2" maxlength="15" id="pkt_tanggal_terima" autocomplete="off" readonly');?></td>
+	    <td><?php echo form_text('Tgl Due Date*','pkt_jatuh_tempo',(isset($data[0]->pkt_jatuh_tempo))?date('d-M-Y D',strtotime($data[0]->pkt_jatuh_tempo)):'','class="span2" maxlength="15" autocomplete="off" readonly');?></td>
 	</tr>
 	</table>
 	    <legend>List Key</legend>

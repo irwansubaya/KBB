@@ -30,10 +30,11 @@ class Call_m extends MY_Model {
 		$this->tableName = 'call';
 		$this->idx	 = 'call_idx';
 		$this->fields	 = array(
-			'adm_username' => array('admin name', TRUE),
+			//'adm_username' => array('admin name', TRUE),
 			'call_date' => array('Call Date', TRUE),
-			'call_status' => array('Status', TRUE),
-                        'call_kategori' => array('Kategori', false),
+			'call_konfirm' => array('Komfirm', TRUE),
+                        'call_cp_lain' => array('CP Lain', false),
+			'call_telp_lain' => array('Telp Lain', false),
 			'call_keterangan' => array('Keterangan',true),
 		);
 	}
@@ -46,6 +47,13 @@ class Call_m extends MY_Model {
 	 * @param	integer
 	 * @return	boolean
 	*/
+	public function get_sched_call ($sched_idx = FALSE)
+	{
+		$this->db->where('call_idx', $sched_idx);
+		$this->db->order_by('call_nama_admin');
+		return parent :: get ();
+	}
+	
 	public function get_call_detail ($call_idx = FALSE, $cus_idx = FALSE)
 	{
 		$this->db->join('customer', 'customer.cus_idx = call.cus_idx');
@@ -61,14 +69,19 @@ class Call_m extends MY_Model {
 	 * @param	integer
 	 * @return	boolean
 	 */
-	public function save ($idx = FALSE)
+	/*public function save ($idx = FALSE)
 	{
 		$this->db->set('pkt_fitur', implode(',', $this->input->post('fitur')));
 		parent :: save ($idx);
 		if(!$idx) $idx = $this->db->insert_id();
 		return $this->insert_sn($idx, $this->input->post('cus_idx'));
+	}*/
+	
+	public function save ($idx = FALSE)
+	{
+		return parent :: save ($idx);	
 	}
-
+	
 	public function convert_date ($str = FALSE)
 	{
 		return date('y-m-d', strtotime($str));

@@ -32,7 +32,7 @@ class Schedule_m extends MY_Model {
 		$this->fields	 = array(
 			'cus_idx' => array('', TRUE),
 			'pkt_idx' => array('', TRUE),
-			'sched_date_time' => array('Date/Time', TRUE, 'convert_datetime'),
+			//'sched_date_time' => array('Date/Time', TRUE, 'convert_datetime'),
 			'sched_visit' => array('Schedule Visit', FALSE),
 			'sched_alamat_kirim' => array('Alamat Kirim', FALSE)
 		);

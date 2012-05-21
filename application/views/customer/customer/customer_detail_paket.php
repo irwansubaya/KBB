@@ -5,15 +5,14 @@
         $("#pkt_tanggal_koneksi").datepicker({
 		changeMonth: true,
 		changeYear: true,
-		dateFormat: 'dd-M-yy',
+		dateFormat: 'dd-M-yy DD',
 		showAnim: 'fold',
-		
 	});
         $("#pkt_tanggal_terima").datepicker
 	({
 		changeMonth: true,
 		changeYear: true,
-		dateFormat: 'dd-M-yy',
+		dateFormat: 'dd-M-yy DD',
 		showAnim: 'fold',
 		minDate: new date(),
 		onClose: function(dateText, inst)
@@ -79,7 +78,8 @@
             }
         });*/
     });
-
+    
+    
     var id = 0;
     function insert_key ()
     {

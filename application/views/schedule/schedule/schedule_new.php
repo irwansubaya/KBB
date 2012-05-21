@@ -8,14 +8,20 @@
 		    dateFormat: 'dd-M-yy',
 		    showAnim: 'fold'
 	});
-        $('#date_time').datetimepicker();
+        $('#date_time').datetimepicker({
+            dateFormat: 'dd-M-yy DD',
+            });
     });
-
+    
+    //var val = new Array();
+    <?php
+        //foreach ($kategori as $val)
+           // echo "val['{$val[0]}'] = '{$val[1]}';\n";
+    ?>
+        //$("#call_status").val(val[$("#call_kategori").val()]);
+        ////$("#call_kategori").change(function() {
 	$("#call_status").val(val[$("#call_keterangan").val()]);
- 
-	$("#call_keterangan").change(function() {
-	    $("#call_status").val(val[$("#call_keterangan").val()]);
-	});
+	//});
     
     var id = 0;
     function insert_call ()
@@ -124,22 +130,19 @@
         <td><?php echo form_text('Model Paket','pkt_status',(isset($data[0]->pkt_status))?$data[0]->pkt_status:'','class="span2"  readonly');?></td>
     </tr>
     <tr>
-        <td><?php echo form_text('Tgl Koneksi','pkt_tanggal_koneksi',(isset($data[0]->pkt_tanggal_koneksi))?date('d-M-Y ;l',strtotime($data[0]->pkt_tanggal_koneksi)):'','class="span2" maxlength="15"  readonly');?></td>
+        <td><?php echo form_text('Tgl Koneksi','pkt_tanggal_koneksi',(isset($data[0]->pkt_tanggal_koneksi))?date('d-M-Y ;l',strtotime($data[0]->pkt_tanggal_koneksi)):'','class="span2"  readonly');?></td>
         <td>&nbsp;</td>
-        <td><?php echo form_text('Tgl Due Date','pkt_jatuh_tempo',(isset($data[0]->pkt_jatuh_tempo))?date('d-M-Y ;l',strtotime($data[0]->pkt_jatuh_tempo)):'','class="span2" maxlength="15"  readonly');?></td> 
+        <td><?php echo form_text('Tgl Due Date','pkt_jatuh_tempo',(isset($data[0]->pkt_jatuh_tempo))?date('d-M-Y ;l',strtotime($data[0]->pkt_jatuh_tempo)):'','class="span2"  readonly');?></td> 
     </tr>
     <tr>
-        <td><?php echo form_text('Tgl Terima Paket','pkt_tanggal_terima',(isset($data[0]->pkt_tanggal_terima))?date('d-M-Y ; l',strtotime($data[0]->pkt_tanggal_terima)):'','class="span2" maxlength="15" id="pkt_tanggal_terima" readonly');?></td>
+        <td><?php echo form_text('Tgl Terima Paket','pkt_tanggal_terima',(isset($data[0]->pkt_tanggal_terima))?date('d-M-Y ; l',strtotime($data[0]->pkt_tanggal_terima)):'','class="span2" id="pkt_tanggal_terima" readonly');?></td>
         <td>&nbsp;</td>
-        <td><?php echo form_drop('Status *','cus_status',$status,(isset($data[0]->cus_status))?$data[0]->cus_status:'','class="span2"');?></td>
+        <td><?php echo form_text('Status ','cus_status',(isset($data[0]->cus_status))?$data[0]->cus_status:'','class="span2" readonly');?></td>
     </tr>
     <tr>
-        <td><?php echo form_text('Schedule Date','sched_date',(isset($data[0]->sched_date))?date('d-M-Y ;l',strtotime($data[0]->sched_date)):'','class="span2" id="sched_date"autocomplete="off"');?></td>
+        <td><?php echo form_text('Schedule Date & time','sched_date_time',(isset($data[0]->sched_date_time))?date('d-M-Y ;l',strtotime($data[0]->sched_date_time)):'','class="span3" id="date_time" autocomplete="off"');?></td>
         <td>&nbsp;</td>
         <td><?php echo form_drop('Visit','sched_visit',$visit,(isset($data[0]->sched_visit))?$data[0]->sched_visit:'','class="span2"');?></td>
-    </tr>
-    <tr>
-        <td><?php echo form_text('Schedule Time *','sched_time',(isset($data[0]->sched_time))?date('d-M-Y ;l',strtotime($data[0]->sched_time)):'','class="span2" id="time"autocomplete="off"');?></td>
     </tr>
     <tr>
         <td>
@@ -157,7 +160,7 @@
 	    </div>
         </td>
         <td>&nbsp;</td>
-        <td><?php echo form_area('Alamat Kirim *','sched_alamat_kirim',(isset($data[0]->sched_alamat_kirim))?$data[0]->sched_alamat_kirim:'','class="span3" maxlength="10" autocomplete="off"');?></td>
+        <td><?php echo form_area('Alamat Kirim ','sched_alamat_kirim',(isset($data[0]->sched_alamat_kirim))?$data[0]->sched_alamat_kirim:'','class="span3" maxlength="10" autocomplete="off"');?></td>
     </tr>
 </table>
 
@@ -169,16 +172,17 @@
         <td><input type="text" name="call_nama_admin" placeholder="Nama Admin" id="call_nama_admin" class="span2" value="Irwan" readonly="readonly"></td>
         <td>&nbsp;</td>
         <td>Call Date</td>
-        <td><input type="text" name="call_date" placeholder="Date" id="call_date" class="span2" readonly="readonly" value="<?php echo date('d-M-y H:i')?>"></td>
+        <td><input type="text" name="call_date" placeholder="Date" id="call_date" class="span2" readonly="readonly" value="<?php echo date('d-M-y H:i l')?>"></td>
         <td>&nbsp;</td>
 	 <td>Respon</td>
         <td>
             <select name="call_konfirm" id="call_konfirm" class="span2">
                 <?php
-                foreach ($konfirm as $vil) {
-                    echo '<option value="'.$vil[0].'">'.$vil[0].'</option>';
+                foreach ($konfirm as $val) {
+                    echo '<option value="'.$val[0].'">'.$val[0].'</option>';
                 }
                 ?>
+                
             </select>
         </td>
         <!--<td>Kategori</td>
