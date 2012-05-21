@@ -71,8 +71,7 @@ class Customer_m extends MY_Model {
 	public function save ($idx = FALSE)
 	{
 		$this->db->set('cus_tanggal_input',date('Y-m-d'));
-		$this->db->set('cus_admin_input','irwan');
-		$this->db->set('cus_status','Folow UP');
+		$this->db->set('cus_admin_input','irwan');		
 		return parent :: save ($idx);	
 	}
 

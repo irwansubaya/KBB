@@ -2,28 +2,26 @@
 <script type="text/javascript">
     $(document).ready(function(){
 	$("#formid").validate();
+	$('#cus_kode_cabang').autocomplete('<?php echo base_url()?>customer/customer/cabang_ajax',{
+                     parse: function(data){
+                         var parsed = [];
+                         for (var i=0; i < data.length; i++) {
+                             parsed[i] = { data: data[i], value: data[i].cab_code };
+                         }
+                         return parsed;
+                     },
+                     formatItem: function(data,i,max){
+                         return  '<div class="search_content"><bold> '+data.cab_code+' </bold> &nbsp;<small>'+data.cab_name+'</small></div>';
+                     },
+                     width: 450, 
+                     dataType: 'json' 
+                 }).result( 
+                         function(event,data,formated){
+                             $('#cus_kode_cabang').val(data.cab_code);
+                             $('#cab_name').val(data.cab_name);
+                     }
+             );
     });
-    $('#pkt_corporate_id').autocomplete('<?php echo base_url()?>customer/paket/customer_ajax',{
-		parse: function(data){
-		    var parsed = [];
-		    for (var i=0; i < data.length; i++) {
-			parsed[i] = { data: data[i], value: data[i].cus_corporate_id };
-		    }
-		    return parsed;
-		},
-		formatItem: function(data,i,max){
-		    return  '<div class="search_content"><bold> '+data.cus_corporate_id+' </bold> &nbsp;<small>'+data.cus_nama_perusahaan+'</small></div>';
-		},
-		width: 450, 
-		dataType: 'json' 
-	    }).result( 
-		    function(event,data,formated){
-			$('#pkt_corporate_id').val(data.cus_corporate_id);
-			$('#cus_nama_perusahaan').val(data.cus_nama_perusahaan);
-			$('#cus_cp').val(data.cus_cp);
-			$('#cus_idx').val(data.cus_idx);
-		}
-	)
     function dontEnter(evt) { 
     var evt = (evt) ? evt : ((event) ? event : null); 
         var node = (evt.target) ? evt.target : ((evt.srcElement) ? evt.srcElement : null); 
@@ -76,8 +74,8 @@
 		<td><?php echo form_text('Telp Fax','cus_no_fax',(isset($data->cus_no_fax))?$data->cus_no_fax:'','class="span2" maxlength="32" autocomplete="off"');?></td>
 	    </tr>
 	    <tr>
-		<td><?php echo form_text('Kode Cabang','cus_kode_cabang',(isset($data->cus_kode_cabang))?$data->cus_kode_cabang:'','class="span1" maxlength="32" autocomplete="off"');?></td>
-		<td><?php echo form_text('Cabang','cus_cabang',(isset($data->cus_cabang))?$data->cus_cabang:'','class="span2" readonly');?></td>
+		<td><?php echo form_text('Kode Cabang','cus_kode_cabang',(isset($data->cus_kode_cabang))?$data->cus_kode_cabang:'','class="span1" id="cus_kode_cabang"autocomplete="off"');?></td>
+		<td><?php echo form_text('Cabang','cus_cabang',(isset($data->cus_cabang))?$data->cus_cabang:'','class="span2" id="cab_name" readonly');?></td>
 	    </tr>
 	    <tr>
 		<td><?php echo form_text('Email *','cus_email',(isset($data->cus_email))?$data->cus_email:'','class="span3" maxlength="64" autocomplete="off"');?></td>

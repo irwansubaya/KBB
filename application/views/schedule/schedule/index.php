@@ -9,7 +9,7 @@
 <table class="table sortable">
   <thead>
     <tr>
-      <th width="10%">Corporate ID</th>
+      <th width="10%">Schedule ID</th>
       <th width="15%">Nama Perusahaan</th>
       <th width="10%">Jenis Paket</th>
       <th width="15%">Tipe Paket</th>
@@ -22,7 +22,7 @@
   <?php if ($data):?>
     <?php foreach ($data as $item):?>
       <tr>
-	<td><?php echo anchor($module[0].'/update/'.$cus_idx.'/'.$pkt_idx.'/'.$item->sched_idx, $item->cus_corporate_id)?></td>
+	<td><?php echo anchor($module[0].'/update/'.$cus_idx.'/'.$pkt_idx.'/'.$item->sched_idx, $item->sched_idx)?></td>
 	<td><?php echo $item->cus_nama_perusahaan?></td>
 	<td><?php echo $item->pkt_jenis ?></td>
 	<td><?php echo $item->pkt_tipe ?></td>

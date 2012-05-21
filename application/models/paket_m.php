@@ -100,6 +100,7 @@ class Paket_m extends MY_Model {
 		//$this->db->set('pkt_status', implode(',', $this->input->post('status')));
 		$this->db->set('pkt_tanggal_input',date('d-m-y'));
 		$this->db->set('pkt_admin_input','irwan');
+		$this->db->set('pkt_konfirm','Folow UP');
 		parent :: save ($idx);
 		if(!$idx) $idx = $this->db->insert_id();
 		return $this->insert_sn($idx, $this->input->post('cus_idx'));

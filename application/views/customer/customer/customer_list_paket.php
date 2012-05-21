@@ -24,12 +24,13 @@ $(document).ready(function() {
 	  <thead>
 	    <tr>
 	      <th width="10%">Jenis Paket</th>
-	      <th width="15%">Tipe Paket</th>
-	      <th width="15%">Model Paket</th>
-	      <th width="15%">Tgl Koneksi</th>
+	      <th width="10%">Tipe Paket</th>
+	      <th width="10%">Model Paket</th>
+	      <th width="10%">Jumlah Key</thH>
+	      <th width="10%">Tgl Koneksi</th>
 	      <th width="10%">Tgl Terima Paket</th>
 	      <th width="10%">Tgl Due Date</th>
-	      <th width="10%">Aktif</th>
+	      <!--<th width="10%">Aktif</th>-->
 	    </tr>
 	  </thead>
 	  <tbody>
@@ -39,10 +40,11 @@ $(document).ready(function() {
 	      <td><?php echo anchor($this->module[0] . '/update/paket/' . $item->cus_idx . '/' . $item->pkt_idx, $item->pkt_jenis)?></td>
 	      <td><?php echo $item->pkt_tipe?></td>
 	      <td><?php echo $item->pkt_status ?></td>
-	      <td><?php echo $item->pkt_tanggal_koneksi ?></td>
-	      <td><?php echo $item->pkt_tanggal_terima ?></td>
-	      <td><?php echo $item->pkt_jatuh_tempo ?></td>
-	      <td><input type="checkbox" name="aktif"></td>
+	      <td><?php echo $item->pkt_jumlah_key?></td>
+	      <td><?php echo ($item->pkt_tanggal_koneksi == '') ? '' : date('d-M-Y',strtotime($item->pkt_tanggal_koneksi ))?></td>
+	      <td><?php echo ($item->pkt_tanggal_terima == '') ? '' : date('d-M-Y',strtotime($item->pkt_tanggal_terima ))?></td>
+	      <td><?php echo ($item->pkt_jatuh_tempo == '') ? '' : date('d-M-Y',strtotime($item->pkt_jatuh_tempo ))?></td>
+	      <!--<td><input type="checkbox" name="aktif"></td>-->
 	    </tr>
 	    <?php endforeach;?>
 	  <?php else:?>

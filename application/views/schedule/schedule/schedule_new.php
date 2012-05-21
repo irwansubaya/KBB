@@ -14,20 +14,20 @@
     });
     
     //var val = new Array();
-    <?php
+    //<?php
         //foreach ($kategori as $val)
            // echo "val['{$val[0]}'] = '{$val[1]}';\n";
-    ?>
+    //?>
         //$("#call_status").val(val[$("#call_kategori").val()]);
         ////$("#call_kategori").change(function() {
-	$("#call_status").val(val[$("#call_keterangan").val()]);
+	//$("#call_status").val(val[$("#call_keterangan").val()]);
 	//});
     
     var id = 0;
     function insert_call ()
     {
         if ($("#call_konfirm").val() == '') {alert ('Please fill respon'); $("#call_konfirm").focus()}
-        else if ($("#call_status").val() == '') {alert ('Please fill Status'); $("#call_status").focus()}
+        //else if ($("#call_status").val() == '') {alert ('Please fill Status'); $("#call_status").focus()}
 	else insert_call_print ();
     }
 
@@ -35,9 +35,10 @@
     {
 	if($("#call_konfirm").val() == 'Di Jadwalkan')
 	{
-	    $("#cus_status").val('Active');
+	    $("#pkt_konfirm").val('Active');
 	}
-
+        else $("#pkt_konfirm").val('Folow Up');
+        
 	$string = '<tr id="call_'+id+'">'+
 		    '<td>'+$("#call_nama_admin").val()+'<input type="hidden" name="item_call_admin[]" value="'+$("#call_nama_admin").val()+'"></td>'+
 		    '<td>'+$("#call_date").val()+'<input type="hidden" name="item_call_date[]" value="'+$("#call_date").val()+'"></td>'+
@@ -142,30 +143,7 @@
     <tr>
         <td><?php echo form_text('Tgl Terima Paket','pkt_tanggal_terima',(isset($data[0]->pkt_tanggal_terima))?date('d-M-Y ; l',strtotime($data[0]->pkt_tanggal_terima)):'','class="span2" id="pkt_tanggal_terima" readonly');?></td>
         <td>&nbsp;</td>
-        <td><?php echo form_text('Status ','cus_status',(isset($data[0]->cus_status))?$data[0]->cus_status:'','class="span2" readonly');?></td>
-    </tr>
-    <tr>
-        <td><?php echo form_text('Schedule Date & time','sched_date_time',(isset($data[0]->sched_date_time))?date('d-M-Y ;l',strtotime($data[0]->sched_date_time)):'','class="span3" id="date_time" autocomplete="off"');?></td>
-        <td>&nbsp;</td>
-        <td><?php echo form_drop('Visit','sched_visit',$visit,(isset($data[0]->sched_visit))?$data[0]->sched_visit:'','class="span2"');?></td>
-    </tr>
-    <tr>
-        <td>
-            <div class="control-group">
-		<label class="control-label" for="it_has_ed">Agenda Kunjungan</label>
-		<div class="controls">
-		    <input type="checkbox" name="agenda_kunjungan[]" value="Key BCA Delivery"<?php echo (isset($data[0]->sched_agenda_kunjungan) && in_array('Key BCA Delivery', explode(',', $data[0]->sched_agenda_kunjungan)))?' checked':'' ?>>  Key BCA Delivery<br>
-		    <input type="checkbox" name="agenda_kunjungan[]" value="VPN Setting & Instalation"<?php echo (isset($data[0]->sched_agenda_kunjungan) && in_array('VPN Setting & Instalation', explode(',', $data[0]->sched_agenda_kunjungan)))?' checked':'' ?>>  VPN Setting & Instalation<br>
-		    <input type="checkbox" name="agenda_kunjungan[]" value="Training Pemakaian"<?php echo (isset($data[0]->sched_agenda_kunjungan) && in_array('Training Pemakaian', explode(',', $data[0]->sched_agenda_kunjungan)))?' checked':'' ?>>  Training Pemakaian<br>
-		    <input type="checkbox" name="agenda_kunjungan[]" value="Training Sysadmin"<?php echo (isset($data[0]->sched_agenda_kunjungan) && in_array('Training Sysadmin', explode(',', $data[0]->sched_agenda_kunjungan)))?' checked':'' ?>>  Training Sysadmin<br>
-		    <input type="checkbox" name="agenda_kunjungan[]" value="Training MAR"<?php echo (isset($data[0]->sched_agenda_kunjungan) && in_array('Training MAR', explode(',', $data[0]->sched_agenda_kunjungan)))?' checked':'' ?>>  Training MAR<br>
-		    <input type="checkbox" name="agenda_kunjungan[]" value="Training MFTS Converter"<?php echo (isset($data[0]->sched_agenda_kunjungan) && in_array('Training MFTS Converter', explode(',', $data[0]->sched_agenda_kunjungan)))?' checked':'' ?>>  Training MFTS Converter<br>
-		    <input type="checkbox" name="agenda_kunjungan[]" value="KBB Trouble Shooting"<?php echo (isset($data[0]->sched_agenda_kunjungan) && in_array('KBB Trouble Shooting', explode(',', $data[0]->sched_agenda_kunjungan)))?' checked':'' ?>>  KBB Trouble Shooting
-		</div>
-	    </div>
-        </td>
-        <td>&nbsp;</td>
-        <td><?php echo form_area('Alamat Kirim ','sched_alamat_kirim',(isset($data[0]->sched_alamat_kirim))?$data[0]->sched_alamat_kirim:'','class="span3" maxlength="10" autocomplete="off"');?></td>
+        <td><?php echo form_text('Status ','pkt_konfirm',(isset($data[0]->pkt_konfirm))?$data[0]->pkt_konfirm:'','class="span2" readonly');?></td>
     </tr>
 </table>
 
@@ -230,6 +208,50 @@
     </tr>
     </table>
    </div>
+   
+<legend>Schedule</legend>
+   <div class="well form-inline">
+        <table>
+            <tr>
+                <td><?php echo form_text('Schedule Date & time','sched_date_time',(isset($data[0]->sched_date_time))?date('d-M-Y ;l',strtotime($data[0]->sched_date_time)):'','class="span3" id="date_time" autocomplete="off"');?>
+                <?php echo form_drop('Visit','sched_visit',$visit,(isset($data[0]->sched_visit))?$data[0]->sched_visit:'','class="span2"');?></td>
+                <td valign="top"><?php echo form_area('Alamat Kirim ','sched_alamat_kirim',(isset($data[0]->sched_alamat_kirim))?$data[0]->sched_alamat_kirim:'','class="span3" maxlength="10" autocomplete="off"');?></td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="control-group">
+                        <label class="control-label" for="it_has_ed">Agenda Kunjungan</label>
+                        <div class="controls">
+                            <input type="checkbox" name="agenda_kunjungan[]" value="Key BCA Delivery"<?php echo (isset($data[0]->sched_agenda_kunjungan) && in_array('Key BCA Delivery', explode(',', $data[0]->sched_agenda_kunjungan)))?' checked':'' ?>>  Key BCA Delivery<br>
+                            <input type="checkbox" name="agenda_kunjungan[]" value="VPN Setting & Instalation"<?php echo (isset($data[0]->sched_agenda_kunjungan) && in_array('VPN Setting & Instalation', explode(',', $data[0]->sched_agenda_kunjungan)))?' checked':'' ?>>  VPN Setting & Instalation<br>
+                            <input type="checkbox" name="agenda_kunjungan[]" value="Training Pemakaian"<?php echo (isset($data[0]->sched_agenda_kunjungan) && in_array('Training Pemakaian', explode(',', $data[0]->sched_agenda_kunjungan)))?' checked':'' ?>>  Training Pemakaian<br>
+                            <input type="checkbox" name="agenda_kunjungan[]" value="Training Sysadmin"<?php echo (isset($data[0]->sched_agenda_kunjungan) && in_array('Training Sysadmin', explode(',', $data[0]->sched_agenda_kunjungan)))?' checked':'' ?>>  Training Sysadmin<br>
+                            <input type="checkbox" name="agenda_kunjungan[]" value="Training MAR"<?php echo (isset($data[0]->sched_agenda_kunjungan) && in_array('Training MAR', explode(',', $data[0]->sched_agenda_kunjungan)))?' checked':'' ?>>  Training MAR<br>
+                            <input type="checkbox" name="agenda_kunjungan[]" value="Training MFTS Converter"<?php echo (isset($data[0]->sched_agenda_kunjungan) && in_array('Training MFTS Converter', explode(',', $data[0]->sched_agenda_kunjungan)))?' checked':'' ?>>  Training MFTS Converter<br>
+                            <input type="checkbox" name="agenda_kunjungan[]" value="KBB Trouble Shooting"<?php echo (isset($data[0]->sched_agenda_kunjungan) && in_array('KBB Trouble Shooting', explode(',', $data[0]->sched_agenda_kunjungan)))?' checked':'' ?>>  KBB Trouble Shooting
+                        </div>
+                    </div>
+                </td>
+                <td>
+                    <div class="control-group">
+                        <label class="control-label" for="it_has_ed">Fitur BCA</label>
+                        <div class="controls">
+                            <input type="checkbox" name="agenda_kunjungan[]" value="Key BCA Delivery"<?php echo (isset($data[0]->sched_agenda_kunjungan) && in_array('Training BCA VA', explode(',', $data[0]->sched_agenda_kunjungan)))?' checked':'' ?>>  Training BCA VA<br>
+                            <input type="checkbox" name="agenda_kunjungan[]" value="Key BCA Delivery"<?php echo (isset($data[0]->sched_agenda_kunjungan) && in_array('Training VA', explode(',', $data[0]->sched_agenda_kunjungan)))?' checked':'' ?>>  Training VA<br>
+                            <input type="checkbox" name="agenda_kunjungan[]" value="VPN Setting & Instalation"<?php echo (isset($data[0]->sched_agenda_kunjungan) && in_array('Training Payroll', explode(',', $data[0]->sched_agenda_kunjungan)))?' checked':'' ?>>  Training Payroll<br>
+                            <input type="checkbox" name="agenda_kunjungan[]" value="Training Pemakaian"<?php echo (isset($data[0]->sched_agenda_kunjungan) && in_array('Training Auto Credit', explode(',', $data[0]->sched_agenda_kunjungan)))?' checked':'' ?>>  Training Auto Credit<br>
+                            <input type="checkbox" name="agenda_kunjungan[]" value="Training Sysadmin"<?php echo (isset($data[0]->sched_agenda_kunjungan) && in_array('Training Auto Colection', explode(',', $data[0]->sched_agenda_kunjungan)))?' checked':'' ?>>  Training Auto Colection<br>
+                            <input type="checkbox" name="agenda_kunjungan[]" value="Training MAR"<?php echo (isset($data[0]->sched_agenda_kunjungan) && in_array('Training B2B Pertamina', explode(',', $data[0]->sched_agenda_kunjungan)))?' checked':'' ?>>  Training B2B Pertamina<br>
+                            <input type="checkbox" name="agenda_kunjungan[]" value="Training MFTS Converter"<?php echo (isset($data[0]->sched_agenda_kunjungan) && in_array('Training Fleet', explode(',', $data[0]->sched_agenda_kunjungan)))?' checked':'' ?>>  Training Fleet<br>
+                            <input type="checkbox" name="agenda_kunjungan[]" value="KBB Trouble Shooting"<?php echo (isset($data[0]->sched_agenda_kunjungan) && in_array('DLL', explode(',', $data[0]->sched_agenda_kunjungan)))?' checked':'' ?>>  DLL
+                        </div>
+                    </div>
+                </td>
+                
+            </tr>
+        </table>
+</div>
+   
     <table class="table table-bordered" id="call_list">
       <thead>
 	<tr>

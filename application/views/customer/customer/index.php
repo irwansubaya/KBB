@@ -75,8 +75,8 @@
       <td><?php echo $item->cus_alamat ?></td>
       <td><?php echo $item->cus_handphone ?></td>
       <td><?php echo $item->pkt_jenis ?></td>
-      <td><?php echo ($item->pkt_tanggal_koneksi == '') ? '' : date('d-m-y',strtotime($item->pkt_tanggal_koneksi ))?></td>
-      <td><?php echo anchor(base_url().'schedule/schedule/index/'.$item->cus_idx.'/'.$item->pkt_idx,$item->cus_status)?></td>
+      <td><?php echo ($item->pkt_tanggal_koneksi == '') ? '' : date('d-M-Y',strtotime($item->pkt_tanggal_koneksi ))?></td>
+      <td><?php echo anchor(base_url().'schedule/schedule/index/'.$item->cus_idx.'/'.$item->pkt_idx,$item->pkt_konfirm)?></td>
     </tr>
     <?php endforeach;?>
   <?php else:?>

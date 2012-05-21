@@ -150,6 +150,12 @@
         var rows = $("#key_list >tbody tr").length;
         $("#pkt_jumlah_key").val(rows);
     }
+    function dontEnter(evt) { 
+    var evt = (evt) ? evt : ((event) ? event : null); 
+        var node = (evt.target) ? evt.target : ((evt.srcElement) ? evt.srcElement : null); 
+        if ((evt.keyCode == 13) && (node.type=="text"))  {return false;} 
+      } 
+      document.onkeypress = dontEnter;
 </script>
 <div class="page-header">
     <h2>Detail Customer : <?php echo '['.$cus->cus_corporate_id.'] '.$cus->cus_nama_perusahaan ?></h2>
@@ -174,8 +180,8 @@
 	    <td><?php echo form_text('Tgl Koneksi*','pkt_tanggal_koneksi',(isset($data[0]->pkt_tanggal_koneksi))?date('d-M-Y ',strtotime($data[0]->pkt_tanggal_koneksi)):'','class="span2" id="pkt_tanggal_koneksi" readonly');?></td>
 	</tr>
 	<tr>
-	    <td><?php echo form_text('Tgl Terima Paket*','pkt_tanggal_terima',(isset($data[0]->pkt_tanggal_terima))?date('d-M-Y',strtotime($data[0]->pkt_tanggal_terima)):'','class="span2" maxlength="15" id="pkt_tanggal_terima" autocomplete="off" readonly');?></td>
-	    <td><?php echo form_text('Tgl Due Date*','pkt_jatuh_tempo',(isset($data[0]->pkt_jatuh_tempo))?date('d-M-Y D',strtotime($data[0]->pkt_jatuh_tempo)):'','class="span2" maxlength="15" autocomplete="off" readonly');?></td>
+	    <td><?php echo form_text('Tgl Terima Paket*','pkt_tanggal_terima',(isset($data[0]->pkt_tanggal_terima))?date('d-M-Y',strtotime($data[0]->pkt_tanggal_terima)):'','class="span2"  id="pkt_tanggal_terima" autocomplete="off" readonly');?></td>
+	    <td><?php echo form_text('Tgl Due Date*','pkt_jatuh_tempo',(isset($data[0]->pkt_jatuh_tempo))?date('d-M-Y D',strtotime($data[0]->pkt_jatuh_tempo)):'','class="span2"  autocomplete="off" readonly');?></td>
 	</tr>
 	</table>
 	    <legend>List Key</legend>

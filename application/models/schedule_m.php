@@ -33,7 +33,9 @@ class Schedule_m extends MY_Model {
 			'cus_idx' => array('', TRUE),
 			'pkt_idx' => array('', TRUE),
 			//'sched_date_time' => array('Date/Time', TRUE, 'convert_datetime'),
-			'sched_visit' => array('Schedule Visit', FALSE),
+			'sched_date_time' => array('Date/Time'),
+			'sched_visit' => array('Schedule Visit',true),
+			'sched_agenda_kunjungan'=>array ('Agenda Kunjungan'),
 			'sched_alamat_kirim' => array('Alamat Kirim', FALSE)
 		);
 	}
