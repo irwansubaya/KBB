@@ -33,6 +33,11 @@
 
     function insert_call_print ()
     {
+	if($("#call_konfirm").val() == 'Di Jadwalkan')
+	{
+	    $("#cus_status").val('Active');
+	}
+
 	$string = '<tr id="call_'+id+'">'+
 		    '<td>'+$("#call_nama_admin").val()+'<input type="hidden" name="item_call_admin[]" value="'+$("#call_nama_admin").val()+'"></td>'+
 		    '<td>'+$("#call_date").val()+'<input type="hidden" name="item_call_date[]" value="'+$("#call_date").val()+'"></td>'+
