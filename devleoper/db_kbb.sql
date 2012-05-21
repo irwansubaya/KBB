@@ -1,16 +1,16 @@
 /*
 Navicat MySQL Data Transfer
 
-Source Server         : localhost
-Source Server Version : 50515
+Source Server         : localhost_3306
+Source Server Version : 50141
 Source Host           : localhost:3306
 Source Database       : kbb
 
 Target Server Type    : MYSQL
-Target Server Version : 50515
+Target Server Version : 50141
 File Encoding         : 65001
 
-Date: 2012-05-16 09:53:13
+Date: 2012-05-21 08:21:07
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -412,15 +412,23 @@ CREATE TABLE `tb_call` (
   `call_cp_lain` varchar(64) DEFAULT NULL,
   `call_telp_lain` varchar(64) DEFAULT NULL,
   `call_keterangan` text,
-  PRIMARY KEY (`call_idx`,`sched_idx`),
+  PRIMARY KEY (`call_idx`),
   KEY `tb_call_sched_idx_fk` (`sched_idx`),
   CONSTRAINT `tb_call_sched_idx_fk` FOREIGN KEY (`sched_idx`) REFERENCES `tb_schedule` (`sched_idx`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=33 DEFAULT CHARSET=latin1;
 
 -- ----------------------------
 -- Records of tb_call
 -- ----------------------------
-INSERT INTO `tb_call` VALUES ('5', '25', null, '2012-05-16 09:52:00', '--', 'sdasd', 'sdasd', 'asdas');
+INSERT INTO `tb_call` VALUES ('23', '42', null, '2012-05-16 12:45:00', 'Komputer Rusak', 'rewrwr', '324324234', 'dgdfgfd');
+INSERT INTO `tb_call` VALUES ('24', '43', null, '2012-05-16 12:56:00', 'Nasabaj Sulit Di', '', '', '');
+INSERT INTO `tb_call` VALUES ('25', '46', null, '2012-05-16 13:00:00', '--', '', '', '');
+INSERT INTO `tb_call` VALUES ('27', '41', null, '2012-05-18 19:59:00', 'Nasabah SIbuk', 'sgdfgdg', '342432424243', 'dfgdfgdfg');
+INSERT INTO `tb_call` VALUES ('28', '47', null, '2012-05-18 20:03:00', 'Nasabah SIbuk', '', '', '');
+INSERT INTO `tb_call` VALUES ('29', '48', null, '2012-05-18 20:03:00', 'Nasabah SIbuk', '', '', '');
+INSERT INTO `tb_call` VALUES ('30', '49', null, '2012-05-20 00:00:00', '--', '', '', '');
+INSERT INTO `tb_call` VALUES ('31', '50', null, '2012-05-20 00:00:00', 'Di Jadwalkan', '', '', '');
+INSERT INTO `tb_call` VALUES ('32', '50', null, '2012-05-20 00:00:00', 'Komputer Rusak', '', '', '');
 
 -- ----------------------------
 -- Table structure for `tb_customer`
@@ -449,12 +457,11 @@ CREATE TABLE `tb_customer` (
   `cus_admin_input` varchar(255) NOT NULL,
   `cus_status` varchar(255) NOT NULL,
   PRIMARY KEY (`cus_idx`)
-) ENGINE=InnoDB AUTO_INCREMENT=54064 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=54065 DEFAULT CHARSET=latin1;
 
 -- ----------------------------
 -- Records of tb_customer
 -- ----------------------------
-INSERT INTO `tb_customer` VALUES ('54042', '0', 'IBSDADADAD', 'AAAAAAAAAAAAAA', '9090909090909', '9090909090', 'Toko Keramik', 'HHJHJHJHJHJ', 'HJHJHJHJ', 'Jakarta Selatan', '89989', '3213123213', '8989898989', '313213123', '9898989', 'sukun', '0448', '', '2012-05-03', 'irwan', 'Folow UP');
 INSERT INTO `tb_customer` VALUES ('54043', '0', 'IBSJIKAKAK', 'IRWAN', '827263636', '0932393939', 'Toko Keramik', 'JL.  Meruya Ilir', 'Erika', 'Jakarta Selatan', '98292', '0219838383', '0928338389', '8989898989', '98989', 'joyoboyo', '0298', 'Erikia@jadinpratama.com', '2012-05-04', 'irwan', 'Folow UP');
 INSERT INTO `tb_customer` VALUES ('54044', '0', 'IBSYUGILIM', 'YUGI pt MAJUMUNDUR', '737183718372813', '7438287427', 'Toko Keramik', 'SKFJSKDFLJSDKFJDWH', 'LHJHJKHJKHKJHKJH', 'Jakarta Selatan', '93243', '0787878', '7897897', '878', '7878', 'rich palace', '5110', 'YUGI@FLEXI-RENT.CO.ID', '2012-05-08', 'irwan', 'Folow UP');
 INSERT INTO `tb_customer` VALUES ('54045', '0', 'IBSIRWANSU', 'IRWAN SUBAYA', '09282828282828', '9287398127', 'Toko Keramik', 'JL. KEDOYA', 'IRWAN SUBAYA', 'Jakarta Selatan', '02827', '8721872839473287', '0887483789457387', '878787874238', '8978787', 'joyoboyo', '0298', 'IRWAN@JADINPRATAMA.COM', '2012-05-09', 'irwan', 'Folow UP');
@@ -463,11 +470,10 @@ INSERT INTO `tb_customer` VALUES ('54055', '0', 'IBSKDAKJDK', 'JHJDKHSFJDHSKHFSH
 INSERT INTO `tb_customer` VALUES ('54056', '0', 'IDHASIDHAI', 'HKJHKHJHJH', '9009090', '0909090909', 'Toko Keramik', 'JKJKJKJKJK', 'JKJKJKJK', 'Jakarta Barat', '00909', '0', '090900', '09090', '09', 'joyoboyo', '0298', '', '2012-05-10', 'irwan', 'Folow UP');
 INSERT INTO `tb_customer` VALUES ('54057', '0', 'IBSIRWANSJ', 'JSDJJFFJDHJFDHJF', '09989809898', '0809890890', 'Handphone', 'HFDKSJHFJDSHFKJHDSJKFH', 'HFKJDHFHDJ', 'Jakarta Selatan', '08098', '989878', '78789798', '978978', '987897', 'muara karang', '1323', '', '2012-05-11', 'irwan', 'Folow UP');
 INSERT INTO `tb_customer` VALUES ('54058', '0', 'IRWANSUBAY', 'IRWAN', '88787878', '7878787878', 'Toko Keramik', 'IRWANSUB', 'IRWAN', 'Jakarta Selatan', '89898', '989898908980809', '80808908989890', '908908', '0989898098', 'muara karang', '1323', '', '2012-05-11', 'irwan', 'Folow UP');
-INSERT INTO `tb_customer` VALUES ('54059', '0', 'IBSICONJAU', 'ICON', '83198329183', '7482748327', 'Toko Keramik', 'ICON', 'ICON', 'Jakarta Selatan', '74298', '27981738721378787', '7897798789', '79878', '7897', 'rungkut mapan', '1111', 'icon@jadinpratama.com', '2012-05-11', 'irwan', 'Folow UP');
+INSERT INTO `tb_customer` VALUES ('54059', '0', 'IBSICONJAU', 'ICON', '83198329183', '7482748327', 'Toko Keramik', 'ICON', 'ICON', 'Jakarta Selatan', '74298', '27981738721378787', '7897798789', '79878', '7897', 'rungkut mapan', '1111', 'icon@jadinpratama.com', '2012-05-18', 'irwan', 'Folow UP');
 INSERT INTO `tb_customer` VALUES ('54060', '0', 'IBSJDJSADB', 'DHSAKDHSAJDHSJAKHDJSAK', '67676786876', '6868687687', 'Toko Keramik', 'SAHGDASDGSAJHDGHJ', 'HGDSAGHGSAFGDJHG', 'Jakarta Selatan', '67686', '867667867', '6868768768', '868876786', '68678786', 'KCP Abdul Muis', '6550', '', '2012-05-11', 'irwan', 'Folow UP');
-INSERT INTO `tb_customer` VALUES ('54061', '0', 'AAAAAAAAAA', 'A', '', '1111111111', 'Toko Keramik', 'A', 'A', 'Jakarta Selatan', '', '', '', '', '', 'KCP Abdul Muis', '6550', '', '2012-05-14', 'irwan', 'Folow UP');
 INSERT INTO `tb_customer` VALUES ('54062', '0', 'sasdasdads', 'sdadad', '', '1312132132', 'Toko Keramik', 'df', 'fd', 'Jakarta Selatan', '', '', '', '', '', 'KCP Ancol', '0211', '', '2012-05-14', 'irwan', 'Folow UP');
-INSERT INTO `tb_customer` VALUES ('54063', '0', 'ewqeqeqwew', 'wqeqwe', '', '2313123131', 'Toko Keramik', 'df', 'fd', 'Jakarta Selatan', '', '', '', '', '', 'KCP Ancol', '', '', '2012-05-14', 'irwan', 'Folow UP');
+INSERT INTO `tb_customer` VALUES ('54064', '0', 'IBSJSKSKSK', 'BERUSAHA, PT', '9872626', '9287363636', 'Toko Keramik', 'Jl. Berusaha III', 'Martini', 'Jakarta Barat', '98989', '0219827262', '0217873636', '0829737373737', '0215676252', 'KCP Ancol', '0211', 'martini@berusaha.com', '2012-05-16', 'irwan', 'Folow UP');
 
 -- ----------------------------
 -- Table structure for `tb_engineer`
@@ -523,13 +529,11 @@ CREATE TABLE `tb_key` (
   KEY `tb_key_pkt_idx_fk` (`pkt_idx`),
   CONSTRAINT `tb_key_cus_idx_fk` FOREIGN KEY (`cus_idx`) REFERENCES `tb_customer` (`cus_idx`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `tb_key_pkt_idx_fk` FOREIGN KEY (`pkt_idx`) REFERENCES `tb_paket` (`pkt_idx`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=311 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=314 DEFAULT CHARSET=latin1;
 
 -- ----------------------------
 -- Records of tb_key
 -- ----------------------------
-INSERT INTO `tb_key` VALUES ('46', '12', '54042', '3213123131', 'RWRWRWERWERWE', '0000-00-00');
-INSERT INTO `tb_key` VALUES ('47', '12', '54042', '2423432432', 'VDFGFDGDFGG', '0000-00-00');
 INSERT INTO `tb_key` VALUES ('64', '13', '54043', '1234567890', 'Erika', '0000-00-00');
 INSERT INTO `tb_key` VALUES ('65', '13', '54043', '8787878878', 'hjhjhhjhj', '0000-00-00');
 INSERT INTO `tb_key` VALUES ('71', '14', '54044', '2312313213', 'DSFSDFSDFG', '0000-00-00');
@@ -554,9 +558,9 @@ INSERT INTO `tb_key` VALUES ('289', '28', '54058', '3453354353', 'fdggdgfdgfdgd'
 INSERT INTO `tb_key` VALUES ('290', '28', '54058', '4353543535', 'fdgdgfdgdgfgd', '0000-00-00');
 INSERT INTO `tb_key` VALUES ('305', '30', '54060', '2131231312', 'DSFSFDSFDSFSF', '0000-00-00');
 INSERT INTO `tb_key` VALUES ('306', '30', '54060', '3123131232', 'GFGDGFDGFDGDFG', '0000-00-00');
-INSERT INTO `tb_key` VALUES ('308', '32', '54063', '1231231312', 'dsfsdfdsfsfsf', '0000-00-00');
-INSERT INTO `tb_key` VALUES ('309', '32', '54063', '3123132131', 'dfsfsfsdff', '0000-00-00');
-INSERT INTO `tb_key` VALUES ('310', '31', '54061', '3213121313', 'dasdadsadsad', '0000-00-00');
+INSERT INTO `tb_key` VALUES ('311', '33', '54064', '3123123213', 'martini', '0000-00-00');
+INSERT INTO `tb_key` VALUES ('312', '34', '54059', '1432432423', 'fgdfgfdgdfgfd', '0000-00-00');
+INSERT INTO `tb_key` VALUES ('313', '34', '54059', '3242423432', 'fdfgdfgdfgdfg', '0000-00-00');
 
 -- ----------------------------
 -- Table structure for `tb_konfirm`
@@ -566,16 +570,17 @@ CREATE TABLE `tb_konfirm` (
   `konfirm_idx` int(11) NOT NULL AUTO_INCREMENT,
   `konfirm_nama` text NOT NULL,
   PRIMARY KEY (`konfirm_idx`)
-) ENGINE=MyISAM AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
 
 -- ----------------------------
 -- Records of tb_konfirm
 -- ----------------------------
 INSERT INTO `tb_konfirm` VALUES ('1', '--');
-INSERT INTO `tb_konfirm` VALUES ('2', 'Nasabah SIbuk');
+INSERT INTO `tb_konfirm` VALUES ('2', 'Nasabah Sibuk');
 INSERT INTO `tb_konfirm` VALUES ('3', 'Komputer Rusak');
-INSERT INTO `tb_konfirm` VALUES ('4', 'Nasabaj Sulit Dihubungi');
+INSERT INTO `tb_konfirm` VALUES ('4', 'Nasabah Sulit Dihubungi');
 INSERT INTO `tb_konfirm` VALUES ('5', 'PIN Belum Diterima');
+INSERT INTO `tb_konfirm` VALUES ('6', 'Di Jadwalkan');
 
 -- ----------------------------
 -- Table structure for `tb_kota`
@@ -626,12 +631,11 @@ CREATE TABLE `tb_paket` (
   PRIMARY KEY (`pkt_idx`),
   KEY `tb_paket_cus_idx_fk` (`cus_idx`),
   CONSTRAINT `tb_paket_cus_idx_fk` FOREIGN KEY (`cus_idx`) REFERENCES `tb_customer` (`cus_idx`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=33 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=35 DEFAULT CHARSET=latin1;
 
 -- ----------------------------
 -- Records of tb_paket
 -- ----------------------------
-INSERT INTO `tb_paket` VALUES ('12', '54042', 'single_otorisasi', 'gold', 'upgrade', '2', '2012-05-01', '2012-05-04', '2012-05-09', '2003-05-12', 'irwan', '0');
 INSERT INTO `tb_paket` VALUES ('13', '54043', 'single_otorisasi', 'gold', 'new', '2', '2012-05-02', '2012-05-04', '2012-05-09', '2004-05-12', 'irwan', '0');
 INSERT INTO `tb_paket` VALUES ('14', '54044', 'multi_otorisasi', 'gold_payroll', 'upgrade', '2', '2012-05-08', '2012-05-09', '2012-05-14', '2008-05-12', 'irwan', '0');
 INSERT INTO `tb_paket` VALUES ('15', '54057', 'multi_otorisasi', 'gold_payroll', 'upgrade', '1', '2012-05-01', '2012-05-01', '2012-05-04', '2011-05-12', 'irwan', '0');
@@ -644,8 +648,8 @@ INSERT INTO `tb_paket` VALUES ('26', '54059', 'multi_otorisasi', 'platinum', 'up
 INSERT INTO `tb_paket` VALUES ('27', '54059', 'single_otorisasi', 'platinum', 'amplop', '2', '2012-05-01', '2012-05-10', '2012-05-15', '2011-05-12', 'irwan', '0');
 INSERT INTO `tb_paket` VALUES ('28', '54058', 'single_otorisasi', 'gold', 'new', '2', '2012-05-01', '2012-05-10', '2012-05-15', '2011-05-12', 'irwan', '0');
 INSERT INTO `tb_paket` VALUES ('30', '54060', 'single_otorisasi', 'gold_payroll', 'amplop', '2', '2012-05-01', '2012-05-11', '2012-05-16', '2011-05-12', 'irwan', '0');
-INSERT INTO `tb_paket` VALUES ('31', '54061', 'single_otorisasi', 'gold', 'new', '0', '1970-01-01', '1970-01-01', '1970-01-01', '2016-05-12', 'irwan', '0');
-INSERT INTO `tb_paket` VALUES ('32', '54063', 'single_otorisasi', 'gold', 'upgrade', '2', '2012-05-01', '2012-05-10', '2012-05-15', '2014-05-12', 'irwan', '0');
+INSERT INTO `tb_paket` VALUES ('33', '54064', 'single_otorisasi', 'gold_payroll', 'new', '1', '2012-05-01', '2012-05-16', '2012-05-21', '2016-05-12', 'irwan', '0');
+INSERT INTO `tb_paket` VALUES ('34', '54059', 'single_otorisasi', 'gold', 'new', '2', '2012-05-02', '2012-05-03', '2012-05-08', '2020-05-12', 'irwan', '0');
 
 -- ----------------------------
 -- Table structure for `tb_schedule`
@@ -664,14 +668,21 @@ CREATE TABLE `tb_schedule` (
   KEY `cus_idx` (`cus_idx`),
   CONSTRAINT `cus_idx` FOREIGN KEY (`cus_idx`) REFERENCES `tb_customer` (`cus_idx`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `pkt_idx` FOREIGN KEY (`pkt_idx`) REFERENCES `tb_paket` (`pkt_idx`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=51 DEFAULT CHARSET=latin1;
 
 -- ----------------------------
 -- Records of tb_schedule
 -- ----------------------------
-INSERT INTO `tb_schedule` VALUES ('1', '54063', '32', '2012-05-15 14:28:23', 'new', 'dasdadad', '');
-INSERT INTO `tb_schedule` VALUES ('2', '54063', '32', '2012-05-15 14:29:09', 'adhoch', 'dsadadd', '');
-INSERT INTO `tb_schedule` VALUES ('25', '54061', '31', '2012-05-16 11:21:00', 'New', '', 'Key BCA Delivery,VPN Setting & Instalation');
+INSERT INTO `tb_schedule` VALUES ('41', '54059', '26', null, 'New', '', '');
+INSERT INTO `tb_schedule` VALUES ('42', '54059', '26', null, 'New', '', '');
+INSERT INTO `tb_schedule` VALUES ('43', '54064', '33', null, 'New', '', '');
+INSERT INTO `tb_schedule` VALUES ('44', '54064', '33', null, 'New', '', '');
+INSERT INTO `tb_schedule` VALUES ('45', '54064', '33', null, 'New', '', '');
+INSERT INTO `tb_schedule` VALUES ('46', '54064', '33', null, 'New', '', '');
+INSERT INTO `tb_schedule` VALUES ('47', '54059', '27', null, 'New', '', '');
+INSERT INTO `tb_schedule` VALUES ('48', '54059', '27', null, 'New', '', '');
+INSERT INTO `tb_schedule` VALUES ('49', '54059', '26', null, 'New', '', '');
+INSERT INTO `tb_schedule` VALUES ('50', '54059', '26', null, 'New', '', '');
 
 -- ----------------------------
 -- Table structure for `tb_status`
