@@ -32,7 +32,7 @@ class Schedule_m extends MY_Model {
 		$this->fields	 = array(
 			'cus_idx' => array('', TRUE),
 			'pkt_idx' => array('', TRUE),
-			'sched_date_time' => array('Date/Time'),
+			'sched_date_time' => array('Date/Time', TRUE, 'convert_datetime'),
 			'sched_visit' => array('Schedule Visit',true),
 			'sched_alamat_kirim' => array('Alamat Kirim', FALSE)
 		);
@@ -102,12 +102,7 @@ class Schedule_m extends MY_Model {
 	{
 		$agenda = (($this->input->post('agenda_kunjungan')) > 0) ? implode(',',$this->input->post('agenda_kunjungan')) : '';
 		$fitur = (($this->input->post('sched_fitur')) > 0) ? implode(',',$this->input->post('sched_fitur')) : '';
-/*
-echo "<pre>";
-var_dump($agenda, $fitur);
-echo "</pre>";
-exit;
-*/
+
 		$this->db->set('sched_agenda_kunjungan', $agenda);
 		$this->db->set('sched_fitur', $fitur);
 		parent :: save ($idx);
