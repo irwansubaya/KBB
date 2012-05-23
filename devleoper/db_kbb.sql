@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50141
 File Encoding         : 65001
 
-Date: 2012-05-21 14:24:38
+Date: 2012-05-23 08:30:05
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -415,7 +415,7 @@ CREATE TABLE `tb_call` (
   PRIMARY KEY (`call_idx`),
   KEY `tb_call_sched_idx_fk` (`sched_idx`),
   CONSTRAINT `tb_call_sched_idx_fk` FOREIGN KEY (`sched_idx`) REFERENCES `tb_schedule` (`sched_idx`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=48 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=50 DEFAULT CHARSET=latin1;
 
 -- ----------------------------
 -- Records of tb_call
@@ -424,6 +424,8 @@ INSERT INTO `tb_call` VALUES ('44', '71', null, '2012-05-21 00:00:00', 'Nasabah 
 INSERT INTO `tb_call` VALUES ('45', '72', null, '2012-05-21 00:00:00', 'Di Jadwalkan', '', '', '');
 INSERT INTO `tb_call` VALUES ('46', '73', null, '2012-05-21 00:00:00', 'Di Jadwalkan', '', '', '');
 INSERT INTO `tb_call` VALUES ('47', '74', null, '2012-05-21 00:00:00', 'Komputer Rusak', '', '', '');
+INSERT INTO `tb_call` VALUES ('48', '75', null, '2012-05-21 00:00:00', 'Komputer Rusak', '', '', '');
+INSERT INTO `tb_call` VALUES ('49', '76', null, '2012-05-21 00:00:00', 'Di Jadwalkan', '', '', '');
 
 -- ----------------------------
 -- Table structure for `tb_customer`
@@ -663,19 +665,23 @@ CREATE TABLE `tb_schedule` (
   `sched_fitur` text NOT NULL,
   `sched_alamat_kirim` text NOT NULL,
   PRIMARY KEY (`sched_idx`),
+  UNIQUE KEY `sched_idx` (`sched_idx`),
   KEY `pkt_idx` (`pkt_idx`),
   KEY `cus_idx` (`cus_idx`),
   CONSTRAINT `cus_idx` FOREIGN KEY (`cus_idx`) REFERENCES `tb_customer` (`cus_idx`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `pkt_idx` FOREIGN KEY (`pkt_idx`) REFERENCES `tb_paket` (`pkt_idx`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=75 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=78 DEFAULT CHARSET=latin1;
 
 -- ----------------------------
 -- Records of tb_schedule
 -- ----------------------------
-INSERT INTO `tb_schedule` VALUES ('71', '54065', '36', '', 'New', '0', '', '');
-INSERT INTO `tb_schedule` VALUES ('72', '54073', '44', '22-May-2012 Tuesday 11:00', 'New', '0', '', '');
-INSERT INTO `tb_schedule` VALUES ('73', '54073', '44', '', 'New', '0', '', '');
-INSERT INTO `tb_schedule` VALUES ('74', '54073', '44', '', 'New', '0', '', '');
+INSERT INTO `tb_schedule` VALUES ('71', '54065', '36', '', 'New', '', '', '');
+INSERT INTO `tb_schedule` VALUES ('72', '54073', '44', '22-May-2012 Tuesday 11:00', 'New', '', '', '');
+INSERT INTO `tb_schedule` VALUES ('73', '54073', '44', '', 'New', '', '', '');
+INSERT INTO `tb_schedule` VALUES ('74', '54073', '44', '', 'New', '', '', '');
+INSERT INTO `tb_schedule` VALUES ('75', '54072', '43', '', 'New', '', '', '');
+INSERT INTO `tb_schedule` VALUES ('76', '54072', '43', '21-May-2012 Monday 16:48', 'New', '0', '', 'Jln. Taman Sari Raya No.78 Jakarta Barat');
+INSERT INTO `tb_schedule` VALUES ('77', '54073', '44', '', 'New', '0', '', '');
 
 -- ----------------------------
 -- Table structure for `tb_status`
