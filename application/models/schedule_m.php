@@ -32,10 +32,8 @@ class Schedule_m extends MY_Model {
 		$this->fields	 = array(
 			'cus_idx' => array('', TRUE),
 			'pkt_idx' => array('', TRUE),
-			//'sched_date_time' => array('Date/Time', TRUE, 'convert_datetime'),
 			'sched_date_time' => array('Date/Time'),
 			'sched_visit' => array('Schedule Visit',true),
-			'sched_agenda_kunjungan'=>array ('Agenda Kunjungan'),
 			'sched_alamat_kirim' => array('Alamat Kirim', FALSE)
 		);
 	}
@@ -85,8 +83,6 @@ class Schedule_m extends MY_Model {
 	*/
 	public function get_sched_detail ($sched_idx, $cus_idx, $pkt_idx)
 	{
-		//$this->db->join('paket', 'paket.cus_idx = customer.cus_idx');
-		//$this->db->join('schedule', 'schedule.sched_idx = customer.cus_idx');
 		if ($sched_idx) { $this->db->join('schedule', 'paket.pkt_idx = schedule.pkt_idx'); }
 		$this->db->where('customer.cus_idx', $cus_idx);
 		$this->db->where('paket.pkt_idx', $pkt_idx);
@@ -94,17 +90,7 @@ class Schedule_m extends MY_Model {
 		$this->db->order_by('cus_corporate_id');
 		return parent :: get();
 	}
-	/*public function get_schedule_detail ($pkt_idx = FALSE)
-	{
-		$this->db->LEFT OUTERjoin('paket', 'paket.cus_idx = customer.cus_idx');
-		//$this->db->join('customer', 'customer.cus_idx = paket.cus_idx');
-		//$this->db->join('customer AS cus', 'cus.cus_idx = schedule.cus_idx');
-		//$this->db->join('paket', 'customer.cus_idx = paket.cus_idx');
-		//$this->db->join('paket', 'paket.pkt_idx = schedule.pkt_idx');
-		//if ($pkt_idx) { $this->db->where('pkt_idx', $pkt_idx); }
-		$this->db->order_by('cus_corporate_id');
-		return parent :: get ();
-	}*/
+
 	/**
 	 * Save method
 	 *
@@ -115,7 +101,15 @@ class Schedule_m extends MY_Model {
 	public function save ($idx = FALSE)
 	{
 		$agenda = (($this->input->post('agenda_kunjungan')) > 0) ? implode(',',$this->input->post('agenda_kunjungan')) : '';
+		$fitur = (($this->input->post('sched_fitur')) > 0) ? implode(',',$this->input->post('sched_fitur')) : '';
+/*
+echo "<pre>";
+var_dump($agenda, $fitur);
+echo "</pre>";
+exit;
+*/
 		$this->db->set('sched_agenda_kunjungan', $agenda);
+		$this->db->set('sched_fitur', $fitur);
 		parent :: save ($idx);
 		if(!$idx) $idx = $this->db->insert_id();
 		return $this->insert_call($idx);
