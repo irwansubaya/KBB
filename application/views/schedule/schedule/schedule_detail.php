@@ -214,14 +214,14 @@
                     <div class="control-group">
                         <label class="control-label" for="it_has_ed">Fitur BCA</label>
                         <div class="controls">
-                            <input type="checkbox" name="sched_fitur[]" value="Key BCA Delivery"<?php echo (isset($data[0]->sched_fitur) && in_array('Training BCA VA', explode(',', $data[0]->sched_fitur)))?' checked':'' ?>>  Training BCA VA<br>
-                            <input type="checkbox" name="sched_fitur[]" value="Key BCA Delivery"<?php echo (isset($data[0]->sched_fitur) && in_array('Training VA', explode(',', $data[0]->sched_fitur)))?' checked':'' ?>>  Training VA<br>
-                            <input type="checkbox" name="sched_fitur[]" value="VPN Setting & Instalation"<?php echo (isset($data[0]->sched_fitur) && in_array('Training Payroll', explode(',', $data[0]->sched_fitur)))?' checked':'' ?>>  Training Payroll<br>
-                            <input type="checkbox" name="sched_fitur[]" value="Training Pemakaian"<?php echo (isset($data[0]->sched_fitur) && in_array('Training Auto Credit', explode(',', $data[0]->sched_fitur)))?' checked':'' ?>>  Training Auto Credit<br>
-                            <input type="checkbox" name="sched_fitur[]" value="Training Sysadmin"<?php echo (isset($data[0]->sched_fitur) && in_array('Training Auto Colection', explode(',', $data[0]->sched_fitur)))?' checked':'' ?>>  Training Auto Colection<br>
-                            <input type="checkbox" name="sched_fitur[]" value="Training MAR"<?php echo (isset($data[0]->sched_fitur) && in_array('Training B2B Pertamina', explode(',', $data[0]->sched_fitur)))?' checked':'' ?>>  Training B2B Pertamina<br>
-                            <input type="checkbox" name="sched_fitur[]" value="Training MFTS Converter"<?php echo (isset($data[0]->sched_fitur) && in_array('Training Fleet', explode(',', $data[0]->sched_fitur)))?' checked':'' ?>>  Training Fleet<br>
-                            <input type="checkbox" name="sched_fitur[]" value="KBB Trouble Shooting"<?php echo (isset($data[0]->sched_fitur) && in_array('DLL', explode(',', $data[0]->sched_fitur)))?' checked':'' ?>>  DLL
+			    <input type="checkbox" name="sched_fitur[]" value="Training BCA VA"<?php echo (isset($data[0]->sched_fitur) && in_array('Training BCA VA', explode(',', $data[0]->sched_fitur)))?' checked':'' ?>>  Training BCA VA<br>
+                            <input type="checkbox" name="sched_fitur[]" value="Training VA"<?php echo (isset($data[0]->sched_fitur) && in_array('Training VA', explode(',', $data[0]->sched_fitur)))?' checked':'' ?>>  Training VA<br>
+                            <input type="checkbox" name="sched_fitur[]" value="Training Payroll"<?php echo (isset($data[0]->sched_fitur) && in_array('Training Payroll', explode(',', $data[0]->sched_fitur)))?' checked':'' ?>>  Training Payroll<br>
+                            <input type="checkbox" name="sched_fitur[]" value="Training Auto Credit"<?php echo (isset($data[0]->sched_fitur) && in_array('Training Auto Credit', explode(',', $data[0]->sched_fitur)))?' checked':'' ?>>  Training Auto Credit<br>
+                            <input type="checkbox" name="sched_fitur[]" value="Training Auto Colection"<?php echo (isset($data[0]->sched_fitur) && in_array('Training Auto Colection', explode(',', $data[0]->sched_fitur)))?' checked':'' ?>>  Training Auto Colection<br>
+                            <input type="checkbox" name="sched_fitur[]" value="Training B2B Pertamina"<?php echo (isset($data[0]->sched_fitur) && in_array('Training B2B Pertamina', explode(',', $data[0]->sched_fitur)))?' checked':'' ?>>  Training B2B Pertamina<br>
+                            <input type="checkbox" name="sched_fitur[]" value="Training Fleet"<?php echo (isset($data[0]->sched_fitur) && in_array('Training Fleet', explode(',', $data[0]->sched_fitur)))?' checked':'' ?>>  Training Fleet<br>
+                            <input type="checkbox" name="sched_fitur[]" value="DLL"<?php echo (isset($data[0]->sched_fitur) && in_array('DLL', explode(',', $data[0]->sched_fitur)))?' checked':'' ?>>  DLL
                         </div>
                     </div>
                 </td>

@@ -222,13 +222,13 @@
                     <div class="control-group">
                         <label class="control-label" for="it_has_ed">Agenda Kunjungan</label>
                         <div class="controls">
-                            <input type="checkbox" name="agenda_kunjungan[]" value="Key BCA Delivery"<?php echo (isset($data[0]->sched_agenda_kunjungan) && in_array('Key BCA Delivery', explode(',', $data[0]->sched_agenda_kunjungan)))?' checked':'' ?>>  Key BCA Delivery<br>
-                            <input type="checkbox" name="agenda_kunjungan[]" value="VPN Setting & Instalation"<?php echo (isset($data[0]->sched_agenda_kunjungan) && in_array('VPN Setting & Instalation', explode(',', $data[0]->sched_agenda_kunjungan)))?' checked':'' ?>>  VPN Setting & Instalation<br>
-                            <input type="checkbox" name="agenda_kunjungan[]" value="Training Pemakaian"<?php echo (isset($data[0]->sched_agenda_kunjungan) && in_array('Training Pemakaian', explode(',', $data[0]->sched_agenda_kunjungan)))?' checked':'' ?>>  Training Pemakaian<br>
-                            <input type="checkbox" name="agenda_kunjungan[]" value="Training Sysadmin"<?php echo (isset($data[0]->sched_agenda_kunjungan) && in_array('Training Sysadmin', explode(',', $data[0]->sched_agenda_kunjungan)))?' checked':'' ?>>  Training Sysadmin<br>
-                            <input type="checkbox" name="agenda_kunjungan[]" value="Training MAR"<?php echo (isset($data[0]->sched_agenda_kunjungan) && in_array('Training MAR', explode(',', $data[0]->sched_agenda_kunjungan)))?' checked':'' ?>>  Training MAR<br>
-                            <input type="checkbox" name="agenda_kunjungan[]" value="Training MFTS Converter"<?php echo (isset($data[0]->sched_agenda_kunjungan) && in_array('Training MFTS Converter', explode(',', $data[0]->sched_agenda_kunjungan)))?' checked':'' ?>>  Training MFTS Converter<br>
-                            <input type="checkbox" name="agenda_kunjungan[]" value="KBB Trouble Shooting"<?php echo (isset($data[0]->sched_agenda_kunjungan) && in_array('KBB Trouble Shooting', explode(',', $data[0]->sched_agenda_kunjungan)))?' checked':'' ?>>  KBB Trouble Shooting
+                            <input type="checkbox" name="agenda_kunjungan[]" value="Key BCA Delivery">  Key BCA Delivery<br>
+                            <input type="checkbox" name="agenda_kunjungan[]" value="VPN Setting & Instalation">  VPN Setting & Instalation<br>
+                            <input type="checkbox" name="agenda_kunjungan[]" value="Training Pemakaian">  Training Pemakaian<br>
+                            <input type="checkbox" name="agenda_kunjungan[]" value="Training Sysadmin">  Training Sysadmin<br>
+                            <input type="checkbox" name="agenda_kunjungan[]" value="Training MAR">  Training MAR<br>
+                            <input type="checkbox" name="agenda_kunjungan[]" value="Training MFTS Converter">  Training MFTS Converter<br>
+                            <input type="checkbox" name="agenda_kunjungan[]" value="KBB Trouble Shooting">  KBB Trouble Shooting
                         </div>
                     </div>
                 </td>
@@ -236,14 +236,14 @@
                     <div class="control-group">
                         <label class="control-label" for="it_has_ed">Fitur BCA</label>
                         <div class="controls">
-                            <input type="checkbox" name="agenda_kunjungan[]" value="Key BCA Delivery"<?php echo (isset($data[0]->sched_agenda_kunjungan) && in_array('Training BCA VA', explode(',', $data[0]->sched_agenda_kunjungan)))?' checked':'' ?>>  Training BCA VA<br>
-                            <input type="checkbox" name="agenda_kunjungan[]" value="Key BCA Delivery"<?php echo (isset($data[0]->sched_agenda_kunjungan) && in_array('Training VA', explode(',', $data[0]->sched_agenda_kunjungan)))?' checked':'' ?>>  Training VA<br>
-                            <input type="checkbox" name="agenda_kunjungan[]" value="VPN Setting & Instalation"<?php echo (isset($data[0]->sched_agenda_kunjungan) && in_array('Training Payroll', explode(',', $data[0]->sched_agenda_kunjungan)))?' checked':'' ?>>  Training Payroll<br>
-                            <input type="checkbox" name="agenda_kunjungan[]" value="Training Pemakaian"<?php echo (isset($data[0]->sched_agenda_kunjungan) && in_array('Training Auto Credit', explode(',', $data[0]->sched_agenda_kunjungan)))?' checked':'' ?>>  Training Auto Credit<br>
-                            <input type="checkbox" name="agenda_kunjungan[]" value="Training Sysadmin"<?php echo (isset($data[0]->sched_agenda_kunjungan) && in_array('Training Auto Colection', explode(',', $data[0]->sched_agenda_kunjungan)))?' checked':'' ?>>  Training Auto Colection<br>
-                            <input type="checkbox" name="agenda_kunjungan[]" value="Training MAR"<?php echo (isset($data[0]->sched_agenda_kunjungan) && in_array('Training B2B Pertamina', explode(',', $data[0]->sched_agenda_kunjungan)))?' checked':'' ?>>  Training B2B Pertamina<br>
-                            <input type="checkbox" name="agenda_kunjungan[]" value="Training MFTS Converter"<?php echo (isset($data[0]->sched_agenda_kunjungan) && in_array('Training Fleet', explode(',', $data[0]->sched_agenda_kunjungan)))?' checked':'' ?>>  Training Fleet<br>
-                            <input type="checkbox" name="agenda_kunjungan[]" value="KBB Trouble Shooting"<?php echo (isset($data[0]->sched_agenda_kunjungan) && in_array('DLL', explode(',', $data[0]->sched_agenda_kunjungan)))?' checked':'' ?>>  DLL
+                            <input type="checkbox" name="sched_fitur[]" value="Training BCA VA">  Training BCA VA<br>
+                            <input type="checkbox" name="sched_fitur[]" value="Training VA">  Training VA<br>
+                            <input type="checkbox" name="sched_fitur[]" value="Training Payroll">  Training Payroll<br>
+                            <input type="checkbox" name="sched_fitur[]" value="Training Auto Credit">  Training Auto Credit<br>
+                            <input type="checkbox" name="sched_fitur[]" value="Training Auto Colection">  Training Auto Colection<br>
+                            <input type="checkbox" name="sched_fitur[]" value="Training B2B Pertamina">  Training B2B Pertamina<br>
+                            <input type="checkbox" name="sched_fitur[]" value="Training Fleet">  Training Fleet<br>
+                            <input type="checkbox" name="sched_fitur[]" value="DLL">  DLL
                         </div>
                     </div>
                 </td>

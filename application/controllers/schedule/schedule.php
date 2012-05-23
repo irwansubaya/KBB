@@ -79,7 +79,7 @@ class Schedule extends MY_Controller {
 					setSucces('Data is saved');
 					$cus_idx = $this->input->post('cus_idx');
 					$pkt_idx = $this->input->post('pkt_idx');
-					redirect ($this->module[0].'/schedule_list/'.$cus_idx.'/'.$pkt_idx.'/'.$this->db->insert_id());
+					redirect ($this->module[0].'/schedule_list/'.$cus_idx.'/'.$pkt_idx);
 				}
 				else
 				{
@@ -94,8 +94,8 @@ class Schedule extends MY_Controller {
 		$this->params['status'] = $this->status_m->dropdown();
 		$this->_view('main_1_3', 'schedule_new');
 	}
-	
-	public function update ($cus_idx,$pkt_idx, $sched_idx=false)
+
+	public function update ($cus_idx, $pkt_idx, $sched_idx)
 	{
 		if ($sched_idx AND $this->schedule_m->get($sched_idx))
 		{
@@ -108,10 +108,10 @@ class Schedule extends MY_Controller {
 				{
 					if ($this->schedule_m->save($sched_idx))
 					{						
-					setSucces('Data is saved');
-					$cus_idx = $this->input->post('cus_idx');
-					$pkt_idx = $this->input->post('pkt_idx');
-					redirect ($this->module[0].'/schedule_list/'.$cus_idx.'/'.$pkt_idx.'/'.$this->db->insert_id());
+						setSucces('Data is saved');
+						$cus_idx = $this->input->post('cus_idx');
+						$pkt_idx = $this->input->post('pkt_idx');
+						redirect ($this->module[0].'/update/'.$cus_idx.'/'.$pkt_idx.'/'.$sched_idx);
 					}
 					else
 					{
