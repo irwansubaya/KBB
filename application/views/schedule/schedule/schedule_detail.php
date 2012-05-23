@@ -9,7 +9,9 @@
 		    showAnim: 'fold'
 	});
         $('#date_time').datetimepicker({
-            dateFormat: 'dd-M-yy DD',
+            dateFormat: 'dd-M-yy',
+	    minDate: '-2m',
+            maxDate:'+2m'
             });
     });
 
@@ -212,14 +214,14 @@
                     <div class="control-group">
                         <label class="control-label" for="it_has_ed">Fitur BCA</label>
                         <div class="controls">
-                            <input type="checkbox" name="agenda_kunjungan[]" value="Key BCA Delivery"<?php echo (isset($data[0]->sched_agenda_kunjungan) && in_array('Training BCA VA', explode(',', $data[0]->sched_agenda_kunjungan)))?' checked':'' ?>>  Training BCA VA<br>
-                            <input type="checkbox" name="agenda_kunjungan[]" value="Key BCA Delivery"<?php echo (isset($data[0]->sched_agenda_kunjungan) && in_array('Training VA', explode(',', $data[0]->sched_agenda_kunjungan)))?' checked':'' ?>>  Training VA<br>
-                            <input type="checkbox" name="agenda_kunjungan[]" value="VPN Setting & Instalation"<?php echo (isset($data[0]->sched_agenda_kunjungan) && in_array('Training Payroll', explode(',', $data[0]->sched_agenda_kunjungan)))?' checked':'' ?>>  Training Payroll<br>
-                            <input type="checkbox" name="agenda_kunjungan[]" value="Training Pemakaian"<?php echo (isset($data[0]->sched_agenda_kunjungan) && in_array('Training Auto Credit', explode(',', $data[0]->sched_agenda_kunjungan)))?' checked':'' ?>>  Training Auto Credit<br>
-                            <input type="checkbox" name="agenda_kunjungan[]" value="Training Sysadmin"<?php echo (isset($data[0]->sched_agenda_kunjungan) && in_array('Training Auto Colection', explode(',', $data[0]->sched_agenda_kunjungan)))?' checked':'' ?>>  Training Auto Colection<br>
-                            <input type="checkbox" name="agenda_kunjungan[]" value="Training MAR"<?php echo (isset($data[0]->sched_agenda_kunjungan) && in_array('Training B2B Pertamina', explode(',', $data[0]->sched_agenda_kunjungan)))?' checked':'' ?>>  Training B2B Pertamina<br>
-                            <input type="checkbox" name="agenda_kunjungan[]" value="Training MFTS Converter"<?php echo (isset($data[0]->sched_agenda_kunjungan) && in_array('Training Fleet', explode(',', $data[0]->sched_agenda_kunjungan)))?' checked':'' ?>>  Training Fleet<br>
-                            <input type="checkbox" name="agenda_kunjungan[]" value="KBB Trouble Shooting"<?php echo (isset($data[0]->sched_agenda_kunjungan) && in_array('DLL', explode(',', $data[0]->sched_agenda_kunjungan)))?' checked':'' ?>>  DLL
+                            <input type="checkbox" name="sched_fitur[]" value="Key BCA Delivery"<?php echo (isset($data[0]->sched_fitur) && in_array('Training BCA VA', explode(',', $data[0]->sched_fitur)))?' checked':'' ?>>  Training BCA VA<br>
+                            <input type="checkbox" name="sched_fitur[]" value="Key BCA Delivery"<?php echo (isset($data[0]->sched_fitur) && in_array('Training VA', explode(',', $data[0]->sched_fitur)))?' checked':'' ?>>  Training VA<br>
+                            <input type="checkbox" name="sched_fitur[]" value="VPN Setting & Instalation"<?php echo (isset($data[0]->sched_fitur) && in_array('Training Payroll', explode(',', $data[0]->sched_fitur)))?' checked':'' ?>>  Training Payroll<br>
+                            <input type="checkbox" name="sched_fitur[]" value="Training Pemakaian"<?php echo (isset($data[0]->sched_fitur) && in_array('Training Auto Credit', explode(',', $data[0]->sched_fitur)))?' checked':'' ?>>  Training Auto Credit<br>
+                            <input type="checkbox" name="sched_fitur[]" value="Training Sysadmin"<?php echo (isset($data[0]->sched_fitur) && in_array('Training Auto Colection', explode(',', $data[0]->sched_fitur)))?' checked':'' ?>>  Training Auto Colection<br>
+                            <input type="checkbox" name="sched_fitur[]" value="Training MAR"<?php echo (isset($data[0]->sched_fitur) && in_array('Training B2B Pertamina', explode(',', $data[0]->sched_fitur)))?' checked':'' ?>>  Training B2B Pertamina<br>
+                            <input type="checkbox" name="sched_fitur[]" value="Training MFTS Converter"<?php echo (isset($data[0]->sched_fitur) && in_array('Training Fleet', explode(',', $data[0]->sched_fitur)))?' checked':'' ?>>  Training Fleet<br>
+                            <input type="checkbox" name="sched_fitur[]" value="KBB Trouble Shooting"<?php echo (isset($data[0]->sched_fitur) && in_array('DLL', explode(',', $data[0]->sched_fitur)))?' checked':'' ?>>  DLL
                         </div>
                     </div>
                 </td>
@@ -241,6 +243,24 @@
 	</tr>
       </thead>
       <tbody id="item">
+      <?php
+	      if (@$call) { 
+	      for($i=0; $i<count($call); $i++)
+	      {
+		echo '<tr id="call_'.$i.'">';
+		echo '<td>'. $call[$i]->call_nama_admin .'<input type="hidden" name="item_call_nama_admin[]" value="'. $call[$i]->call_nama_admin .'"></td>';
+		echo '<td>'. $call[$i]->call_date .'<input type="hidden" name="item_call_date[]" value="'. $call[$i]->call_date .'"></td>';
+		echo '<td>'. $call[$i]->call_konfirm .'<input type="hidden" name="item_call_konfirm[]" value="'. $call[$i]->call_konfirm .'"></td>';
+		echo '<td>'. $call[$i]->call_cp_lain .'<input type="hidden" name="item_call_cp_lain[]" value="'. $call[$i]->call_cp_lain .'"></td>';
+		echo '<td>'. $call[$i]->call_telp_lain .'<input type="hidden" name="item_call_telp_lain[]" value="'. $call[$i]->call_telp_lain .'"></td>';
+		echo '<td>'. $call[$i]->call_keterangan .'<input type="hidden" name="item_call_keterangan[]" value="'. $call[$i]->call_keterangan .'"></td>';
+		echo '<td><a href="" onclick="edit_call(\''.$i.
+					'\', \''.$call[$i]->call_nama_admin.
+					'\', \''.$call[$i]->call_date.
+					'\'); return false">Edit</a> | <a href="" onclick="remove_call(\''.$i.'\'); return false;">Delete</a></td>';
+		echo "</tr>";
+	      } }
+	      ?>
       </tbody>
     </table>
 
@@ -248,6 +268,6 @@
     <div class="form-actions">
         <?php echo form_submit('save','Save data', 'class="btn btn-primary"')?>
         <?php echo anchor($module[0],'Cancel', 'class="btn"')?>
-        <?php if(isset($sched[0]->sched_idx)): ?><div class="pull-right"><?php echo anchor($module[0].'/delete/'.$sched[0]->sched_idx,'Delete User', 'class="btn btn-danger"')?></div><?php endif; ?>
+	<?php// echo anchor($this->module[0].'/update/schedule_list/'.$cus->cus_idx,'Back to List Paket', 'class="btn"')?>
     </div>
 <?php echo form_close();?>

@@ -79,6 +79,7 @@ class Customer_m extends MY_Model {
 	{
 		$this->db->join('paket', 'paket.cus_idx = customer.cus_idx');
 		$this->db->join('schedule', 'schedule.pkt_idx = paket.pkt_idx');
+		//$this->db->join('call', 'call.call_idx = schedule.call_idx');
 		$this->db->where('sched_idx', $sched_idx);
 		return parent :: get ();
 	}

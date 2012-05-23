@@ -9,7 +9,7 @@
 		    showAnim: 'fold'
 	});
         $('#date_time').datetimepicker({
-            dateFormat: 'dd-M-yy DD',
+            dateFormat: 'dd-M-yy',
             });
     });
     

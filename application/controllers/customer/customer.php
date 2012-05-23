@@ -74,7 +74,7 @@ class Customer extends MY_Controller {
 		$this->params['page']	= create_pagination (
 			array(
 				'uri'			=> base_url().$this->module[0].'?'.$this->url,
-				'limit'			=> 25,
+				'limit'		=> 25,
 				'query' 		=> TRUE,
 				'total_rows'	=> $this->customer_m->count_customer()
 			)
