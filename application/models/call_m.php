@@ -49,7 +49,7 @@ class Call_m extends MY_Model {
 	*/
 	public function get_sched_call ($sched_idx = FALSE)
 	{
-		$this->db->where('call_idx', $sched_idx);
+		$this->db->where('sched_idx', $sched_idx);
 		$this->db->order_by('call_nama_admin');
 		return parent :: get ();
 	}
@@ -62,20 +62,6 @@ class Call_m extends MY_Model {
 		$this->db->order_by('cus_corporate_id');
 		return parent :: get ();
 	}
-	/**
-	 * Save method
-	 *
-	 * @access	public
-	 * @param	integer
-	 * @return	boolean
-	 */
-	/*public function save ($idx = FALSE)
-	{
-		$this->db->set('pkt_fitur', implode(',', $this->input->post('fitur')));
-		parent :: save ($idx);
-		if(!$idx) $idx = $this->db->insert_id();
-		return $this->insert_sn($idx, $this->input->post('cus_idx'));
-	}*/
 	
 	public function save ($idx = FALSE)
 	{

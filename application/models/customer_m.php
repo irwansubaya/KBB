@@ -75,15 +75,11 @@ class Customer_m extends MY_Model {
 		return parent :: save ($idx);	
 	}
 
-	public function get_schedule_detail ($pkt_idx = FALSE)
+	public function get_schedule_detail ($sched_idx = FALSE)
 	{
 		$this->db->join('paket', 'paket.cus_idx = customer.cus_idx');
-		//$this->db->join('customer', 'customer.cus_idx = paket.cus_idx');
-		//$this->db->join('customer AS cus', 'cus.cus_idx = schedule.cus_idx');
-		//$this->db->join('paket', 'customer.cus_idx = paket.cus_idx');
-		//$this->db->join('paket', 'paket.pkt_idx = schedule.pkt_idx');
-		//if ($pkt_idx) { $this->db->where('pkt_idx', $pkt_idx); }
-		$this->db->order_by('cus_corporate_id');
+		$this->db->join('schedule', 'schedule.pkt_idx = paket.pkt_idx');
+		$this->db->where('sched_idx', $sched_idx);
 		return parent :: get ();
 	}
 

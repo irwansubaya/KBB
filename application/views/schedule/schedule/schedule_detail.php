@@ -12,22 +12,11 @@
             dateFormat: 'dd-M-yy DD',
             });
     });
-    
-    //var val = new Array();
-    //<?php
-        //foreach ($kategori as $val)
-           // echo "val['{$val[0]}'] = '{$val[1]}';\n";
-    //?>
-        //$("#call_status").val(val[$("#call_kategori").val()]);
-        ////$("#call_kategori").change(function() {
-	//$("#call_status").val(val[$("#call_keterangan").val()]);
-	//});
-    
+
     var id = 0;
     function insert_call ()
     {
         if ($("#call_konfirm").val() == '') {alert ('Please fill respon'); $("#call_konfirm").focus()}
-        //else if ($("#call_status").val() == '') {alert ('Please fill Status'); $("#call_status").focus()}
 	else insert_call_print ();
     }
 
@@ -104,11 +93,11 @@
 <table>
     <tr>
 	<td><?php echo form_hidden('cus_idx',$cus->cus_idx, 'id=cus_idx');?></td>
-        <td><?php //echo form_hidden('pkt_idx',$data[0]->pkt_idx, 'id=pkt_idx');?></td>
+        <td><?php echo form_hidden('pkt_idx',$data[0]->pkt_idx, 'id=pkt_idx');?></td>
     </tr>
     <tr>
         <td><?php echo form_text('Corporate ID','cus_corporate_id',(isset($data[0]->cus_corporate_id))?$data[0]->cus_corporate_id:'','class="span2" maxlength="10" id="sched_corporate_id" readonly');?></td>
-	<td><?php echo form_hidden('sched_idx','', 'id=sched_idx');?></td>
+	<td><?php echo form_hidden('sched_idx',$data[0]->sched_idx, 'id=sched_idx');?></td>
     </tr>
     <tr>
         <td><?php echo form_text('Nama Perusahaan / Nasabah','cus_nama_perusahaan',(isset($data[0]->cus_nama_perusahaan))?$data[0]->cus_nama_perusahaan:'','class="span2" maxlength="64" id="cus_nama_perusahaan" readonly');?></td>
@@ -168,19 +157,6 @@
                 
             </select>
         </td>
-        <!--<td>Kategori</td>
-        <td>
-            <select name="call_katagori" id="call_katagori" class="span2">
-                <?php
-                //foreach ($kategori as $val) {
-                //    echo '<option value="'.$val[0].'">'.$val[0].'</option>';
-                //}
-                ?>
-            </select>
-        </td>
-        <td>&nbsp;</td>
-        <td>Status</td>
-        <td><input type="text" name="call_status" id="call_status" class="span2" readonly="readonly"></td>-->
     </tr>
     <tr>
         <td>&nbsp;</td>

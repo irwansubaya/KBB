@@ -40,7 +40,8 @@ class Schedule extends MY_Controller {
 			'schedule_m',
 			'status_m',
 			'visit_m',
-			'konfirm_m'
+			'konfirm_m',
+			'call_m'
 		));
 	}
 
@@ -117,10 +118,8 @@ class Schedule extends MY_Controller {
 				}
 			}
 		$this->params['cus']=$this->customer_m->get($cus_idx);
-		//$this->params['data'] = $this->customer_m->get_paket_schedule($cus_idx, $pkt_idx);
-		$this->params['data'] = $this->schedule_m->get_sched_detail($sched_idx,$cus_idx, $pkt_idx);
-		$sched_idx = (!$this->params['data']) ? null : $this->params['data'][0]->sched_idx;
-		$this->params['call'] = $this->Call_m->get_sched_call($sched_idx);
+		$this->params['data'] = $this->customer_m->get_schedule_detail($sched_idx);
+		$this->params['call'] = $this->call_m->get_sched_call($sched_idx);
 		$this->params['visit'] = $this->visit_m->dropdown();
 		$this->params['konfirm'] = $this->konfirm_m->dropdown();
 		$this->params['status'] = $this->status_m->dropdown();
