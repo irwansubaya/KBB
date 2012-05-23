@@ -77,6 +77,35 @@ class Schedule_m extends MY_Model {
 	}
 
 	/**
+	 * Get record 
+	 *
+	 * @access	public
+	 * @param	integer
+	 * @return	boolean
+	*/
+	public function get_sched_detail ($sched_idx, $cus_idx, $pkt_idx)
+	{
+		//$this->db->join('paket', 'paket.cus_idx = customer.cus_idx');
+		//$this->db->join('schedule', 'schedule.sched_idx = customer.cus_idx');
+		if ($sched_idx) { $this->db->join('schedule', 'paket.pkt_idx = schedule.pkt_idx'); }
+		$this->db->where('customer.cus_idx', $cus_idx);
+		$this->db->where('paket.pkt_idx', $pkt_idx);
+		if ($sched_idx) { $this->db->where('sched_idx', $sched_idx); }
+		$this->db->order_by('cus_corporate_id');
+		return parent :: get();
+	}
+	/*public function get_schedule_detail ($pkt_idx = FALSE)
+	{
+		$this->db->LEFT OUTERjoin('paket', 'paket.cus_idx = customer.cus_idx');
+		//$this->db->join('customer', 'customer.cus_idx = paket.cus_idx');
+		//$this->db->join('customer AS cus', 'cus.cus_idx = schedule.cus_idx');
+		//$this->db->join('paket', 'customer.cus_idx = paket.cus_idx');
+		//$this->db->join('paket', 'paket.pkt_idx = schedule.pkt_idx');
+		//if ($pkt_idx) { $this->db->where('pkt_idx', $pkt_idx); }
+		$this->db->order_by('cus_corporate_id');
+		return parent :: get ();
+	}*/
+	/**
 	 * Save method
 	 *
 	 * @access	public

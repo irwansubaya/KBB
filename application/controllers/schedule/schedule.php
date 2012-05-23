@@ -50,15 +50,22 @@ class Schedule extends MY_Controller {
 	 * @access	public
 	 * @return	parent class function
 	 */
-	public function index ($cus_idx, $pkt_idx)
+	/*public function index ($cus_idx, $pkt_idx)
 	{
 		$this->params['cus_idx'] = $cus_idx;
 		$this->params['pkt_idx'] = $pkt_idx;
 		$this->params['cus'] = $this->customer_m->get($cus_idx);
 		$this->params['data'] = $this->customer_m->get_list_schedule($cus_idx, $pkt_idx);
-		$this->_view('main_1_3', 'index');
+		$this->_view('main_1_3', 'schedule_list');
+	}*/
+	public function schedule_list ($cus_idx, $pkt_idx)
+	{
+		$this->params['cus_idx'] = $cus_idx;
+		$this->params['pkt_idx'] = $pkt_idx;
+		$this->params['cus'] = $this->customer_m->get($cus_idx);
+		$this->params['data'] = $this->customer_m->get_list_schedule($cus_idx, $pkt_idx);
+		$this->_view('main_1_3', 'schedule_list');
 	}
-	
 	public function insert ($cus_idx, $pkt_idx)
 	{
 		
@@ -71,7 +78,7 @@ class Schedule extends MY_Controller {
 					setSucces('Data is saved');
 					$cus_idx = $this->input->post('cus_idx');
 					$pkt_idx = $this->input->post('pkt_idx');
-					redirect ($this->module[0].'/index/'.$cus_idx.'/'.$pkt_idx.'/'.$this->db->insert_id());
+					redirect ($this->module[0].'/schedule_list/'.$cus_idx.'/'.$pkt_idx.'/'.$this->db->insert_id());
 				}
 				else
 				{
@@ -87,17 +94,17 @@ class Schedule extends MY_Controller {
 		$this->_view('main_1_3', 'schedule_new');
 	}
 	
-	public function update ($idx,$cus_idx,$pkt_idx = false, $sched_idx=false)
+	public function update ($cus_idx,$pkt_idx, $sched_idx=false)
 	{
-		if ($idx AND $this->schedule_m->get($idx))
+		if ($sched_idx AND $this->schedule_m->get($sched_idx))
 		{
 			if ($this->input->post('save'))
 			{
 				if ($this->schedule_m->isValid())
 				{
 					// save data
-					if ($this->schedule_m->save($idx))
-					{
+					if ($this->schedule_m->save($sched_idx))
+					{						
 					setSucces('Data is saved');
 					$cus_idx = $this->input->post('cus_idx');
 					$pkt_idx = $this->input->post('pkt_idx');
@@ -110,13 +117,14 @@ class Schedule extends MY_Controller {
 				}
 			}
 		$this->params['cus']=$this->customer_m->get($cus_idx);
-		$this->params['data'] = $this->customer_m->get_paket_schedule($cus_idx, $pkt_idx);
-		$pkt_idx = (!$this->params['data']) ? null : $this->params['data'][0]->pkt_idx;
-		$this->params['call'] = $this->Call_m->get_sched_call($idx);
+		//$this->params['data'] = $this->customer_m->get_paket_schedule($cus_idx, $pkt_idx);
+		$this->params['data'] = $this->schedule_m->get_sched_detail($sched_idx,$cus_idx, $pkt_idx);
+		$sched_idx = (!$this->params['data']) ? null : $this->params['data'][0]->sched_idx;
+		$this->params['call'] = $this->Call_m->get_sched_call($sched_idx);
 		$this->params['visit'] = $this->visit_m->dropdown();
 		$this->params['konfirm'] = $this->konfirm_m->dropdown();
 		$this->params['status'] = $this->status_m->dropdown();
-		$this->_view('main_1_3', 'schedule_new');
+		$this->_view('main_1_3', 'schedule_detail');
 		}	
 	}
 }

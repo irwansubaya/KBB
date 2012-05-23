@@ -22,7 +22,7 @@
   <?php if ($data):?>
     <?php foreach ($data as $item):?>
       <tr>
-	<td><?php echo anchor($module[0].'/update/'.$cus_idx.'/'.$pkt_idx.'/'.$item->sched_idx, $item->sched_idx)?></td>
+	<td><?php echo anchor($module[0].'/update/'.$cus_idx.'/'.$pkt_idx.'/'.$item->sched_idx, $item->cus_corporate_id)?></td>
 	<td><?php echo $item->cus_nama_perusahaan?></td>
 	<td><?php echo $item->pkt_jenis ?></td>
 	<td><?php echo $item->pkt_tipe ?></td>
