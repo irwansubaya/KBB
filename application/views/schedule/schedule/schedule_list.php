@@ -12,9 +12,10 @@
       <th width="10%">Schedule ID</th>
       <th width="15%">Nama Perusahaan</th>
       <th width="10%">Jenis Paket</th>
-      <th width="15%">Tipe Paket</th>
-      <th width="15%">Model Paket</th>
-      <th width="15%">Tgl Schedule</th>
+      <th width="10%">Tipe Paket</th>
+      <th width="10%">Model Paket</th>
+      <th width="10%">Status</th>
+      <th width="10%">Tgl Schedule</th>
       <th width="15%">Alamat Kirim</th>
     </tr>
   </thead>
@@ -27,6 +28,7 @@
 	<td><?php echo $item->pkt_jenis ?></td>
 	<td><?php echo $item->pkt_tipe ?></td>
 	<td><?php echo $item->pkt_status ?></td>
+	<td><?php echo $item->pkt_konfirm ?></td>
 	<td><?php echo $item->sched_date_time?></td>
 	<td><?php echo $item->sched_alamat_kirim?></td>
       </tr>

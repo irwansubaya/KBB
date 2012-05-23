@@ -31,7 +31,7 @@
         else $("#pkt_konfirm").val('Folow Up');
         
 	$string = '<tr id="call_'+id+'">'+
-		    '<td>'+$("#call_nama_admin").val()+'<input type="hidden" name="item_call_admin[]" value="'+$("#call_nama_admin").val()+'"></td>'+
+		    '<td>'+$("#call_nama_admin").val()+'<input type="hidden" name="item_call_nama_admin[]" value="'+$("#call_nama_admin").val()+'"></td>'+
 		    '<td>'+$("#call_date").val()+'<input type="hidden" name="item_call_date[]" value="'+$("#call_date").val()+'"></td>'+
 		    '<td>'+$("#call_konfirm").val()+'<input type="hidden" name="item_call_konfirm[]" value="'+$("#call_konfirm").val()+'"></td>'+
                     '<td>'+$("#call_cp_lain").val()+'<input type="hidden" name="item_call_cp_lain[]" value="'+$("#call_cp_lain").val()+'"></td>'+
@@ -44,7 +44,7 @@
                                                     '\', \''+$("#call_cp_lain").val()+
                                                     '\', \''+$("#call_telp_lain").val()+
                                                     '\', \''+$("#call_keterangan").val()+
-						    '\'); return false">E</a> | <a href="" onclick="remove_call(\''+id+'\'); return false;">D</a></td>'+
+						    '\'); return false">Edit</a> | <a href="" onclick="remove_call(\''+id+'\'); return false;">Delete</a></td>'+
 		   '</tr>';
 	if ( $("#mode").val() == 'insert')
 	{
@@ -143,10 +143,10 @@
     <table>
     <tr>
         <td>Nama Admin </td>
-        <td><input type="text" name="call_nama_admin" placeholder="Nama Admin" id="call_nama_admin" class="span2" value="Irwan" readonly="readonly"></td>
+        <td><input type="text" name="call_nama_admin" id="call_nama_admin" class="span2" value="Irwan" readonly="readonly"></td>
         <td>&nbsp;</td>
         <td>Call Date</td>
-        <td><input type="text" name="call_date" placeholder="Date" id="call_date" class="span2" readonly="readonly" value="<?php echo date('d-M-y H:i l')?>"></td>
+        <td><input type="text" name="call_date" id="call_date" class="span2" readonly="readonly" value="<?php echo date('d-M-y H:i l')?>"></td>
         <td>&nbsp;</td>
 	 <td>Respon</td>
         <td>
@@ -268,6 +268,5 @@
     <div class="form-actions">
         <?php echo form_submit('save','Save data', 'class="btn btn-primary"')?>
         <?php echo anchor($module[0],'Cancel', 'class="btn"')?>
-	<?php// echo anchor($this->module[0].'/update/schedule_list/'.$cus->cus_idx,'Back to List Paket', 'class="btn"')?>
     </div>
 <?php echo form_close();?>
