@@ -191,7 +191,7 @@
    <div class="well form-inline">
         <table>
             <tr>
-                <td><?php echo form_text('Schedule Date & time','sched_date_time',(isset($data[0]->sched_date_time))?date('d-M-Y ;l',strtotime($data[0]->sched_date_time)):'','class="span3" id="date_time" autocomplete="off"');?>
+                <td><?php echo form_text('Schedule Date & time','sched_date_time',(isset($data[0]->sched_date_time) && $data[0]->sched_date_time != '')?date('d-M-Y ;l',strtotime($data[0]->sched_date_time)):'','class="span3" id="date_time" autocomplete="off"');?>
                 <?php echo form_drop('Visit','sched_visit',$visit,(isset($data[0]->sched_visit))?$data[0]->sched_visit:'','class="span2"');?></td>
                 <td valign="top"><?php echo form_area('Alamat Kirim ','sched_alamat_kirim',(isset($data[0]->sched_alamat_kirim))?$data[0]->sched_alamat_kirim:'','class="span3" autocomplete="off"');?></td>
             </tr>
