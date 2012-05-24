@@ -89,6 +89,7 @@ class Schedule extends MY_Controller {
 		}
 		$this->params['cus']=$this->customer_m->get($cus_idx);
 		$this->params['data'] = $this->customer_m->get_paket_schedule($cus_idx, $pkt_idx);
+		//$this->params['pkt_idx'] = $this->paket_m->get_paket($sched_idx);
 		$this->params['visit'] = $this->visit_m->dropdown();
 		$this->params['konfirm'] = $this->konfirm_m->dropdown();
 		$this->params['status'] = $this->status_m->dropdown();
@@ -100,6 +101,7 @@ class Schedule extends MY_Controller {
 		if ($sched_idx AND $this->schedule_m->get($sched_idx))
 		{
 			$this->params['cus']=$this->customer_m->get($cus_idx);
+			//$this->params['pkt']=$this->paket_m->get_paket_detail($pkt_idx);
 			$this->params['data'] = $this->customer_m->get_schedule_detail($sched_idx);
 			$this->params['call'] = $this->call_m->get_sched_call($sched_idx);
 			if ($this->input->post('save'))
@@ -111,7 +113,8 @@ class Schedule extends MY_Controller {
 						setSucces('Data is saved');
 						$cus_idx = $this->input->post('cus_idx');
 						$pkt_idx = $this->input->post('pkt_idx');
-						redirect ($this->module[0].'/update/'.$cus_idx.'/'.$pkt_idx.'/'.$sched_idx);
+						redirect ($this->module[0].'/schedule_list/'.$cus_idx.'/'.$pkt_idx.'/'.$sched_idx);
+						//redirect ($this->module[0].'/update/'.$cus_idx.'/'.$pkt_idx.'/'.$sched_idx);
 					}
 					else
 					{

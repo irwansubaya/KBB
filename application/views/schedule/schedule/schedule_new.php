@@ -9,7 +9,9 @@
 		    showAnim: 'fold'
 	});
         $('#date_time').datetimepicker({
-            dateFormat: 'dd-M-yy',
+            dateFormat: 'dd-M-yy DD',
+            minDate: '-2m',
+            maxDate:'+2m',
             });
     });
     
@@ -94,7 +96,12 @@
 	$('#call_'+VAL).remove();
 	return false;
     }
-    
+    function dontEnter(evt) { 
+    var evt = (evt) ? evt : ((event) ? event : null); 
+      var node = (evt.target) ? evt.target : ((evt.srcElement) ? evt.srcElement : null); 
+      if ((evt.keyCode == 13) && (node.type=="text"))  {return false;} 
+    } 
+    document.onkeypress = dontEnter;
 </script>
 <div class="page-header">
     <h2>Schedule for Customer :<?php echo '['.$cus->cus_corporate_id.'] '.$cus->cus_nama_perusahaan ?></h2>
@@ -107,7 +114,7 @@
         <td><?php echo form_hidden('pkt_idx',$data[0]->pkt_idx, 'id=pkt_idx');?></td>
     </tr>
     <tr>
-        <td><?php echo form_text('Corporate ID*','cus_corporate_id',(isset($data[0]->cus_corporate_id))?$data[0]->cus_corporate_id:'','class="span2" maxlength="10" id="sched_corporate_id" readonly');?></td>
+        <td><?php echo form_text('Corporate ID','cus_corporate_id',(isset($data[0]->cus_corporate_id))?$data[0]->cus_corporate_id:'','class="span2" maxlength="10" id="sched_corporate_id" readonly');?></td>
 	<td><?php echo form_hidden('sched_idx','', 'id=sched_idx');?></td>
     </tr>
     <tr>
@@ -187,13 +194,13 @@
     </tr>
     <tr>
         <td>CP Lain</td>
-        <td><input type="text" name="call_cp_lain" id="call_cp_lain" class="span2"></td>
+        <td><input type="text" name="call_cp_lain" id="call_cp_lain" class="span2" autocomplete="off"></td>
         <td>&nbsp;</td>
         <td>Telp Lain</td>
-        <td><input type="text" name="call_telp_lain" id="call_telp_lain" class="span2"></td>
+        <td><input type="text" name="call_telp_lain" id="call_telp_lain" class="span2" autocomplete="off"></td>
         <td>&nbsp;</td>
 	<td>Keterangan</td>
-	<td><textarea name="keterangan" id="call_keterangan" class="span2"></textarea></td>
+	<td><textarea name="keterangan" id="call_keterangan" class="span2" autocomplete="off"></textarea></td>
     </tr>
     <tr>
         <td>&nbsp;</td>
@@ -243,7 +250,7 @@
                             <input type="checkbox" name="sched_fitur[]" value="Training Auto Colection">  Training Auto Colection<br>
                             <input type="checkbox" name="sched_fitur[]" value="Training B2B Pertamina">  Training B2B Pertamina<br>
                             <input type="checkbox" name="sched_fitur[]" value="Training Fleet">  Training Fleet<br>
-                            <input type="checkbox" name="sched_fitur[]" value="DLL">  DLL
+                            <input type="checkbox" name="sched_fitur[]" value="Training KBB">  Training KBB
                         </div>
                     </div>
                 </td>

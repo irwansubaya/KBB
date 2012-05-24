@@ -9,7 +9,9 @@
 		    showAnim: 'fold'
 	});
         $('#date_time').datetimepicker({
-            dateFormat: 'dd-M-yy',
+            dateFormat: 'dd-M-yy ',
+	    changeMonth: true,
+	    changeYear: true,
 	    minDate: '-2m',
             maxDate:'+2m'
             });
@@ -191,7 +193,7 @@
    <div class="well form-inline">
         <table>
             <tr>
-                <td><?php echo form_text('Schedule Date & time','sched_date_time',(isset($data[0]->sched_date_time))?date('d-M-Y ;l',strtotime($data[0]->sched_date_time)):'','class="span3" id="date_time" autocomplete="off"');?>
+                <td><?php echo form_text('Schedule Date & time','sched_date_time',(isset($data[0]->sched_date_time))?date('d-M-Y ; h:i ;l',strtotime($data[0]->sched_date_time)):'','class="span3" id="date_time" autocomplete="off"');?>
                 <?php echo form_drop('Visit','sched_visit',$visit,(isset($data[0]->sched_visit))?$data[0]->sched_visit:'','class="span2"');?></td>
                 <td valign="top"><?php echo form_area('Alamat Kirim ','sched_alamat_kirim',(isset($data[0]->sched_alamat_kirim))?$data[0]->sched_alamat_kirim:'','class="span3" autocomplete="off"');?></td>
             </tr>
@@ -221,7 +223,7 @@
                             <input type="checkbox" name="sched_fitur[]" value="Training Auto Colection"<?php echo (isset($data[0]->sched_fitur) && in_array('Training Auto Colection', explode(',', $data[0]->sched_fitur)))?' checked':'' ?>>  Training Auto Colection<br>
                             <input type="checkbox" name="sched_fitur[]" value="Training B2B Pertamina"<?php echo (isset($data[0]->sched_fitur) && in_array('Training B2B Pertamina', explode(',', $data[0]->sched_fitur)))?' checked':'' ?>>  Training B2B Pertamina<br>
                             <input type="checkbox" name="sched_fitur[]" value="Training Fleet"<?php echo (isset($data[0]->sched_fitur) && in_array('Training Fleet', explode(',', $data[0]->sched_fitur)))?' checked':'' ?>>  Training Fleet<br>
-                            <input type="checkbox" name="sched_fitur[]" value="DLL"<?php echo (isset($data[0]->sched_fitur) && in_array('DLL', explode(',', $data[0]->sched_fitur)))?' checked':'' ?>>  DLL
+                            <input type="checkbox" name="sched_fitur[]" value="Training KBB"<?php echo (isset($data[0]->sched_fitur) && in_array('Training KBB', explode(',', $data[0]->sched_fitur)))?' checked':'' ?>>  Training KBB
                         </div>
                     </div>
                 </td>
@@ -257,6 +259,9 @@
 		echo '<td><a href="" onclick="edit_call(\''.$i.
 					'\', \''.$call[$i]->call_nama_admin.
 					'\', \''.$call[$i]->call_date.
+					'\', \''.$call[$i]->call_konfirm.
+					'\', \''.$call[$i]->call_telp_lain.
+					'\', \''.$call[$i]->call_keterangan.
 					'\'); return false">Edit</a> | <a href="" onclick="remove_call(\''.$i.'\'); return false;">Delete</a></td>';
 		echo "</tr>";
 	      } }

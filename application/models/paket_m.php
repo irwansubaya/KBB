@@ -88,6 +88,14 @@ class Paket_m extends MY_Model {
 		$this->db->order_by('cus_corporate_id');
 		return parent :: get ();
 	}
+	public function get_paket ($pkt_idx = FALSE, $cus_idx = FALSE)
+	{
+		$this->db->join('customer', 'customer.cus_idx = paket.cus_idx');
+		//if ($pkt_idx) { $this->db->where('pkt_idx', $pkt_idx); }
+		//if ($cus_idx) { $this->db->where('customer.cus_idx', $cus_idx); }
+		//$this->db->order_by('cus_corporate_id');
+		return parent :: get ();
+	}
 	/**
 	 * Save method
 	 *

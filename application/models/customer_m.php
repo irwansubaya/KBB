@@ -102,7 +102,7 @@ class Customer_m extends MY_Model {
 		$this->db->join('schedule', 'paket.pkt_idx = schedule.pkt_idx');
 		$this->db->where('customer.cus_idx', $cus_idx);
 		$this->db->where('paket.pkt_idx', $pkt_idx);
-		$this->db->order_by('sched_date_time');
+		//$this->db->order_by('sched_date_time');
 		return parent :: get();
 	}
 	
