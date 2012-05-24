@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50141
 File Encoding         : 65001
 
-Date: 2012-05-23 08:30:05
+Date: 2012-05-24 09:07:40
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -407,25 +407,21 @@ CREATE TABLE `tb_call` (
   `call_idx` int(11) NOT NULL AUTO_INCREMENT,
   `sched_idx` int(11) NOT NULL DEFAULT '0',
   `call_nama_admin` varchar(16) DEFAULT NULL,
-  `call_date` datetime DEFAULT NULL,
-  `call_konfirm` varchar(16) DEFAULT NULL,
-  `call_cp_lain` varchar(64) DEFAULT NULL,
-  `call_telp_lain` varchar(64) DEFAULT NULL,
-  `call_keterangan` text,
+  `call_date` datetime NOT NULL,
+  `call_konfirm` varchar(16) NOT NULL,
+  `call_cp_lain` varchar(64) NOT NULL,
+  `call_telp_lain` varchar(64) NOT NULL,
+  `call_keterangan` text NOT NULL,
   PRIMARY KEY (`call_idx`),
   KEY `tb_call_sched_idx_fk` (`sched_idx`),
   CONSTRAINT `tb_call_sched_idx_fk` FOREIGN KEY (`sched_idx`) REFERENCES `tb_schedule` (`sched_idx`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=50 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
 
 -- ----------------------------
 -- Records of tb_call
 -- ----------------------------
-INSERT INTO `tb_call` VALUES ('44', '71', null, '2012-05-21 00:00:00', 'Nasabah Sulit Di', '', '', '');
-INSERT INTO `tb_call` VALUES ('45', '72', null, '2012-05-21 00:00:00', 'Di Jadwalkan', '', '', '');
-INSERT INTO `tb_call` VALUES ('46', '73', null, '2012-05-21 00:00:00', 'Di Jadwalkan', '', '', '');
-INSERT INTO `tb_call` VALUES ('47', '74', null, '2012-05-21 00:00:00', 'Komputer Rusak', '', '', '');
-INSERT INTO `tb_call` VALUES ('48', '75', null, '2012-05-21 00:00:00', 'Komputer Rusak', '', '', '');
-INSERT INTO `tb_call` VALUES ('49', '76', null, '2012-05-21 00:00:00', 'Di Jadwalkan', '', '', '');
+INSERT INTO `tb_call` VALUES ('5', '1', '', '2012-05-24 00:00:00', 'Di Jadwalkan', '', '', '');
+INSERT INTO `tb_call` VALUES ('6', '1', 'Irwan', '2012-05-24 00:00:00', 'Di Jadwalkan', '', '', '');
 
 -- ----------------------------
 -- Table structure for `tb_customer`
@@ -433,7 +429,6 @@ INSERT INTO `tb_call` VALUES ('49', '76', null, '2012-05-21 00:00:00', 'Di Jadwa
 DROP TABLE IF EXISTS `tb_customer`;
 CREATE TABLE `tb_customer` (
   `cus_idx` int(11) NOT NULL AUTO_INCREMENT,
-  `cus_no_sp` int(11) NOT NULL,
   `cus_corporate_id` varchar(10) NOT NULL,
   `cus_nama_perusahaan` varchar(64) NOT NULL,
   `cus_no_ktp` varchar(255) DEFAULT NULL,
@@ -452,33 +447,32 @@ CREATE TABLE `tb_customer` (
   `cus_email` varchar(255) DEFAULT NULL,
   `cus_tanggal_input` date NOT NULL,
   `cus_admin_input` varchar(255) NOT NULL,
-  `cus_status` varchar(255) NOT NULL,
   PRIMARY KEY (`cus_idx`)
 ) ENGINE=InnoDB AUTO_INCREMENT=54087 DEFAULT CHARSET=latin1;
 
 -- ----------------------------
 -- Records of tb_customer
 -- ----------------------------
-INSERT INTO `tb_customer` VALUES ('54065', '0', 'IBSMAKJAEX', 'Makmur Jaya Express CV', '', '1982928272', 'Toko Keramik', 'Ruko Taman Palem Lestari Blok A-30 No.15 Cengkareng  Jakarta Barat', 'Yuliana Tandu', 'Bekasi Selatan', '', '', '', '0812987876765', '', 'KCU DAAN MOGOT', '0198', 'makmurjaya_xpdc@yahoo.com', '2012-05-21', 'irwan', '');
-INSERT INTO `tb_customer` VALUES ('54068', '0', 'IBSSURYPER', 'Surya Perdana Abadi PT', '', '', '', 'Jl. Kapuk Utara II/8 Rt003/Rw001 Penjaringan Jakarta Barat', 'Suhai Wiraya', 'Jakarta Barat', '', ',', '', '0813 1877 8156 (Dewi)', '', 'KCU DAAN MOGOT', '0198', '', '2012-05-01', 'irwan', '');
-INSERT INTO `tb_customer` VALUES ('54069', '0', 'IBSTRIANKU', 'Trianto Kuswita', '', '', '', 'Jl. Cempaka Putih Tengah 27 No.6A Cempaka Putih Jakarta Pusat', 'Imelda', 'Jakarta Pusat', '', '021- 8690 6112', '', '', '', 'KCU DAAN MOGOT', '0198', 'triantokuswita@gmail.com', '2012-05-01', 'irwan', '');
-INSERT INTO `tb_customer` VALUES ('54070', '0', 'IBSGLOBSUC', 'Global Success International PT', '', '3213123213', 'Toko Keramik', 'Gedung Rifa Lt.2 Jl.Prof Dr.Satrio Blok C4 Kav.6-7 Kuningan Jakarta Pusat', 'Jefri Oktavian Indroe', 'Jakarta Selatan', '', '0215260781', '', '', '', 'KCU DAAN MOGOT', '0198', '', '2012-05-21', 'irwan', '');
-INSERT INTO `tb_customer` VALUES ('54071', '0', 'IBSSAMSIMJ', 'Samsim Jaya', '', '', '', 'Jl. Kapuk Raya No.12 E & F Kel.Kapuk Muara Kec.Penjaringan Jakarta', '', 'Jakarta', '', '0812 9411 300; 7059 3159; 5439 4635', '', '', '', 'KCU DAAN MOGOT', '0198', 'samsinjaya@yahoo.com', '2012-05-01', 'irwan', '');
-INSERT INTO `tb_customer` VALUES ('54072', '0', 'IBSYYSDHAS', 'Yay Dharmasagara', '', '5345353543', 'Toko Keramik', 'Jln. Taman Sari Raya No.78 Jakarta Barat', 'Elizaris P', 'Jakarta Barat', '11150', '0216492254', '', '08176999511', '', 'KCU DAAN MOGOT', '0198', '', '2012-05-21', 'irwan', '');
-INSERT INTO `tb_customer` VALUES ('54073', '0', 'IBSALIANOO', 'Alianto', '', '1321323132', 'Toko Keramik', 'Jl. Komplek TSS Indah No.815 Blok B Jakarta', 'Alianto', 'Jakarta Selatan', '', '02163859181', '', '08121052052', '', 'KCU DAAN MOGOT', '0001', '', '2012-05-21', 'irwan', '');
-INSERT INTO `tb_customer` VALUES ('54074', '0', 'IBSPUNDIPT', 'Pundi Kalia Mandiri PT', '', '', 'Perdagangan Umum', 'Jl. Tarumanegara No.100A, Cirendeu Tangerang', '', 'Tangerang', '15419', '021- 7470 2842', '', '', '', 'KCU DAAN MOGOT', '0198', 'pundikm@yahoo.com', '2012-05-01', 'irwan', '');
-INSERT INTO `tb_customer` VALUES ('54075', '0', 'IBSTJHINPK', 'Tjhin Pauw Kim Bangunan Jaya', '327.101.440.958.0002', '0953200845', 'toko keramik', 'Jl.Siliwangi No.28 Kel.Bondongan Rt01 Rw.13 Bogor Bogor', '', 'Bogor', '16131', '0251- 832 6082; 832 4992', '', '0878 7080 8123', '0251-8324992', 'KCU DAAN MOGOT', '0198', 'U43DY@yahoo.com', '2012-05-01', 'irwan', '');
-INSERT INTO `tb_customer` VALUES ('54076', '0', 'IBSHINTADW', 'Shinta Dewi', '', '5345353453', 'Toko Keramik', 'Jl. Sunter Kirana Raya Blok ND2 No.11 Sunter Jaya, Tanjung Priok Jakarta', 'Shinta Dewi', 'Jakarta Selatan', '', '', '', '0811999889', '', 'KCU DAAN MOGOT', '0198', '', '2012-05-21', 'irwan', '');
-INSERT INTO `tb_customer` VALUES ('54077', '0', 'IBSWIGIYAN', 'Wigiyanto Soleman', '', '', '', 'Jl. Kayu Putih Raya B4 / 8  Sebelah kolam Renang Jakarta Timur', '', 'Jakarta Timur', '', '', '', '0812 8137 896', '', 'KCU DAAN MOGOT', '0198', 'wigianto@gmail.com', '2012-05-01', 'irwan', '');
-INSERT INTO `tb_customer` VALUES ('54078', '0', 'IBSMARKAUW', 'Martin Kauw', '', '', '', 'Poglar Ex Pool PPD Blok B 27 Jakarta', '', 'Jakarta', '', '021- 5437 8002; 5437 8003', '', '', '', 'KCU DAAN MOGOT', '0198', '', '2012-05-01', 'irwan', '');
-INSERT INTO `tb_customer` VALUES ('54079', '0', 'IBSINGCUAA', 'Ing Cuan', '', '5450706789', 'Toko Keramik', 'Jl.Perdana Raya Indah Blok A/3 Rt10 Rw04 Wijaya Kusuma, Grogol Petamburan Jakarta Barat', 'Ing Cuan', 'Jakarta Barat', '11460', '02163858150', '', '0811933111', '', 'KCU DAAN MOGOT', '0198', 'as8888@indosat.net.id', '2012-05-21', 'irwan', '');
-INSERT INTO `tb_customer` VALUES ('54080', '0', 'IBSPTHAKAS', 'Hakasima Inti PT', '', '', 'Peralatan Rumah Tangga', 'Jl. Kembangan Baru Raya Blok AA No.3 Kembangan Jakarta Barat', 'Tjhin Anthony', 'Jakarta Barat', '11610', '021- 581 3345', '', '', '', 'KCU DAAN MOGOT', '0198', '', '2012-05-01', 'irwan', '');
-INSERT INTO `tb_customer` VALUES ('54081', '0', 'IBSPTPUSAK', 'Pusaka Banten Sakti PT', '', '', 'Jasa Angkutan', 'Jl. Raya Serang - Cilegon Km.122 Kramat watu Cilegon', '', 'Cilegon', '42161', '0254- 7000622; 7001168', '', '0812 1200091', '0254-233170', 'KCU DAAN MOGOT', '0198', 'pbs_one@yahoo.com', '2012-05-01', 'irwan', '');
-INSERT INTO `tb_customer` VALUES ('54082', '0', 'IBSRUDIPAW', 'Rudianto Paw', '09.5003.111173.2013', '', '', 'Pademangan II  Gg II No.49  TK Borneo el Jl.Hayam Wuruk , Pademangan Jakarta', '', 'Jakarta', '', '629 5658', '', '0812 8132 897', '', 'KCU DAAN MOGOT', '0198', 'rudianto@yahoo.com', '2012-05-01', 'irwan', '');
-INSERT INTO `tb_customer` VALUES ('54083', '0', 'IBSPTWATAN', 'Wahana Tani Organik Lestari PT', '', '', 'Produksi Pupuk', 'Jl.Gatot Subroto Rt04/Rw01 Sangiang Jaya Periuk Tangerang', '', 'Tangerang', '15132', '021- 4788 2599592 7148', '', '', '', 'KCU DAAN MOGOT', '0198', 'peterhartono@live.com', '2012-05-01', 'irwan', '');
-INSERT INTO `tb_customer` VALUES ('54084', '0', 'IBSPTINDOC', 'Indocore Perkasa PT', '', '', 'Alat Kesehatan', 'Graha Mas Pemuda Blok AB No.19 Kel.Jati Kec.Pulo Gadung Jakarta Timur', 'O Lee', 'Jakarta Timur', '', '021- 4788 2599', '', '', '', 'KCU DAAN MOGOT', '0198', 'sunflower58@homail.net', '2012-05-01', 'irwan', '');
-INSERT INTO `tb_customer` VALUES ('54085', '0', 'IBSGUNWIDJ', 'Gunadi Widjanarko', '', '2543535354', 'Bahan Bangunan', 'Jl.Gelang Baru Barat 1/38 Rt.01 Rw.003 Tomang, Grogol Petamburan (Alamat Lama) Jakarta Barat', 'Gunadi Widjanarko', 'Jakarta Barat', '', '', '', '', '', 'KCU DAAN MOGOT', '0198', 'batarex.indo@yahoo.com', '2012-05-21', 'irwan', '');
-INSERT INTO `tb_customer` VALUES ('54086', '0', 'IBSKARUMEL', 'Karunia Mekar Sarana PT', '0951072301560147', '2413002877', 'Jasa Angkutan', 'Jl Rajawali selatan I No.18 Mangga dua', 'Mervyn Komandalika', 'Jakarta Barat', '10720', '02164700888', '', '02195740554', '', 'KCU DAAN MOGOT', '0198', 'kms888@centrin.net.id', '2012-05-21', 'irwan', '');
+INSERT INTO `tb_customer` VALUES ('54065', 'IBSMAKJAEX', 'Makmur Jaya Express CV', '', '1982928272', 'Toko Keramik', 'Ruko Taman Palem Lestari Blok A-30 No.15 Cengkareng  Jakarta Barat', 'Yuliana Tandu', 'Bekasi Selatan', '', '', '', '0812987876765', '', 'KCU DAAN MOGOT', '0198', 'makmurjaya_xpdc@yahoo.com', '2012-05-21', 'irwan');
+INSERT INTO `tb_customer` VALUES ('54068', 'IBSSURYPER', 'Surya Perdana Abadi PT', '', '', '', 'Jl. Kapuk Utara II/8 Rt003/Rw001 Penjaringan Jakarta Barat', 'Suhai Wiraya', 'Jakarta Barat', '', ',', '', '0813 1877 8156 (Dewi)', '', 'KCU DAAN MOGOT', '0198', '', '2012-05-01', 'irwan');
+INSERT INTO `tb_customer` VALUES ('54069', 'IBSTRIANKU', 'Trianto Kuswita', '', '', '', 'Jl. Cempaka Putih Tengah 27 No.6A Cempaka Putih Jakarta Pusat', 'Imelda', 'Jakarta Pusat', '', '021- 8690 6112', '', '', '', 'KCU DAAN MOGOT', '0198', 'triantokuswita@gmail.com', '2012-05-01', 'irwan');
+INSERT INTO `tb_customer` VALUES ('54070', 'IBSGLOBSUC', 'Global Success International PT', '', '3213123213', 'Toko Keramik', 'Gedung Rifa Lt.2 Jl.Prof Dr.Satrio Blok C4 Kav.6-7 Kuningan Jakarta Pusat', 'Jefri Oktavian Indroe', 'Jakarta Selatan', '', '0215260781', '', '', '', 'KCU DAAN MOGOT', '0198', '', '2012-05-21', 'irwan');
+INSERT INTO `tb_customer` VALUES ('54071', 'IBSSAMSIMJ', 'Samsim Jaya', '', '', '', 'Jl. Kapuk Raya No.12 E & F Kel.Kapuk Muara Kec.Penjaringan Jakarta', '', 'Jakarta', '', '0812 9411 300; 7059 3159; 5439 4635', '', '', '', 'KCU DAAN MOGOT', '0198', 'samsinjaya@yahoo.com', '2012-05-01', 'irwan');
+INSERT INTO `tb_customer` VALUES ('54072', 'IBSYYSDHAS', 'Yay Dharmasagara', '', '5345353543', 'Toko Keramik', 'Jln. Taman Sari Raya No.78 Jakarta Barat', 'Elizaris P', 'Jakarta Barat', '11150', '0216492254', '', '08176999511', '', 'KCU DAAN MOGOT', '0198', '', '2012-05-21', 'irwan');
+INSERT INTO `tb_customer` VALUES ('54073', 'IBSALIANOO', 'Alianto', '', '1321323132', 'Toko Keramik', 'Jl. Komplek TSS Indah No.815 Blok B Jakarta', 'Alianto', 'Jakarta Selatan', '', '02163859181', '', '08121052052', '', 'KCU DAAN MOGOT', '0001', '', '2012-05-21', 'irwan');
+INSERT INTO `tb_customer` VALUES ('54074', 'IBSPUNDIPT', 'Pundi Kalia Mandiri PT', '', '', 'Perdagangan Umum', 'Jl. Tarumanegara No.100A, Cirendeu Tangerang', '', 'Tangerang', '15419', '021- 7470 2842', '', '', '', 'KCU DAAN MOGOT', '0198', 'pundikm@yahoo.com', '2012-05-01', 'irwan');
+INSERT INTO `tb_customer` VALUES ('54075', 'IBSTJHINPK', 'Tjhin Pauw Kim Bangunan Jaya', '327.101.440.958.0002', '0953200845', 'toko keramik', 'Jl.Siliwangi No.28 Kel.Bondongan Rt01 Rw.13 Bogor Bogor', '', 'Bogor', '16131', '0251- 832 6082; 832 4992', '', '0878 7080 8123', '0251-8324992', 'KCU DAAN MOGOT', '0198', 'U43DY@yahoo.com', '2012-05-01', 'irwan');
+INSERT INTO `tb_customer` VALUES ('54076', 'IBSHINTADW', 'Shinta Dewi', '', '5345353453', 'Toko Keramik', 'Jl. Sunter Kirana Raya Blok ND2 No.11 Sunter Jaya, Tanjung Priok Jakarta', 'Shinta Dewi', 'Jakarta Selatan', '', '', '', '0811999889', '', 'KCU DAAN MOGOT', '0198', '', '2012-05-21', 'irwan');
+INSERT INTO `tb_customer` VALUES ('54077', 'IBSWIGIYAN', 'Wigiyanto Soleman', '', '', '', 'Jl. Kayu Putih Raya B4 / 8  Sebelah kolam Renang Jakarta Timur', '', 'Jakarta Timur', '', '', '', '0812 8137 896', '', 'KCU DAAN MOGOT', '0198', 'wigianto@gmail.com', '2012-05-01', 'irwan');
+INSERT INTO `tb_customer` VALUES ('54078', 'IBSMARKAUW', 'Martin Kauw', '', '', '', 'Poglar Ex Pool PPD Blok B 27 Jakarta', '', 'Jakarta', '', '021- 5437 8002; 5437 8003', '', '', '', 'KCU DAAN MOGOT', '0198', '', '2012-05-01', 'irwan');
+INSERT INTO `tb_customer` VALUES ('54079', 'IBSINGCUAA', 'Ing Cuan', '', '5450706789', 'Toko Keramik', 'Jl.Perdana Raya Indah Blok A/3 Rt10 Rw04 Wijaya Kusuma, Grogol Petamburan Jakarta Barat', 'Ing Cuan', 'Jakarta Barat', '11460', '02163858150', '', '0811933111', '', 'KCU DAAN MOGOT', '0198', 'as8888@indosat.net.id', '2012-05-21', 'irwan');
+INSERT INTO `tb_customer` VALUES ('54080', 'IBSPTHAKAS', 'Hakasima Inti PT', '', '', 'Peralatan Rumah Tangga', 'Jl. Kembangan Baru Raya Blok AA No.3 Kembangan Jakarta Barat', 'Tjhin Anthony', 'Jakarta Barat', '11610', '021- 581 3345', '', '', '', 'KCU DAAN MOGOT', '0198', '', '2012-05-01', 'irwan');
+INSERT INTO `tb_customer` VALUES ('54081', 'IBSPTPUSAK', 'Pusaka Banten Sakti PT', '', '', 'Jasa Angkutan', 'Jl. Raya Serang - Cilegon Km.122 Kramat watu Cilegon', '', 'Cilegon', '42161', '0254- 7000622; 7001168', '', '0812 1200091', '0254-233170', 'KCU DAAN MOGOT', '0198', 'pbs_one@yahoo.com', '2012-05-01', 'irwan');
+INSERT INTO `tb_customer` VALUES ('54082', 'IBSRUDIPAW', 'Rudianto Paw', '09.5003.111173.2013', '', '', 'Pademangan II  Gg II No.49  TK Borneo el Jl.Hayam Wuruk , Pademangan Jakarta', '', 'Jakarta', '', '629 5658', '', '0812 8132 897', '', 'KCU DAAN MOGOT', '0198', 'rudianto@yahoo.com', '2012-05-01', 'irwan');
+INSERT INTO `tb_customer` VALUES ('54083', 'IBSPTWATAN', 'Wahana Tani Organik Lestari PT', '', '', 'Produksi Pupuk', 'Jl.Gatot Subroto Rt04/Rw01 Sangiang Jaya Periuk Tangerang', '', 'Tangerang', '15132', '021- 4788 2599592 7148', '', '', '', 'KCU DAAN MOGOT', '0198', 'peterhartono@live.com', '2012-05-01', 'irwan');
+INSERT INTO `tb_customer` VALUES ('54084', 'IBSPTINDOC', 'Indocore Perkasa PT', '', '', 'Alat Kesehatan', 'Graha Mas Pemuda Blok AB No.19 Kel.Jati Kec.Pulo Gadung Jakarta Timur', 'O Lee', 'Jakarta Timur', '', '021- 4788 2599', '', '', '', 'KCU DAAN MOGOT', '0198', 'sunflower58@homail.net', '2012-05-01', 'irwan');
+INSERT INTO `tb_customer` VALUES ('54085', 'IBSGUNWIDJ', 'Gunadi Widjanarko', '', '2543535354', 'Bahan Bangunan', 'Jl.Gelang Baru Barat 1/38 Rt.01 Rw.003 Tomang, Grogol Petamburan (Alamat Lama) Jakarta Barat', 'Gunadi Widjanarko', 'Jakarta Barat', '', '', '', '', '', 'KCU DAAN MOGOT', '0198', 'batarex.indo@yahoo.com', '2012-05-21', 'irwan');
+INSERT INTO `tb_customer` VALUES ('54086', 'IBSKARUMEL', 'Karunia Mekar Sarana PT', '0951072301560147', '2413002877', 'Jasa Angkutan', 'Jl Rajawali selatan I No.18 Mangga dua', 'Mervyn Komandalika', 'Jakarta Barat', '10720', '02164700888', '', '02195740554', '', 'KCU DAAN MOGOT', '0198', 'kms888@centrin.net.id', '2012-05-21', 'irwan');
 
 -- ----------------------------
 -- Table structure for `tb_engineer`
@@ -659,7 +653,8 @@ CREATE TABLE `tb_schedule` (
   `sched_idx` int(11) NOT NULL AUTO_INCREMENT,
   `cus_idx` int(11) NOT NULL,
   `pkt_idx` int(11) NOT NULL,
-  `sched_date_time` text NOT NULL,
+  `sched_date_time` text,
+  `sched_time` text NOT NULL,
   `sched_visit` text NOT NULL,
   `sched_agenda_kunjungan` text NOT NULL,
   `sched_fitur` text NOT NULL,
@@ -670,18 +665,12 @@ CREATE TABLE `tb_schedule` (
   KEY `cus_idx` (`cus_idx`),
   CONSTRAINT `cus_idx` FOREIGN KEY (`cus_idx`) REFERENCES `tb_customer` (`cus_idx`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `pkt_idx` FOREIGN KEY (`pkt_idx`) REFERENCES `tb_paket` (`pkt_idx`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=78 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 
 -- ----------------------------
 -- Records of tb_schedule
 -- ----------------------------
-INSERT INTO `tb_schedule` VALUES ('71', '54065', '36', '', 'New', '', '', '');
-INSERT INTO `tb_schedule` VALUES ('72', '54073', '44', '22-May-2012 Tuesday 11:00', 'New', '', '', '');
-INSERT INTO `tb_schedule` VALUES ('73', '54073', '44', '', 'New', '', '', '');
-INSERT INTO `tb_schedule` VALUES ('74', '54073', '44', '', 'New', '', '', '');
-INSERT INTO `tb_schedule` VALUES ('75', '54072', '43', '', 'New', '', '', '');
-INSERT INTO `tb_schedule` VALUES ('76', '54072', '43', '21-May-2012 Monday 16:48', 'New', '0', '', 'Jln. Taman Sari Raya No.78 Jakarta Barat');
-INSERT INTO `tb_schedule` VALUES ('77', '54073', '44', '', 'New', '0', '', '');
+INSERT INTO `tb_schedule` VALUES ('1', '54073', '44', '70-01-01 07:00:00', '', 'Adhoc', 'Key BCA Delivery,VPN Setting & Instalation,Training Pemakaian', 'Training KBB', '');
 
 -- ----------------------------
 -- Table structure for `tb_status`
