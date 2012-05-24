@@ -106,9 +106,14 @@ class Schedule_m extends MY_Model {
 		$this->db->set('sched_date_time',  $date);
 		$this->db->set('sched_agenda_kunjungan', $agenda);
 		$this->db->set('sched_fitur', $fitur);
-		//$this->db->set('paket', $pkt_konfirm);
+
 		parent :: save ($idx);
 		if(!$idx) $idx = $this->db->insert_id();
+
+		// Update status related paket
+		$this->db->where('pkt_idx', $this->input->post('pkt_idx'));
+		$this->db->update('paket', array('pkt_konfirm'=>$this->input->post('pkt_konfirm'))); 
+
 		return $this->insert_call($idx);
 	}
 }
