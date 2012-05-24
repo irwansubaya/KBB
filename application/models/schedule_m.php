@@ -32,9 +32,7 @@ class Schedule_m extends MY_Model {
 		$this->fields	 = array(
 			'cus_idx' => array('', TRUE),
 			'pkt_idx' => array('', TRUE),
-			'sched_date_time'=>array('date',false),
-			//'sched_date_time' => array('Date/Time', false, 'convert_datetime'),
-			'sched_visit' => array('Schedule Visit',true),
+			'sched_visit' => array('Schedule Visit', FALSE),
 			'sched_alamat_kirim' => array('Alamat Kirim', FALSE)
 		);
 	}
@@ -101,10 +99,11 @@ class Schedule_m extends MY_Model {
 	 */
 	public function save ($idx = FALSE)
 	{
+		$date =  ($this->input->post('sched_date_time') == '') ? '' : convert_datetime($this->input->post('sched_date_time'));
 		$agenda = (($this->input->post('agenda_kunjungan')) > 0) ? implode(',',$this->input->post('agenda_kunjungan')) : '';
 		$fitur = (($this->input->post('sched_fitur')) > 0) ? implode(',',$this->input->post('sched_fitur')) : '';
-		//$pkt_konfirm =  $this->input->post('pkt_konfirm');
-		
+
+		$this->db->set('sched_date_time',  $date);
 		$this->db->set('sched_agenda_kunjungan', $agenda);
 		$this->db->set('sched_fitur', $fitur);
 		//$this->db->set('paket', $pkt_konfirm);
