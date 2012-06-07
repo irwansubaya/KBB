@@ -156,6 +156,35 @@ class Customer extends MY_Controller {
 				$this->params['labels']= $this->customer_m->getLabels();
 				$this->_view('main_1_3', 'customer_detail');
 			}
+			if ($action == 'customer_paket')
+			{
+				/*if ($this->input->post('save'))
+				{
+						if ($this->customer_m->isValid())
+						{
+							if ($this->customer_m->save($idx))
+							{
+								setSucces('Data is saved');
+								redirect ($this->module[0]. '/update/detail/' . $idx);
+							}
+							else
+							{
+								setError('Unable to save');
+							}
+						}
+					
+				}*/
+				$this->params['cus'] = $this->customer_m->get($idx);
+				$this->params['data'] = $this->paket_m->get_paket_detail(false, $idx);
+				//$this->params['kota'] = $this->kota_m->dropdown();
+				//$this->params['bidus'] = $this->bidus_m->dropdown();
+				//$this->params['cabang'] = $this->cabang_m->dropdown();
+				//$this->params['labels']= $this->customer_m->getLabels();
+				$this->_view('main_1_3', 'customer_paket_detail');
+				//$this->params['cus'] = $this->customer_m->get($idx);
+				//$this->params['data'] = $this->paket_m->get_paket_detail(false, $idx);
+				//$this->_view('main_1_3', 'customer_list_paket');
+			}
 			else if ($action == 'paket')
 			{
 				if($pkt_idx)

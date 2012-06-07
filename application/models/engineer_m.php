@@ -48,4 +48,19 @@ class Engineer_m extends MY_Model {
 	{
 		return parent :: save ($idx);
 	}
+	public function dropdown()
+        {
+            $arr = array();
+            
+            $data = parent ::get();
+            if ($data)
+            {
+                foreach($data as $d)
+                {
+                    $arr[$d->se_nama] = $d->se_nama;
+                }
+                
+                return $arr;
+            }
+        }
 }

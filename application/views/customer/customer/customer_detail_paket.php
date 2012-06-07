@@ -190,17 +190,17 @@
 	</tr>
 	<tr>
 	    <td><?php echo form_drop('Model Paket *','pkt_status',array('new'=>'New','upgrade'=>'Upgrade','amplop'=>'Amplop','info_bca'=>'Info BCA'),(isset($data[0]->pkt_status))?$data[0]->pkt_status:'','class="span2"');?></td>
-	    <td><?php echo form_text('Tgl Koneksi*','pkt_tanggal_koneksi',(isset($data[0]->pkt_tanggal_koneksi))?date('d-M-Y l',strtotime($data[0]->pkt_tanggal_koneksi)):'','class="span2" maxlength="25" id="pkt_tanggal_koneksi"');?></td>
+	    <td><?php echo form_text('Tgl Koneksi*','pkt_tanggal_koneksi',(isset($data[0]->pkt_tanggal_koneksi))?date('d-M-Y l',strtotime($data[0]->pkt_tanggal_koneksi)):'','class="span5" maxlength="25" id="pkt_tanggal_koneksi" readonly');?></td>
 	</tr>
 	<tr>
-	    <td><?php echo form_text('Tgl Terima Paket*','pkt_tanggal_terima',(isset($data[0]->pkt_tanggal_terima))?date('d-M-Y l',strtotime($data[0]->pkt_tanggal_terima)):'','class="span2" maxlength="25" id="pkt_tanggal_terima" autocomplete="off"');?></td>
-	    <td><?php echo form_text('Tgl Due Date*','pkt_jatuh_tempo',(isset($data[0]->pkt_jatuh_tempo))?date('d-M-Y l',strtotime($data[0]->pkt_jatuh_tempo)):'','class="span2" maxlength="25" autocomplete="off" readonly');?></td>
+	    <td><?php echo form_text('Tgl Terima Paket*','pkt_tanggal_terima',(isset($data[0]->pkt_tanggal_terima))?date('d-M-Y l',strtotime($data[0]->pkt_tanggal_terima)):'','class="span5" maxlength="25" id="pkt_tanggal_terima" autocomplete="off" readonly');?></td>
+	    <td><?php echo form_text('Tgl Due Date*','pkt_jatuh_tempo',(isset($data[0]->pkt_jatuh_tempo))?date('d-M-Y l',strtotime($data[0]->pkt_jatuh_tempo)):'','class="span5" maxlength="25" autocomplete="off" readonly');?></td>
 	</tr>
 	</table>
 	    <legend>List Key</legend>
 	    <div class="well form-inline">
 	    <input autocomplete="off" onkeypress="" type="text" name="key_sn" placeholder="SN Key" id="key_sn" class="span2" maxlength="10" onkeyup="this.value=this.value.replace(/\D/g,'') ">
-	    <input autocomplete="off" type="text" name="key_username" placeholder="Username" id="key_username" class="span3">
+	    <input autocomplete="off" type="text" name="key_username" placeholder="Username" id="key_username" class="span4">
 	    <input type="hidden" value="insert" name="mode" id="mode" >
 	    <input type="hidden" value="" name="id_key" id="id_key">
 	    <?php echo form_button('insert-key','Insert','onclick="return insert_key()" class="btn"')?>

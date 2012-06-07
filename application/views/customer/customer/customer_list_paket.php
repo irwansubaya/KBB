@@ -30,7 +30,7 @@ $(document).ready(function() {
 	      <th width="10%">Tgl Koneksi</th>
 	      <th width="10%">Tgl Terima Paket</th>
 	      <th width="10%">Tgl Due Date</th>
-	      <!--<th width="10%">Aktif</th>-->
+	      <th width="20%">&nbsp</th>
 	    </tr>
 	  </thead>
 	  <tbody>

@@ -361,6 +361,9 @@ h6 {
   padding-bottom: 17px;
   margin: 18px 0;
   border-bottom: 1px solid #eeeeee;
+  margin-bottom: 2px;
+  padding-bottom: 5px;
+  font-size: 15px;
 }
 .page-header h1 {
   line-height: 1;
@@ -975,7 +978,6 @@ input:focus:required:invalid:focus, textarea:focus:required:invalid:focus, selec
 .form-inline .uneditable-input,
 .form-horizontal .uneditable-input {
   font-size:12px;
-  display: inline-block;
   margin-bottom: 0;
 }
 .form-search .hide, .form-inline .hide, .form-horizontal .hide {
@@ -1010,18 +1012,26 @@ legend + .control-group {
   -webkit-margin-top-collapse: separate;
 }
 .form-horizontal .control-group {
-  margin-bottom: 18px;
+  margin-bottom: 2px;
   *zoom: 1;
 }
 .form-horizontal .control-group:before, .form-horizontal .control-group:after {
   display: table;
   content: "";
+  margin-top: 2px;
 }
 .form-horizontal .control-group:after {
   clear: both;
 }
+.form-horizontall .control-label {
+  font-size:11px;
+  float: left;
+  width: 140px;
+  padding-top: 5px;
+  text-align: left;
+}
 .form-horizontal .control-label {
-  font-size:12px;
+  font-size:11px;
   float: left;
   width: 140px;
   padding-top: 5px;
@@ -1049,6 +1059,7 @@ table {
   text-align: left;
   vertical-align: top;
   border-top: 1px solid #ddd;
+  font-size: 10px;
 }
 .table th {
   font-weight: bold;
@@ -1652,7 +1663,7 @@ table .span12 {
 }
 .well {
   min-height: 20px;
-  padding: 19px;
+  padding: 0px;
   margin-bottom: 20px;
   background-color: #f5f5f5;
   border: 1px solid #eee;

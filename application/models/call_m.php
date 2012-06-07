@@ -30,12 +30,13 @@ class Call_m extends MY_Model {
 		$this->tableName = 'call';
 		$this->idx	 = 'call_idx';
 		$this->fields	 = array(
-			//'adm_username' => array('admin name', TRUE),
+			'call_nama_admin' => array('Nama Admin', TRUE),
 			'call_date' => array('Call Date', TRUE),
 			'call_konfirm' => array('Komfirm', TRUE),
                         'call_cp_lain' => array('CP Lain', false),
 			'call_telp_lain' => array('Telp Lain', false),
-			'call_keterangan' => array('Keterangan',true),
+			'call_status' => array('Call Status', true),
+			'call_keterangan' => array('Keterangan',true)
 		);
 	}
 	

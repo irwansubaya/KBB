@@ -4,7 +4,7 @@
         $("#formid").validate();
         $("#pkt_tanggal_koneksi").datepicker({
                 showOn: "button",
-		buttonImage: "images/calendar.gif",
+		buttonImage: "<?php echo base_url()?>static/js/date.png",
 		buttonImageOnly: true,
                 minDate: '-2m',
                 maxDate:'+2m',
@@ -13,7 +13,7 @@
 	});
         $("#pkt_tanggal_terima").datepicker({
                 showOn: "button",
-		buttonImage: "images/calendar.gif",
+		buttonImage: "/image/calendar.gif",
 		buttonImageOnly: true,
 		changeMonth: true,
 		changeYear: true,
@@ -49,6 +49,7 @@
 			var due_date =  dateText.next().wednesday();
 		    } 
 		    $('#pkt_jatuh_tempo').val(due_date.toString('dd-MMM-yyyy dddd'));
+                    
 		}
 	});
         $('#pkt_corporate_id').autocomplete('<?php echo base_url()?>customer/paket/customer_ajax',{
@@ -177,17 +178,17 @@
 	</tr>
 	<tr>
 	    <td><?php echo form_drop('Model Paket *','pkt_status',array('new'=>'New','upgrade'=>'Upgrade','amplop'=>'Amplop','info_bca'=>'Info BCA'),(isset($data[0]->pkt_status))?$data[0]->pkt_status:'','class="span2"');?></td>
-	    <td><?php echo form_text('Tgl Koneksi*','pkt_tanggal_koneksi',(isset($data[0]->pkt_tanggal_koneksi))?date('d-M-Y ',strtotime($data[0]->pkt_tanggal_koneksi)):'','class="span2" id="pkt_tanggal_koneksi" readonly');?></td>
+	    <td><?php echo form_text('Tgl Koneksi*','pkt_tanggal_koneksi',(isset($data[0]->pkt_tanggal_koneksi))?date('d-M-Y ',strtotime($data[0]->pkt_tanggal_koneksi)):'','class="span5" id="pkt_tanggal_koneksi" readonly');?></td>
 	</tr>
 	<tr>
-	    <td><?php echo form_text('Tgl Terima Paket*','pkt_tanggal_terima',(isset($data[0]->pkt_tanggal_terima))?date('d-M-Y',strtotime($data[0]->pkt_tanggal_terima)):'','class="span2"  id="pkt_tanggal_terima" autocomplete="off" readonly');?></td>
-	    <td><?php echo form_text('Tgl Due Date*','pkt_jatuh_tempo',(isset($data[0]->pkt_jatuh_tempo))?date('d-M-Y D',strtotime($data[0]->pkt_jatuh_tempo)):'','class="span2"  autocomplete="off" readonly');?></td>
+	    <td><?php echo form_text('Tgl Terima Paket*','pkt_tanggal_terima',(isset($data[0]->pkt_tanggal_terima))?date('d-M-Y',strtotime($data[0]->pkt_tanggal_terima)):'','class="span5"  id="pkt_tanggal_terima" autocomplete="off" readonly');?></td>
+	    <td><?php echo form_text('Tgl Due Date*','pkt_jatuh_tempo',(isset($data[0]->pkt_jatuh_tempo))?date('d-M-Y D',strtotime($data[0]->pkt_jatuh_tempo)):'','class="span5"  autocomplete="off" readonly');?></td>
 	</tr>
 	</table>
 	    <legend>List Key</legend>
 	    <div class="well form-inline">
-	    <input autocomplete="off" type="text" name="key_sn" placeholder="Key SN" id="key_sn" class="span2" maxlength="10" onkeyup="this.value=this.value.replace(/\D/g,'') ">
-	    <input autocomplete="off" type="text" name="key_username" placeholder="Username" id="key_username" class="span3">
+	    <input autocomplete="off" type="text" name="key_sn" placeholder="Key SN" id="key_sn" class="span3" maxlength="10" onkeyup="this.value=this.value.replace(/\D/g,'') ">
+	    <input autocomplete="off" type="text" name="key_username" placeholder="Username" id="key_username" class="span4">
 	    <input type="hidden" value="insert" name="mode" id="mode" >
 	    <input type="hidden" value="" name="id_key" id="id_key">
 	    <?php echo form_button('insert-key','Insert','onclick="return insert_key()" class="btn"')?>

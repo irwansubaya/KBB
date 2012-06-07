@@ -33,7 +33,11 @@ class Schedule_m extends MY_Model {
 			'cus_idx' => array('', TRUE),
 			'pkt_idx' => array('', TRUE),
 			'sched_visit' => array('Schedule Visit', FALSE),
-			'sched_alamat_kirim' => array('Alamat Kirim', FALSE)
+			'sched_status' => array('Schedule Status', FALSE),
+			'sched_alamat_kirim' => array('Alamat Kirim', FALSE),
+			'sched_resolve_date' => array('Resoleve Date',FALSE, 'convert_date'),
+			'sched_engineer' => array('Engineer', FALSE),
+			'sched_keterangan' => array('Keterangan', FALSE)		
 		);
 	}
 
@@ -51,7 +55,8 @@ class Schedule_m extends MY_Model {
 		$call[2] = $this->input->post('item_call_konfirm');
 		$call[3] = $this->input->post('item_call_cp_lain');
 		$call[4] = $this->input->post('item_call_telp_lain');
-		$call[5] = $this->input->post('item_call_keterangan');
+		$call[5] = $this->input->post('item_call_status');
+		$call[6] = $this->input->post('item_call_keterangan');
 
 		// delete old call, insert new call
 		$this->db->delete('call', array('sched_idx' => $sched_idx));
@@ -66,7 +71,8 @@ class Schedule_m extends MY_Model {
 				$this->db->set('call_konfirm',$call[2][$i]);
 				$this->db->set('call_cp_lain', $call[3][$i]);
 				$this->db->set('call_telp_lain', $call[4][$i]);
-				$this->db->set('call_keterangan', $call[5][$i]);
+				$this->db->set('call_status', $call[5][$i]);
+				$this->db->set('call_keterangan', $call[6][$i]);
 				$this->db->insert('call');
 			}
 		}
@@ -99,11 +105,13 @@ class Schedule_m extends MY_Model {
 	 */
 	public function save ($idx = FALSE)
 	{
-		$date =  ($this->input->post('sched_date_time') == '') ? '' : convert_datetime($this->input->post('sched_date_time'));
+		$resolved =  ($this->input->post('sched_resolve_date') == '') ? '' : convert_datetime($this->input->post('sched_resolve_date'));
+		$date =  ($this->input->post('sched_date') == '') ? '' : convert_datetime($this->input->post('sched_date'));
 		$agenda = (($this->input->post('agenda_kunjungan')) > 0) ? implode(',',$this->input->post('agenda_kunjungan')) : '';
 		$fitur = (($this->input->post('sched_fitur')) > 0) ? implode(',',$this->input->post('sched_fitur')) : '';
 
-		$this->db->set('sched_date_time',  $date);
+		$this->db->set('sched_resolve_date',  $resolved);
+		$this->db->set('sched_date',  $date);
 		$this->db->set('sched_agenda_kunjungan', $agenda);
 		$this->db->set('sched_fitur', $fitur);
 

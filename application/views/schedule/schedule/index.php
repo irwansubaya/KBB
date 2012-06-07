@@ -3,9 +3,10 @@
 <script src="<?php echo base_url() ?>static/js/standardista-table-sorting.js" type="text/javascript"></script>
 <script type="text/javascript">
 </script>
-<div class="page-header">
-    <h2>List Schedule for Customer :<?php echo '['.$cus->cus_corporate_id.'] '.$cus->cus_nama_perusahaan ?></h2>
+<!--<div class="page-header">
+    <h2>List Schedule for Customer :<?php //echo '['.$cus->cus_corporate_id.'] '.$cus->cus_nama_perusahaan ?></h2>
 </div>
+-->
 <table class="table sortable">
   <thead>
     <tr>
@@ -38,4 +39,4 @@
   <?php endif;?>
   </tbody>
 </table>
-<?php echo anchor($module[0].'/insert/'.$cus_idx.'/'.$pkt_idx,'Add New Schedule')?>
+<?php// echo anchor($module[0].'/insert/'.$cus_idx.'/'.$pkt_idx,'Add New Schedule')?>

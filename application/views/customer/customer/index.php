@@ -16,21 +16,15 @@
 		dateFormat: 'dd-M-yy',
 		showAnim: 'fold'
 	});
-        $("#browser").treeview();
-        $("#add").click(function() {
-            var branches = $("<li><span class='folder'>New Sublist</span><ul>" + 
-                    "<li><span class='file'>Item1</span></li>" + 
-                    "<li><span class='file'>Item2</span></li>" +
-                    "</ul></li>").appendTo("#browser");
-        $("#browser").treeview({
- 		add: branches
- 	});
-        });
     });
     
 </script>
 <div class="page-header">
     <h2>List Customer</h2>
+</div>
+<div id="dialog">
+    
+    
 </div>
 <form class="well form-search" style="text-align:left" name="search">
     <table>
@@ -61,20 +55,42 @@
       <th width="15%">ALAMAT</th>
       <th width="10%">HANDPHONE</th>
       <th width="10%">JENIS PAKET</th>
+      <th width="10%">SLA</th>
       <th width="10%">TGL KONEKSI</th>
       <td>STATUS</td>
     </tr>
   </thead>
-  <tbody>
+  <tbody>  
   <?php if ($data):?>
     <?php foreach ($data as $item):?>
     <tr>
-      <td><?php echo anchor($this->module[0] . '/update/detail/' . $item->cus_idx, $item->cus_corporate_id)?></td>
-      <td><?php echo $item->cus_nama_perusahaan?></td>
+      <!--<td><?php// echo anchor($this->module[0] . '/update/detail/' . $item->cus_idx, $item->cus_corporate_id)?></td>-->
+      <td><?php echo $item->cus_corporate_id ?></td>
+      <td><?php echo anchor($this->module[0] . '/update/customer_paket/' . $item->cus_idx, $item->cus_nama_perusahaan)?></td>
+      <!--<td><?php //echo $item->cus_nama_perusahaan?></td>-->
       <td><?php echo $item->cus_cp ?></td>
       <td><?php echo $item->cus_alamat ?></td>
       <td><?php echo $item->cus_handphone ?></td>
       <td><?php echo $item->pkt_jenis ?></td>
+      <td>  <?php
+                $tgl_trm_pkt = $item-> pkt_tanggal_terima;
+                $tgl_hari_ini=  date('Y-m-d');
+                $pecah1 = explode("-", $tgl_trm_pkt);
+                $date1 = $pecah1[2];
+                $month1 = $pecah1[1];
+                $year1 = $pecah1[0];
+                
+                $pecah2 = explode("-", $tgl_hari_ini);
+                $date2 = $pecah2[2];
+                $month2 = $pecah2[1];
+                $year2 =  $pecah2[0];
+                $trm_pkt = GregorianToJD($month1, $date1, $year1);
+                $hari_ini = GregorianToJD($month2, $date2, $year2);
+                
+                $total_hari = $hari_ini - $trm_pkt;
+                echo $total_hari;
+            ?>        
+      </td>
       <td><?php echo ($item->pkt_tanggal_koneksi == '') ? '' : date('d-M-Y',strtotime($item->pkt_tanggal_koneksi ))?></td>
       <td><?php echo anchor(base_url().'schedule/schedule/schedule_list/'.$item->cus_idx.'/'.$item->pkt_idx,$item->pkt_konfirm)?></td>
     </tr>
