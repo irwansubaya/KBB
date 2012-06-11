@@ -143,7 +143,7 @@ class Schedule extends MY_Controller {
 						{
 							if ($this->schedule_m->save($sched_idx))
 							{						
-								//setSucces('Data is saved');
+								setSucces('Data is saved');
 								$cus_idx = $this->input->post('cus_idx');
 								$pkt_idx = $this->input->post('pkt_idx');
 								redirect ($this->module[0].'/schedule_list/'.$cus_idx.'/'.$pkt_idx);
@@ -171,10 +171,10 @@ class Schedule extends MY_Controller {
 						{
 							if ($this->schedule_m->save($sched_idx))
 							{						
-								//setSucces('Data is saved');
+								setSucces('Data is saved');
 								$cus_idx = $this->input->post('cus_idx');
 								$pkt_idx = $this->input->post('pkt_idx');
-								redirect ($this->module[0].'/update/hasjung/'.$cus_idx.'/'.$pkt_idx.'/'.$sched_idx);
+								redirect ($this->module[0].'/update/schedule_list/'.$cus_idx.'/'.$pkt_idx.'/'.$sched_idx);
 							}
 							else
 							{

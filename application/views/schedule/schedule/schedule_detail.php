@@ -39,7 +39,7 @@
             $("#sched_status").val('Active') && $("#pkt_konfirm").val('Active') && $(('#tabs-2')).show();
 	}
         else
-        $("#sched_status").val('Folow Up') && $("#pkt_konfirm").val('Folow Up') && $('#tabs-2').hide(); 
+        $("#sched_status").val('Folow Up') && $("#pkt_konfirm").val('Folow Up') && $('#tabs-2').hide();              
         
 	$string = '<tr id="call_'+id+'">'+
 		    '<td>'+$("#call_nama_admin").val()+'<input type="hidden" name="item_call_nama_admin[]" value="'+$("#call_nama_admin").val()+'"></td>'+
@@ -49,7 +49,7 @@
                     '<td>'+$("#call_telp_lain").val()+'<input type="hidden" name="item_call_telp_lain[]" value="'+$("#call_telp_lain").val()+'"></td>'+
                     '<td>'+$("#call_status").val()+'<input type="hidden" name="item_call_status[]" value="'+$("#call_status").val()+'"></td>'+
                     '<td>'+$("#call_keterangan").val()+'<input type="hidden" name="item_call_keterangan[]" value="'+$("#call_keterangan").val()+'"></td>'+
-		    '<td><a href="" onclick="edit_call(\''+id+
+		    /*'<td><a href="" onclick="edit_call(\''+id+
 						    '\', \''+$("#call_nama_admin").val()+
 						    '\', \''+$("#call_date").val()+
                                                     '\', \''+$("#call_konfirm").val()+
@@ -57,7 +57,7 @@
                                                     '\', \''+$("#call_telp_lain").val()+
                                                     '\', \''+$("#call_status").val()+
                                                     '\', \''+$("#call_keterangan").val()+
-						    '\'); return false">Edit</a> | <a href="" onclick="remove_call(\''+id+'\'); return false;">Delete</a></td>'+
+						    '\'); return false">Edit</a> | <a href="" onclick="remove_call(\''+id+'\'); return false;">Delete</a></td>'+*/
 		   '</tr>';
 	if ( $("#mode").val() == 'insert')
 	{
@@ -90,7 +90,7 @@
         $("#call_telp_lain").val( TELPLAIN );
         $("#call_status").val( STATUS );
 	$("#call_keterangan").val( KETERANGAN );        
-	$("#mode").val('edit');
+	//$("#mode").val('edit');
 	return false;
     }
 
@@ -197,9 +197,9 @@
 						</td>
 						
 					    </tr>
-					    <tr>
+					    <!--<tr>
 						<td><input type="hidden" name="sched_status" id="sched_status"></td>
-					    </tr>
+					    </tr>-->
 					</table>
 			    </div>
 			    </div>	
@@ -236,19 +236,23 @@
                      <td><input type="hidden" name="call_status" id="call_status"></td>
                      <td>Keterangan</td>
                      <td><textarea name="keterangan" id="call_keterangan" class="span4" autocomplete="off"></textarea></td>
-                 </tr>
-                 <tr>
-                     <td>&nbsp;</td>
-                     <td>
-                         <input type="hidden" value="" name="call_idx" id="call_idx">
-                         <?php echo form_button('insert-call','Insert','onclick="return insert_call()" class="btn"')?>
-                     </td>
-                 </tr>
+                 </tr>	                 
                  <tr>
                      <td><input type="hidden" value="insert" name="mode" id="mode"></td>
                      <td><input type="hidden" value="" name="id_call" id="id_call"></td>
                  </tr>
                  </table>
+		 <table>
+		    <tr>                 
+			<td><?php echo form_text('Status Schedule','sched_status',(isset($data[0]->sched_status))?$data[0]->sched_status:'','class="span3" readonly id="sched_status"');?></td>
+		    </tr>
+		    <tr>
+                     <td>
+                         <input type="hidden" value="" name="call_idx" id="call_idx">
+                         <?php echo form_button('insert-call','Insert','onclick="return insert_call()" class="btn"')?>
+                     </td>
+                 </tr>
+		 </table>
                 </div>
 	   
 	   <table class="table table-bordered" id="call_list">
@@ -261,7 +265,7 @@
 			<th width="10%">Telp Lain</th>
 			<th width="10%">Call Status</th>
 			<th width="20%">Keterangan</th>
-			<th width="10%">&nbsp;</th>
+			<!--<th width="10%">&nbsp;</th>-->
 		</tr>
 	      </thead>
 	      <tbody id="item">
@@ -277,7 +281,7 @@
 			echo '<td>'. $call[$i]->call_telp_lain .'<input type="hidden" name="item_call_telp_lain[]" value="'. $call[$i]->call_telp_lain .'"></td>';
 			echo '<td>'. $call[$i]->call_status .'<input type="hidden" name="item_call_status[]" value="'. $call[$i]->call_status .'"></td>';
 			echo '<td>'. $call[$i]->call_keterangan .'<input type="hidden" name="item_call_keterangan[]" value="'. $call[$i]->call_keterangan .'"></td>';
-			echo '<td><a href="" onclick="edit_call(\''.$i.
+			/*echo '<td><a href="" onclick="edit_call(\''.$i.
 						'\', \''.$call[$i]->call_nama_admin.
 						'\', \''.$call[$i]->call_date.
 						'\', \''.$call[$i]->call_konfirm.
@@ -285,7 +289,7 @@
 						'\', \''.$call[$i]->call_telp_lain.
 						'\', \''.$call[$i]->call_status.
 						'\', \''.$call[$i]->call_keterangan.
-						'\'); return false">Edit</a> | <a href="" onclick="remove_call(\''.$i.'\'); return false;">Delete</a></td>';
+						'\'); return false">Edit</a> | <a href="" onclick="remove_call(\''.$i.'\'); return false;">Delete</a></td>';*/
 			echo "</tr>";
 		      } }
 		      ?>
