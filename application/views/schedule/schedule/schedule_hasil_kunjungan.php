@@ -69,7 +69,7 @@
 		<td><?php echo form_drop('Status','sched_status',$status,(isset($data[0]->sched_status))?$data[0]->sched_status:'','class="span2"');?></td>
 	    </tr>
 	    <tr>
-		<td><?php echo form_text('Resolve Date','sched_resolve_date',(isset($data[0]->sched_resolve_date)&& $data[0]->sched_resolve_date!='0000-00-00')?date('d-M-Y',strtotime($data[0]->sched_resolve_date)):'','class="span3" id="resolve_date" autocomplete="off"');?></td>
+		<td><?php echo form_text('Resolve Date','sched_resolve_date',(isset($data[0]->sched_resolve_date)&& ($item->sched_date=='0000-00-00' || $item->sched_date=='1970-01-01'))?date('d-M-Y',strtotime($data[0]->sched_resolve_date)):'','class="span3" id="resolve_date" autocomplete="off"');?></td>
 		<td><?php echo form_drop('Engineer','sched_engineer',$engineer,(isset($data[0]->sched_engineer))?$data[0]->sched_engineer:'','class="span2"');?></td>
 	    <tr>
 		<td><?php echo form_area('Keterangan','sched_keterangan',(isset($data[0]->sched_keterangan)&& $data[0]->sched_keterangan!='0')?$data[0]->sched_keterangan:'','class="span4" autocomplete="off"');?></td>

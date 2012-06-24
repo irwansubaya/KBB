@@ -24,6 +24,25 @@
                              $('#cab_name').val(data.cab_name);
                      }
              );
+        $('#cus_bidus').autocomplete('<?php echo base_url()?>customer/customer/bidus_ajax',{
+                     parse: function(data){
+                         var parsed = [];
+                         for (var i=0; i < data.length; i++) {
+                             parsed[i] = { data: data[i], value: data[i].bid_name };
+                         }
+                         return parsed;
+                     },
+                     formatItem: function(data,i,max){
+                         return  '<div class="search_content"><bold> '+data.bid_name+' </bold></div>';
+                     },
+                     width: 450, 
+                     dataType: 'json' 
+                 }).result( 
+                         function(event,data,formated){
+                             //$('#cus_bidus').val(data.bid_idx);
+                             $('#cus_bidus').val(data.bid_name);
+                     }
+             );
         $('#cus_kode_pos').autocomplete('<?php echo base_url()?>customer/customer/kodepos_ajax',{
                      parse: function(data){
                          var parsed = [];
@@ -79,18 +98,18 @@
     </tr>
     <tr>
         <td><?php echo form_text('No Rekening *','cus_no_rekening',(isset($data->cus_no_rekening))?$data->cus_no_rekening:'','class="span2" maxlength="10" autocomplete="off" tabindex="4"');?></td>
-        <td><?php echo form_drop('Bidang Usaha','cus_bidang_usaha',$bidus,(isset($data->cus_bidang_usaha))?$data->cus_bidang_usaha:'','class="span3" tabindex="5"');?></td>
+        <td><?php echo form_text('Bidang Usaha','cus_bidang_usaha',(isset($data->cus_bidang_usaha))?$data->cus_bidang_usaha:'','class="span3" id="cus_bidus" tabindex="5"');?></td>
     </tr>
     <tr>
         <td><?php echo form_area('ALamat *','cus_alamat',(isset($data->cus_alamat))?$data->cus_alamat:'','class="span4 maxlength="255" autocomplete="off" tabindex="6"');?></td>
-        <td><?php echo form_area('Nama User / PIC*','cus_cp',(isset($data->cus_cp))?$data->cus_cp:'','class="span4" maxlength="64" autocomplete="off" tabindex="7"');?></td>
+        <td><?php echo form_area('Nama User / PIC*','cus_cp',(isset($data->cus_cp))?$data->cus_cp:'','class="span4" autocomplete="off" tabindex="7"');?></td>
     </tr>
     <tr>
         <td>
             <?php echo form_text('Kode Pos ','cus_kodepos',(isset($data->cus_kodepos))?$data->cus_kodepos:'','class="span1" maxlength="5" id="cus_kode_pos" autocomplete="off" tabindex="8"');?>
         </td>
         <td>
-            <?php echo form_text('Kecamatan','cus_kec','','class="span3" maxlength="64" readonly id="cus_kec"');?>
+            <?php echo form_text('Kecamatan','cus_kec','','class="span4" maxlength="64" readonly id="cus_kec"');?>
         </td>
     <tr>
         <td>
@@ -98,7 +117,7 @@
             <?php// echo form_text('Kota','cus_kota','','class="span2" id="cus_kota"');?>
         </td>
         <td>
-            <?php echo form_text('Kelurahan','cus_kel','','class="span3" maxlength="64" readonly id="cus_kel"');?>
+            <?php echo form_text('Kelurahan','cus_kel','','class="span4" maxlength="64" readonly id="cus_kel"');?>
         </td>
     </tr>
         <!--<td><?php// echo form_drop('Kota','cus_kota',$kota,(isset($data->cus_kota))?$data->cus_kota:'','class="span2"');?></td>-->
@@ -124,7 +143,7 @@
 </table>
     <p><code>Note: </code> &nbsp; All field mark with <code>*</code> are required.</p>
     <div class="form-actions">
-        <?php echo form_submit('save','Save changes', 'class="btn btn-primary"')?>
+        <?php echo form_submit('save','Save changes', 'class="btn btn-primary" tabindex="14"')?>
         <?php echo anchor($module[0],'Cancel', 'class="btn"')?>
         <?php if(isset($data->cus_idx)): ?><div class="pull-right"><?php echo anchor($module[0].'/delete/'.$data->cus_idx,'Delete Customer', 'class="btn btn-danger"')?></div><?php endif; ?>
     </div>

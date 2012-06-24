@@ -67,7 +67,7 @@
 	<td><?php echo $item->pkt_jenis ?></td>
 	<td><?php echo $item->pkt_tipe ?></td>
 	<td><?php echo $item->pkt_status ?></td>
-	<td><?php echo $item->sched_date?></td>
+	<td><?php echo ($item->sched_date=='0000-00-00' || $item->sched_date=='1970-01-01')? '' : date('d-M-Y',strtotime($item->sched_date ))?></td>
 	<td><?php echo $item->pkt_konfirm?></td>
       </tr>
     <?php endforeach;?>

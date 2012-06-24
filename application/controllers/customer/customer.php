@@ -65,6 +65,7 @@ class Customer extends MY_Controller {
 		$this->params['param'] 	= $this->customer_m->data();
 		$this->params['data'] 	= $this->customer_m->get_customer();
 		
+		
 
 		// loop and implode to create an url exist
 		foreach ($this->params['param'] as $key => $value) 
@@ -126,7 +127,7 @@ class Customer extends MY_Controller {
 	 * @access	public
 	 * @return	parent class function
 	 */
-	public function update ($action, $idx, $pkt_idx = FALSE, $sched_idx = false)
+	public function update ($action, $idx, $pkt_idx = FALSE, $sched_idx = FALSE)
 	{
 		if ($idx AND $this->customer_m->get($idx))
 		{
@@ -260,6 +261,16 @@ class Customer extends MY_Controller {
 			$this->load->model('cabang_m');
 			$this->db->like('cab_code', $this->input->get('q'));
 			echo json_encode($this->cabang_m->get());
+		}
+	}
+	
+	public function bidus_ajax ()
+	{
+		if ($this->input->is_ajax_request())
+		{
+			$this->load->model('bidus_m');
+			$this->db->like('bid_name', $this->input->get('q'));
+			echo json_encode($this->bidus_m->get());
 		}
 	}
 	

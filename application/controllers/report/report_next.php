@@ -67,7 +67,7 @@ class Report_next extends MY_Controller {
 */              
 	 $html = "
          <p align=\"center\"><b>PT. JADIN PRATAMA <br>
-         <p align=\"center\"><b>LAPORAN NEXT <br>
+         <p align=\"center\"><b>LAPORAN BERIKUTNYA <br>
          <p align=\"center\"> STATUS AKTIF
 	<table align=\"center\" cellpadding=\"0\" cellspacing=\"0\" border=\"1\" width=\"100%\">
 	    <tr>

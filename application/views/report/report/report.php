@@ -20,7 +20,7 @@ $(document).ready(function(){
         </tr>
         <tr>
         <?php 
-              //echo date("y-m-d",strtotime("+72 hours"))
+             // echo date("y-m-d",strtotime("-72 hours"));
         ?>
             <!--<td><input autocomplete="off" type="text" name="sched_date" id="sched_date" class="input-small" value="<?php //echo @$param['sched_date'] ?>"></td>-->
             <td><?php echo anchor(base_url(). 'report/report/pdf', 'Report Harian','class="btn span2"')?></td>
@@ -29,12 +29,14 @@ $(document).ready(function(){
             <td><?php echo anchor(base_url(). 'report/report_next/pdf', 'Report Next','class="btn span2"')?></td>
         </tr>
         <tr>
-            <!--<td><?php //echo anchor(base_url(). 'report/report_tiga/pdf', 'Report H+3','class="btn span2"')?></td>-->
-            <td><button type="submit" class="btn span2">Report H+3</td>
-            <td><input  autocomplete="off" type="text" name="pkt_tanggal_terima" id="pkt_tanggal_terima" class="input-small" value="<?php echo @$param['pkt_tanggal_terima'] ?>"></td>
+            <td><?php echo anchor(base_url(). 'report/report_tiga/pdf', 'Report H+3','class="btn span2"')?></td>
         </tr>
-        <tr>    
+                <tr>    
             <td><?php echo anchor(base_url(). 'report/report_invoice/pdf', 'Report Invoice','class="btn span2"')?></td>
         </tr>
+        <!--<tr>
+            <td><button type="submit" class="btn span2">Report H+3</td>
+            <td><input  autocomplete="off" type="text" name="pkt_tanggal_terima" id="pkt_tanggal_terima" class="input-small" value="<?php echo @$param['pkt_tanggal_terima'] ?>"></td>
+        </tr>-->
     </table>
 </form>

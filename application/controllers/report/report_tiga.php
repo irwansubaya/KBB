@@ -68,7 +68,7 @@ class Report_tiga extends MY_Controller {
 	 $html = "
         <p align=\"center\"><b>PT. JADIN PRATAMA <br>
         <p align=\"center\"><b>LAPORAN H+3 <br>
-        <p align=\"center\"> ".date("d-M-Y",strtotime("+72 hours"))."
+        <p align=\"center\"> ".date("d-M-Y",strtotime("-72 hours"))."
 	<table align=\"center\" cellpadding=\"0\" cellspacing=\"0\" border=\"1\" width=\"100%\">
 	    <tr>
             <td align=\"center\"><b>No</td>
@@ -78,7 +78,6 @@ class Report_tiga extends MY_Controller {
             <td align=\"center\" width=\"10%\"><b>Tgl Koneksi</td>
             <td align=\"center\" width=\"15%\"><b>No Telp</td>
             <td align=\"center\" width=\"10%\"><b>Cabang</td>
-            <td align=\"center\" width=\"10%\"><b>SN Key</td>
             <td align=\"center\" width=\"10%\"><b>Status</td>
             <td align=\"center\" width=\"15%\"><b>Respon</td>
             <td align=\"center\" width=\"20%\"><b>Keterangan</td>
@@ -98,7 +97,6 @@ for($i = 0; $i < count($data); $i++)  {
                 ".$data[$i]->cus_telepon_rumah."<br>
                 ".$data[$i]->cus_handphone."
             <td align=\"center\">".$data[$i]->cus_cabang."</td>
-            <td align=\"center\">".$data[$i]->key_id."</td>
             <td align=\"center\">".$data[$i]->sched_status."</td>
             <td align=\"center\">".$data[$i]->call_konfirm."</td>
             <td>".$data[$i]->call_keterangan."</td>

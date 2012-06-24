@@ -163,7 +163,6 @@ class Schedule_m extends MY_Model {
 	{
 		$this->db->join('customer', 'customer.cus_idx = schedule.cus_idx');
 		$this->db->join('paket', 'paket.pkt_idx = schedule.pkt_idx');
-		$today=date('Y-m-d');
 		$this->db->where('sched_date', date('Y-m-d'));				  
 		return parent :: get();
 	}
@@ -171,6 +170,7 @@ class Schedule_m extends MY_Model {
 	{
 		$this->db->join('customer', 'customer.cus_idx = schedule.cus_idx');
 		$this->db->join('paket', 'paket.pkt_idx = schedule.pkt_idx');
+		$this->db->order_by('sched_date ASC');
 		$this->db->where('sched_status','active');
 		return parent :: get();
 	}
@@ -178,9 +178,11 @@ class Schedule_m extends MY_Model {
 	{
 		$this->db->join('customer', 'customer.cus_idx = schedule.cus_idx');
 		$this->db->join('paket', 'paket.pkt_idx = schedule.pkt_idx');
-		$this->db->join('key', 'key.pkt_idx = paket.pkt_idx');
-		$this->db->join('call', 'call.sched_idx = schedule.sched_idx ');
-		$this->db->where('call_date',date("y-m-d",strtotime("+72 hours")));				  
+		//$this->db->join('key', 'key.cus_idx = paket.cus_idx');
+		$this->db->join('call', 'call.sched_idx = schedule.sched_idx ');		
+		//$this->db->order_by('pkt_tanggal_koneksi ASC');
+		$this->db->where('pkt_tanggal_koneksi',date("y-m-d",strtotime("-72 hours")));
+		
 		return parent :: get();
 	}
 	

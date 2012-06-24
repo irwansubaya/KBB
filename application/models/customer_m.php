@@ -33,7 +33,7 @@ class Customer_m extends MY_Model {
 			'cus_corporate_id' => array('Corporate ID', TRUE,'exact_length[10]'),
 			'cus_nama_perusahaan' => array('Nama Perusahaan', TRUE),
 			'cus_no_ktp' => array('No KTP', FALSE),
-			'cus_no_rekening' => array('No Rekening', TRUE,'integer|exact_length[10]'),
+			'cus_no_rekening' => array('No Rekening', FALSE,'integer|exact_length[10]'),
 			'cus_bidang_usaha' => array('Bidang Usaha', FALSE),
 			'cus_alamat' => array('Alamat', TRUE),
 			'cus_cp' => array('Contact Person', TRUE),			
@@ -45,7 +45,7 @@ class Customer_m extends MY_Model {
 			'cus_telepon_rumah' => array('Telp Rumah', FALSE),
 			'cus_handphone' => array('Handphone', FALSE),
 			'cus_no_fax' => array('No Fax', FALSE),
-			'cus_cabang' => array('Cabang', TRUE),
+			'cus_cabang' => array('Cabang', FALSE),
 			'cus_kode_cabang' => array('Kode Cabang', FALSE,'integer|exact_length[4]'),
 			'cus_email' => array('Email', false, 'valid_email')
 		);
