@@ -47,7 +47,8 @@ class Customer extends MY_Controller {
 			'call_m',
 			'kategori_m',
 			'visit_m',
-			'konfirm_m'
+			'konfirm_m',
+			'kodepos_m'
 		));
 	}
 
@@ -121,7 +122,6 @@ class Customer extends MY_Controller {
 	}
 
 	/**
-	 * Update supplier
 	 *
 	 * @access	public
 	 * @return	parent class function
@@ -243,122 +243,6 @@ class Customer extends MY_Controller {
 					$this->_view('main_1_3', 'customer_list_paket');
 				}
 			}
-			/*
-			else if ($action == 'schedule')
-			{
-				if ($this->input->post('save'))
-				{
-					if ($this->schedule_m->isValid())
-					{
-						if ($this->schedule_m->save($idx))
-						{
-							setSucces('Data is saved');
-							redirect ($this->module[0]. '/update/schedule/' . $idx);
-						}
-							else
-						{
-							setError('Unable to save');
-						}
-					}
-					
-				}
-				//$this->params['cus'] = $this->customer_m->get($idx);
-				$this->params['cus'] = $this->customer_m->get_paket_schedule($idx, $pkt_idx, $sched_idx);
-				$this->params['visit'] = $this->visit_m->dropdown();
-				$this->params['konfirm'] = $this->konfirm_m->dropdown();
-				$this->params['status'] = $this->status_m->dropdown();
-				$this->params['labels']= $this->customer_m->getLabels();
-				$this->_view('main_1_3', 'customer_detail_schedule');
-			}*/
-			/*
-			else if ($action == 'schedule')
-			{
-				if($sched_idx)
-				{
-					if ($sched_idx == 'customer_new_schedule')
-					{
-						$this->params['cus'] = $this->customer_m->get($idx);
-						$this->params['data'] = $this->customer_m->get_paket_schedule($idx, $pkt_idx, $sched_idx);
-						$sched_idx = (!$this->params['data']) ? null : $this->params['data'][0]->pkt_idx;
-						$this->params['key'] = $this->call_m->get_call_detail(false,$idx);
-						if ($this->input->post('save'))
-						{
-							if ($this->schedule_m->isValid())
-							{
-								if ($this->schedule_m->save())
-								{
-									setSucces('Data is saved');
-									redirect ($this->module[0]. '/update/schedule/' . $idx . '/' . $this->db->insert_call());
-								}
-								else
-								{
-									setError('Unable to save');
-								}
-							}
-						}				
-						$this->_view('main_1_3', 'customer_new_schedule');
-					}
-					else
-					{
-						$this->params['cus'] = $this->customer_m->get($idx);
-						$this->params['data'] = $this->customer_m->get_paket_schedule($idx, $pkt_idx, $sched_idx);
-						$sched_idx = (!$this->params['data']) ? null : $this->params['data'][0]->pkt_idx;
-						$this->params['call'] = $this->call_m->get_call_detail($sched_idx);
-						if ($this->input->post('save'))
-						{
-							if ($this->schedule_m->isValid())
-							{
-								if ($this->schedule_m->save($pkt_idx))
-								{
-									setSucces('Data is saved');
-									redirect ($this->module[0]. '/update/schedule/' . $idx . '/' . $pkt_idx);
-								}
-								else
-								{
-									setError('Unable to save');
-								}
-							}
-						}				
-						$this->_view('main_1_3', 'customer_detail_schedule');
-					}
-				}
-				else
-				{
-					$this->params['cus'] = $this->customer_m->get_schedule_detail($idx);
-					$this->params['data'] = $this->customer_m->get_paket_schedule(false, $idx);
-					$this->_view('main_1_3', 'customer_list_schedule');
-				}
-			}
-			*/
-			/*
-			else if ($action == 'hasjung')
-			{
-				if ($this->input->post('save'))
-				{
-					if ($this->hasil_kunjungan_m->isValid())
-					{
-						if ($this->hasil_kunjungan_m->save($idx))
-						{
-							setSucces('Data is saved');
-							redirect ($this->module[0]. '/update/hasjung/' . $idx);
-						}
-							else
-						{
-							setError('Unable to save');
-						}
-					}
-					
-				}
-				
-				$this->params['cus'] = $this->customer_m->get($idx);
-				//$this->params['data'] = $this->schedule_m->get_sched_detail($sched_idx);
-				$this->params['visit'] = $this->visit_m->dropdown();
-				$this->params['konfirm'] = $this->konfirm_m->dropdown();
-				$this->params['status'] = $this->status_m->dropdown();
-				$this->params['labels']= $this->customer_m->getLabels();
-				$this->_view('main_1_3', 'customer_hasil_schedule');
-			}
-			*/
 
 		}
 	}
@@ -379,6 +263,15 @@ class Customer extends MY_Controller {
 		}
 	}
 	
+	public function kodepos_ajax ()
+	{
+		if ($this->input->is_ajax_request())
+		{
+			$this->load->model('kodepos_m');
+			$this->db->like('kodepos_no', $this->input->get('q'));
+			echo json_encode($this->kodepos_m->get());
+		}
+	}
 	/**
 	 * Delete supplier
 	 *

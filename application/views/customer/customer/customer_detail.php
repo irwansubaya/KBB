@@ -21,6 +21,27 @@
                              $('#cab_name').val(data.cab_name);
                      }
              );
+	$('#cus_kode_pos').autocomplete('<?php echo base_url()?>customer/customer/kodepos_ajax',{
+                     parse: function(data){
+                         var parsed = [];
+                         for (var i=0; i < data.length; i++) {
+                             parsed[i] = { data: data[i], value: data[i].kodepos_no };
+                         }
+                         return parsed;
+                     },
+                     formatItem: function(data,i,max){
+                         return  '<div class="search_content"><bold> '+data.kodepos_no+' </bold> &nbsp;<small>'+data.kodepos_kota+'</small></div>';
+                     },
+                     width: 450, 
+                     dataType: 'json' 
+                 }).result( 
+                         function(event,data,formated){
+                             $('#cus_kode_pos').val(data.kodepos_no);
+                             $('#cus_kota').val(data.kodepos_kota);
+                             $('#cus_kec').val(data.kodepos_kec);
+                             $('#cus_kel').val(data.kodepos_kel);
+                     }
+             );
     });
     function dontEnter(evt) { 
     var evt = (evt) ? evt : ((event) ? event : null); 
@@ -60,9 +81,20 @@
 	    </tr>
 	    <tr>
 		<td>
-		    <?php echo form_drop('Kota','cus_kota',$kota,(isset($data->cus_kota))?$data->cus_kota:'','class="span2"');?>
-		<?php //echo form_text('Kota *','cus_kota',(isset($data->cus_kota))?$data->cus_kota:'','class="span2"');?></td>
-		<td><?php echo form_text('Kode Pos ','cus_kodepos',(isset($data->cus_kodepos))?$data->cus_kodepos:'','class="span1" maxlength="5" autocomplete="off"');?></td>
+		    <?php echo form_text('Kode Pos ','cus_kodepos',(isset($data->cus_kodepos))?$data->cus_kodepos:'','class="span1" maxlength="5" id="cus_kode_pos" autocomplete="off"');?>
+		</td>
+		<td>
+		    <?php echo form_text('Kecamatan','cus_kec',(isset($data->cus_kec))?$data->cus_kec:'','class="span3" maxlength="64" readonly id="cus_kec"');?>
+		</td>
+	    <tr>
+		<td>
+		    <?php //echo form_drop('Kota','cus_kota',$kota,(isset($data->cus_kota))?$data->cus_kota:'','class="span2"');?>
+		    <?php echo form_drop('Kota','cus_kota',$kota,(isset($data->cus_kota))?$data->cus_kota:'','class="span2" id="cus_kota"');?>
+		    <?php //echo form_text('Kota','cus_kota',(isset($data->cus_kota))?$data->cus_kota:'','class="span2" id="cus_kota"');?>
+		</td>
+		<td>
+		    <?php echo form_text('Kelurahan','cus_kel',(isset($data->cus_kel))?$data->cus_kel:'','class="span3" maxlength="64" readonly id="cus_kel"');?>
+		</td>
 	    </tr>
 	    <tr>
 		<td><?php echo form_text('Telp Kantor ','cus_telepon_kantor',(isset($data->cus_telepon_kantor))?$data->cus_telepon_kantor:'','class="span4" maxlength="32" autocomplete="off"');?></td>

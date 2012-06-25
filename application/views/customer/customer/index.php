@@ -1,7 +1,6 @@
 <script src="<?php echo base_url() ?>static/js/standardista-table-sorting-common.js" type="text/javascript"></script>
 <script src="<?php echo base_url() ?>static/js/standardista-table-sorting-css.js" type="text/javascript"></script>
 <script src="<?php echo base_url() ?>static/js/standardista-table-sorting.js" type="text/javascript"></script>
-<script src="<?php echo base_url() ?>static/js/jquery.jstree.js" type="text/javascript"></script>
 <script type="text/javascript">
     $(document).ready(function(){
         $("#cus_input_date").datepicker({
@@ -17,7 +16,6 @@
 		showAnim: 'fold'
 	});
     });
-    
 </script>
 <div class="page-header">
     <h2>List Customer</h2>
@@ -33,31 +31,32 @@
             <td>Nama Perusahaan</td>
             <td>Tgl Input</td>
             <td>Tgl Koneksi</td>
+            <td>Status</td>
         </tr>
         <tr>
             <td><input autocomplete="off" type="text" name="cus_corporate_id" id="cus_corporate_id" class="input-small "  value="<?php echo @$param['cus_corporate_id'] ?>"></td>
             <td><input autocomplete="off"  type="text" name="cus_nama_perusahaan" id="cus_nama_perusahaan" class="input-small " value="<?php echo @$param['cus_nama_perusahaan'] ?>"></td>
             <td><input autocomplete="off" type="text" name="cus_tanggal_input" id="cus_input_date" class="input-small" value="<?php echo @$param['cus_tanggal_input'] ?>"></td>
             <td><input autocomplete="off" type="text" name="pkt_tanggal_koneksi" id="pkt_tgl_koneksi" class="input-small" value="<?php echo @$param['pkt_tanggal_koneksi'] ?>"></td>
+            <td><input autocomplete="off" type="text" name="pkt_konfirm" id="pkt_konfirm" class="input-small" value="<?php echo @$param['pkt_konfirm'] ?>"></td>
             <td><button type="submit" class="btn"><i class="icon-search"></i>Search</button></td>            
             <td><?php echo anchor($this->module[0] . '/customer/update/','Clear', 'class="btn"')?></td>
 
         </tr>
     </table>
 </form>
-
 <table class="table sortable">
   <thead>
     <tr>
       <th width="10%">CORP ID</th>
-      <th width="15%">NAMA PERUSAHAAN</th>
+      <th align="center" width="15%">NAMA PERUSAHAAN</th>
       <th width="15%">CONTACT PERSON</th>
       <th width="15%">ALAMAT</th>
       <th width="10%">HANDPHONE</th>
       <th width="10%">JENIS PAKET</th>
-      <th width="10%">SLA</th>
+      <th width="5%">SLA</th>
       <th width="10%">TGL KONEKSI</th>
-      <td>STATUS</td>
+      <td width="10%">STATUS</td>
     </tr>
   </thead>
   <tbody>  
@@ -66,7 +65,7 @@
     <tr>
       <!--<td><?php// echo anchor($this->module[0] . '/update/detail/' . $item->cus_idx, $item->cus_corporate_id)?></td>-->
       <td><?php echo $item->cus_corporate_id ?></td>
-      <td><?php echo anchor($this->module[0] . '/update/customer_paket/' . $item->cus_idx, $item->cus_nama_perusahaan)?></td>
+      <td><?php echo anchor($this->module[0] . '/update/customer_paket/'. $item->cus_idx .'/?'.$_SERVER['QUERY_STRING'], $item->cus_nama_perusahaan)?></td>
       <!--<td><?php //echo $item->cus_nama_perusahaan?></td>-->
       <td><?php echo $item->cus_cp ?></td>
       <td><?php echo $item->cus_alamat ?></td>
@@ -92,7 +91,13 @@
             ?>        
       </td>
       <td><?php echo ($item->pkt_tanggal_koneksi == '') ? '' : date('d-M-Y',strtotime($item->pkt_tanggal_koneksi ))?></td>
-      <td><?php echo anchor(base_url().'schedule/schedule/schedule_list/'.$item->cus_idx.'/'.$item->pkt_idx,$item->pkt_konfirm)?></td>
+      <td><?php
+            if ($item->pkt_konfirm == ''){                
+            echo '';}
+            else{
+            echo anchor(base_url().'schedule/schedule/schedule_list/'.$item->cus_idx.'/'.$item->pkt_idx,$item->pkt_konfirm);
+            }
+            ?></td>
     </tr>
     <?php endforeach;?>
   <?php else:?>

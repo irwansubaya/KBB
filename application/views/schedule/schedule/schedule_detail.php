@@ -160,8 +160,8 @@
 				    <table>
 					    <tr>
 						<td>
-						<?php echo form_text('Schedule Date','sched_date',(isset($data[0]->sched_date))?date('d-M-Y ;D',strtotime($data[0]->sched_date)):'','class="span4" id="sched_date" autocomplete="off"');?>
-						<?php echo form_text('Schedule time','sched_time',(isset($data[0]->sched_time))?date('',strtotime($data[0]->sched_time)):'','class="span3" id="timepicker" autocomplete="off"');?>
+						<?php echo form_text('Schedule Date','sched_date',(isset($data[0]->sched_date)&& $data[0]->sched_date!='0000-00-00')?date('d-M-Y D',strtotime($data[0]->sched_date)):'','class="span4" id="sched_date" autocomplete="off"');?>
+						<?php echo form_text('Schedule time','sched_time',(isset($data[0]->sched_time))?date('H:i',strtotime($data[0]->sched_time)):'','class="span3" autocomplete="off"');?>
 						<?php echo form_drop('Visit','sched_visit',$visit,(isset($data[0]->sched_visit))?$data[0]->sched_visit:'','class="span2"');?></td>
 						<td valign="top"><?php echo form_area('Alamat Kirim ','sched_alamat_kirim',(isset($data[0]->sched_alamat_kirim))?$data[0]->sched_alamat_kirim:'','class="span4" autocomplete="off"');?></td>
 					    </tr>
@@ -170,13 +170,13 @@
 						    <div class="control-group">
 							<label class="control-label" for="it_has_ed">Agenda Kunjungan</label>
 							<div class="controls">
-							    <input type="checkbox" name="agenda_kunjungan[]" value="Key BCA Delivery">  Key BCA Delivery<br>
-							    <input type="checkbox" name="agenda_kunjungan[]" value="VPN Setting & Instalation">  VPN Setting & Instalation<br>
-							    <input type="checkbox" name="agenda_kunjungan[]" value="Training Pemakaian">  Training Pemakaian<br>
-							    <input type="checkbox" name="agenda_kunjungan[]" value="Training Sysadmin">  Training Sysadmin<br>
-							    <input type="checkbox" name="agenda_kunjungan[]" value="Training MAR">  Training MAR<br>
-							    <input type="checkbox" name="agenda_kunjungan[]" value="Training MFTS Converter">  Training MFTS Converter<br>
-							    <input type="checkbox" name="agenda_kunjungan[]" value="KBB Trouble Shooting">  KBB Trouble Shooting
+							    <input type="checkbox" name="agenda_kunjungan[]" value="Key BCA Delivery"<?php echo (isset($data[0]->sched_agenda_kunjungan) && in_array('Key BCA Delivery', explode(',', $data[0]->sched_agenda_kunjungan)))?' checked':'' ?>>  Key BCA Delivery<br>
+							    <input type="checkbox" name="agenda_kunjungan[]" value="VPN Setting & Instalation"<?php echo (isset($data[0]->sched_agenda_kunjungan) && in_array('VPN Setting & Instalation', explode(',', $data[0]->sched_agenda_kunjungan)))?' checked':'' ?>>  VPN Setting & Instalation<br>
+							    <input type="checkbox" name="agenda_kunjungan[]" value="Training Pemakaian"<?php echo (isset($data[0]->sched_agenda_kunjungan) && in_array('Training Pemakaian', explode(',', $data[0]->sched_agenda_kunjungan)))?' checked':'' ?>>  Training Pemakaian<br>
+							    <input type="checkbox" name="agenda_kunjungan[]" value="Training Sysadmin"<?php echo (isset($data[0]->sched_agenda_kunjungan) && in_array('Training Sysadmin', explode(',', $data[0]->sched_agenda_kunjungan)))?' checked':'' ?>>  Training Sysadmin<br>
+							    <input type="checkbox" name="agenda_kunjungan[]" value="Training MAR"<?php echo (isset($data[0]->sched_agenda_kunjungan) && in_array('Training MAR', explode(',', $data[0]->sched_agenda_kunjungan)))?' checked':'' ?>>  Training MAR<br>
+							    <input type="checkbox" name="agenda_kunjungan[]" value="Training MFTS Converter"<?php echo (isset($data[0]->sched_agenda_kunjungan) && in_array('Training MFTS Converter', explode(',', $data[0]->sched_agenda_kunjungan)))?' checked':'' ?>>  Training MFTS Converter<br>
+							    <input type="checkbox" name="agenda_kunjungan[]" value="KBB Trouble Shooting"<?php echo (isset($data[0]->sched_agenda_kunjungan) && in_array('Training MFTS Converter', explode(',', $data[0]->sched_agenda_kunjungan)))?' checked':'' ?>>  KBB Trouble Shooting<br>
 							</div>
 						    </div>
 						</td>
@@ -184,14 +184,14 @@
 						    <div class="control-group">
 							<label class="control-label" for="it_has_ed">Fitur BCA</label>
 							<div class="controls">
-							    <input type="checkbox" name="sched_fitur[]" value="Training BCA VA">  Training BCA VA<br>
-							    <input type="checkbox" name="sched_fitur[]" value="Training VA">  Training VA<br>
-							    <input type="checkbox" name="sched_fitur[]" value="Training Payroll">  Training Payroll<br>
-							    <input type="checkbox" name="sched_fitur[]" value="Training Auto Credit">  Training Auto Credit<br>
-							    <input type="checkbox" name="sched_fitur[]" value="Training Auto Colection">  Training Auto Colection<br>
-							    <input type="checkbox" name="sched_fitur[]" value="Training B2B Pertamina">  Training B2B Pertamina<br>
-							    <input type="checkbox" name="sched_fitur[]" value="Training Fleet">  Training Fleet<br>
-							    <input type="checkbox" name="sched_fitur[]" value="Training KBB">  Training KBB
+							    <input type="checkbox" name="sched_fitur[]" value="Training BCA VA"<?php echo (isset($data[0]->sched_fitur) && in_array('Training BCA VA', explode(',', $data[0]->sched_fitur)))?' checked':'' ?>>  Training BCA VA<br>
+							    <input type="checkbox" name="sched_fitur[]" value="Training VA"<?php echo (isset($data[0]->sched_fitur) && in_array('Training VA', explode(',', $data[0]->sched_fitur)))?' checked':'' ?>>  Training VA<br>
+							    <input type="checkbox" name="sched_fitur[]" value="Training Payroll"<?php echo (isset($data[0]->sched_fitur) && in_array('Training Payroll', explode(',', $data[0]->sched_fitur)))?' checked':'' ?>>  Training Payroll<br>
+							    <input type="checkbox" name="sched_fitur[]" value="Training Auto Credit"<?php echo (isset($data[0]->sched_fitur) && in_array('Training Auto Credit', explode(',', $data[0]->sched_fitur)))?' checked':'' ?>>  Training Auto Credit<br>
+							    <input type="checkbox" name="sched_fitur[]" value="Training Auto Colection"<?php echo (isset($data[0]->sched_fitur) && in_array('Training Auto Colection', explode(',', $data[0]->sched_fitur)))?' checked':'' ?>>  Training Auto Colection<br>
+							    <input type="checkbox" name="sched_fitur[]" value="Training B2B Pertamina"<?php echo (isset($data[0]->sched_fitur) && in_array('Training B2B Pertamina', explode(',', $data[0]->sched_fitur)))?' checked':'' ?>>  Training B2B Pertamina<br>
+							    <input type="checkbox" name="sched_fitur[]" value="Training Fleet"<?php echo (isset($data[0]->sched_fitur) && in_array('Training Fleet', explode(',', $data[0]->sched_fitur)))?' checked':'' ?>>  Training Fleet<br>
+							    <input type="checkbox" name="sched_fitur[]" value="Training KBB"<?php echo (isset($data[0]->sched_fitur) && in_array('Training KBB', explode(',', $data[0]->sched_fitur)))?' checked':'' ?>>  Training KBB<br>							    
 							</div>
 						    </div>
 						</td>

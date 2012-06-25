@@ -31,7 +31,7 @@ class Call_m extends MY_Model {
 		$this->idx	 = 'call_idx';
 		$this->fields	 = array(
 			'call_nama_admin' => array('Nama Admin', TRUE),
-			'call_date' => array('Call Date', TRUE),
+			'call_date' => array('Call Date', TRUE, 'convert_datetime'),
 			'call_konfirm' => array('Komfirm', TRUE),
                         'call_cp_lain' => array('CP Lain', false),
 			'call_telp_lain' => array('Telp Lain', false),

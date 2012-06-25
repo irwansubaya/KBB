@@ -12,8 +12,8 @@ $nav = array (
         'customer'	=> array    (
                                     'Customer'=>array(
 					'Add New::customer/insert::',
-					'List Customer::customer/::customer/update',
-                                        'List Schedule::schedule/::schedule/update',
+					'List::customer/::customer/update',
+                                        //'List Schedule::schedule/::schedule/update',
                                     //),
                                     //'Paket'=>array(
                                         //'Add New::paket/insert::',
@@ -25,10 +25,11 @@ $nav = array (
 					//'Add New ::schedule/insert::',
 					'List Schedule::schedule/::schedule/update',
                                     )),
-        'Paketz'	=> array (
-                                    'Paketz'=>array(
-					'Add New::Paketz/insert::',
-					'List::Paketz/::Paketz/update',
+        'report'	=> array (
+                                    'report'=>array(
+					'Report::report/report::',
+					//'Report Next::report/report_next',
+                                        //'Report H+3::report/report_tiga',
                                     ))
         
 	);

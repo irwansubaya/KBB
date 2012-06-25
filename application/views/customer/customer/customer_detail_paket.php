@@ -4,7 +4,7 @@
         $("#formid").validate();
         $("#pkt_tanggal_koneksi").datepicker({
 		showOn: "button",
-		buttonImage: "images/calendar.gif",
+		buttonImage: "<?php echo base_url()?>static/image/calendar.gif",
 		buttonImageOnly: true,
 		dateFormat: 'dd-M-yy',
 		showAnim: 'fold',
@@ -13,10 +13,8 @@
 	});
         $("#pkt_tanggal_terima").datepicker({
                 showOn: "button",
-		buttonImage: "images/calendar.gif",
+		buttonImage: "<?php echo base_url()?>static/image/calendar.gif",
 		buttonImageOnly: true,
-		changeMonth: true,
-		changeYear: true,
 		dateFormat: 'dd-M-yy',
 		showAnim: 'fold',
                 minDate: '-2m',
@@ -99,14 +97,29 @@
 	    }
 	});
 
-	if(is_double) {
-	    alert("Key SN may not duplicate");
-	    $("#key_sn").val('');
-	    $("#key_sn").focus();
+	if ( $("#mode").val() == 'edit')
+	{
+	    if ( $("#old_sn").val() == $("#key_sn").val() ) {
+		insert_key_print ();
+	    } else {
+		if(is_double) {
+		    alert("Key SN may not duplicate");
+		    $("#key_sn").val('');
+		    $("#key_sn").focus();
+		} else {
+		    insert_key_print ();
+		}   
+	    }
 	} else {
-	    insert_key_print ();
+	    if(is_double) {
+		alert("Key SN may not duplicate");
+		$("#key_sn").val('');
+		$("#key_sn").focus();
+	    } else {
+		insert_key_print ();
+	    }   
 	}
-	
+
     }
 
     function insert_key_print ()
@@ -142,7 +155,8 @@
     {
         $("#id_key").val( ID );
 	$("#key_sn").val( SN );
-	$("#key_username").val( USERNAME );
+	$("#old_sn").val( SN );
+        $("#key_username").val( USERNAME );
 	$("#mode").val('edit');
 	return false;
     }
@@ -184,12 +198,12 @@
 		<?php #echo form_text('Corporate ID *','cus_corporate_id',(isset($data[0]->cus_corporate_id))?$data[0]->cus_corporate_id:'','class="span2" maxlength="10" id="pkt_corporate_id"');?>
 		<?php #echo form_text('Name Perusahaan*','cus_nama_perusahaan',(isset($data[0]->cus_nama_perusahaan))?$data[0]->cus_nama_perusahaan:'','class="span3" maxlength="64" id ="cus_nama_perusahaan"');?>
 		<?php #echo form_area('Contact Person *','cus_cp',(isset($data[0]->cus_cp))?$data[0]->cus_cp:'','class="span3" maxlength="64"');?>
-		<?php echo form_drop('Jenis Paket *','pkt_tipe',array('gold'=>'Gold','gold_payroll'=>'Gold Payroll','platinum'=>'Platinum'),(isset($data[0]->pkt_tipe))?$data[0]->pkt_tipe:'','class="span2"');?>
+		<?php echo form_drop('Jenis Paket ','pkt_tipe',array('gold'=>'Gold','gold_payroll'=>'Gold Payroll','platinum'=>'Platinum'),(isset($data[0]->pkt_tipe))?$data[0]->pkt_tipe:'','class="span2"');?>
 	    </td>
-	    <td><?php echo form_drop('Tipe Paket *','pkt_jenis',array('single_otorisasi'=>'Single Otorisasi','multi_otorisasi'=>'Multi Otorisasi'),(isset($data[0]->pkt_jenis))?$data[0]->pkt_jenis:'','class="span2"');?></td>
+	    <td><?php echo form_drop('Tipe Paket ','pkt_jenis',array('single_otorisasi'=>'Single Otorisasi','multi_otorisasi'=>'Multi Otorisasi'),(isset($data[0]->pkt_jenis))?$data[0]->pkt_jenis:'','class="span2"');?></td>
 	</tr>
 	<tr>
-	    <td><?php echo form_drop('Model Paket *','pkt_status',array('new'=>'New','upgrade'=>'Upgrade','amplop'=>'Amplop','info_bca'=>'Info BCA'),(isset($data[0]->pkt_status))?$data[0]->pkt_status:'','class="span2"');?></td>
+	    <td><?php echo form_drop('Model Paket ','pkt_status',array('new'=>'New','upgrade'=>'Upgrade','amplop'=>'Amplop','info_bca'=>'Info BCA'),(isset($data[0]->pkt_status))?$data[0]->pkt_status:'','class="span2"');?></td>
 	    <td><?php echo form_text('Tgl Koneksi*','pkt_tanggal_koneksi',(isset($data[0]->pkt_tanggal_koneksi))?date('d-M-Y l',strtotime($data[0]->pkt_tanggal_koneksi)):'','class="span5" maxlength="25" id="pkt_tanggal_koneksi" readonly');?></td>
 	</tr>
 	<tr>
@@ -202,6 +216,7 @@
 	    <input autocomplete="off" onkeypress="" type="text" name="key_sn" placeholder="SN Key" id="key_sn" class="span2" maxlength="10" onkeyup="this.value=this.value.replace(/\D/g,'') ">
 	    <input autocomplete="off" type="text" name="key_username" placeholder="Username" id="key_username" class="span4">
 	    <input type="hidden" value="insert" name="mode" id="mode" >
+	    <input type="hidden" value="insert" name="old_sn" id="old_sn" >
 	    <input type="hidden" value="" name="id_key" id="id_key">
 	    <?php echo form_button('insert-key','Insert','onclick="return insert_key()" class="btn"')?>
 	    </div>

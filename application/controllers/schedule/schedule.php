@@ -56,9 +56,10 @@ class Schedule extends MY_Controller {
 	{
 		$this->params['param'] 	= $this->customer_m->data();
 		$this->params['cus_idx'] = $cus_idx;
-		$this->params['pkt_idx'] = $pkt_idx;
+		//$this->params['pkt_idx'] = $pkt_idx;
 		$this->params['cus'] = $this->customer_m->get($cus_idx);
-		$this->params['data'] = $this->customer_m->get_list_schedule($cus_idx, $pkt_idx);
+		//$this->params['data'] = $this->customer_m->get_list_schedule($cus_idx, $pkt_idx);
+		$this->params['data'] = $this->schedule_m->get_sched($cus_idx, $pkt_idx);
 		$this->_view('main_1_3', 'index');
 	}
 	public function schedule_list ($cus_idx, $pkt_idx)
@@ -164,6 +165,32 @@ class Schedule extends MY_Controller {
 				$this->_view('main_1_3', 'schedule_detail');
 			}
 			else if ($action == 'hasjung')
+			{				
+				if ($this->input->post('save'))
+				{
+					if ($this->schedule_m->save_hasjung($sched_idx))
+					{
+						setSucces('Data is saved');
+						$cus_idx = $this->input->post('cus_idx');
+						$pkt_idx = $this->input->post('pkt_idx');
+						redirect ($this->module[0].'/schedule_list/'.$cus_idx.'/'.$pkt_idx);
+					}
+					else
+					{
+						setError('Unable to save');
+					}
+				}
+				$this->params['cus']=$this->customer_m->get($cus_idx);
+				$this->params['data'] = $this->customer_m->get_schedule_detail($sched_idx);
+				//$this->params['call'] = $this->call_m->get_sched_call($sched_idx);
+				$this->params['visit'] = $this->visit_m->dropdown();
+				$this->params['konfirm'] = $this->konfirm_m->dropdown();
+				$this->params['status'] = $this->status_m->dropdown();
+				$this->params['engineer'] = $this->engineer_m->dropdown();
+				$this->_view('main_1_3', 'schedule_hasil_kunjungan');
+			}
+			/*
+			else if ($action == 'hasjung')
 			{
 				if ($this->input->post('save'))
 				{
@@ -191,7 +218,7 @@ class Schedule extends MY_Controller {
 				$this->params['engineer'] = $this->engineer_m->dropdown();
 				$this->_view('main_1_3', 'schedule_hasil_kunjungan');
 			}
-			/*
+			
 			else if ($action == 'hasjung')
 			{
 				if ($this->input->post('save'))

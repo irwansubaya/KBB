@@ -168,7 +168,7 @@ $(document).ready(function(){
 	</table>
 	</div>
     <div class="modal-footer">
-	<?php echo anchor($this->module[0] . '/customer/update/','Close', 'class="btn"')?>
+	<?php echo anchor($this->module[0] . '/customer/update/?'.$_SERVER['QUERY_STRING'],'Close', 'class="btn"')?>
 	<?php echo anchor($this->module[0] . '/update/paket/' . $cus->cus_idx . '/customer_new_paket','Add new paket','class="btn"');?>
 	<!--<a href="#" class="btn">Close</a>
 	<a href="#" class="btn btn-primary">Save changes</a>

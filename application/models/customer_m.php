@@ -30,19 +30,21 @@ class Customer_m extends MY_Model {
 		$this->tableName = 'customer';
 		$this->idx	 = 'cus_idx';
 		$this->fields	 = array(			
-			'cus_corporate_id' => array('Corporate ID', TRUE,'exact_length[10]|alpha'),
+			'cus_corporate_id' => array('Corporate ID', TRUE,'exact_length[10]'),
 			'cus_nama_perusahaan' => array('Nama Perusahaan', TRUE),
-			'cus_no_ktp' => array('No KTP', FALSE,'integer'),
+			'cus_no_ktp' => array('No KTP', FALSE),
 			'cus_no_rekening' => array('No Rekening', TRUE,'integer|exact_length[10]'),
 			'cus_bidang_usaha' => array('Bidang Usaha', FALSE),
 			'cus_alamat' => array('Alamat', TRUE),
-			'cus_cp' => array('Contact Person', TRUE),
-			'cus_kota' => array('Kota', TRUE),
+			'cus_cp' => array('Contact Person', TRUE),			
+			'cus_kec' => array('Kecamatan', FALSE),
+			'cus_kel' => array('Kelurahan', FALSE),
+			'cus_kota' => array('Kota', FALSE),
 			'cus_kodepos' => array('Kode Pos', FALSE,'integer|exact_length[5]'),
-			'cus_telepon_kantor' => array('Telp Kantor', FALSE,'integer'),
-			'cus_telepon_rumah' => array('Telp Rumah', FALSE,'integer'),
-			'cus_handphone' => array('Handphone', FALSE,'integer'),
-			'cus_no_fax' => array('No Fax', FALSE,'integer'),
+			'cus_telepon_kantor' => array('Telp Kantor', FALSE),
+			'cus_telepon_rumah' => array('Telp Rumah', FALSE),
+			'cus_handphone' => array('Handphone', FALSE),
+			'cus_no_fax' => array('No Fax', FALSE),
 			'cus_cabang' => array('Cabang', TRUE),
 			'cus_kode_cabang' => array('Kode Cabang', FALSE,'integer|exact_length[4]'),
 			'cus_email' => array('Email', false, 'valid_email')
@@ -50,12 +52,12 @@ class Customer_m extends MY_Model {
 
 		$this->data = array(
 			'cus_nama_perusahaan'=>$this->input->get('cus_nama_perusahaan'),
-			//'cek_nama_perusahaan'=>$this->input->get('cek_nama_perusahaan'),
 			'asdes'		=> $this->input->get('asdes'),
 			'corpname'		=> $this->input->get('cus_nama_perusahaan'),
 			'cus_corporate_id'	=> $this->input->get('cus_corporate_id'),
 			'cus_tanggal_input'	=> $this->input->get('cus_tanggal_input'),
-			'pkt_tanggal_koneksi'=> $this->input->get('pkt_tanggal_koneksi')
+			'pkt_tanggal_koneksi'=> $this->input->get('pkt_tanggal_koneksi'),
+			'pkt_konfirm'		=> $this->input->get('pkt_konfirm')
 		);
 
 		$this->page         = $this->input->get('page') != 0 ? ((int) ($this->input->get('page') - 1) * 25) : 0;
@@ -104,8 +106,7 @@ class Customer_m extends MY_Model {
 		$this->db->where('paket.pkt_idx', $pkt_idx);
 		//$this->db->order_by('sched_date_time');
 		return parent :: get();
-	}
-	
+	}	
 
 	public function get_by_corporate_id ($cus_corporate_id = false)
 	{
@@ -120,16 +121,15 @@ class Customer_m extends MY_Model {
 	public function get_customer ()
 	{
 		$this->db->join('paket', 'customer.cus_idx = paket.cus_idx', 'left');
-		//$this->db->where('cus_corporate_id');
 		foreach ($this->data as $key => $value) 
 		{
 			if ($value && $key == 'cus_nama_perusahaan') $this->db->like($key, $value);
 			elseif ($value && $key == 'cus_corporate_id') $this->db->like($key, $value);
 			elseif ($value && $key == 'cus_tanggal_input') $this->db->where($key, date('Y-m-d', strtotime($value)));
 			elseif ($value && $key == 'pkt_tanggal_koneksi') $this->db->where($key, date('Y-m-d', strtotime($value)));
-			$this->db->order_by('cus_corporate_id');
-//			elseif ($value && $key == 'asdes') $this->db->order_by('cus_corporate_id '.$value);
-//			elseif ($value && $key == 'cek_nama_perusahaan') $this->db->order_by('cus_nama_perusahaan '.$value);
+			elseif ($value && $key == 'pkt_konfirm') $this->db->like($key, $value);
+			//$this->db->order_by('pkt_konfirm','Follo');
+			$this->db->order_by('pkt_konfirm DESC, pkt_tanggal_koneksi');
 		}
 		$this->db->limit('25',$this->page);
 		return parent::get();
@@ -146,7 +146,8 @@ class Customer_m extends MY_Model {
 			if ($value && $key == 'cus_nama_perusahaan') $this->db->like($key, $value);
 			else if ($value && $key == 'cus_corporate_id') $this->db->like($key, $value);
 			else if ($value && $key == 'cus_tanggal_input') $this->db->where($key, date('Y-m-d', strtotime($value)));
-			
+			//else if ($value && $key == 'pkt_tanggal_koneksi') $this->db->where($key, date('Y-m-d', strtotime($value)));
+			//else if ($value && $key == 'pkt_konfirm') $this->db->where($key,$value);
 		}
 		return parent :: count_record();
 	}

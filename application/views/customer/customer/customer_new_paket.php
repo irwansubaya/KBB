@@ -4,7 +4,7 @@
         $("#formid").validate();
         $("#pkt_tanggal_koneksi").datepicker({
                 showOn: "button",
-		buttonImage: "<?php echo base_url()?>static/js/date.png",
+		buttonImage: "<?php echo base_url()?>static/image/calendar.gif",
 		buttonImageOnly: true,
                 minDate: '-2m',
                 maxDate:'+2m',
@@ -13,10 +13,8 @@
 	});
         $("#pkt_tanggal_terima").datepicker({
                 showOn: "button",
-		buttonImage: "/image/calendar.gif",
+		buttonImage: "<?php echo base_url()?>static/image/calendar.gif",
 		buttonImageOnly: true,
-		changeMonth: true,
-		changeYear: true,
 		dateFormat: 'dd-M-yy DD',
 		showAnim: 'fold',
                 minDate: '-2m',
@@ -81,7 +79,8 @@
     {
 	if ($("#key_sn").val() == '') {alert ('Please fill SN'); $("#key_sn").focus();return false;}
 	else if ($("#key_username").val() == '') {alert ('Please fill username'); $("#key_username").focus();return false;}
-
+        else if ($("#key_sn").val().length != 10) {alert ('SN must be 10 characters'); $("#key_sn").focus();return false;}
+	
 	var is_double = false;
 	$("#item tr").each(function() {
 	    if ($(this).find('td:first input').val() == $("#key_sn").val()) {
@@ -89,12 +88,27 @@
 	    }
 	});
 
-	if(is_double) {
-	    alert("Key SN may not duplicate");
-	    $("#key_sn").val('');
-	    $("#key_sn").focus();
+	if ( $("#mode").val() == 'edit')
+	{
+	    if ( $("#old_sn").val() == $("#key_sn").val() ) {
+		insert_key_print ();
+	    } else {
+		if(is_double) {
+		    alert("Key SN may not duplicate");
+		    $("#key_sn").val('');
+		    $("#key_sn").focus();
+		} else {
+		    insert_key_print ();
+		}   
+	    }
 	} else {
-	    insert_key_print ();
+	    if(is_double) {
+		alert("Key SN may not duplicate");
+		$("#key_sn").val('');
+		$("#key_sn").focus();
+	    } else {
+		insert_key_print ();
+	    }   
 	}
 	
     }
@@ -151,6 +165,7 @@
         var rows = $("#key_list >tbody tr").length;
         $("#pkt_jumlah_key").val(rows);
     }
+    
     function dontEnter(evt) { 
     var evt = (evt) ? evt : ((event) ? event : null); 
         var node = (evt.target) ? evt.target : ((evt.srcElement) ? evt.srcElement : null); 
@@ -190,6 +205,7 @@
 	    <input autocomplete="off" type="text" name="key_sn" placeholder="Key SN" id="key_sn" class="span3" maxlength="10" onkeyup="this.value=this.value.replace(/\D/g,'') ">
 	    <input autocomplete="off" type="text" name="key_username" placeholder="Username" id="key_username" class="span4">
 	    <input type="hidden" value="insert" name="mode" id="mode" >
+	    <input type="hidden" value="" name="old_sn" id="old_sn" >
 	    <input type="hidden" value="" name="id_key" id="id_key">
 	    <?php echo form_button('insert-key','Insert','onclick="return insert_key()" class="btn"')?>
 	    </div>

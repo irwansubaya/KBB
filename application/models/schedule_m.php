@@ -33,9 +33,11 @@ class Schedule_m extends MY_Model {
 			'cus_idx' => array('', TRUE),
 			'pkt_idx' => array('', TRUE),
 			'sched_visit' => array('Schedule Visit', FALSE),
-			'sched_status' => array('Schedule Status', FALSE),
+			'sched_status' => array('Schedule Status', TRUE),
 			'sched_alamat_kirim' => array('Alamat Kirim', FALSE),
-			'sched_resolve_date' => array('Resoleve Date',FALSE, 'convert_date'),
+			'sched_resolve_date' => array('Resolve Date',FALSE,'convert_date'),
+			'sched_date' => array('Schedule Date',FALSE, 'convert_date'),
+			'sched_time' => array('Schedule Time',FALSE),
 			'sched_engineer' => array('Engineer', FALSE),
 			'sched_keterangan' => array('Keterangan', FALSE)		
 		);
@@ -96,6 +98,16 @@ class Schedule_m extends MY_Model {
 		return parent :: get();
 	}
 
+	public function get_sched ($sched_idx,$pkt_idx)
+	{
+		$this->db->join('customer', 'customer.cus_idx = schedule.cus_idx');
+		$this->db->join('paket', 'paket.pkt_idx = schedule.pkt_idx');
+		$this->db->order_by('pkt_konfirm','pkt_konfirm = aktif');
+		//$this->db->where('schedule.sched_idx', $sched_idx);
+		//$this->db->where('paket.pkt_idx', $pkt_idx);
+		return parent :: get();
+	}
+	
 	/**
 	 * Save method
 	 *
@@ -105,13 +117,13 @@ class Schedule_m extends MY_Model {
 	 */
 	public function save ($idx = FALSE)
 	{
-		$resolved =  ($this->input->post('sched_resolve_date') == '') ? '' : convert_datetime($this->input->post('sched_resolve_date'));
-		$date =  ($this->input->post('sched_date') == '') ? '' : convert_datetime($this->input->post('sched_date'));
+		//$resolved =  ($this->input->post('sched_resolve_date') == '') ? '' : convert_date($this->input->post('sched_resolve_date'));
+		//$date =  ($this->input->post('sched_date') == '') ? '' : convert_date($this->input->post('sched_date'));
 		$agenda = (($this->input->post('agenda_kunjungan')) > 0) ? implode(',',$this->input->post('agenda_kunjungan')) : '';
 		$fitur = (($this->input->post('sched_fitur')) > 0) ? implode(',',$this->input->post('sched_fitur')) : '';
 
-		$this->db->set('sched_resolve_date',  $resolved);
-		$this->db->set('sched_date',  $date);
+		//$this->db->set('sched_resolve_date',  $resolved);
+		//$this->db->set('sched_date',  $date);
 		$this->db->set('sched_agenda_kunjungan', $agenda);
 		$this->db->set('sched_fitur', $fitur);
 
@@ -124,4 +136,52 @@ class Schedule_m extends MY_Model {
 
 		return $this->insert_call($idx);
 	}
+
+	/**
+	 * Save hasil kunjungan method
+	 *
+	 * @access	public
+	 * @param	integer
+	 * @return	boolean
+	 */
+	public function save_hasjung ($idx = FALSE)
+	{		
+		$this->db->where('sched_idx', $this->input->post('sched_idx'));
+		$this->db->update('schedule',
+			array('sched_status'=>$this->input->post('sched_status'),
+			      'sched_resolve_date'=>convert_date($this->input->post('sched_resolve_date')),
+			      'sched_engineer'=>$this->input->post('sched_engineer'),
+			      'sched_keterangan'=>$this->input->post('sched_keterangan'),
+			      ));
+		$this->db->where('pkt_idx', $this->input->post('pkt_idx'));
+		$this->db->update('paket', array('pkt_konfirm'=>$this->input->post('sched_status'))); 
+
+		return TRUE;
+	}	
+
+	public function ambil_data()
+	{
+		$this->db->join('customer', 'customer.cus_idx = schedule.cus_idx');
+		$this->db->join('paket', 'paket.pkt_idx = schedule.pkt_idx');
+		$today=date('Y-m-d');
+		$this->db->where('sched_date', date('Y-m-d'));				  
+		return parent :: get();
+	}
+	public function ambil_data_next()
+	{
+		$this->db->join('customer', 'customer.cus_idx = schedule.cus_idx');
+		$this->db->join('paket', 'paket.pkt_idx = schedule.pkt_idx');
+		$this->db->where('sched_status','active');
+		return parent :: get();
+	}
+	public function ambil_data_tiga()
+	{
+		$this->db->join('customer', 'customer.cus_idx = schedule.cus_idx');
+		$this->db->join('paket', 'paket.pkt_idx = schedule.pkt_idx');
+		$this->db->join('key', 'key.pkt_idx = paket.pkt_idx');
+		$this->db->join('call', 'call.sched_idx = schedule.sched_idx ');
+		$this->db->where('call_date',date("y-m-d",strtotime("+72 hours")));				  
+		return parent :: get();
+	}
+	
 }

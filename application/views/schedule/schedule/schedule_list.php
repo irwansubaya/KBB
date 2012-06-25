@@ -16,8 +16,9 @@
       <th width="10%">Status</th>
       <th width="10%">Sched Date</th>
       <th width="10%">Sched Time</th>
+      <th width="10%">Enginer</th>
       <th width="15%">Resolved Date</th>
-      <th width="10%">Alamat Kirim</th>
+      <th width="10%">Keterangan</th>
     </tr>
   </thead>
   <tbody>
@@ -29,10 +30,11 @@
 	<td><?php echo $item->pkt_tipe ?></td>
 	<td><?php echo $item->pkt_status ?></td>
 	<td><?php echo anchor($this->module[0] . '/update/hasjung/'.$cus_idx.'/'.$pkt_idx.'/'.$item->sched_idx, $item->sched_status)?></td>
-	<td><?php echo $item->sched_date ?></td>
-	<td><?php echo $item->sched_time ?></td>
-	<td><?php echo $item->sched_resolve_date ?></td>
-	<td><?php echo $item->sched_alamat_kirim?></td>
+	<td><?php echo ($item->sched_date=='0000-00-00' || $item->sched_date=='1970-01-01')? '' : date('d-M-Y',strtotime($item->sched_date ))?></td>
+	<td><?php echo ($item->sched_time == '00:00:00') ? '' : $item->sched_time ?></td>
+	<td><?php echo ($item->sched_engineer == '0') ? '' :$item->sched_engineer?></td>
+	<td><?php echo ($item->sched_resolve_date=='0000-00-00' || $item->sched_resolve_date=='1970-01-01')? '' : date('d-M-Y',strtotime($item->sched_resolve_date )) ?></td>
+	<td><?php echo ($item->sched_keterangan == '0') ? '' :$item->sched_keterangan?></td>
       </tr>
     <?php endforeach;?>
   <?php else:?>

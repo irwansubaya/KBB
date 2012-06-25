@@ -26,7 +26,9 @@
               <li<?php echo ($this->uri->segment(1) == 'customer')?' class="active"':''?>><a href="<?php echo base_url()."customer/customer" ?>">Customer</a></li>
 	      <li<?php echo ($this->uri->segment(1) == 'schedule')?' class="active"':''?>><a href="<?php echo base_url()."schedule/schedule" ?>">schedule</a></li>
 	      <li<?php echo ($this->uri->segment(1) == 'report')?' class="active"':''?>><a href="<?php echo base_url()."report/report" ?>">Report</a></li>
-            </ul>
+	      <!--<li<?php echo ($this->uri->segment(1) == 'report_next')?' class="active"':''?>><a href="<?php echo base_url()."report/report_next" ?>">Report Next</a></li>
+	      <li<?php echo ($this->uri->segment(1) == 'report_tiga')?' class="active"':''?>><a href="<?php echo base_url()."report/report_tiga" ?>">Report H+3</a></li>-->
+	    </ul>
             <p class="navbar-text pull-right">Logged in as <a href="#">xxx</a></p>
           </div>
         </div>
