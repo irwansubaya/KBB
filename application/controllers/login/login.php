@@ -1,7 +1,7 @@
 <?php
 class Login extends MY_Controller {
 	
-	public $module = 'welcome';
+	public $module = 'login';
 	
 	//constructor
 	public function __construct() 
@@ -9,63 +9,44 @@ class Login extends MY_Controller {
 		parent::__construct();
 		$this->load->helper('form');
 		$this->load->library('form_validation');
-		// $this->load->library('session');
 	}
-	//index for showing the login form
+	
 	public function index() 
 	{
-		parent :: index ();
-		// $this->load->view('login_view');
-	}
-	public function welcome()
-	{
-		parent::welcome('welcome');
-	}
-	public function insert ()
-	{
-		parent :: insert();
-	}
-	//this function will do the login process
-	public function proseslogin() 
-	{
-		$username = $this->input->post('username'); //read the username that filled by the user
-		$password = $this->input->post('password'); //read the password that filled by the user
-		
-		//$passwordx = md5($password); //this is for change $password into MD5 form
-		//the query is to matching the username+password user with username+password from database
-		$q = $this->db->query("SELECT * FROM tb_admin WHERE adm_username='$username' AND adm_password='$password'");
-		
-		// jika terdapat record
-		if ($q->num_rows() == 1) 
+		if ($_POST)
 		{
-			// if the query is TRUE, then save the username into session and load the welcome view
-			$nama = $q->row()->adm_username;
-			
-			// save variebel $nama ke session
-			$this->session->set_userdata('username',$nama);
-			
-			//$data['welcome'] = "Welcome $nama";
-			//$this->load->view('welcome_login_view', $data);
-			
-			$this->params['nama_user'] = ''. $nama ;
-			parent :: index ('welcome');
+			$this->form_validation->set_rules('username', 'Username', 'trim|required|xss_clean');
+			$this->form_validation->set_rules('password', 'Password', 'trim|required|xss_clean');
+
+			if ($this->form_validation->run() == TRUE)
+			{
+				if ($this->auth_m->login())
+				{
+					if ($this->auth_m->data('adm_status') == 'Administrator')
+					{
+						redirect('admin/admin');
+					}
+					elseif ($this->auth_m->data('adm_status') == 'Operator')
+					{
+						redirect('admin/engineer');
+					}
+				}
+				else
+				{
+					setError('Username dan password tidak valid');
+				}
+			}
 		}
-		else
-		{
-			// query error
-			//$data['error']='!! Wrong Username or Password !!';
-			//$this->load->view('login_view', $data);
-			$this->params['error']= 'Username atau password salah';
-			parent::index();
-		}
+
+		$this->load->view('login/index');
+		
 	}
-	//to do logout process
+	
 	public function logout()
 	{
 		$this->session->sess_destroy();
 		$this->params['logout'] = 'You have been logged out.';
-		redirect (parent :: index ());
-		
+		redirect ('login');
 	}
 }
 /* End class login.php*/ 
