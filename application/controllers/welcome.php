@@ -19,7 +19,12 @@ class Welcome extends CI_Controller {
 	 */
 	public function index()
 	{
+<<<<<<< HEAD
 		$this->load->view('login/login/login_view');
+=======
+		//$this->load->view('welcome');
+		$this->load->view('login/login/login');
+>>>>>>> 1a73f2d0f2d7d3e73cc45ee199fb97f031c99cfe
 	}
 }
 

@@ -34,6 +34,17 @@ class Admin extends MY_Controller {
 	{
 		parent :: __construct ();
 
+		// cek apakah login
+		$this->auth_m->is_secure_redirect(); 
+
+		// cek apakah yang login admin
+		if ($this->auth_m->data('adm_status') != 'Administrator')
+		{
+			$this->auth_m->logout();
+			redirect('login');
+		}
+	
+
 		$this->load->model(array(
 			'admin_m',
 		));
