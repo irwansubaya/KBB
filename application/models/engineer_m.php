@@ -33,7 +33,9 @@ class Engineer_m extends MY_Model {
 			'se_nama' => array('Nama SE', TRUE),
 			'se_tgl_lahir'=>array('Tgl Lahir',TRUE),
 			'se_alamat' => array('Alamat', TRUE),
-			'se_no_ktp' => array('No Telp', TRUE),
+			'se_no_ktp' => array('No KTP', TRUE),
+			'se_telepon_rumah' => array('Telp Rumah', false),
+			'se_handphone' => array('Handphone', false),
 		);
 	}
 
@@ -48,6 +50,13 @@ class Engineer_m extends MY_Model {
 	{
 		return parent :: save ($idx);
 	}
+	
+	public function get_by_se_nama ($se_nama = false)
+	{
+		$this->db->where('se_nama', $se_nama);
+		return parent :: get ();
+	}
+	
 	public function dropdown()
         {
             $arr = array();

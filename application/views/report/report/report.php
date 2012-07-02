@@ -34,9 +34,9 @@ $(document).ready(function(){
                 <tr>    
             <td><?php echo anchor(base_url(). 'report/report_invoice/pdf', 'Report Invoice','class="btn span2"')?></td>
         </tr>
-        <!--<tr>
+        <tr>
             <td><button type="submit" class="btn span2">Report H+3</td>
             <td><input  autocomplete="off" type="text" name="pkt_tanggal_terima" id="pkt_tanggal_terima" class="input-small" value="<?php echo @$param['pkt_tanggal_terima'] ?>"></td>
-        </tr>-->
+        </tr>
     </table>
 </form>

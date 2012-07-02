@@ -30,8 +30,11 @@ class Kodepos_m extends MY_Model {
 		$this->tableName = 'kodepos';
 		$this->idx	 = 'kodepos_idx';
 		$this->fields	 = array(
-			'kodepos_kota' => array('Kota', TRUE),
-                        'kodepos_kec' => array('Kecamatan', TRUE),
+			'kodepos_idx' => array('ID', TRUE),
+			'kodepos_no' => array('NO Kodepos', TRUE),
+			'kodepos_kel' => array('Kelurahan', TRUE),
+			'kodepos_kec' => array('Kecamatan', TRUE),
+                        'kodepos_kota' => array('Kota', TRUE),
 		);
 	}
 
@@ -46,6 +49,13 @@ class Kodepos_m extends MY_Model {
 	{
 		return parent :: save ($idx);	
 	}
+	
+	public function get_by_kodepos_no ($kodepos_no = false)
+	{
+		$this->db->where('kodepos_no', $kodepos_no);
+		return parent :: get ();
+	}
+
         
         public function dropdown()
         {

@@ -11,6 +11,15 @@
 		dateFormat: 'dd-M-yy DD',
 		showAnim: 'fold'
 	});
+        $("#pkt_jatuh_tempo").focus(function(){
+            var due_date = new Date($("#pkt_tanggal_terima").val());
+                if(Date.parse(due_date)) {
+                var due_date = new Date().setDate(due_date.getDate()+2);
+                var due_date = new Date(due_date);
+                var due_date = due_date.toLocaleFormat('%Y-%m-%d');
+                $("#pkt_jatuh_tempo").val(due_date);
+            }
+        });
         $("#pkt_tanggal_terima").datepicker({
                 showOn: "button",
 		buttonImage: "<?php echo base_url()?>static/image/calendar.gif",
@@ -35,7 +44,8 @@
 			return false;
 		    }
 		    var dateText = Date.parse(dateText);
-		    
+                        
+                    }
 		    // Jika sabtu / minggu maka
 		    if (dateText.is().monday() || dateText.is().tuesday()) {
 			var due_date =  dateText.add(3).days();
@@ -47,7 +57,6 @@
 			var due_date =  dateText.next().wednesday();
 		    } 
 		    $('#pkt_jatuh_tempo').val(due_date.toString('dd-MMM-yyyy dddd'));
-                    
 		}
 	});
         $('#pkt_corporate_id').autocomplete('<?php echo base_url()?>customer/paket/customer_ajax',{

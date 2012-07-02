@@ -1,12 +1,24 @@
 <?php echo form_open('login/login/proseslogin');?>
 <table border="0" align="center">
     <tr>
-        <td></td>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
+    </tr>
+    <tr>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
+    </tr>
+    <tr>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
+    </tr>
+    <tr>
+        <td>&nbsp;</td>
         <td><h2>User Login</h2></td>
     </tr>
     <tr>
         <td> Username</td>
-        <td><?php echo form_input('username');?> </td>
+        <td><?php echo form_input('username','','autocomplete="off"');?> </td>
     </tr>
     <tr>
         <td> Password</td>
@@ -17,6 +29,7 @@
         <td><input name="submit" type="submit" class="btn btn-primary" value="Login" ></td>
     </tr>
 </table>
+
 <?php echo form_close();?>
 <?php
 if(isset($error)) echo "<b><span style='color:red;'>$error</span></b>";

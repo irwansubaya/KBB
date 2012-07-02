@@ -67,8 +67,7 @@ class MY_Controller extends CI_Controller {
 		$this->params['actions']		= $actions;
 		$this->params['module']			= $this->module;
 		$this->params['method']			= $this->method;
-		$this->params['breadcrumbs']		= anchor(base_url(), 'Base Home').' &raquo; '. ucfirst($this->uri->segment(1)) . ' &raquo; ' . anchor($this->module[0].'/index/'.$this->uri->segment(3), $this->title).' &raquo; '.$this->method;
-                
+		//$this->params['breadcrumbs']		= anchor(base_url(), 'Base Home').' &raquo; '. ucfirst($this->uri->segment(1)) . ' &raquo; ' . anchor($this->module[0].'/index/'.$this->uri->segment(3), $this->title).' &raquo; '.$this->method;                
 		// load template
 		if ( ! $this->input->is_ajax_request())
 		{

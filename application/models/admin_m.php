@@ -31,7 +31,7 @@ class Admin_m extends MY_Model {
 		$this->idx	 = 'adm_id';
 		$this->fields	 = array(
 			'adm_name' => array('Name', TRUE),
-			'adm_username' => array('Username', TRUE),
+			'adm_username' => array('Username', TRUE,'alpha'),
 			'adm_password' => array('Password', TRUE),
 			'adm_status' => array('Status', TRUE),
 		);

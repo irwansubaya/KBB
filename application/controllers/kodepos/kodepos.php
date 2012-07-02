@@ -22,9 +22,9 @@
  * @category	        Model
  */
 
-class Admin extends MY_Controller {
+class Kodepos extends MY_Controller {
 
-	public $module = array('admin/admin', 'admin', 'admin');
+	public $module = array('kodepos/kodepos', 'kodepos', 'kodepos');
 
 	/**
 	 * Constructor
@@ -35,7 +35,7 @@ class Admin extends MY_Controller {
 		parent :: __construct ();
 
 		$this->load->model(array(
-			'admin_m',
+			'kodepos_m',
 		));
 	}
 
@@ -47,7 +47,7 @@ class Admin extends MY_Controller {
 	 */
 	public function index ()
 	{
-		$this->params['data'] = $this->admin_m->get();
+		$this->params['data'] = $this->kodepos_m->get();
 		$this->_view('main_1_3', 'index');
 	}
 	
@@ -57,20 +57,19 @@ class Admin extends MY_Controller {
 	 * @access	public
 	 * @return	parent class function
 	 */
-	
 	public function insert ()
 	{
 		if ($this->input->post('save'))
 		{
-			if ($this->admin_m->get_by_adm_username($this->input->post('adm_username')))	# Check cus_corporate_id
+			if ($this->kodepos_m->get_by_kodepos_no($this->input->post('kodepos_no')))	# Check cus_corporate_id
 			{
-				setError('Username <b>'.$this->input->post('adm_username').'</b> already exist. Please check your current input.');
+				setError('No Kodepos<b>'.$this->input->post('kodepos_no').'</b> already exist. Please check your current input.');
 			}
 			else
 			{
-				if ($this->admin_m->isValid())
+				if ($this->kodepos_m->isValid())
 				{
-					if ($this->admin_m->save())
+					if ($this->kodepos_m->save())
 					{
 						setSucces('Data is saved');
 						redirect ($this->module[0]);
@@ -83,8 +82,9 @@ class Admin extends MY_Controller {
 			}
 			
 		}
-			$this->_view('main_1_3', 'admin_new');
+		$this->_view('main_1_3', 'kodepos_new');
 	}
+	
 	
 
 	/**
@@ -96,15 +96,15 @@ class Admin extends MY_Controller {
 	
 	public function update ($idx)
 	{
-		if ($idx AND $this->admin_m->get($idx))
+		if ($idx AND $this->kodepos_m->get($idx))
 		{
 			if ($this->input->post('save'))
 			{
-				$query = $this->admin_m->get_by_adm_username($this->input->post('adm_username'));
+				$query = $this->kodepos_m->get_by_kodepos_no($this->input->post('kodepos_no'));
 
-				if ($query && count($query) >= 1 && $this->input->post('adm_username_old') != $this->input->post('adm_username'))
+				if ($query && count($query) >= 1 && $this->input->post('kodepos_no_old') != $this->input->post('adm_username'))
 				{
-					setError('Username <b>'.$this->input->post('adm_username').'</b> already exist. Please check your current input.');
+					setError('Kodepos <b>'.$this->input->post('kodepos_no').'</b> already exist. Please check your current input.');
 				}
 				else
 				{
@@ -122,9 +122,9 @@ class Admin extends MY_Controller {
 					#}
 				}
 			}
-			$this->params['data']		= $this->admin_m->get($idx);
-			$this->params['labels']		= $this->admin_m->getLabels();
-			$this->_view('main_1_3', 'admin_new');
+			$this->params['data']		= $this->kodepos_m->get($idx);
+			$this->params['labels']		= $this->kodepos_m->getLabels();
+			$this->_view('main_1_3', 'kodepos_new');
 		}
 		
 	}
@@ -137,7 +137,7 @@ class Admin extends MY_Controller {
 	 */
 	public function delete ($idx)
 	{
-		$this->admin_m->delete($idx);
+		$this->kodepos_m->delete($idx);
 		redirect ($this->module[0]);
 	}
 }

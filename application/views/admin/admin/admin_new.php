@@ -10,9 +10,9 @@
 <?php echo form_open(uri_string(),array('id'=>'formid', 'class'=>'form-horizontal'))?>
 <?php echo view_errors();?>
     <input type="hidden" name="adm_username_old" value="<?php echo (isset($data->adm_username))?$data->adm_username:'' ?>">
-    <?php echo form_text('Name *','adm_name',(isset($data->adm_name))?$data->adm_name:'','class="span2" maxlength="25"');?>
-    <?php echo form_text('Username *','adm_username',(isset($data->adm_username))?$data->adm_username:'','class="span2" maxlength="25"');?>
-    <?php echo form_pass('Password *','adm_password',(isset($data->adm_password))?$data->adm_password:'','class="span2" maxlength="25"');?>
+    <?php echo form_text('Name *','adm_name',(isset($data->adm_name))?$data->adm_name:'','class="span4" maxlength="25" autocomplete="off"');?>
+    <?php echo form_text('Username *','adm_username',(isset($data->adm_username))?$data->adm_username:'','class="span4" maxlength="10" autocomplete="off"');?>
+    <?php echo form_pass('Password *','adm_password',(isset($data->adm_password))?$data->adm_password:'','class="span4" maxlength="25"');?>
     <?php echo form_drop('Status','adm_status',array('Administrator'=>'Administrator','Operator'=>'Operator'),(isset($data->adm_status))?$data->adm_status:'','class="span2"');?>
 
     <p><code>Note: </code> &nbsp; All field mark with <code>*</code> are required.</p>

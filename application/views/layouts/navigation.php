@@ -8,7 +8,12 @@ $nav = array (
                                     'Engineer'=>array(
                                         'Add New::engineer/insert::',
 					'List Engineer::engineer/::engineer/update',
+                                    ),
+                                     'Kodepos'=>array(
+                                        'Add New::kodepos/insert::',
+					'List Engineer::kodepos/::kodepos/update',
                                     )),
+                                    
         'customer'	=> array    (
                                     'Customer'=>array(
 					'Add New::customer/insert::',

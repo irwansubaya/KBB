@@ -15,12 +15,10 @@
 </div>
 <?php echo form_open(uri_string(),array('id'=>'formid', 'class'=>'form-horizontal'))?>
     <input type="hidden" name="se_nama_old" value="<?php echo (isset($data->se_nama))?$data->se_nama:'' ?>">
-    <?php echo form_text('Name SE *','se_nama',(isset($data->se_nama))?$data->se_nama:'','class="span4" maxlength="25" autocomplete="off"');?>
-    <?php echo form_text('Tanggal Lahir*','se_tgl_lahir',(isset($data->se_tgl_lahir))?date('d-M-Y ',strtotime($data->se_tgl_lahir)):'','class="span4" autocomplete="off" id="tgl_lahir" readonly');?>
-    <?php echo form_area('Alamat*','se_alamat',(isset($data->se_alamat))?$data->se_alamat:'','class="span4" maxlength="255" autocomplete="off"');?>
-    <?php echo form_text('NO KTP *','se_no_ktp',(isset($data->se_no_ktp))?$data->se_no_ktp:'','class="span4" maxlength="30" autocomplete="off"');?>
-    <?php echo form_text('Telp Rumah ','se_telepon_rumah',(isset($data->se_telepon_rumah))?$data->se_telepon_rumah:'','class="span4" maxlength="12" autocomplete="off"');?>
-    <?php echo form_text('Telp Handphone ','se_handphone',(isset($data->se_handphone))?$data->se_handphone:'','class="span4" maxlength="15" autocomplete="off"');?>
+    <?php echo form_text('No Kodepos *','kodepos_no',(isset($data->kodepos_no))?$data->kodepos_no:'','class="span1" maxlength="5" autocomplete="off"');?>
+    <?php echo form_text('Kelurahan*','kodepos_kel',(isset($data->kodepos_kel))?$data->kodepos_kel:'','class="span4" maxlength="55" autocomplete="off"');?>
+    <?php echo form_text('Kecamatan*','kodepos_kec',(isset($data->kodepos_kec))?$data->kodepos_kec:'','class="span4" maxlength="30" autocomplete="off"');?>
+    <?php echo form_text('Kota*','kodepos_kota',(isset($data->kodepos_kota))?$data->kodepos_kota:'','class="span4" maxlength="32" autocomplete="off"');?>
 
     <p><code>Note: </code> &nbsp; All field mark with <code>*</code> are required.</p>
     <div class="form-actions">

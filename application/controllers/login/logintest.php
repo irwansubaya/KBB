@@ -1,30 +1,30 @@
-<?php  if (! defined('BASEPATH')) exit('No direct script access allowed');
-
+<?php
 class Login extends MY_Controller {
 	
-	public $module = array('login/login','login');
+	//public $module = 'welcome';
+	
 	//constructor
 	public function __construct() 
 	{
 		parent::__construct();
 		$this->load->helper('form');
 		$this->load->library('form_validation');
-		$this->load->library('session');
+		// $this->load->library('session');
 	}
 	//index for showing the login form
-	public function index() 
+	/*public function index() 
 	{
 		parent :: index ();
-		$this->load->view('login_form');
+		//$this->load->view('login_view');
 	}
 	public function welcome()
 	{
-		parent::welcome('login');
+		parent::welcome('welcome');
 	}
 	public function insert ()
 	{
 		parent :: insert();
-	}
+	}*/
 	//this function will do the login process
 	public function proseslogin() 
 	{
@@ -40,15 +40,16 @@ class Login extends MY_Controller {
 		{
 			// if the query is TRUE, then save the username into session and load the welcome view
 			$nama = $q->row()->adm_username;
+			
 			// save variebel $nama ke session
 			$this->session->set_userdata('username',$nama);
-
-			//$data['welcome'] = "Welcome $nama";
-			$this->_view('main_1_3', 'index');
-			//$this->load->view('layouts/main_1_3','customer/customer/index');
+			
+			$data['welcome'] = "Welcome $nama";
+			$this->_view('layouts/main_1_3', 'customer/customer/customer_list_paket');
+			//$this->load->view('layouts/main_1_3','customer/customer/customer_list_paket');
 			
 			//$this->params['nama_user'] = ''. $nama ;
-			//parent :: index ('login_home');
+			//parent :: index ('login_form');
 		}
 		else
 		{
@@ -56,8 +57,7 @@ class Login extends MY_Controller {
 			//$data['error']='!! Wrong Username or Password !!';
 			//$this->load->view('login_view', $data);
 			$this->params['error']= 'Username atau password salah';
-			$this->_view('login','login_view');
-			//parent::index();
+			parent::index();
 		}
 	}
 	//to do logout process

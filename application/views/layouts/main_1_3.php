@@ -1,6 +1,5 @@
 <?php require_once('navigation.php'); ?>
 <!DOCTYPE html>
-<!-- Created by : Neki Arismi neki.arismi@gmail.com 0856 874 5318  -->
 <html>
 <head>
 	<meta charset="UTF-8" />
@@ -19,7 +18,7 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </a>
-          <a class="brand" href="<?php echo base_url()?>">KBB</a>
+          <a class="brand">KBB</a>
           <div class="nav-collapse">
             <ul class="nav">
               <li<?php echo ($this->uri->segment(1) == 'admin')?' class="active"':''?>><a href="<?php echo base_url()."admin/admin" ?>">Admin</a></li>
@@ -29,7 +28,8 @@
 	      <!--<li<?php echo ($this->uri->segment(1) == 'report_next')?' class="active"':''?>><a href="<?php echo base_url()."report/report_next" ?>">Report Next</a></li>
 	      <li<?php echo ($this->uri->segment(1) == 'report_tiga')?' class="active"':''?>><a href="<?php echo base_url()."report/report_tiga" ?>">Report H+3</a></li>-->
 	    </ul>
-            <p class="navbar-text pull-right">Logged in as <a href="#">xxx</a></p>
+	    <?php $nama = $this->session->userdata('username');?>	    
+            <p class="navbar-text pull-right">Logged in as <?php echo $nama ?>  <a href="http://localhost/kbb/">Logout</a></p>
           </div>
         </div>
       </div>
@@ -64,11 +64,22 @@
           </div>
 	</div>
 	<div class="span10">
-		<ul class="breadcrumb"><?php echo $breadcrumbs?></ul>
+		<!--<ul class="breadcrumb"><?php echo $breadcrumbs?></ul>-->
 		<?php echo $content?>
 	</div>
       </div>
       <hr>
+	<footer class="footer">
+		<p class="pull-right">
+		    <?php echo anchor('about/about','About');?> &nbsp;&nbsp;&nbsp;&nbsp;
+		    <?php echo anchor('contact/contact','Contact');?> &nbsp;&nbsp;&nbsp;&nbsp;
+		</p>
+	       
+		<p>Designed and built with all the love using Codeigniter
+		    and Twitter Boostrap.</p>
+		<p>Created by Irwan Subaya &copy; 2012</p>
+	</footer>
     </div>
+    
 </body>
 </html>
