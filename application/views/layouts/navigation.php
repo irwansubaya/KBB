@@ -11,7 +11,15 @@ $nav = array (
                                     ),
                                      'Kodepos'=>array(
                                         'Add New::kodepos/insert::',
-					'List Engineer::kodepos/::kodepos/update',
+					'List Kodepos::kodepos/::kodepos/update',
+                                    ),
+                                    'Kode Cabang'=>array(
+                                        'Add New::kodecabang/insert::',
+					'List Cabang::kodecabang/::kodecabang/update',
+                                    ),
+                                    'Bidang Usaha'=>array(
+                                        'Add New::bidus/insert::',
+					'List Bidang Usaha::bidus/::bidus/update',
                                     )),
                                     
         'customer'	=> array    (

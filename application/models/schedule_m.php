@@ -93,7 +93,7 @@ class Schedule_m extends MY_Model {
 		if ($sched_idx) { $this->db->join('schedule', 'paket.pkt_idx = schedule.pkt_idx'); }
 		$this->db->where('customer.cus_idx', $cus_idx);
 		$this->db->where('paket.pkt_idx', $pkt_idx);
-		if ($sched_idx) { $this->db->where('sched_idx', $sched_idx); }
+		if ($sched_idx) { $this->db->where('sched_idx', date(d-m-y)); }
 		$this->db->order_by('cus_corporate_id');
 		return parent :: get();
 	}
@@ -102,7 +102,8 @@ class Schedule_m extends MY_Model {
 	{
 		$this->db->join('customer', 'customer.cus_idx = schedule.cus_idx');
 		$this->db->join('paket', 'paket.pkt_idx = schedule.pkt_idx');
-		$this->db->order_by('pkt_konfirm','pkt_konfirm = aktif');
+		$this->db->where('pkt_konfirm','active');
+		$this->db->where('sched_date',date(d-m-y));
 		//$this->db->where('schedule.sched_idx', $sched_idx);
 		//$this->db->where('paket.pkt_idx', $pkt_idx);
 		return parent :: get();

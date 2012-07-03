@@ -21,22 +21,18 @@
 <div class="page-header">
     <h2>List User</h2>
 </div>
+
 <form class="well form-search" style="text-align:left" name="search">
     <table>
         <tr>
-            <td>Kodepos </td>
-            <td>Kelurahan</td>
-            <td>Kecamatan</td>
-            <td>Kota</td>
+            <td>Kode Cabang </td>
+            <td>Nama Cabang</td>
         </tr>
         <tr>
-            <td><input autocomplete="off" type="text" name="kodepos_no" id="kodepos_no" class="input-small "  value="<?php echo @$param['kodepos_no'] ?>"></td>
-            <td><input autocomplete="off"  type="text" name="kodepos_kel" id="kodepos_kel" class="input-small " value="<?php echo @$param['kodepos_kel'] ?>"></td>
-            <td><input autocomplete="off" type="text" name="kodepos_kec" id="kodepos_kec" class="input-small" value="<?php echo @$param['kodepos_kec'] ?>"></td>
-            <td><input autocomplete="off" type="text" name="kodepos_kota" id="kodepos_kota" class="input-small" value="<?php echo @$param['kodepos_kota'] ?>"></td>
+            <td><input autocomplete="off" type="text" name="cab_code" id="cab_code" class="input-small "  value="<?php echo @$param['cab_code'] ?>"></td>
+            <td><input autocomplete="off"  type="text" name="cab_name" id="cab_name" class="input-small " value="<?php echo @$param['cab_name'] ?>"></td>
             <td><button type="submit" class="btn"><i class="icon-search"></i>Search</button></td>            
             <td><?php //echo anchor($this->module[0] . '/admin/kodepos/kodepos/update/','Clear', 'class="btn"')?></td>
-
         </tr>
     </table>
 </form>
@@ -45,21 +41,16 @@
 <table class="table sortable">
   <thead>
     <tr>
-      <th width="10%">Kodepos</th>
-      <th width="10%">Kelurahan</th>
-      <th width="10%">Kecamatan</th>
-      <th width="10%">Kota</th>
-      <th width="">&nbsp;</th>
+      <th width="10%">Kode Cabang</th>
+      <th width="80%">Nama Cabang</th>
     </tr>
   </thead>
   <tbody>
   <?php if ($data):?>
     <?php foreach ($data as $item):?>
     <tr>
-      <td><?php echo anchor($this->module[0] . '/update/' . $item->kodepos_idx, $item->kodepos_no)?></td>
-      <td><?php echo $item->kodepos_kel ?></td>
-      <td><?php echo $item->kodepos_kec ?></td>
-      <td><?php echo $item->kodepos_kota ?></td>
+      <td><?php echo anchor($this->module[0] . '/update/' . $item->cab_idx, $item->cab_code)?></td>
+      <td><?php echo $item->cab_name ?></td>
     </tr>
     <?php endforeach;?>
   <?php else:?>

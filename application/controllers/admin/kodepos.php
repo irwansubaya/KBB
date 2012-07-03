@@ -47,7 +47,24 @@ class Kodepos extends MY_Controller {
 	 */
 	public function index ()
 	{
-		$this->params['data'] = $this->kodepos_m->get();
+		$this->load->helper('pagination');
+		$this->params['param'] 	= $this->kodepos_m->data();
+		$this->params['data'] 	= $this->kodepos_m->get_kodepos();
+		//$this->params['data'] = $this->kodepos_m->get();
+		foreach ($this->params['param'] as $key => $value) 
+		{
+			$this->url .= $key.'='.$value.'&';
+		}
+
+		$this->params['page']	= create_pagination (
+			array(
+				'uri'			=> base_url().$this->module[0].'?'.$this->url,
+				'limit'		=> 25,
+				'query' 		=> TRUE,
+				'total_rows'	=> $this->kodepos_m->count_kodepos()
+			)
+		);
+		
 		$this->_view('main_1_3', 'index');
 	}
 	
@@ -57,13 +74,14 @@ class Kodepos extends MY_Controller {
 	 * @access	public
 	 * @return	parent class function
 	 */
+	
 	public function insert ()
 	{
 		if ($this->input->post('save'))
 		{
 			if ($this->kodepos_m->get_by_kodepos_no($this->input->post('kodepos_no')))	# Check cus_corporate_id
 			{
-				setError('No Kodepos<b>'.$this->input->post('kodepos_no').'</b> already exist. Please check your current input.');
+				setError('Username <b>'.$this->input->post('kodepos_no').'</b> already exist. Please check your current input.');
 			}
 			else
 			{
@@ -72,7 +90,7 @@ class Kodepos extends MY_Controller {
 					if ($this->kodepos_m->save())
 					{
 						setSucces('Data is saved');
-						redirect ($this->module[0]);
+						//redirect ($this->module[0]);
 					}
 					else
 					{
@@ -82,9 +100,8 @@ class Kodepos extends MY_Controller {
 			}
 			
 		}
-		$this->_view('main_1_3', 'kodepos_new');
+			$this->_view('main_1_3', 'kodepos_new');
 	}
-	
 	
 
 	/**
@@ -102,7 +119,7 @@ class Kodepos extends MY_Controller {
 			{
 				$query = $this->kodepos_m->get_by_kodepos_no($this->input->post('kodepos_no'));
 
-				if ($query && count($query) >= 1 && $this->input->post('kodepos_no_old') != $this->input->post('adm_username'))
+				if ($query && count($query) >= 1 && $this->input->post('kodepos_no_old') != $this->input->post('kodepos_no'))
 				{
 					setError('Kodepos <b>'.$this->input->post('kodepos_no').'</b> already exist. Please check your current input.');
 				}
@@ -110,7 +127,7 @@ class Kodepos extends MY_Controller {
 				{
 					#if ($this->customer_m->isValid())
 					#{
-						if ($this->admin_m->save($idx))
+						if ($this->kodepos_m->save($idx))
 						{
 							setSucces('Data is saved');
 							redirect ($this->module[0].'/update/'.$idx);

@@ -30,12 +30,18 @@ class Kodepos_m extends MY_Model {
 		$this->tableName = 'kodepos';
 		$this->idx	 = 'kodepos_idx';
 		$this->fields	 = array(
-			'kodepos_idx' => array('ID', TRUE),
-			'kodepos_no' => array('NO Kodepos', TRUE),
+			'kodepos_no' => array('NO Kodepos', TRUE,'integer'),
 			'kodepos_kel' => array('Kelurahan', TRUE),
 			'kodepos_kec' => array('Kecamatan', TRUE),
                         'kodepos_kota' => array('Kota', TRUE),
 		);
+		$this->data = array(
+			'kodepos_no'=>$this->input->get('kodepos_no'),
+			'kodepos_kel'		=> $this->input->get('kodepos_kel'),
+			'kodepos_kec'		=> $this->input->get('kodepos_kec'),
+			'kodepos_kota'	=> $this->input->get('kodepos_kota'),
+		);
+		$this->page         = $this->input->get('page') != 0 ? ((int) ($this->input->get('page') - 1) * 25) : 0;
 	}
 
 	/**
@@ -47,7 +53,7 @@ class Kodepos_m extends MY_Model {
 	 */
 	public function save ($idx = FALSE)
 	{
-		return parent :: save ($idx);	
+		return parent :: save ($idx);
 	}
 	
 	public function get_by_kodepos_no ($kodepos_no = false)
@@ -55,9 +61,8 @@ class Kodepos_m extends MY_Model {
 		$this->db->where('kodepos_no', $kodepos_no);
 		return parent :: get ();
 	}
-
-        
-        public function dropdown()
+	
+	public function dropdown()
         {
             $arr = array();
             
@@ -72,4 +77,34 @@ class Kodepos_m extends MY_Model {
                 return $arr;
             }
         }
+	
+	public function get_kodepos ()
+	{
+		//$this->db->join('paket', 'customer.cus_idx = paket.cus_idx', 'left');
+		foreach ($this->data as $key => $value) 
+		{
+			if ($value && $key == 'kodepos_no') $this->db->like($key, $value);
+			elseif ($value && $key == 'kodepos_kel') $this->db->like($key, $value);
+			elseif ($value && $key == 'kodepos_kec') $this->db->like($key, $value);
+			elseif ($value && $key == 'kodepos_kota') $this->db->like($key, $value);
+			//$this->db->order_by('pkt_konfirm DESC, pkt_tanggal_koneksi');
+		}
+		$this->db->limit('25',$this->page);
+		return parent::get();
+	}
+	public function count_kodepos ()
+	{
+		foreach ($this->data as $key => $value) 
+		{
+			if ($value && $key == 'kodepos_no') $this->db->like($key, $value);
+			else if ($value && $key == 'kodepos_kel') $this->db->like($key, $value);
+			else if ($value && $key == 'kodepos_kec') $this->db->where($key, $value);
+			else if ($value && $key == 'kodepos_kota') $this->db->where($key, $value);
+		}
+		return parent :: count_record();
+	}
+	public function data ()
+	{
+		return $this->data;
+	}
 }

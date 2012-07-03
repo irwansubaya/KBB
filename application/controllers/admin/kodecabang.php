@@ -22,9 +22,9 @@
  * @category	        Model
  */
 
-class Engineer extends MY_Controller {
+class Kodecabang extends MY_Controller {
 
-	public $module = array('admin/engineer', 'admin', 'engineer');
+	public $module = array('admin/kodecabang', 'admin', 'kodecabang');
 
 	/**
 	 * Constructor
@@ -33,9 +33,9 @@ class Engineer extends MY_Controller {
 	public function __construct ()
 	{
 		parent :: __construct ();
-		$this->load->library('calendar');
+
 		$this->load->model(array(
-			'engineer_m',
+			'cabang_m',
 		));
 	}
 
@@ -47,7 +47,23 @@ class Engineer extends MY_Controller {
 	 */
 	public function index ()
 	{
-		$this->params['data'] = $this->engineer_m->get();
+		$this->load->helper('pagination');
+		$this->params['param'] 	= $this->cabang_m->data();
+		$this->params['data'] 	= $this->cabang_m->get_kodecab();
+		//$this->params['data'] = $this->cabang_m->get();
+		foreach ($this->params['param'] as $key => $value) 
+		{
+			$this->url .= $key.'='.$value.'&';
+		}
+
+		$this->params['page']	= create_pagination (
+			array(
+				'uri'			=> base_url().$this->module[0].'?'.$this->url,
+				'limit'		=> 25,
+				'query' 		=> TRUE,
+				'total_rows'	=> $this->cabang_m->count_kodecab()
+			)
+		);
 		$this->_view('main_1_3', 'index');
 	}
 	
@@ -62,15 +78,15 @@ class Engineer extends MY_Controller {
 	{
 		if ($this->input->post('save'))
 		{
-			if ($this->engineer_m->get_by_se_nama($this->input->post('se_nama')))	# Check se_nama
+			if ($this->cabang_m->get_by_kodecabang($this->input->post('cab_code')))	# Check se_nama
 			{
-				setError('Nama Engineer <b>'.$this->input->post('se_nama').'</b> already exist. Please check your current input.');
+				setError('Kode Cabang<b>'.$this->input->post('cab_code').'</b> already exist. Please check your current input.');
 			}
 			else
 			{
-				if ($this->engineer_m->isValid())
+				if ($this->cabang_m->isValid())
 				{
-					if ($this->engineer_m->save())
+					if ($this->cabang_m->save())
 					{
 						setSucces('Data is saved');
 						//redirect ($this->module[0]);
@@ -83,10 +99,9 @@ class Engineer extends MY_Controller {
 			}
 			
 		}
-			$this->_view('main_1_3', 'engineer_new');
+			$this->_view('main_1_3', 'kodecabang_new');
 	}
 
-	
 	/**
 	 * Update supplier
 	 *
@@ -96,21 +111,21 @@ class Engineer extends MY_Controller {
 	
 	public function update ($idx)
 	{
-		if ($idx AND $this->engineer_m->get($idx))
+		if ($idx AND $this->cabang_m->get($idx))
 		{
 			if ($this->input->post('save'))
 			{
-				$query = $this->engineer_m->get_by_se_nama($this->input->post('se_nama'));
+				$query = $this->cabang_m->get_by_kodecabang($this->input->post('cab_code'));
 
-				if ($query && count($query) >= 1 && $this->input->post('se_nama_old') != $this->input->post('se_nama'))
+				if ($query && count($query) >= 1 && $this->input->post('cab_code_old') != $this->input->post('cab_code'))
 				{
-					setError('Username <b>'.$this->input->post('se_nama').'</b> already exist. Please check your current input.');
+					setError('Kode Cabang <b>'.$this->input->post('cab_code').'</b> already exist. Please check your current input.');
 				}
 				else
 				{
 					#if ($this->customer_m->isValid())
 					#{
-						if ($this->engineer_m->save($idx))
+						if ($this->cabang_m->save($idx))
 						{
 							setSucces('Data is saved');
 							redirect ($this->module[0].'/update/'.$idx);
@@ -122,9 +137,9 @@ class Engineer extends MY_Controller {
 					#}
 				}
 			}
-			$this->params['data']		= $this->engineer_m->get($idx);
-			//$this->params['labels']		= $this->engineer_m->getLabels();
-			$this->_view('main_1_3', 'engineer_new');
+			$this->params['data']		= $this->cabang_m->get($idx);
+			$this->params['labels']	= $this->cabang_m->getLabels();
+			$this->_view('main_1_3', 'kodecabang_new');
 		}
 		
 	}
@@ -137,7 +152,7 @@ class Engineer extends MY_Controller {
 	 */
 	public function delete ($idx)
 	{
-		$this->engineer_m->delete($idx);
+		$this->cabang_m->delete($idx);
 		redirect ($this->module[0]);
 	}
 }

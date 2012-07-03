@@ -32,6 +32,7 @@ class Bidus_m extends MY_Model {
 		$this->fields	 = array(
 			'bid_name' => array('Name', TRUE),
 		);
+		$this->page         = $this->input->get('page') != 0 ? ((int) ($this->input->get('page') - 1) * 25) : 0;
 	}
 
 	/**
@@ -44,6 +45,12 @@ class Bidus_m extends MY_Model {
 	public function save ($idx = FALSE)
 	{
 		return parent :: save ($idx);	
+	}
+	
+	public function get_by_bidus ($bidus_name = false)
+	{
+		$this->db->where('bid_name', $bidus_name);
+		return parent :: get ();
 	}
         
         public function dropdown()
@@ -61,4 +68,27 @@ class Bidus_m extends MY_Model {
                 return $arr;
             }
         }
+	public function get_bidus ()
+	{
+		//$this->db->join('paket', 'customer.cus_idx = paket.cus_idx', 'left');
+		#foreach ($this->data as $key => $value) 
+		#{
+			if ($value && $key == 'bid_name') $this->db->like($key, $value);
+			//$this->db->order_by('pkt_konfirm DESC, pkt_tanggal_koneksi');
+		#}
+		$this->db->limit('25',$this->page);
+		return parent::get();
+	}
+	public function count_bidus()
+	{
+		#foreach ($this->data as $key => $value) 
+		#{
+			if ($value && $key == 'bid_name') $this->db->like($key, $value);
+		#}
+		return parent :: count_record();
+	}
+	public function data ()
+	{
+		return $this->data;
+	}
 }

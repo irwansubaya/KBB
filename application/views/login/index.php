@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-<!-- Created by : Neki Arismi neki.arismi@gmail.com 0856 874 5318  -->
 <html>
 <head>
     <meta charset="UTF-8" />
@@ -16,8 +15,8 @@
             <br /><br /><br />
             <legend>Form Login</legend>
             <?php echo view_errors();?>
-            <?php echo form_text('Username','username');?>
-            <?php echo form_pass('Password','password');?>
+            <?php echo form_text('Username','username','','autocomplete="off"');?>
+            <?php echo form_pass('Password','password','','autocomplete="off"');?>
 
             <div class="form-actions">
                 <button name="submit" type="submit" class="btn btn-primary">Login</button>

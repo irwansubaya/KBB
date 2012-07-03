@@ -22,9 +22,9 @@
  * @category	        Model
  */
 
-class Engineer extends MY_Controller {
+class Bidus extends MY_Controller {
 
-	public $module = array('admin/engineer', 'admin', 'engineer');
+	public $module = array('admin/bidus', 'admin', 'bidus');
 
 	/**
 	 * Constructor
@@ -33,9 +33,9 @@ class Engineer extends MY_Controller {
 	public function __construct ()
 	{
 		parent :: __construct ();
-		$this->load->library('calendar');
+
 		$this->load->model(array(
-			'engineer_m',
+			'bidus_m',
 		));
 	}
 
@@ -47,7 +47,24 @@ class Engineer extends MY_Controller {
 	 */
 	public function index ()
 	{
-		$this->params['data'] = $this->engineer_m->get();
+		$this->load->helper('pagination');
+		$this->params['param'] 	= $this->bidus_m->data();
+		$this->params['data'] 	= $this->bidus_m->get_bidus();
+		//$this->params['data'] = $this->kodepos_m->get();
+		#foreach ($this->params['param'] as $key => $value) 
+		#{
+			$this->url .= $key.'='.$value.'&';
+		#}
+
+		$this->params['page']	= create_pagination (
+			array(
+				'uri'			=> base_url().$this->module[0].'?'.$this->url,
+				'limit'		=> 25,
+				'query' 		=> TRUE,
+				'total_rows'	=> $this->bidus_m->count_bidus()
+			)
+		);
+		
 		$this->_view('main_1_3', 'index');
 	}
 	
@@ -62,15 +79,15 @@ class Engineer extends MY_Controller {
 	{
 		if ($this->input->post('save'))
 		{
-			if ($this->engineer_m->get_by_se_nama($this->input->post('se_nama')))	# Check se_nama
+			if ($this->bidus_m->get_by_bidus($this->input->post('bid_name')))	# Check cus_corporate_id
 			{
-				setError('Nama Engineer <b>'.$this->input->post('se_nama').'</b> already exist. Please check your current input.');
+				setError('Bidang Usaha <b>'.$this->input->post('bid_name').'</b> already exist. Please check your current input.');
 			}
 			else
 			{
-				if ($this->engineer_m->isValid())
+				if ($this->bidus_m->isValid())
 				{
-					if ($this->engineer_m->save())
+					if ($this->bidus_m->save())
 					{
 						setSucces('Data is saved');
 						//redirect ($this->module[0]);
@@ -83,10 +100,10 @@ class Engineer extends MY_Controller {
 			}
 			
 		}
-			$this->_view('main_1_3', 'engineer_new');
+			$this->_view('main_1_3', 'bidus_new');
 	}
-
 	
+
 	/**
 	 * Update supplier
 	 *
@@ -96,21 +113,21 @@ class Engineer extends MY_Controller {
 	
 	public function update ($idx)
 	{
-		if ($idx AND $this->engineer_m->get($idx))
+		if ($idx AND $this->bidus_m->get($idx))
 		{
 			if ($this->input->post('save'))
 			{
-				$query = $this->engineer_m->get_by_se_nama($this->input->post('se_nama'));
+				$query = $this->bidus_m->get_by_bidus($this->input->post('bid_name'));
 
-				if ($query && count($query) >= 1 && $this->input->post('se_nama_old') != $this->input->post('se_nama'))
+				if ($query && count($query) >= 1 && $this->input->post('bid_name_old') != $this->input->post('bid_name'))
 				{
-					setError('Username <b>'.$this->input->post('se_nama').'</b> already exist. Please check your current input.');
+					setError('Bidang Usaha <b>'.$this->input->post('bid_name').'</b> already exist. Please check your current input.');
 				}
 				else
 				{
 					#if ($this->customer_m->isValid())
 					#{
-						if ($this->engineer_m->save($idx))
+						if ($this->bidus_m->save($idx))
 						{
 							setSucces('Data is saved');
 							redirect ($this->module[0].'/update/'.$idx);
@@ -122,9 +139,9 @@ class Engineer extends MY_Controller {
 					#}
 				}
 			}
-			$this->params['data']		= $this->engineer_m->get($idx);
-			//$this->params['labels']		= $this->engineer_m->getLabels();
-			$this->_view('main_1_3', 'engineer_new');
+			$this->params['data']		= $this->bidus_m->get($idx);
+			$this->params['labels']	= $this->bidus_m->getLabels();
+			$this->_view('main_1_3', 'bidus_new');
 		}
 		
 	}
@@ -137,7 +154,7 @@ class Engineer extends MY_Controller {
 	 */
 	public function delete ($idx)
 	{
-		$this->engineer_m->delete($idx);
+		$this->bidus_m->delete($idx);
 		redirect ($this->module[0]);
 	}
 }

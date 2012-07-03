@@ -84,7 +84,7 @@ class Admin extends MY_Controller {
 					if ($this->admin_m->save())
 					{
 						setSucces('Data is saved');
-						redirect ($this->module[0]);
+						//redirect ($this->module[0]);
 					}
 					else
 					{

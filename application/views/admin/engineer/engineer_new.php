@@ -14,6 +14,7 @@
     <h2>Add New Engineer</h2>
 </div>
 <?php echo form_open(uri_string(),array('id'=>'formid', 'class'=>'form-horizontal'))?>
+<?php echo view_errors();?>
     <input type="hidden" name="se_nama_old" value="<?php echo (isset($data->se_nama))?$data->se_nama:'' ?>">
     <?php echo form_text('Name SE *','se_nama',(isset($data->se_nama))?$data->se_nama:'','class="span4" maxlength="25" autocomplete="off"');?>
     <?php echo form_text('Tanggal Lahir*','se_tgl_lahir',(isset($data->se_tgl_lahir))?date('d-M-Y ',strtotime($data->se_tgl_lahir)):'','class="span4" autocomplete="off" id="tgl_lahir" readonly');?>

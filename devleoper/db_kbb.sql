@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50141
 File Encoding         : 65001
 
-Date: 2012-06-24 08:25:50
+Date: 2012-07-03 09:22:07
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -26,14 +26,15 @@ CREATE TABLE `tb_admin` (
   `adm_password` varchar(32) NOT NULL,
   `adm_status` varchar(32) NOT NULL,
   PRIMARY KEY (`adm_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=latin1;
 
 -- ----------------------------
 -- Records of tb_admin
 -- ----------------------------
 INSERT INTO `tb_admin` VALUES ('9', 'yugi', 'yugi', 'yugi', 'Operator');
-INSERT INTO `tb_admin` VALUES ('10', 'rizka', 'rizka', 'rizka', 'Operator');
-INSERT INTO `tb_admin` VALUES ('19', 'irwan', 'irwan', '12324', 'Administrator');
+INSERT INTO `tb_admin` VALUES ('10', 'ebie', 'ebi', 'ebie', 'Operator');
+INSERT INTO `tb_admin` VALUES ('19', 'irwan', 'irwan', 'irwan', 'Administrator');
+INSERT INTO `tb_admin` VALUES ('20', 'Vita', 'vita', 'vita', 'Administrator');
 
 -- ----------------------------
 -- Table structure for `tb_bidang_usaha`
@@ -43,7 +44,7 @@ CREATE TABLE `tb_bidang_usaha` (
   `bid_idx` int(5) NOT NULL AUTO_INCREMENT,
   `bid_name` varchar(64) NOT NULL,
   PRIMARY KEY (`bid_idx`)
-) ENGINE=MyISAM AUTO_INCREMENT=12378 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=12379 DEFAULT CHARSET=latin1;
 
 -- ----------------------------
 -- Records of tb_bidang_usaha
@@ -165,6 +166,7 @@ INSERT INTO `tb_bidang_usaha` VALUES ('19', 'perdagangan dan pengangkutan');
 INSERT INTO `tb_bidang_usaha` VALUES ('18', 'perdagangan eceran');
 INSERT INTO `tb_bidang_usaha` VALUES ('17', 'perdagangan sapi');
 INSERT INTO `tb_bidang_usaha` VALUES ('16', 'perdagangan besar bahan baku hasil pertanian');
+INSERT INTO `tb_bidang_usaha` VALUES ('12378', 'tetstsdfsfdsfsfdsfsf');
 
 -- ----------------------------
 -- Table structure for `tb_cabang`
@@ -175,7 +177,7 @@ CREATE TABLE `tb_cabang` (
   `cab_code` text NOT NULL,
   `cab_name` varchar(64) NOT NULL,
   PRIMARY KEY (`cab_idx`)
-) ENGINE=MyISAM AUTO_INCREMENT=643 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=646 DEFAULT CHARSET=latin1;
 
 -- ----------------------------
 -- Records of tb_cabang
@@ -497,7 +499,7 @@ INSERT INTO `tb_cabang` VALUES ('638', '0491', 'KCP Wisma Relasi ');
 INSERT INTO `tb_cabang` VALUES ('639', '5240', 'KCP Wolter Mongisidi ');
 INSERT INTO `tb_cabang` VALUES ('640', '8790', 'KCP WTC Mangga Dua ');
 INSERT INTO `tb_cabang` VALUES ('641', '5455', 'KCP WTC Sudirman ');
-INSERT INTO `tb_cabang` VALUES ('642', '6910', 'KCP Yos Sudarso ');
+INSERT INTO `tb_cabang` VALUES ('0', '6910', 'KCP Yos Sudarso ');
 
 -- ----------------------------
 -- Table structure for `tb_call`
@@ -516,7 +518,7 @@ CREATE TABLE `tb_call` (
   PRIMARY KEY (`call_idx`),
   KEY `tb_call_sched_idx_fk` (`sched_idx`),
   CONSTRAINT `tb_call_sched_idx_fk` FOREIGN KEY (`sched_idx`) REFERENCES `tb_schedule` (`sched_idx`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=59 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=62 DEFAULT CHARSET=latin1;
 
 -- ----------------------------
 -- Records of tb_call
@@ -537,7 +539,6 @@ INSERT INTO `tb_call` VALUES ('25', '16', 'Irwan', '2012-06-25', 'Di Jadwalkan',
 INSERT INTO `tb_call` VALUES ('26', '17', 'Irwan', '2012-06-25', 'Di Jadwalkan', '', '', '', '');
 INSERT INTO `tb_call` VALUES ('27', '18', 'Irwan', '2012-06-25', 'Di Jadwalkan', '', '', '', '');
 INSERT INTO `tb_call` VALUES ('28', '19', 'Irwan', '2012-06-25', 'Di Jadwalkan', '', '', '', '');
-INSERT INTO `tb_call` VALUES ('31', '22', 'Irwan', '2012-06-25', 'Di Jadwalkan', '', '', '', '');
 INSERT INTO `tb_call` VALUES ('32', '23', 'Irwan', '2012-06-25', 'Di Jadwalkan', '', '', '', '');
 INSERT INTO `tb_call` VALUES ('33', '24', 'Irwan', '2012-06-22', 'Di Jadwalkan', '', '', '', '');
 INSERT INTO `tb_call` VALUES ('34', '15', 'Irwan', '2012-06-25', 'Komputer Rusak', '', '', '', '');
@@ -560,8 +561,9 @@ INSERT INTO `tb_call` VALUES ('52', '33', 'Irwan', '2012-06-22', 'Di Jadwalkan',
 INSERT INTO `tb_call` VALUES ('53', '34', 'Irwan', '2012-06-22', 'Di Jadwalkan', '', '', '', '');
 INSERT INTO `tb_call` VALUES ('54', '35', 'Irwan', '2012-06-22', 'Di Jadwalkan', 'Wenny', '081317695705', 'Jl Kelapa Dua - Depok', '');
 INSERT INTO `tb_call` VALUES ('55', '36', 'Irwan', '2012-06-22', 'Di Jadwalkan', '', '', '', '');
-INSERT INTO `tb_call` VALUES ('57', '37', 'Irwan', '2012-06-22', 'Di Jadwalkan', 'Ebie', '7967867867686', 'Urgent', '');
-INSERT INTO `tb_call` VALUES ('58', '37', 'Irwan', '2012-06-22', 'Nasabah Sibuk', '', '', '', '');
+INSERT INTO `tb_call` VALUES ('59', '37', 'Irwan', '2012-06-22', 'Di Jadwalkan', 'Ebie', '7967867867686', 'Urgent', '');
+INSERT INTO `tb_call` VALUES ('60', '37', 'Irwan', '2012-06-22', 'Nasabah Sibuk', '', '', '', '');
+INSERT INTO `tb_call` VALUES ('61', '37', 'Irwan', '2012-07-02', 'Di Jadwalkan', '', '', '', '');
 
 -- ----------------------------
 -- Table structure for `tb_customer`
@@ -625,7 +627,6 @@ INSERT INTO `tb_customer` VALUES ('75', 'IBSROCKETA', 'Rockit Aldeway PT', '', '
 INSERT INTO `tb_customer` VALUES ('76', 'IBSLAUWHOK', 'Lauw Hok Tjiang', '', '8690955955', '', 'Jl Siliwangi No 10 G5 Flamboyan Pnacoran Mas Rt 03/07', 'Lauw Hok Tjiang', 'Depok', '', '', '16431', '0812 8299 7171', '', '0818 550 99', '', 'Margonda', '', '', '2012-06-26', 'irwan');
 INSERT INTO `tb_customer` VALUES ('77', 'IBSCASPUTR', 'Cahaya Surya Putra Abadi PT', '', '5285036833', '', 'Jl Lodan Raya Blok B No 18-19 Komp lodan Center', 'Djiauw Frenky', 'Jakarta Utara', 'Ancol', 'Pademangan', '14430', '021- 691 8899', '', '021- 6983 3388', '', 'Lodan Center', '', '', '2012-06-26', 'irwan');
 INSERT INTO `tb_customer` VALUES ('78', 'IBSBRISSKO', 'Briss & Skots Indonesia PT', '', '2863017190', '', 'Graha Mustika Ratu Lt 10 Jl Jend Gatot Subroto 74-45', 'Mb AlmaR Rini S', 'Jakarta Selatan', 'Menteng Dalam', 'Tebet', '12870', '021- 8370 7100', '', '021- 8370 7101/ 0815 102 854 79', '', 'Menara Bidakara', '', '', '2012-06-26', 'irwan');
-INSERT INTO `tb_customer` VALUES ('79', 'IBSASTIKAI', 'Astika Indonesia PT', '', '4503064408', '', 'Jl Lamandau IV No 18 Kramat Pela Keb Baru', 'Dita Susanti', 'Jakarta Selatan', 'Kramat Pela', 'Kebayoran Baru', '12130', '021- 7222 225', '', '021- 7245 350/ 0816 1386 030', '', 'Kemang', '', '', '2012-06-26', 'irwan');
 INSERT INTO `tb_customer` VALUES ('80', 'IBSUSGALAN', 'Usaha Galang Bersama CV', '', '5210315588', '', 'Pondok Ungu Permai Blok B 20 Utara Kalibalang Tengah,', 'Ismantoro', 'Bekasi', '', '', '17125', '021- 8888 1028', '', '0813 9885 5855', '', 'Bulevard Hijau', '', '', '2012-06-26', 'irwan');
 INSERT INTO `tb_customer` VALUES ('81', 'IBSACHMADT', 'Achmad Taufik', '', '5745033811', '', 'Bumi Teluk Jember  W no 23 Rt 01/12 Karawang', 'Achmad Taufik', 'Karawang', '', '', '41361', '0813 1530 8311', '', '6267- 643 325', '', 'Karawang Teparev', '', '', '2012-06-26', 'irwan');
 INSERT INTO `tb_customer` VALUES ('82', 'IBSCATRAPI', 'Catra Pilar Persada PT', '', '5210322339', '', 'Harapan Indah Komp Ruko Garaha Blok H No 8 Kel Pusakarakyat Kec Taruma Jaya', 'Bambang Setia Budi', 'Bekasi', '', '', '17214', '021- 292 837 66', '', '0813 1872 8723', '', 'Bulevard Hijau', '', '', '2012-06-26', 'irwan');
@@ -698,7 +699,7 @@ CREATE TABLE `tb_engineer` (
   `se_telepon_rumah` varchar(64) NOT NULL,
   `se_handphone` varchar(64) NOT NULL,
   PRIMARY KEY (`se_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=latin1;
 
 -- ----------------------------
 -- Records of tb_engineer
@@ -715,6 +716,7 @@ INSERT INTO `tb_engineer` VALUES ('18', 'Tirta', '1988-06-23', 'Jl. Rawa Bunga',
 INSERT INTO `tb_engineer` VALUES ('19', 'Dudi', '1987-06-02', 'Jl. Jangkrik', '2147483647', '', '');
 INSERT INTO `tb_engineer` VALUES ('20', 'Andi K', '1988-06-09', 'Jl. H.basir', '2147483647', '', '');
 INSERT INTO `tb_engineer` VALUES ('21', 'Ricki', '1989-06-16', 'Jl. Regensi raya', '42425435', '', '');
+INSERT INTO `tb_engineer` VALUES ('26', 'Frenky', '0000-00-00', 'JL. akakak', '2147483647', '021-73298765', '081253658478');
 
 -- ----------------------------
 -- Table structure for `tb_kategori`
@@ -879,7 +881,7 @@ CREATE TABLE `tb_kodepos` (
   `kodepos_kec` varchar(255) NOT NULL,
   `kodepos_kota` varchar(255) NOT NULL,
   PRIMARY KEY (`kodepos_idx`)
-) ENGINE=MyISAM AUTO_INCREMENT=537 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=539 DEFAULT CHARSET=latin1;
 
 -- ----------------------------
 -- Records of tb_kodepos
@@ -1021,7 +1023,7 @@ INSERT INTO `tb_kodepos` VALUES ('402', '14270', 'Lagoa', 'Koja', 'Jakarta Utara
 INSERT INTO `tb_kodepos` VALUES ('403', '14230', 'Rawa Badak Selatan', 'Koja', 'Jakarta Utara');
 INSERT INTO `tb_kodepos` VALUES ('404', '14230', 'Rawa Badak Utara', 'Koja', 'Jakarta Utara');
 INSERT INTO `tb_kodepos` VALUES ('405', '14260', 'Tugu Selatan', 'Koja', 'Jakarta Utara');
-INSERT INTO `tb_kodepos` VALUES ('406', '14260', 'Tugu Utara', 'Koja', 'Jakarta Utara');
+INSERT INTO `tb_kodepos` VALUES ('0', '14260', 'Tugu Utara', 'Koja', 'Jakarta Utara');
 INSERT INTO `tb_kodepos` VALUES ('407', '14540', 'Pulau Harapan', 'Kepulauan Seribu Utara', 'Kepulauan Seribu');
 INSERT INTO `tb_kodepos` VALUES ('408', '14540', 'Pulau Kelapa', 'Kepulauan Seribu Utara', 'Kepulauan Seribu');
 INSERT INTO `tb_kodepos` VALUES ('409', '14530', 'Pulau Panggang', 'Kepulauan Seribu Utara', 'Kepulauan Seribu');
@@ -1317,7 +1319,7 @@ INSERT INTO `tb_paket` VALUES ('165', '133', 'single_otorisasi', 'gold', 'new', 
 INSERT INTO `tb_paket` VALUES ('166', '134', 'single_otorisasi', 'gold', 'new', '2', '2012-06-21', '2012-06-22', '2012-06-27', '2026-06-12', 'irwan', 'Done');
 INSERT INTO `tb_paket` VALUES ('167', '135', 'multi_otorisasi', 'gold_payroll', 'new', '1', '2012-06-20', '2012-06-21', '2012-06-26', '2022-06-12', 'irwan', 'Active');
 INSERT INTO `tb_paket` VALUES ('168', '136', 'multi_otorisasi', 'platinum', 'new', '1', '2012-06-18', '2012-06-19', '2012-06-22', '2022-06-12', 'irwan', 'Done');
-INSERT INTO `tb_paket` VALUES ('169', '137', 'multi_otorisasi', 'gold_payroll', 'info_bca', '1', '2012-06-25', '2012-06-26', '2012-06-29', '2022-06-12', 'irwan', 'Folow Up');
+INSERT INTO `tb_paket` VALUES ('169', '137', 'multi_otorisasi', 'gold_payroll', 'info_bca', '1', '2012-06-25', '2012-06-26', '2012-06-29', '2022-06-12', 'irwan', 'Active');
 
 -- ----------------------------
 -- Table structure for `tb_schedule`
@@ -1364,7 +1366,6 @@ INSERT INTO `tb_schedule` VALUES ('18', '75', '107', '2012-06-26', '14:00:00', '
 INSERT INTO `tb_schedule` VALUES ('19', '76', '108', '2012-06-26', '15:00:00', 'New', 'Key BCA Delivery,VPN Setting & Instalation,Training Pemakaian', 'Training KBB', 'Jl Siliwangi No 10 G5 Flamboyan Pnacoran Mas Rt 03/07', 'Active', '0000-00-00', '0', '0');
 INSERT INTO `tb_schedule` VALUES ('20', '77', '109', '2012-06-22', '14:00:00', 'New', 'Key BCA Delivery,VPN Setting & Instalation,Training Pemakaian', 'Training KBB', 'Jl Lodan Raya Blok B No 18-19 Komp lodan Center', 'Done', '2012-06-22', 'Badri', 'deliver, Instal dan training');
 INSERT INTO `tb_schedule` VALUES ('21', '78', '110', '2012-06-22', '14:00:00', 'New', 'Key BCA Delivery,VPN Setting & Instalation,Training Pemakaian', 'Training KBB', '', 'Pending', '1970-01-01', 'Irwan Subaya', 'Internet bermasalah');
-INSERT INTO `tb_schedule` VALUES ('22', '79', '111', '2012-06-26', '16:00:00', 'New', 'Key BCA Delivery,VPN Setting & Instalation,Training Pemakaian', 'Training KBB', 'Jl Lamandau IV No 18 Kramat Pela Keb Baru', 'Active', '0000-00-00', '0', '0');
 INSERT INTO `tb_schedule` VALUES ('23', '80', '112', '2012-06-26', '10:00:00', 'New', 'Key BCA Delivery,VPN Setting & Instalation,Training Pemakaian', 'Training KBB', 'Pondok Ungu Permai Blok B 20 Utara Kalibalang Tengah,', 'Active', '0000-00-00', '0', '0');
 INSERT INTO `tb_schedule` VALUES ('24', '134', '166', '2012-06-22', '10:00:00', 'New', 'Key BCA Delivery,VPN Setting & Instalation,Training Pemakaian', 'Training KBB', 'GD Wisma Metropolitan II Lt 6 Jl Jend Sudirman Kav 29-31', 'Done', '2012-06-22', 'Irwan Subaya', 'Delivery, Instal dan Training');
 INSERT INTO `tb_schedule` VALUES ('25', '81', '113', '2012-06-22', '10:00:00', 'New', 'Key BCA Delivery,VPN Setting & Instalation,Training Pemakaian', 'Training KBB', 'Bumi Teluk Jember  W no 23 Rt 01/12 Karawang', 'Done', '2012-06-22', 'Adrian', 'Delivery, Instal dan training');
@@ -1379,7 +1380,7 @@ INSERT INTO `tb_schedule` VALUES ('33', '136', '168', '2012-06-20', '11:00:00', 
 INSERT INTO `tb_schedule` VALUES ('34', '135', '167', '2012-06-22', '11:00:00', 'New', 'Key BCA Delivery,VPN Setting & Instalation,Training Pemakaian,Training Sysadmin', 'Training Payroll,Training KBB', '', 'Done', '2012-06-22', 'Irwan Subaya', '');
 INSERT INTO `tb_schedule` VALUES ('35', '135', '167', '2012-06-26', '13:00:00', 'Adhoc', 'Key BCA Delivery,Training Pemakaian', 'Training BCA VA,Training VA', 'Jl. Raya Matraman 127', 'Active', '0000-00-00', '0', '0');
 INSERT INTO `tb_schedule` VALUES ('36', '89', '121', '2012-06-20', '13:00:00', 'New', 'Key BCA Delivery,VPN Setting & Instalation,Training Pemakaian', 'Training Payroll', 'gjahkdhkahk', 'Active', '0000-00-00', '0', '0');
-INSERT INTO `tb_schedule` VALUES ('37', '137', '169', '2012-06-26', '14:00:00', 'Adhoc', 'Key BCA Delivery,VPN Setting & Instalation,Training Pemakaian', 'Training BCA VA', 'Jl Meruya Ilir', 'Folow Up', '0000-00-00', '0', '0');
+INSERT INTO `tb_schedule` VALUES ('37', '137', '169', '2012-06-26', '14:00:00', 'Adhoc', 'Key BCA Delivery,VPN Setting & Instalation,Training Pemakaian', 'Training BCA VA', 'Jl Meruya Ilir', 'Active', '0000-00-00', '0', '0');
 
 -- ----------------------------
 -- Table structure for `tb_status`

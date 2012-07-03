@@ -14,8 +14,9 @@
     <h2>Add New Engineer</h2>
 </div>
 <?php echo form_open(uri_string(),array('id'=>'formid', 'class'=>'form-horizontal'))?>
-    <input type="hidden" name="se_nama_old" value="<?php echo (isset($data->se_nama))?$data->se_nama:'' ?>">
-    <?php echo form_text('No Kodepoas *','kodepos_no',(isset($data->kodepos_no))?$data->kodepos_no:'','class="span1" maxlength="5" autocomplete="off"');?>
+<?php echo view_errors();?>
+    <input type="hidden" name="kodepos_no_old" value="<?php echo (isset($data->kodepos_no))?$data->kodepos_no:'' ?>">
+    <?php echo form_text('No Kodepos *','kodepos_no',(isset($data->kodepos_no))?$data->kodepos_no:'','class="span1" maxlength="5" autocomplete="off"');?>
     <?php echo form_text('Kelurahan*','kodepos_kel',(isset($data->kodepos_kel))?$data->kodepos_kel:'','class="span4" maxlength="55" autocomplete="off"');?>
     <?php echo form_text('Kecamatan*','kodepos_kec',(isset($data->kodepos_kec))?$data->kodepos_kec:'','class="span4" maxlength="30" autocomplete="off"');?>
     <?php echo form_text('Kota*','kodepos_kota',(isset($data->kodepos_kota))?$data->kodepos_kota:'','class="span4" maxlength="32" autocomplete="off"');?>
@@ -24,6 +25,6 @@
     <div class="form-actions">
         <?php echo form_submit('save','Save data', 'class="btn btn-primary"')?>
         <?php echo anchor($module[0],'Cancel', 'class="btn"')?>
-        <?php if(isset($data->se_id)): ?><div class="pull-right"><?php echo anchor($module[0].'/delete/'.$data->se_id,'Delete Customer', 'class="btn btn-danger"')?></div><?php endif; ?>
+        <?php if(isset($data->kodepos_idx)): ?><div class="pull-right"><?php echo anchor($module[0].'/delete/'.$data->kodepos_idx,'Delete Customer', 'class="btn btn-danger"')?></div><?php endif; ?>
     </div>
 <?php echo form_close();?>

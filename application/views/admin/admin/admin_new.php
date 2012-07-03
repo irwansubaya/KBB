@@ -3,6 +3,12 @@
     $(document).ready(function(){
         $("#formid").validate();
     });
+    function dontEnter(evt) { 
+    var evt = (evt) ? evt : ((event) ? event : null); 
+        var node = (evt.target) ? evt.target : ((evt.srcElement) ? evt.srcElement : null); 
+        if ((evt.keyCode == 13) && (node.type=="text"))  {return false;} 
+    } 
+    document.onkeypress = dontEnter;
 </script>
 <div class="page-header">
     <h2>Add New Admin</h2>

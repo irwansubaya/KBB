@@ -36,12 +36,6 @@ $(document).ready(function() {
 	  <?php if ($data):?>
 	    <?php foreach ($data as $item):?>
 	    <tr>
-<?php
-echo "<pre>";
-var_dump($item);
-echo "</pre>";
-exit;
-?>
 	      <td><?php echo anchor($this->module[0] . '/update/schedule/' . $item->cus_idx . '/' . $item->sched_idx, $item->cus_corporate_id)?></td>
 	      <td><?php echo $item->cus_nama_perusahaan?></td>
 	      <td><?php echo $item->pkt_jenis ?></td>
